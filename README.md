@@ -26,6 +26,7 @@ A comprehensive **Odoo 18** module for managing church membership, events, donat
 - **Baptism Registrations** — kanban + calendar workflow (*Submit for Review → Approve → Mark Completed*), auto-calculated age, officiating minister (Pastor type only).
 - **Marriage Registrations** — kanban + calendar workflow with groom/bride.
 - **Church Calendar** — one unified calendar aggregating events, musician schedules, baptisms, and marriages (daily auto-refresh cron).
+- **Public Church Calendar** — a public website page (`/church-calendar`) that shows **confirmed** activities (events, baptisms, marriages, care cells) with **type filters** and **month/type grouping**. Musician schedules and unconfirmed entries are excluded.
 
 ### 📰 News & Website
 - **News articles, categories, and sources** with RSS/feed ingestion (`feedparser`), published to the website.

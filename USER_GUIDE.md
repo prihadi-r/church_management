@@ -148,6 +148,18 @@ Master Data berisi daftar istilah / kategori yang dipakai di seluruh modul. Semu
   4. Klik kegiatan untuk melihat detail.
 - Data di-refresh otomatis setiap hari (ada cron harian); tombol **Refresh** tersedia untuk pembaruan manual.
 
+### 4.6 Kalender Publik di Website (Public Church Calendar)
+- **Fungsi:** Menampilkan kalender kegiatan gereja di **website publik** — dapat diakses tanpa login.
+- **URL:** `/church-calendar` (mis. `https://www.situs-anda.id/church-calendar`).
+- **Isi:** Semua kegiatan yang **sudah dikonfirmasi** — *Event/Ibadah*, *Baptis*, *Pernikahan*, dan *Care Cell*.
+  - Hanya status **Approved** dan **Completed** yang tampil (draft/review/dibatalkan disembunyikan).
+  - **Jadwal Musisi tidak ditampilkan** di halaman publik.
+- **Fitur:**
+  1. **Filter berdasarkan jenis** — tab *All*, *Church Event*, *Baptism*, *Marriage*, *Care Cell*.
+  2. **Pengelompokan** — *By Month* (per bulan) atau *By Type* (per jenis).
+  3. **Legenda warna** dan jumlah total kegiatan.
+- **Cara akses:** Buka menu **Church Calendar** di navigasi website, atau kunjungi langsung `/church-calendar`.
+
 ---
 
 ## 5. Kontak / Jemaat (Contacts)
@@ -215,6 +227,7 @@ Draft → Under Review → Approved → Completed
 | Pendaftaran baptis | Operations → Baptism Registrations | New → Partner + Tanggal + Petugas → Save → Approve |
 | Pendaftaran nikah | Operations → Marriage Registrations | New → Mempelai + Tanggal + Petugas → Save → Approve |
 | Lihat semua kegiatan | Operations → Church Calendar | (otomatis) |
+| Lihat kalender publik (tanpa login) | Website → /church-calendar | (otomatis) |
 | Ringkasan angka | Dashboard | (otomatis) |
 
 ---
