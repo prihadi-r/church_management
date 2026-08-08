@@ -12,15 +12,60 @@
                     }
                     .cc-hero h1 { font-weight: 700; font-size: 2.25rem; }
                     .cc-hero p { opacity: .9; margin-bottom: 0; }
-                    .cc-month { margin-top: 2.5rem; }
+
+                    .cc-toolbar {
+                        display: flex;
+                        flex-wrap: wrap;
+                        align-items: center;
+                        justify-content: space-between;
+                        gap: 1rem;
+                        margin-top: 2.25rem;
+                        padding-bottom: 1rem;
+                        border-bottom: 1px solid #e8e8e8;
+                    }
+                    .cc-tabs { display: flex; flex-wrap: wrap; gap: .4rem; }
+                    .cc-tab {
+                        display: inline-block;
+                        padding: .45rem 1rem;
+                        border-radius: 999px;
+                        border: 1px solid #d5dbe2;
+                        background: #fff;
+                        color: #2c3e50;
+                        font-size: .85rem;
+                        font-weight: 600;
+                        text-decoration: none;
+                        transition: all .15s ease;
+                    }
+                    .cc-tab:hover { border-color: #4a6b8a; color: #4a6b8a; }
+                    .cc-tab.active { background: #4a6b8a; border-color: #4a6b8a; color: #fff; }
+
+                    .cc-group-switch { display: flex; gap: .4rem; }
+                    .cc-gbtn {
+                        padding: .45rem 1rem;
+                        border-radius: 6px;
+                        border: 1px solid #d5dbe2;
+                        background: #fff;
+                        color: #2c3e50;
+                        font-size: .85rem;
+                        font-weight: 600;
+                        text-decoration: none;
+                        transition: all .15s ease;
+                    }
+                    .cc-gbtn:hover { border-color: #4a6b8a; color: #4a6b8a; }
+                    .cc-gbtn.active { background: #2c3e50; border-color: #2c3e50; color: #fff; }
+
+                    .cc-count { color: #7f8c8d; font-size: .9rem; margin-top: .75rem; }
+
+                    .cc-month { margin-top: 2.25rem; }
                     .cc-month-title {
-                        font-size: 1.4rem;
+                        font-size: 1.35rem;
                         font-weight: 700;
                         color: #2c3e50;
                         border-bottom: 2px solid #e8e8e8;
                         padding-bottom: .5rem;
                         margin-bottom: 1.25rem;
                     }
+
                     .cc-item {
                         display: flex;
                         align-items: center;
@@ -30,24 +75,30 @@
                         border-radius: 6px;
                         margin-bottom: .75rem;
                         background: #fff;
-                        transition: box-shadow .15s ease;
+                        transition: box-shadow .15s ease, transform .15s ease;
                     }
-                    .cc-item:hover { box-shadow: 0 2px 10px rgba(0,0,0,.08); }
+                    .cc-item:hover {
+                        box-shadow: 0 4px 14px rgba(0,0,0,.08);
+                        transform: translateY(-1px);
+                    }
                     .cc-item--event { border-left-color: #3498db; }
                     .cc-item--baptism { border-left-color: #27ae60; }
                     .cc-item--marriage { border-left-color: #9b59b6; }
                     .cc-item--care_cell { border-left-color: #e67e22; }
+
                     .cc-date {
-                        flex: 0 0 84px;
+                        flex: 0 0 88px;
                         text-align: center;
                         margin-right: 1rem;
                     }
-                    .cc-date .day { font-size: 1.6rem; font-weight: 700; line-height: 1; color: #2c3e50; }
+                    .cc-date .day { font-size: 1.7rem; font-weight: 700; line-height: 1; color: #2c3e50; }
                     .cc-date .mon { font-size: .8rem; text-transform: uppercase; color: #7f8c8d; }
                     .cc-date .time { font-size: .8rem; color: #95a5a6; }
+
                     .cc-body { flex: 1; min-width: 0; }
                     .cc-title { font-weight: 600; color: #2c3e50; margin: 0; }
                     .cc-partner { color: #7f8c8d; font-size: .9rem; }
+
                     .cc-badge {
                         flex: 0 0 auto;
                         font-size: .75rem;
@@ -63,53 +114,111 @@
                     .cc-badge--baptism { background: #27ae60; }
                     .cc-badge--marriage { background: #9b59b6; }
                     .cc-badge--care_cell { background: #e67e22; }
-                    .cc-empty { text-align: center; color: #95a5a6; padding: 3rem 0; }
+
+                    .cc-legend {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 1rem;
+                        justify-content: center;
+                        margin-top: 1.5rem;
+                    }
+                    .cc-legend-item { display: inline-flex; align-items: center; gap: .4rem; font-size: .8rem; color: #7f8c8d; }
+                    .cc-legend-dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+                    .cc-empty { text-align: center; color: #95a5a6; padding: 3.5rem 0; }
                 </style>
 
                 <div class="cc-hero">
                     <div class="container">
                         <h1>Church Calendar</h1>
-                        <p>Upcoming church activities — events, baptisms, marriages &amp; care cells</p>
+                        <p>Confirmed church activities — events, baptisms, marriages &amp; care cells</p>
+                        <div class="cc-legend">
+                            <span class="cc-legend-item"><span class="cc-legend-dot" style="background:#3498db"></span> Event</span>
+                            <span class="cc-legend-item"><span class="cc-legend-dot" style="background:#27ae60"></span> Baptism</span>
+                            <span class="cc-legend-item"><span class="cc-legend-dot" style="background:#9b59b6"></span> Marriage</span>
+                            <span class="cc-legend-item"><span class="cc-legend-dot" style="background:#e67e22"></span> Care Cell</span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="container py-4">
-                    <t t-if="months">
-                        <t t-foreach="months" t-as="month">
+                    <!-- Filter + grouping toolbar -->
+                    <div class="cc-toolbar">
+                        <nav class="cc-tabs" aria-label="Activity types">
+                            <a t-attf-href="/church-calendar?group=#{active_group}"
+                               t-attf-class="cc-tab #{ 'active' if active_type == 'all' else '' }">All</a>
+                            <t t-foreach="types" t-as="t">
+                                <a t-attf-href="/church-calendar?type=#{t[0]}&amp;group=#{active_group}"
+                                   t-attf-class="cc-tab #{ 'active' if active_type == t[0] else '' }"
+                                   t-out="t[1]"/>
+                            </t>
+                        </nav>
+                        <div class="cc-group-switch" aria-label="Group by">
+                            <a t-attf-href="/church-calendar?type=#{active_type}&amp;group=month"
+                               t-attf-class="cc-gbtn #{ 'active' if active_group == 'month' else '' }">By Month</a>
+                            <a t-attf-href="/church-calendar?type=#{active_type}&amp;group=type"
+                               t-attf-class="cc-gbtn #{ 'active' if active_group == 'type' else '' }">By Type</a>
+                        </div>
+                    </div>
+                    <p class="cc-count" t-if="total">Showing <strong t-out="total"/> confirmed activities</p>
+
+                    <!-- Grouped by type -->
+                    <t t-if="active_group == 'type' and groups">
+                        <t t-foreach="groups" t-as="group">
                             <section class="cc-month">
-                                <h2 class="cc-month-title" t-out="month['label']"/>
-                                <t t-foreach="month['items']" t-as="act">
-                                    <div t-attf-class="cc-item cc-item-#{act.activity_type}">
-                                        <div class="cc-date">
-                                            <div class="day" t-out="act.start.strftime('%d')"/>
-                                            <div class="mon" t-out="act.start.strftime('%b')"/>
-                                            <div class="time" t-out="act.start.strftime('%H:%M')"/>
-                                        </div>
-                                        <div class="cc-body">
-                                            <div class="cc-title" t-out="act.name"/>
-                                            <div class="cc-partner" t-if="act.partner_id" t-out="act.partner_id.name"/>
-                                        </div>
-                                        <span t-attf-class="cc-badge cc-badge-#{act.activity_type}">
-                                            <t t-if="act.activity_type == 'event'">Event</t>
-                                            <t t-elif="act.activity_type == 'baptism'">Baptism</t>
-                                            <t t-elif="act.activity_type == 'marriage'">Marriage</t>
-                                            <t t-elif="act.activity_type == 'care_cell'">Care Cell</t>
-                                            <t t-else="" t-out="act.activity_type"/>
-                                        </span>
-                                    </div>
+                                <h2 class="cc-month-title" t-out="group['label']"/>
+                                <t t-foreach="group['items']" t-as="act">
+                                    <t t-call="church_management.church_calendar_item">
+                                        <t t-set="act" t-value="act"/>
+                                    </t>
                                 </t>
                             </section>
                         </t>
                     </t>
+
+                    <!-- Grouped by month -->
+                    <t t-elif="months">
+                        <t t-foreach="months" t-as="month">
+                            <section class="cc-month">
+                                <h2 class="cc-month-title" t-out="month['label']"/>
+                                <t t-foreach="month['items']" t-as="act">
+                                    <t t-call="church_management.church_calendar_item">
+                                        <t t-set="act" t-value="act"/>
+                                    </t>
+                                </t>
+                            </section>
+                        </t>
+                    </t>
+
                     <t t-else="">
                         <div class="cc-empty">
-                            <h3>No upcoming activities yet</h3>
-                            <p>Please check back later.</p>
+                            <h3>No confirmed activities found</h3>
+                            <p>Please check back later or choose another filter.</p>
                         </div>
                     </t>
                 </div>
             </div>
         </t>
+    </template>
+
+    <template id="church_calendar_item" name="Church Calendar Item">
+        <div t-attf-class="cc-item cc-item-#{act.activity_type}">
+            <div class="cc-date">
+                <div class="day" t-out="act.start.strftime('%d')"/>
+                <div class="mon" t-out="act.start.strftime('%b')"/>
+                <div class="time" t-out="act.start.strftime('%H:%M')"/>
+            </div>
+            <div class="cc-body">
+                <div class="cc-title" t-out="act.name"/>
+                <div class="cc-partner" t-if="act.partner_id" t-out="act.partner_id.name"/>
+            </div>
+            <span t-attf-class="cc-badge cc-badge-#{act.activity_type}">
+                <t t-if="act.activity_type == 'event'">Event</t>
+                <t t-elif="act.activity_type == 'baptism'">Baptism</t>
+                <t t-elif="act.activity_type == 'marriage'">Marriage</t>
+                <t t-elif="act.activity_type == 'care_cell'">Care Cell</t>
+                <t t-else="" t-out="act.activity_type"/>
+            </span>
+        </div>
     </template>
 
     <record id="menu_website_church_calendar" model="website.menu">
