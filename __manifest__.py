@@ -135,6 +135,7 @@ Church Management
         'views/church_news_category_views.xml',
         'views/church_news_menu_views.xml',
         'views/church_news_website_templates.xml',
+        'views/church_calendar_website_templates.xml',
     ],
     'assets': {
         'web.assets_frontend': [
