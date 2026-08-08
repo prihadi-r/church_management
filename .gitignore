@@ -1,0 +1,19 @@
+# Python bytecode / caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Editor / tooling (personal)
+.vscode/
+.continue/
+.idea/
+*.swp
+
+# Logs & temp files
+*.log
+*.tmp
+*.bak
+
+# Odoo / local runtime
+*.sqlite3
+.odoo/
