@@ -2,6 +2,17 @@
     'name': 'Church Management',
     'version': '1.0.2',
     'summary': 'Church membership, events, donations, and sacrament management',
+    'author': 'Prihadi <prihadi.r@gmail.com>',
+    'description': """
+Church Management
+=================
+
+A comprehensive module for managing church membership, events, donations,
+sacraments, and news.
+
+This module was built with the assistance of GitHub Copilot as a vibe coding
+assistant. It is provided free to use and modify.
+""",
     'category': 'Services/Church',
     'depends': ['base', 'crm', 'event', 'account', 'website'],
 
