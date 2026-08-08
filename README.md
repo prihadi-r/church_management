@@ -1,4 +1,4 @@
-﻿# ⛪ Church Management
+# ⛪ Church Management
 
 A comprehensive **Odoo 18** module for managing church membership, events, donations, sacraments, and news — all in a single application. No more physical books or scattered spreadsheets.
 
@@ -85,26 +85,6 @@ Church Management
 ## 📖 Documentation
 
 See the [User Guide](USER_GUIDE.md) for detailed usage instructions (in Indonesian).
-
----
-
-## 📸 Screenshots
-
-> 📥 **How to add:** place your screenshots in the [`screenshots/`](screenshots/) folder (`.png` recommended), then update the links below.
-
-### Dashboard
-![Dashboard](screenshots/dashboard.png)
-
-### Church Calendar
-![Church Calendar](screenshots/calendar.png)
-
-### Baptism & Marriage Registration
-| | |
-|---|---|
-| ![Baptism Registration](screenshots/baptism.png) | ![Marriage Registration](screenshots/marriage.png) |
-
-### Public Church Calendar (Website)
-![Public Church Calendar](screenshots/public-calendar.png)
 
 ---
 
