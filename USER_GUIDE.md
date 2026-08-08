@@ -255,7 +255,10 @@ Draft → Under Review → Approved → Completed
 - Semua kegiatan otomatis masuk **Church Calendar** — tidak perlu input ganda.
 - **Permohonan doa** otomatis masuk **Church Calendar**; kirim lewat form publik di **`/church-pray`** tanpa login.
 - Data sample (contoh) sudah disediakan agar mudah berlatih.
-- Pastikan pengguna mendapat akses menu yang sesuai (grup pengguna gereja) dari administrator.
+- Pastikan pengguna mendapat akses menu yang sesuai dari administrator melalui
+  **Settings → Users → Access Rights** (kategori **Church Management**): grup
+  **Read Only**, **Write Only**, atau **Full Access**. Tanpa salah satu grup ini,
+  menu **Church Management** tidak akan muncul.
 
 ---
 

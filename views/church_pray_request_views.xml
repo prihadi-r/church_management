@@ -165,12 +165,5 @@
             </field>
         </record>
 
-        <!-- Menu di bawah Operations -->
-        <menuitem id="menu_church_pray_request"
-                  name="Pray Requests"
-                  parent="menu_church_operations"
-                  action="action_church_pray_request"
-                  sequence="37"/>
-
     </data>
 </odoo>

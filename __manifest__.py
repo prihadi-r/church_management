@@ -1,6 +1,6 @@
 {
     'name': 'Church Management',
-    'version': '1.1.0',
+    'version': '1.1.1',
     'summary': 'Church membership, events, donations, and sacrament management',
     'author': 'Prihadi <prihadi.r@gmail.com>',
     'description': """

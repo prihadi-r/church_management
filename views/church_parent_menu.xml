@@ -95,6 +95,12 @@
                   action="action_church_marriage_registration"
                   sequence="35"/>
 
+        <menuitem id="menu_church_pray_request"
+                  name="Pray Requests"
+                  parent="menu_church_operations"
+                  action="action_church_pray_request"
+                  sequence="37"/>
+
         <menuitem id="menu_church_calendar"
                   name="Church Calendar"
                   parent="menu_church_operations"

@@ -5,6 +5,15 @@ A comprehensive **Odoo 18** module for managing church membership, events, donat
 > Built with the assistance of **GitHub Copilot as a vibe coding assistant**.
 > This module is **free to use and modify**.
 
+![Odoo](https://img.shields.io/badge/Odoo-18.0-714B67?style=for-the-badge&logo=odoo&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.10--3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14--16-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![XML](https://img.shields.io/badge/Views-XML-8A2BE2?style=for-the-badge)
+![OWL](https://img.shields.io/badge/UI-OWL%20JS-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![feedparser](https://img.shields.io/badge/RSS-feedparser-FF6600?style=for-the-badge)
+![GitHub Copilot](https://img.shields.io/badge/Built%20with-GitHub%20Copilot-000000?style=for-the-badge&logo=githubcopilot&logoColor=white)
+![License](https://img.shields.io/badge/License-LGPL--3-blue?style=for-the-badge)
+
 ---
 
 ## ✨ Features
@@ -49,6 +58,8 @@ A comprehensive **Odoo 18** module for managing church membership, events, donat
 
 ## 🚀 Installation
 
+> ⚠️ **Requires the `website` module** (plus `base`, `crm`, `event`, `account`). If `website` is not installed, Odoo reports `Unmet dependencies: website` and the module stays stuck in `to install`. Install the missing apps first.
+
 1. Copy this folder into your Odoo addons directory.
 2. Install the Python dependency:
 
@@ -58,6 +69,14 @@ A comprehensive **Odoo 18** module for managing church membership, events, donat
 
 3. Update the module list in Odoo (**Apps → Update Apps List**).
 4. Search for **Church Management** and click **Install**.
+
+Alternatively, install everything from the CLI (auto-resolves the dependency graph):
+
+```bash
+odoo -i website,church_management -d <your_db> --stop-after-init
+```
+
+After installing, assign one of the **Church Management** groups (**Read Only** / **Write Only** / **Full Access**) to users under **Settings → Users → Access Rights**, or the menu will not appear.
 
 ---
 
@@ -91,16 +110,17 @@ Church Management
 
 ---
 
-## � Version History
+## 📜 Version History
 
 | Version | Date | Changes |
 |---------|------|---------|
+| **1.1.1** | 2026-08-08 | **Fixes & docs** — fixed menu load-order bug causing `ParseError` (`External ID not found: menu_church_operations`) on fresh installs by centralizing all menus in `church_parent_menu.xml`; hardened install/troubleshooting docs (requires `website`, security-group setup, Odoo 17→18 `vat_check_vies` cleanup). |
 | **1.1.0** | 2026-08-08 | **Pray Requests** — new feature: public submission form (`/church-pray`), CRUD under **Operations → Pray Requests**, prayer sessions (date, time, prayers, notes), **Kanban / Calendar / List / Pivot / Form** views, **Dashboard** stat card + shortcut, automatic **Church Calendar** sync, and sample data. Also: cohort-style **Pivot** view replaces the grid view (unsupported in Odoo 18). |
 | **1.0.2** | — | **Public Church Calendar** (`/church-calendar`) — type filters, month/type grouping, only confirmed activities shown. |
 
 ---
 
-## �👤 Author
+## 👤 Author
 
 **Prihadi** — [prihadi.r@gmail.com](mailto:prihadi.r@gmail.com)
 

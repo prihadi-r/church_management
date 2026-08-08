@@ -4,7 +4,7 @@ Panduan lengkap untuk menginstal dan mengkonfigurasi modul **Church Management**
 pada Odoo 18. Dokumen ini menjelaskan semua **persyaratan** (requirements),
 **langkah instalasi**, dan **pemecahan masalah** umum.
 
-> Terakhir diperbarui untuk **versi 1.1.0**.
+> Terakhir diperbarui untuk **versi 1.1.1**.
 
 ---
 
@@ -59,8 +59,15 @@ sebelum modul ini diinstal.
 
 > Jika salah satu modul di atas **belum terpasang**, Odoo akan otomatis
 > menginstalnya sebagai dependensi saat Anda menginstal *Church Management*
-> (asalkan ada di direktori addons). Modul `website` biasanya perlu diinstal
-> terlebih dahulu agar fitur publik berfungsi penuh.
+> (asalkan ada di direktori addons).
+>
+> ⚠️ **`website` wajib terpasang.** Jika belum, instalasi akan berhenti dengan
+> `module church_management: Unmet dependencies: website` dan modul tertahan di
+> status `to install`. Instal `website` terlebih dahulu, misalnya via CLI:
+>
+> ```bash
+> odoo -i website,church_management -d <nama_db> --stop-after-init
+> ```
 
 ---
 
@@ -134,6 +141,13 @@ Restart-Service odoo-server-18.0
 3. Odoo akan otomatis menginstal dependensi (`crm`, `event`, `account`,
    `website`) bila belum terpasang.
 
+> 💡 **Alternatif (CLI):** untuk menginstal sekaligus semua dependensi yang
+> hilang, jalankan dari terminal:
+>
+> ```bash
+> odoo -i website,church_management -d <nama_db> --stop-after-init
+> ```
+
 ### 5.6 Verifikasi Instalasi
 - Menu **Church Management** muncul di bar aplikasi utama.
 - **Dashboard** menampilkan kartu statistik.
@@ -193,7 +207,10 @@ Setiap perubahan pada model/field membutuhkan **restart** + **upgrade**:
 | `No matching record found for external id 'model_...'` saat upgrade | Layanan Odoo berjalan dengan kode lama (model baru belum dimuat). | Restart layanan Odoo, lalu **upgrade** modul lagi. |
 | `Warning: Field ... unknown parameter 'tracking'` | Parameter field tidak dikenal di Odoo 18. | Hapus parameter `tracking=True` pada definisi field. |
 | Halaman publik 404 | Modul `website` belum aktif / route belum didaftarkan. | Instal `website`, restart Odoo. |
-| Menu tidak muncul | Hak akses grup belum diberikan. | Beri akses grup **Church Management** pada pengguna. |
+| Menu tidak muncul | Hak akses grup belum diberikan. | Beri akses grup **Church Management** (Read Only / Write Only / Full Access) pada pengguna di **Settings → Users → Access Rights**. |
+| `Unmet dependencies: website` | Modul **`website`** belum terpasang; modul tertahan di status `to install`. | Instal `website` (mis. `odoo -i website,church_management -d <db> --stop-after-init`), lalu instal ulang. |
+| `ParseError: External ID not found ... menu_church_operations` | Kopi modul lama dengan urutan menu yang salah (bug < 1.1.1). | Ganti seluruh folder modul dengan versi **1.1.1+**, lalu upgrade. |
+| `"res.config.settings"."vat_check_vies" field is undefined` (klien) | Sisa modul `base_vat` dari migrasi Odoo 17 → 18; view settings lama masih merujuk field yang sudah dihapus. | Nonaktifkan view sisa: `UPDATE ir_ui_view SET active = false WHERE id = <id_view>;` (cari via `arch_db::text LIKE '%vat_check_vies%'`). |
 | Perubahan kode tidak berefek | Layanan masih memuat registry lama. | `Restart-Service odoo-server-18.0` lalu upgrade. |
 
 ---
