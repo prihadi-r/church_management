@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="menu_christianity_news_root"
+                  name="Christianity News"
+                  sequence="20"/>
+
+        <menuitem id="menu_news_source"
+                  name="Sources"
+                  parent="menu_christianity_news_root"
+                  action="action_news_source"
+                  sequence="10"/>
+
+        <menuitem id="menu_news_article"
+                  name="Articles"
+                  parent="menu_christianity_news_root"
+                  action="action_news_article"
+                  sequence="20"/>
+
+        <menuitem id="menu_news_category"
+                  name="Categories"
+                  parent="menu_christianity_news_root"
+                  action="action_news_category"
+                  sequence="30"/>
+
+    </data>
+</odoo>

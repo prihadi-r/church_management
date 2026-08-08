@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+        <record id="view_res_partner_form_inherit_church" model="ir.ui.view">
+            <field name="name">res.partner.form.church.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="church_member_type_id"/>
+                    <field name="care_cell_id"/>
+                    <field name="is_musician" invisible="1"/>
+                    <field name="musician_role_id" invisible="not is_musician"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_crm_lead_form_inherit_church" model="ir.ui.view">
+            <field name="name">crm.lead.form.church.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="sacrament_type_id"/>
+                    <field name="sacrament_state"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_event_event_form_inherit_church" model="ir.ui.view">
+            <field name="name">event.event.form.church.inherit</field>
+            <field name="model">event.event</field>
+            <field name="inherit_id" ref="event.view_event_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="inside">
+                    <notebook>
+                        <page string="Service Roster">
+                            <field name="roster_ids">
+                                <list editable="bottom">
+                                    <field name="partner_id"/>
+                                    <field name="role_id"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_payment_form_inherit_church" model="ir.ui.view">
+            <field name="name">account.payment.form.church.inherit</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='amount']" position="after">
+                    <field name="church_donation_type_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

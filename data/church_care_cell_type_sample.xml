@@ -1,0 +1,32 @@
+<odoo>
+    <data noupdate="1">
+        <record id="care_cell_1" model="church.care.cell">
+            <field name="name">Care Cell Alpha</field>
+            <field name="start_date">2026-01-01</field>
+            <field name="end_date">2026-12-31</field>
+            <field name="status_id" ref="care_cell_status_proposal"/>
+        </record>
+        <record id="care_cell_2" model="church.care.cell">
+            <field name="name">Care Cell Beta</field>
+            <field name="start_date">2026-02-01</field>
+            <field name="status_id" ref="care_cell_status_review"/>
+        </record>
+        <record id="care_cell_3" model="church.care.cell">
+            <field name="name">Care Cell Gamma</field>
+            <field name="start_date">2026-03-01</field>
+            <field name="end_date">2026-06-30</field>
+            <field name="status_id" ref="care_cell_status_approved"/>
+        </record>
+        <record id="care_cell_4" model="church.care.cell">
+            <field name="name">Care Cell Delta</field>
+            <field name="start_date">2026-04-01</field>
+            <field name="status_id" ref="care_cell_status_running"/>
+        </record>
+        <record id="care_cell_5" model="church.care.cell">
+            <field name="name">Care Cell Epsilon</field>
+            <field name="start_date">2026-05-01</field>
+            <field name="end_date">2026-07-31</field>
+            <field name="status_id" ref="care_cell_status_pending"/>
+        </record>
+    </data>
+</odoo>

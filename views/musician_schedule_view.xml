@@ -1,0 +1,56 @@
+<odoo>
+    <data>
+        <record id="view_calendar_musician_schedule" model="ir.ui.view">
+            <field name="name">church.management.musician.schedule.calendar</field>
+            <field name="model">church.management.musician.schedule</field>
+            <field name="arch" type="xml">
+                <calendar string="Musician Schedule" date_start="start_datetime" date_stop="end_datetime">
+                    <field name="name"/>
+                    <field name="musician_id"/>
+                    <field name="date"/>
+                    <field name="start_time"/>
+                    <field name="end_time"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="view_musician_schedule_list" model="ir.ui.view">
+            <field name="name">church.management.musician.schedule.list</field>
+            <field name="model">church.management.musician.schedule</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="musician_id"/>
+                    <field name="musician_role_id"/>
+                    <field name="date"/>
+                    <field name="start_time"/>
+                    <field name="end_time"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_musician_schedule_form" model="ir.ui.view">
+            <field name="name">church.management.musician.schedule.form</field>
+            <field name="model">church.management.musician.schedule</field>
+            <field name="arch" type="xml">
+                <form string="Musician Schedule">
+                    <sheet>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="musician_id"/>
+                            <field name="date"/>
+                            <field name="start_time"/>
+                            <field name="end_time"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_calendar_musician_schedule" model="ir.actions.act_window">
+            <field name="name">Musician Schedule</field>
+            <field name="res_model">church.management.musician.schedule</field>
+            <field name="view_mode">calendar,list,form</field>
+        </record>
+    </data>
+</odoo>

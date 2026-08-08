@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+        <!-- Category Module -->
+        <record id="module_category_church" model="ir.module.category">
+            <field name="name">Church Management</field>
+            <field name="sequence">10</field>
+        </record>
+
+        <!-- Read Only Group -->
+        <record id="group_church_read_only" model="res.groups">
+            <field name="name">Read Only</field>
+            <field name="category_id" ref="module_category_church"/>
+        </record>
+
+        <!-- Write Only Group (Inherit Read Only) -->
+        <record id="group_church_write_only" model="res.groups">
+            <field name="name">Write Only</field>
+            <field name="category_id" ref="module_category_church"/>
+            <field name="implied_ids" eval="[(4, ref('group_church_read_only'))]"/>
+        </record>
+
+        <!-- Full Access Group (Inherit Write Only) -->
+        <record id="group_church_full_access" model="res.groups">
+            <field name="name">Full Access</field>
+            <field name="category_id" ref="module_category_church"/>
+            <field name="implied_ids" eval="[(4, ref('group_church_write_only'))]"/>
+        </record>
+    </data>
+</odoo>

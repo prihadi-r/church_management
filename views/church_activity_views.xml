@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_church_activity" model="ir.actions.act_window">
+            <field name="name">Church Calendar</field>
+            <field name="res_model">church.activity</field>
+            <field name="view_mode">calendar,list,form</field>
+        </record>
+
+        <record id="view_church_activity_calendar" model="ir.ui.view">
+            <field name="name">church.activity.calendar</field>
+            <field name="model">church.activity</field>
+            <field name="arch" type="xml">
+                <calendar string="Church Activities"
+                          date_start="start"
+                          color="color"
+                          quick_create="false">
+                    <field name="activity_type"/>
+                    <field name="partner_id"/>
+                    <field name="state"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="view_church_activity_list" model="ir.ui.view">
+            <field name="name">church.activity.list</field>
+            <field name="model">church.activity</field>
+            <field name="arch" type="xml">
+                <list string="Church Activities">
+                    <field name="name"/>
+                    <field name="activity_type"/>
+                    <field name="start"/>
+                    <field name="stop"/>
+                    <field name="partner_id"/>
+                    <field name="state" widget="badge"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_activity_search" model="ir.ui.view">
+            <field name="name">church.activity.search</field>
+            <field name="model">church.activity</field>
+            <field name="arch" type="xml">
+                <search string="Church Activities">
+                    <field name="name"/>
+                    <field name="activity_type"/>
+                    <field name="partner_id"/>
+                    <field name="care_cell_id"/>
+                    <filter name="type_event" string="Events" domain="[('activity_type','=','event')]"/>
+                    <filter name="type_musician" string="Musician" domain="[('activity_type','=','musician')]"/>
+                    <filter name="type_baptism" string="Baptisms" domain="[('activity_type','=','baptism')]"/>
+                    <filter name="type_care_cell" string="Care Cells" domain="[('activity_type','=','care_cell')]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_type" string="Activity Type" context="{'group_by':'activity_type'}"/>
+                        <filter name="group_by_date" string="Date" context="{'group_by':'start'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_church_activity_form" model="ir.ui.view">
+            <field name="name">church.activity.form</field>
+            <field name="model">church.activity</field>
+            <field name="arch" type="xml">
+                <form string="Church Activity">
+                    <header>
+                        <button name="action_refresh" type="object" string="Refresh Calendar" class="btn-primary"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group string="Activity">
+                                <field name="name"/>
+                                <field name="activity_type"/>
+                                <field name="start"/>
+                                <field name="stop"/>
+                                <field name="color" invisible="1"/>
+                            </group>
+                            <group string="Details">
+                                <field name="partner_id"/>
+                                <field name="state"/>
+                                <field name="event_id"/>
+                                <field name="musician_schedule_id"/>
+                                <field name="baptism_id"/>
+                                <field name="care_cell_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

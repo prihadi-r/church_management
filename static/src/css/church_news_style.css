@@ -1,0 +1,185 @@
+/* Christianity News Aggregator - frontend styles */
+
+.cn-container {
+    max-width: 1200px;
+}
+
+/* Header */
+.cn-header {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #ececec;
+}
+
+.cn-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #9a7b4f;
+    margin-bottom: 0.75rem;
+}
+
+.cn-page-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.5rem;
+}
+
+.cn-subtitle {
+    color: #6b7280;
+    font-size: 1rem;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* Cards */
+.cn-grid {
+    margin-top: 2rem;
+}
+
+.cn-card {
+    border: 1px solid #e8e8e8;
+    border-radius: 0.5rem;
+    background: #ffffff;
+    padding: 1.5rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+}
+
+.cn-card:hover {
+    border-color: #d0d0d0;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.cn-card-meta {
+    margin-bottom: 0.75rem;
+}
+
+.cn-source {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #9a7b4f;
+}
+
+.cn-date {
+    font-size: 0.78rem;
+    color: #9ca3af;
+}
+
+.cn-card-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.15rem;
+    line-height: 1.4;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.cn-card-title a {
+    color: #1a1a1a;
+    text-decoration: none;
+}
+
+.cn-card-title a:hover {
+    color: #9a7b4f;
+}
+
+.cn-card-summary {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: #4b5563;
+    margin-bottom: 1rem;
+    max-height: 6.5em;
+    overflow: hidden;
+}
+
+.cn-card-summary p {
+    margin-bottom: 0.5rem;
+}
+
+.cn-card-summary img {
+    max-width: 100%;
+    height: auto;
+}
+
+.cn-read-more {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #9a7b4f;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.cn-read-more:hover {
+    color: #1a1a1a;
+}
+
+/* Category filter tabs */
+.cn-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1.5rem 0 0.25rem;
+}
+
+.cn-tab {
+    padding: 0.4rem 0.95rem;
+    border: 1px solid #e2e2e2;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #4b5563;
+    text-decoration: none;
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.cn-tab:hover {
+    border-color: #9a7b4f;
+    color: #9a7b4f;
+}
+
+.cn-tab.active {
+    background: #1a1a1a;
+    border-color: #1a1a1a;
+    color: #ffffff;
+}
+
+/* Grouped sections */
+.cn-section {
+    margin-top: 2.5rem;
+}
+
+.cn-section-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #ececec;
+    margin-bottom: 1.25rem;
+}
+
+/* Card category tags */
+.cn-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 0.9rem;
+}
+
+.cn-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: #9a7b4f;
+    background: #faf6ef;
+    border: 1px solid #ede3cf;
+    border-radius: 4px;
+    padding: 0.15rem 0.45rem;
+}

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="source_christianity_today" model="church.news.source">
+            <field name="name">Christianity Today</field>
+            <field name="url">https://www.christianitytoday.com</field>
+            <field name="rss_feed_url">https://www.christianitytoday.com/rss</field>
+        </record>
+
+        <record id="source_christian_post" model="church.news.source">
+            <field name="name">The Christian Post</field>
+            <field name="url">https://www.christianpost.com</field>
+            <field name="rss_feed_url">https://www.christianpost.com/rss</field>
+        </record>
+
+        <record id="source_religion_news_service" model="church.news.source">
+            <field name="name">Religion News Service (RNS)</field>
+            <field name="url">https://religionnews.com</field>
+            <field name="rss_feed_url">https://religionnews.com/feed</field>
+        </record>
+
+        <record id="source_catholic_news_agency" model="church.news.source">
+            <field name="name">Catholic News Agency (CNA)</field>
+            <field name="url">https://www.catholicnewsagency.com</field>
+            <field name="rss_feed_url">https://www.catholicnewsagency.com/rss</field>
+        </record>
+
+        <record id="source_cbn_news" model="church.news.source">
+            <field name="name">CBN News</field>
+            <field name="url">https://www1.cbn.com</field>
+            <field name="rss_feed_url">https://www1.cbn.com/rss</field>
+        </record>
+
+        <record id="source_baptist_press" model="church.news.source">
+            <field name="name">Baptist Press</field>
+            <field name="url">https://www.baptistpress.com</field>
+            <field name="rss_feed_url">https://www.baptistpress.com/feed</field>
+        </record>
+
+        <record id="source_national_catholic_reporter" model="church.news.source">
+            <field name="name">National Catholic Reporter (NCR)</field>
+            <field name="url">https://www.ncronline.org</field>
+            <field name="rss_feed_url">https://www.ncronline.org/rss</field>
+        </record>
+
+        <record id="source_relevant_magazine" model="church.news.source">
+            <field name="name">Relevant Magazine</field>
+            <field name="url">https://relevantmagazine.com</field>
+            <field name="rss_feed_url">https://relevantmagazine.com/feed</field>
+        </record>
+
+        <record id="source_sojourners" model="church.news.source">
+            <field name="name">Sojourners</field>
+            <field name="url">https://sojo.net</field>
+            <field name="rss_feed_url">https://sojo.net/rss</field>
+        </record>
+
+        <record id="source_crosswalk" model="church.news.source">
+            <field name="name">Crosswalk / Religion Today</field>
+            <field name="url">https://www.crosswalk.com</field>
+            <field name="rss_feed_url">https://www.crosswalk.com/rss</field>
+        </record>
+
+    </data>
+</odoo>

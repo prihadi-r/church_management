@@ -1,0 +1,46 @@
+<odoo>
+    <data noupdate="1">
+        <record id="member_type_1" model="church.member.type">
+            <field name="name">Simpatisan</field>
+        </record>
+        <record id="member_type_2" model="church.member.type">
+            <field name="name">Jemaat Tetap</field>
+        </record>
+        <record id="member_type_3" model="church.member.type">
+            <field name="name">Pelajar</field>
+        </record>
+        <record id="member_type_4" model="church.member.type">
+            <field name="name">Jemaat Luar</field>
+        </record>
+        <record id="member_type_5" model="church.member.type">
+            <field name="name">Dana Member</field>
+        </record>
+        <record id="member_type_6" model="church.member.type">
+            <field name="name">Keluarga Tetap</field>
+        </record>
+        <record id="member_type_7" model="church.member.type">
+            <field name="name">Pelajar Tingkat Lanjut</field>
+        </record>
+        <record id="member_type_8" model="church.member.type">
+            <field name="name">Jemaat Aktif</field>
+        </record>
+        <record id="member_type_9" model="church.member.type">
+            <field name="name">Keluarga Terhormat</field>
+        </record>
+        <record id="member_type_10" model="church.member.type">
+            <field name="name">Jemaat Khusus</field>
+        </record>
+        <record id="member_type_11" model="church.member.type">
+            <field name="name">Musisi</field>
+        </record>
+        <record id="member_type_12" model="church.member.type">
+            <field name="name">Pendoa</field>
+        </record>
+        <record id="member_type_13" model="church.member.type">
+            <field name="name">Worship Leader</field>
+        </record>
+        <record id="member_type_14" model="church.member.type">
+            <field name="name">Pastur</field>
+        </record>
+    </data>
+</odoo>

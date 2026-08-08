@@ -1,0 +1,58 @@
+{
+    'name': 'Church Management',
+    'version': '1.0.2',
+    'summary': 'Church membership, events, donations, and sacrament management',
+    'category': 'Services/Church',
+    'depends': ['base', 'crm', 'event', 'account', 'website'],
+
+    'external_dependencies': {
+        'python': ['feedparser'],
+    },
+
+    'post_init_hook': 'post_init_hook',
+    'data': [
+        'security/church_security.xml',
+        'security/ir.model.access.csv',
+        'data/church_care_cell_status_sample.xml',
+        'data/church_care_cell_type_sample.xml',   
+        'data/church_member_type_sample.xml',
+        'data/church_donation_type_sample.xml',
+        'data/church_sacrament_type_sample.xml',
+        'data/res_partner_sample.xml',
+        'data/crm_lead_sample.xml',
+        'data/church_baptism_registration_sample.xml',
+        'data/event_event_sample.xml',
+        'data/church_musician_role_sample.xml',
+        'data/church_marriage_registration_sample.xml',
+        'data/church_news_initial_sources_data.xml',
+        'data/church_news_categories_data.xml',
+        'data/church_news_cron_data.xml',
+        'views/church_activity_views.xml',
+        'views/church_care_cell_views.xml',
+        'views/church_menu_and_views.xml',
+        'views/church_baptism_registration_views.xml',
+        'views/church_musician_role_views.xml',
+        'views/church_marriage_registration_views.xml',
+        # Dashboard comes AFTER the views that define the actions it links to
+        # (action_church_baptism_registration, action_church_marriage_registration,
+        # action_church_activity) so the %(...)d button references resolve.
+        'views/church_dashboard_views.xml',
+        'views/musician_schedule_view.xml',
+        'views/church_inherited_views.xml',
+        'views/crm_sacrament_kanban.xml',
+        'views/church_parent_menu.xml',
+        'views/church_news_source_views.xml',
+        'views/church_news_article_views.xml',
+        'views/church_news_category_views.xml',
+        'views/church_news_menu_views.xml',
+        'views/church_news_website_templates.xml',
+    ],
+    'assets': {
+        'web.assets_frontend': [
+            'church_management/static/src/css/church_news_style.css',
+        ],
+    },
+    'application': True,
+    'installable': True,
+    'license': 'LGPL-3',
+}

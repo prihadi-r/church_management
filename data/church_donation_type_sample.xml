@@ -1,0 +1,34 @@
+<odoo>
+    <data noupdate="1">
+        <record id="donation_type_1" model="church.donation.type">
+            <field name="name">Persembahan Syukur</field>
+        </record>
+        <record id="donation_type_2" model="church.donation.type">
+            <field name="name">Perpuluhan</field>
+        </record>
+        <record id="donation_type_3" model="church.donation.type">
+            <field name="name">Kursi Tamu</field>
+        </record>
+        <record id="donation_type_4" model="church.donation.type">
+            <field name="name">Lainnya</field>
+        </record>
+        <record id="donation_type_5" model="church.donation.type">
+            <field name="name">Penyerahan Anak</field>
+        </record>
+        <record id="donation_type_6" model="church.donation.type">
+            <field name="name">Seminar</field>
+        </record>
+        <record id="donation_type_7" model="church.donation.type">
+            <field name="name">Donasi Keagamaan</field>
+        </record>
+        <record id="donation_type_8" model="church.donation.type">
+            <field name="name">Persembahan Seni</field>
+        </record>
+        <record id="donation_type_9" model="church.donation.type">
+            <field name="name">Donasi Buku</field>
+        </record>
+        <record id="donation_type_10" model="church.donation.type">
+            <field name="name">Persembahan Lainnya</field>
+        </record>
+    </data>
+</odoo>

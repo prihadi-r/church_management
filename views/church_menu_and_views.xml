@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- ========================================== -->
+        <!-- 1. MAIN & CATEGORY MENU STRUCTURE           -->
+        <!-- ========================================== -->
+        <!-- ========================================== -->
+        <!-- 2. MEMBER TYPES                            -->
+        <!-- ========================================== -->
+        <record id="action_church_member_type" model="ir.actions.act_window">
+            <field name="name">Member Types</field>
+            <field name="res_model">church.member.type</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="view_church_member_type_list" model="ir.ui.view">
+            <field name="name">church.member.type.list</field>
+            <field name="model">church.member.type</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_member_type_form" model="ir.ui.view">
+            <field name="name">church.member.type.form</field>
+            <field name="model">church.member.type</field>
+            <field name="arch" type="xml">
+                <form string="Member Type">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_member_type_search" model="ir.ui.view">
+            <field name="name">church.member.type.search</field>
+            <field name="model">church.member.type</field>
+            <field name="arch" type="xml">
+                <search string="Member Type">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- 3. DONATION TYPES                         -->
+        <!-- ========================================== -->
+        <record id="action_church_donation_type" model="ir.actions.act_window">
+            <field name="name">Donation Types</field>
+            <field name="res_model">church.donation.type</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="view_church_donation_type_list" model="ir.ui.view">
+            <field name="name">church.donation.type.list</field>
+            <field name="model">church.donation.type</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_donation_type_form" model="ir.ui.view">
+            <field name="name">church.donation.type.form</field>
+            <field name="model">church.donation.type</field>
+            <field name="arch" type="xml">
+                <form string="Donation Type">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_donation_type_search" model="ir.ui.view">
+            <field name="name">church.donation.type.search</field>
+            <field name="model">church.donation.type</field>
+            <field name="arch" type="xml">
+                <search string="Donation Type">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- 4. SACRAMENT TYPES                         -->
+        <!-- ========================================== -->
+        <record id="action_church_sacrament_type" model="ir.actions.act_window">
+            <field name="name">Sacrament Types</field>
+            <field name="res_model">church.sacrament.type</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="view_church_sacrament_type_list" model="ir.ui.view">
+            <field name="name">church.sacrament.type.list</field>
+            <field name="model">church.sacrament.type</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_sacrament_type_form" model="ir.ui.view">
+            <field name="name">church.sacrament.type.form</field>
+            <field name="model">church.sacrament.type</field>
+            <field name="arch" type="xml">
+                <form string="Sacrament Type">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_sacrament_type_search" model="ir.ui.view">
+            <field name="name">church.sacrament.type.search</field>
+            <field name="model">church.sacrament.type</field>
+            <field name="arch" type="xml">
+                <search string="Sacrament Type">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- 5. EVENT ROLES                             -->
+        <!-- ========================================== -->
+        <record id="action_church_event_role" model="ir.actions.act_window">
+            <field name="name">Event Roles</field>
+            <field name="res_model">church.event.role</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="view_church_event_role_list" model="ir.ui.view">
+            <field name="name">church.event.role.list</field>
+            <field name="model">church.event.role</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_event_role_form" model="ir.ui.view">
+            <field name="name">church.event.role.form</field>
+            <field name="model">church.event.role</field>
+            <field name="arch" type="xml">
+                <form string="Event Role">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_event_role_search" model="ir.ui.view">
+            <field name="name">church.event.role.search</field>
+            <field name="model">church.event.role</field>
+            <field name="arch" type="xml">
+                <search string="Event Role">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- 6. EVENT ROSTERS                         -->
+        <!-- ========================================== -->
+        <record id="action_church_event_roster" model="ir.actions.act_window">
+            <field name="name">Event Rosters</field>
+            <field name="res_model">church.event.roster</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="view_church_event_roster_list" model="ir.ui.view">
+            <field name="name">church.event.roster.list</field>
+            <field name="model">church.event.roster</field>
+            <field name="arch" type="xml">
+                <list editable="bottom">
+                    <field name="event_id"/>
+                    <field name="partner_id"/>
+                    <field name="role_id"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_event_roster_form" model="ir.ui.view">
+            <field name="name">church.event.roster.form</field>
+            <field name="model">church.event.roster</field>
+            <field name="arch" type="xml">
+                <form string="Event Roster">
+                    <sheet>
+                        <group>
+                            <field name="event_id"/>
+                            <field name="partner_id"/>
+                            <field name="role_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_event_roster_search" model="ir.ui.view">
+            <field name="name">church.event.roster.search</field>
+            <field name="model">church.event.roster</field>
+            <field name="arch" type="xml">
+                <search string="Event Roster">
+                    <field name="event_id"/>
+                    <field name="partner_id"/>
+                    <field name="role_id"/>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</odoo>

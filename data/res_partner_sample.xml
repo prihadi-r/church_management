@@ -1,0 +1,120 @@
+<odoo>
+    <data noupdate="1">
+        <record id="res_partner_1" model="res.partner">
+            <field name="name">John Doe</field>
+            <field name="email">john.doe@example.com</field>
+            <field name="church_member_type_id" ref="member_type_1"/>
+            <field name="care_cell_id" ref="care_cell_1"/>
+        </record>
+        <record id="res_partner_2" model="res.partner">
+            <field name="name">Jane Smith</field>
+            <field name="email">jane.smith@example.com</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="care_cell_2"/>
+        </record>
+        <record id="res_partner_3" model="res.partner">
+            <field name="name">Alice Johnson</field>
+            <field name="email">alice.johnson@example.com</field>
+            <field name="church_member_type_id" ref="member_type_14"/>
+            <field name="care_cell_id" ref="care_cell_3"/>
+        </record>
+        <record id="res_partner_4" model="res.partner">
+            <field name="name">Bob Brown</field>
+            <field name="email">bob.brown@example.com</field>
+            <field name="church_member_type_id" ref="member_type_14"/>
+            <field name="care_cell_id" ref="care_cell_4"/>
+        </record>
+        <record id="res_partner_5" model="res.partner">
+            <field name="name">Charlie Davis</field>
+            <field name="email">charlie.davis@example.com</field>
+            <field name="church_member_type_id" ref="member_type_5"/>
+            <field name="care_cell_id" ref="care_cell_5"/>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- Partners untuk Candidate Baptis            -->
+        <!-- ========================================== -->
+        <record id="res_partner_budi" model="res.partner">
+            <field name="name">Budi Santoso</field>
+            <field name="email">budi.santoso@example.com</field>
+            <field name="phone">0812-3456-7890</field>
+            <field name="street">Jl. Merdeka No. 10, Jakarta</field>
+        </record>
+        <record id="res_partner_sari" model="res.partner">
+            <field name="name">Sari Wijaya</field>
+            <field name="email">sari.wijaya@example.com</field>
+            <field name="phone">0813-2222-3344</field>
+            <field name="street">Jl. Sudirman No. 45, Bandung</field>
+        </record>
+        <record id="res_partner_kevin" model="res.partner">
+            <field name="name">Kevin Pratama</field>
+            <field name="email">kevin.pratama@example.com</field>
+            <field name="phone">0815-9876-5432</field>
+            <field name="street">Jl. Diponegoro No. 8, Surabaya</field>
+        </record>
+        <record id="res_partner_maya" model="res.partner">
+            <field name="name">Maya Anggraini</field>
+            <field name="email">maya.anggraini@example.com</field>
+            <field name="phone">0811-1111-2222</field>
+            <field name="street">Jl. Gatot Subroto No. 3, Semarang</field>
+        </record>
+        <record id="res_partner_agus" model="res.partner">
+            <field name="name">Agus Setiawan</field>
+            <field name="email">agus.setiawan@example.com</field>
+            <field name="phone">0812-7777-8888</field>
+            <field name="street">Jl. Ahmad Yani No. 22, Yogyakarta</field>
+        </record>
+        <record id="res_partner_lina" model="res.partner">
+            <field name="name">Lina Kurniawan</field>
+            <field name="email">lina.kurniawan@example.com</field>
+            <field name="phone">0821-3333-4444</field>
+            <field name="street">Jl. Imam Bonjol No. 12, Medan</field>
+        </record>
+        <record id="res_partner_rudi" model="res.partner">
+            <field name="name">Rudi Hartono</field>
+            <field name="email">rudi.hartono@example.com</field>
+            <field name="phone">0819-5555-6666</field>
+            <field name="street">Jl. Pahlawan No. 7, Makassar</field>
+        </record>
+        <record id="res_partner_feni" model="res.partner">
+            <field name="name">Feni Susanti</field>
+            <field name="email">feni.susanti@example.com</field>
+            <field name="phone">0857-8888-9999</field>
+            <field name="street">Jl. Teuku Umar No. 5, Denpasar</field>
+        </record>
+        <record id="res_partner_joko" model="res.partner">
+            <field name="name">Joko Pramono</field>
+            <field name="email">joko.pramono@example.com</field>
+            <field name="phone">0812-1234-5678</field>
+            <field name="street">Jl. Jend. Sudirman No. 99, Palembang</field>
+        </record>
+        <record id="res_partner_abigail" model="res.partner">
+            <field name="name">Abigail Manurung</field>
+            <field name="email">abigail.manurung@example.com</field>
+            <field name="phone">0813-0000-1111</field>
+            <field name="street">Jl. Veteran No. 14, Balikpapan</field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- Partners untuk Ayah / Ibu (baptis anak)     -->
+        <!-- ========================================== -->
+        <record id="res_partner_andi" model="res.partner">
+            <field name="name">Andi Pratama</field>
+        </record>
+        <record id="res_partner_rina" model="res.partner">
+            <field name="name">Rina Pratama</field>
+        </record>
+        <record id="res_partner_hendra" model="res.partner">
+            <field name="name">Hendra Kurniawan</field>
+        </record>
+        <record id="res_partner_yuni" model="res.partner">
+            <field name="name">Yuni Kurniawan</field>
+        </record>
+        <record id="res_partner_poltak" model="res.partner">
+            <field name="name">Poltak Manurung</field>
+        </record>
+        <record id="res_partner_rosma" model="res.partner">
+            <field name="name">Rosma Manurung</field>
+        </record>
+    </data>
+</odoo>

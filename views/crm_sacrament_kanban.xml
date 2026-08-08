@@ -1,0 +1,24 @@
+<odoo>
+    <!-- Mewarisi Kanban CRM untuk Pendaftaran Sakramen -->
+    <record id="view_crm_lead_sacrament_kanban" model="ir.ui.view">
+        <field name="name">crm.lead.sacrament.kanban.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+        <field name="arch" type="xml">
+            
+            <!-- 1. Group By berdasarkan Field State Baru -->
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="default_group_by">sacrament_state</attribute>
+            </xpath>
+
+            <!-- 2. Target main card container present in crm_case_kanban_view_leads -->
+            <xpath expr="//t[@t-name='card']" position="inside">
+                <div class="mt-2">
+                    <field name="sacrament_state" widget="label_selection" 
+                        options="{'classes': {'draft': 'default', 'review': 'warning', 'approved': 'success', 'cancel': 'danger'}}"/>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

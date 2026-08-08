@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- ========================================== -->
+        <!-- 1. MAIN APP ROOT MENU                       -->
+        <!-- ========================================== -->
+        <menuitem id="menu_church_root" 
+                  name="Church Management" 
+                  sequence="10"
+                  action="action_church_dashboard"/>
+
+        <!-- Dashboard: landing page Church Management (menu pertama) -->
+        <menuitem id="menu_church_dashboard"
+                  name="Dashboard"
+                  parent="menu_church_root"
+                  action="action_church_dashboard"
+                  sequence="5"/>
+
+        <!-- ========================================== -->
+        <!-- 2. CATEGORY HEADERS (SUB-MENUS)             -->
+        <!-- ========================================== -->
+        <menuitem id="menu_church_master" 
+                  name="Master Data" 
+                  parent="menu_church_root" 
+                  sequence="10"/>
+
+        <menuitem id="menu_church_operations" 
+                  name="Operations" 
+                  parent="menu_church_root" 
+                  sequence="20"/>
+
+        <!-- ========================================== -->
+        <!-- 3. MASTER DATA CHILD MENUS                  -->
+        <!-- ========================================== -->
+        <menuitem id="menu_church_member_type"
+                  name="Member Types"
+                  parent="menu_church_master"
+                  action="action_church_member_type"
+                  sequence="10"/>
+
+        <menuitem id="menu_church_donation_type"
+                  name="Donation Types"
+                  parent="menu_church_master"
+                  action="action_church_donation_type"
+                  sequence="30"/>
+
+        <menuitem id="menu_church_sacrament_type"
+                  name="Sacrament Types"
+                  parent="menu_church_master"
+                  action="action_church_sacrament_type"
+                  sequence="40"/>
+
+        <menuitem id="menu_church_event_role"
+                  name="Event Roles"
+                  parent="menu_church_master"
+                  action="action_church_event_role"
+                  sequence="50"/>
+
+        <menuitem id="menu_church_musician_role"
+                  name="Musician Roles"
+                  parent="menu_church_master"
+                  action="action_church_musician_role"
+                  sequence="60"/>
+
+        <!-- ========================================== -->
+        <!-- 4. OPERATIONS CHILD MENUS                  -->
+        <!-- ========================================== -->
+        <menuitem id="menu_church_event_roster"
+                  name="Event Rosters"
+                  parent="menu_church_operations"
+                  action="action_church_event_roster"
+                  sequence="10"/>
+
+        <menuitem id="menu_church_care_cell"
+                  name="Care Cells"
+                  parent="menu_church_operations"
+                  action="action_church_care_cell"
+                  sequence="15"/>
+
+        <menuitem id="menu_church_musician_schedule"
+                  name="Musician Schedule"
+                  parent="menu_church_operations"
+                  action="action_calendar_musician_schedule"
+                  sequence="20"/>
+
+        <menuitem id="menu_church_baptism_registration"
+                  name="Baptism Registrations"
+                  parent="menu_church_operations"
+                  action="action_church_baptism_registration"
+                  sequence="30"/>
+
+        <menuitem id="menu_church_marriage_registration"
+                  name="Marriage Registrations"
+                  parent="menu_church_operations"
+                  action="action_church_marriage_registration"
+                  sequence="35"/>
+
+        <menuitem id="menu_church_calendar"
+                  name="Church Calendar"
+                  parent="menu_church_operations"
+                  action="action_church_activity"
+                  sequence="40"/>
+
+    </data>
+</odoo>

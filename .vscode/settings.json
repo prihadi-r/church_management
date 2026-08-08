@@ -1,0 +1,13 @@
+{
+    "python.analysis.extraPaths": [
+        "C:/Users/Lenovo/Downloads",
+        "C:/Users/Lenovo/Downloads/odoo_core_addons",
+        "U:\\church_management"
+         // Jalur ke modul kustom Anda (sesuaikan)
+    ],
+    "python.autoComplete.extraPaths": [
+        "C:/Users/Lenovo/Downloads",
+        "C:/Users/Lenovo/Downloads/odoo_core_addons",
+        "${workspaceFolder}"
+    ]
+}

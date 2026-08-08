@@ -1,0 +1,23 @@
+<odoo>
+    <data noupdate="1">
+        <record id="event_role_1" model="church.event.role">
+            <field name="name">Speaker</field>
+        </record>
+
+        <record id="event_role_2" model="church.event.role">
+            <field name="name">MC</field>
+        </record>
+
+        <record id="event_role_3" model="church.event.role">
+            <field name="name">Choir Leader</field>
+        </record>
+
+        <record id="event_role_4" model="church.event.role">
+            <field name="name">Usher</field>
+        </record>
+
+        <record id="event_role_5" model="church.event.role">
+            <field name="name">Sound Technician</field>
+        </record>
+    </data>
+</odoo>

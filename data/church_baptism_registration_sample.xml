@@ -1,0 +1,100 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Sample data for Baptism Registration -->
+        <record id="baptism_registration_1" model="church.baptism.registration">
+            <field name="partner_id" ref="res_partner_budi"/>
+            <field name="birth_date">1990-05-12</field>
+            <field name="baptism_datetime">2026-03-15 08:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="pastor_id" ref="res_partner_3"/>
+            <field name="state">done</field>
+            <field name="notes">Dibaptis dalam ibadah Minggu pagi.</field>
+        </record>
+
+        <record id="baptism_registration_2" model="church.baptism.registration">
+            <field name="partner_id" ref="res_partner_sari"/>
+            <field name="birth_date">1995-08-30</field>
+            <field name="baptism_datetime">2026-06-20 09:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="pastor_id" ref="res_partner_4"/>
+            <field name="state">approved</field>
+        </record>
+
+        <record id="baptism_registration_3" model="church.baptism.registration">
+            <field name="partner_id" ref="res_partner_kevin"/>
+            <field name="birth_date">2012-11-02</field>
+            <field name="father_id" ref="res_partner_andi"/>
+            <field name="mother_id" ref="res_partner_rina"/>
+            <field name="baptism_datetime">2026-08-16 10:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="pastor_id" ref="res_partner_3"/>
+            <field name="state">review</field>
+            <field name="notes">Baptis anak, sedang menunggu konfirmasi orang tua.</field>
+        </record>
+
+        <record id="baptism_registration_4" model="church.baptism.registration">
+            <field name="partner_id" ref="res_partner_maya"/>
+            <field name="birth_date">1998-03-21</field>
+            <field name="baptism_datetime">2026-09-05 08:30:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="state">draft</field>
+        </record>
+
+        <record id="baptism_registration_5" model="church.baptism.registration">
+            <field name="partner_id" ref="res_partner_agus"/>
+            <field name="birth_date">1988-12-09</field>
+            <field name="baptism_datetime">2026-04-11 09:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="pastor_id" ref="res_partner_4"/>
+            <field name="state">done</field>
+        </record>
+
+        <record id="baptism_registration_6" model="church.baptism.registration">
+            <field name="partner_id" ref="res_partner_lina"/>
+            <field name="birth_date">2015-06-17</field>
+            <field name="father_id" ref="res_partner_hendra"/>
+            <field name="mother_id" ref="res_partner_yuni"/>
+            <field name="baptism_datetime">2026-10-03 10:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="pastor_id" ref="res_partner_3"/>
+            <field name="state">review</field>
+        </record>
+
+        <record id="baptism_registration_7" model="church.baptism.registration">
+            <field name="partner_id" ref="res_partner_rudi"/>
+            <field name="birth_date">1992-01-25</field>
+            <field name="baptism_datetime">2026-07-12 08:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="state">cancel</field>
+            <field name="notes">Dibatalkan karena jadwal pindah ke bulan berikutnya.</field>
+        </record>
+
+        <record id="baptism_registration_8" model="church.baptism.registration">
+            <field name="partner_id" ref="res_partner_feni"/>
+            <field name="birth_date">2000-09-14</field>
+            <field name="baptism_datetime">2026-11-21 09:30:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="state">draft</field>
+        </record>
+
+        <record id="baptism_registration_9" model="church.baptism.registration">
+            <field name="partner_id" ref="res_partner_joko"/>
+            <field name="birth_date">1985-04-18</field>
+            <field name="baptism_datetime">2026-08-30 10:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="pastor_id" ref="res_partner_4"/>
+            <field name="state">approved</field>
+        </record>
+
+        <record id="baptism_registration_10" model="church.baptism.registration">
+            <field name="partner_id" ref="res_partner_abigail"/>
+            <field name="birth_date">2010-02-08</field>
+            <field name="father_id" ref="res_partner_poltak"/>
+            <field name="mother_id" ref="res_partner_rosma"/>
+            <field name="baptism_datetime">2026-05-24 08:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="pastor_id" ref="res_partner_3"/>
+            <field name="state">done</field>
+        </record>
+    </data>
+</odoo>

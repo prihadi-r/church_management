@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="news_page" name="Christianity News Page">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="container cn-container py-5">
+                    <header class="cn-header text-center mb-4">
+                        <p class="cn-eyebrow">Christian News Aggregator</p>
+                        <h1 class="cn-page-title">Christianity News</h1>
+                        <p class="cn-subtitle">Latest headlines from trusted Christian news sources</p>
+                    </header>
+
+                    <!-- Category filter tabs -->
+                    <nav class="cn-tabs" aria-label="News categories">
+                        <a t-attf-href="/christianity-news"
+                           t-attf-class="cn-tab #{ 'active' if not active_category else '' }">
+                            All
+                        </a>
+                        <t t-foreach="categories" t-as="cat">
+                            <a t-attf-href="/christianity-news?category=#{ cat.slug }"
+                               t-attf-class="cn-tab #{ 'active' if active_category and active_category.id == cat.id else '' }"
+                               t-out="cat.name"/>
+                        </t>
+                    </nav>
+
+                    <t t-if="active_category">
+                        <!-- Filtered view: flat grid of the selected category -->
+                        <div class="row cn-grid">
+                            <t t-foreach="articles" t-as="article">
+                                <t t-call="church_management.news_card">
+                                    <t t-set="article" t-value="article"/>
+                                </t>
+                            </t>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <!-- Overview: grouped sections by category -->
+                        <t t-foreach="groups" t-as="group">
+                            <section class="cn-section">
+                                <h2 class="cn-section-title">
+                                    <t t-out="group['category'].name"/>
+                                </h2>
+                                <div class="row cn-grid">
+                                    <t t-foreach="group['articles']" t-as="article">
+                                        <t t-call="church_management.news_card">
+                                            <t t-set="article" t-value="article"/>
+                                        </t>
+                                    </t>
+                                </div>
+                            </section>
+                        </t>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="news_card" name="News Card">
+        <div class="col-md-6 col-lg-4 d-flex mb-4">
+            <article class="cn-card d-flex flex-column">
+                <div class="cn-card-meta d-flex justify-content-between align-items-center">
+                    <span class="cn-source" t-out="article.source_id.name"/>
+                    <span class="cn-date" t-out="article.published_date"/>
+                </div>
+                <h3 class="cn-card-title">
+                    <a t-att-href="article.original_url"
+                       target="_blank"
+                       rel="noopener"
+                       t-out="article.title"/>
+                </h3>
+                <div class="cn-card-summary flex-grow-1">
+                    <t t-out="article.summary"/>
+                </div>
+                <div class="cn-card-tags">
+                    <t t-foreach="article.category_ids" t-as="tag">
+                        <span class="cn-tag" t-out="tag.name"/>
+                    </t>
+                </div>
+                <a class="cn-read-more"
+                   t-att-href="article.original_url"
+                   target="_blank"
+                   rel="noopener">
+                    Read article →
+                </a>
+            </article>
+        </div>
+    </template>
+</odoo>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="category_general" model="church.news.category">
+            <field name="name">General</field>
+            <field name="slug">general</field>
+            <field name="sequence">90</field>
+            <field name="color">0</field>
+            <field name="keywords">news, update, latest, breaking</field>
+        </record>
+
+        <record id="category_world" model="church.news.category">
+            <field name="name">World</field>
+            <field name="slug">world</field>
+            <field name="sequence">10</field>
+            <field name="color">1</field>
+            <field name="keywords">world, international, global, nations, foreign, israel, ukraine, russia, china, africa, europe, asia, war, conflict, un, united nations, government, president, prime minister</field>
+        </record>
+
+        <record id="category_politics" model="church.news.category">
+            <field name="name">Politics &amp; Law</field>
+            <field name="slug">politics</field>
+            <field name="sequence">20</field>
+            <field name="color">2</field>
+            <field name="keywords">politics, political, law, legal, court, supreme court, congress, senate, house, legislation, bill, vote, election, policy, lawsuit, lawyer, judges, religious freedom</field>
+        </record>
+
+        <record id="category_church" model="church.news.category">
+            <field name="name">Church &amp; Faith</field>
+            <field name="slug">church</field>
+            <field name="sequence">30</field>
+            <field name="color">3</field>
+            <field name="keywords">church, churches, pastor, pastors, congregation, worship, bible, scripture, faith, believers, ministry, evangelism, revival, denominations, catholic, vatican, pope, protestant, orthodox, baptist, methodist</field>
+        </record>
+
+        <record id="category_theology" model="church.news.category">
+            <field name="name">Theology &amp; Opinion</field>
+            <field name="slug">theology</field>
+            <field name="sequence">40</field>
+            <field name="color">4</field>
+            <field name="keywords">theology, theological, doctrine, opinion, commentary, essay, reflection, devotional, sermon, gospel, salvation, sin, grace, god, christ, jesus, apologetics</field>
+        </record>
+
+        <record id="category_culture" model="church.news.category">
+            <field name="name">Culture &amp; Society</field>
+            <field name="slug">culture</field>
+            <field name="sequence">50</field>
+            <field name="color">5</field>
+            <field name="keywords">culture, society, family, marriage, parenting, education, media, entertainment, film, music, arts, abortion, gender, sexuality, lgbt, transgender, morality, values, book, movie</field>
+        </record>
+
+        <record id="category_business" model="church.news.category">
+            <field name="name">Business &amp; Finance</field>
+            <field name="slug">business</field>
+            <field name="sequence">60</field>
+            <field name="color">6</field>
+            <field name="keywords">business, economy, economic, finance, financial, money, market, company, corporate, tax, wealth, debt, banking, inflation, job, jobs, unemployment, entrepreneur</field>
+        </record>
+
+        <record id="category_health" model="church.news.category">
+            <field name="name">Health &amp; Science</field>
+            <field name="slug">health</field>
+            <field name="sequence">70</field>
+            <field name="color">7</field>
+            <field name="keywords">health, medical, medicine, science, research, study, doctors, disease, virus, covid, pandemic, mental health, healthcare, hospital, vaccine</field>
+        </record>
+
+        <record id="category_persecution" model="church.news.category">
+            <field name="name">Persecution &amp; Missions</field>
+            <field name="slug">persecution</field>
+            <field name="sequence">80</field>
+            <field name="color">8</field>
+            <field name="keywords">persecution, persecuted, martyr, missionary, missions, refugees, humanitarian, aid, relief, human rights, oppression, prison</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- ========================================== -->
+        <!-- CARE CELLS : ACTION & VIEWS                -->
+        <!-- ========================================== -->
+        <record id="action_church_care_cell" model="ir.actions.act_window">
+            <field name="name">Care Cells</field>
+            <field name="res_model">church.care.cell</field>
+            <field name="view_mode">kanban,calendar,list,form</field>
+        </record>
+
+        <!-- KANBAN -->
+        <record id="view_church_care_cell_kanban" model="ir.ui.view">
+            <field name="name">church.care.cell.kanban</field>
+            <field name="model">church.care.cell</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="status_id" group_create="true" group_edit="true" group_delete="true">
+                    <field name="status_id"/>
+                    <field name="color"/>
+                    <field name="name"/>
+                    <field name="leader_id"/>
+                    <field name="start_date"/>
+                    <field name="attendee_count"/>
+                    <field name="session_count"/>
+                    <templates>
+                        <t t-name="card">
+                            <div class="oe_kanban_global_click" t-att-class="kanban_color(record.color.raw_value)">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </div>
+                                    <div class="o_kanban_record_options">
+                                        <field name="status_id" widget="badge"/>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div>
+                                        <field name="leader_id"/>
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-calendar" title="Start Date"/> <field name="start_date"/>
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-users" title="Attendees"/> <field name="attendee_count"/>
+                                        <i class="fa fa-calendar-o" title="Sessions"/> <field name="session_count"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- CALENDAR -->
+        <record id="view_church_care_cell_calendar" model="ir.ui.view">
+            <field name="name">church.care.cell.calendar</field>
+            <field name="model">church.care.cell</field>
+            <field name="arch" type="xml">
+                <calendar string="Care Cell Calendar"
+                          date_start="start_date"
+                          date_stop="calendar_end_date"
+                          color="color"
+                          quick_create="false">
+                    <field name="name"/>
+                    <field name="status_id" widget="badge"/>
+                    <field name="leader_id"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="calendar_end_date" invisible="1"/>
+                </calendar>
+            </field>
+        </record>
+
+        <!-- LIST -->
+        <record id="view_church_care_cell_list" model="ir.ui.view">
+            <field name="name">church.care.cell.list</field>
+            <field name="model">church.care.cell</field>
+            <field name="arch" type="xml">
+                <list string="Care Cells">
+                    <field name="name"/>
+                    <field name="leader_id"/>
+                    <field name="status_id" widget="badge"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="attendee_count"/>
+                    <field name="next_session_date"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- FORM -->
+        <record id="view_church_care_cell_form" model="ir.ui.view">
+            <field name="name">church.care.cell.form</field>
+            <field name="model">church.care.cell</field>
+            <field name="arch" type="xml">
+                <form string="Care Cell">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="leader_id"/>
+                                <field name="status_id"/>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                            </group>
+                            <group>
+                                <field name="attendee_count" readonly="1"/>
+                                <field name="session_count" readonly="1"/>
+                                <field name="next_session_date" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Attendees" name="attendees">
+                                <field name="attendee_ids">
+                                    <list editable="bottom">
+                                        <field name="partner_id"/>
+                                        <field name="role"/>
+                                        <field name="joined_date"/>
+                                        <field name="notes"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Sessions" name="sessions">
+                                <field name="session_ids">
+                                    <list editable="bottom">
+                                        <field name="name"/>
+                                        <field name="date"/>
+                                        <field name="plan"/>
+                                        <field name="note"/>
+                                    </list>
+                                    <form>
+                                        <group>
+                                            <group>
+                                                <field name="care_cell_id" readonly="1"/>
+                                                <field name="name"/>
+                                                <field name="date"/>
+                                            </group>
+                                            <group>
+                                                <field name="plan"/>
+                                                <field name="note"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- SEARCH -->
+        <record id="view_church_care_cell_search" model="ir.ui.view">
+            <field name="name">church.care.cell.search</field>
+            <field name="model">church.care.cell</field>
+            <field name="arch" type="xml">
+                <search string="Care Cell">
+                    <field name="name"/>
+                    <field name="leader_id"/>
+                    <field name="status_id"/>
+                    <field name="start_date"/>
+                    <filter name="filter_active" string="Active Now" domain="[('start_date','&lt;=', context_today().strftime('%Y-%m-%d')), '|', ('end_date','=',False), ('end_date','&gt;=', context_today().strftime('%Y-%m-%d'))]"/>
+                    <filter name="filter_upcoming" string="Upcoming" domain="[('start_date','&gt;', context_today().strftime('%Y-%m-%d'))]"/>
+                    <filter name="status_proposal" string="Proposal" domain="[('status_id.code','=','proposal')]"/>
+                    <filter name="status_review" string="Review" domain="[('status_id.code','=','review')]"/>
+                    <filter name="status_approved" string="Approved" domain="[('status_id.code','=','approved')]"/>
+                    <filter name="status_running" string="Running" domain="[('status_id.code','=','running')]"/>
+                    <filter name="status_pending" string="Pending" domain="[('status_id.code','=','pending')]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_status" string="Status" context="{'group_by':'status_id'}"/>
+                        <filter name="group_by_leader" string="Leader" context="{'group_by':'leader_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

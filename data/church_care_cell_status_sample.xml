@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Status care cell (master) -->
+        <record id="care_cell_status_proposal" model="church.care.cell.status">
+            <field name="name">Proposal</field>
+            <field name="code">proposal</field>
+            <field name="sequence">10</field>
+            <field name="color">0</field>
+        </record>
+        <record id="care_cell_status_review" model="church.care.cell.status">
+            <field name="name">Review</field>
+            <field name="code">review</field>
+            <field name="sequence">20</field>
+            <field name="color">3</field>
+        </record>
+        <record id="care_cell_status_approved" model="church.care.cell.status">
+            <field name="name">Approved</field>
+            <field name="code">approved</field>
+            <field name="sequence">30</field>
+            <field name="color">4</field>
+        </record>
+        <record id="care_cell_status_running" model="church.care.cell.status">
+            <field name="name">Running</field>
+            <field name="code">running</field>
+            <field name="sequence">40</field>
+            <field name="color">10</field>
+        </record>
+        <record id="care_cell_status_pending" model="church.care.cell.status">
+            <field name="name">Pending</field>
+            <field name="code">pending</field>
+            <field name="sequence">50</field>
+            <field name="color">2</field>
+        </record>
+        <record id="care_cell_status_cancel" model="church.care.cell.status">
+            <field name="name">Cancel</field>
+            <field name="code">cancel</field>
+            <field name="sequence">60</field>
+            <field name="color">1</field>
+        </record>
+        <record id="care_cell_status_stop" model="church.care.cell.status">
+            <field name="name">Stop</field>
+            <field name="code">stop</field>
+            <field name="sequence">70</field>
+            <field name="color">6</field>
+        </record>
+    </data>
+</odoo>

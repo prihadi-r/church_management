@@ -1,0 +1,26 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Sample data for Musician Role -->
+        <record id="musician_role_1" model="church.musician.role">
+            <field name="name">Bass</field>
+        </record>
+        <record id="musician_role_2" model="church.musician.role">
+            <field name="name">Gitaris</field>
+        </record>
+        <record id="musician_role_3" model="church.musician.role">
+            <field name="name">Singer</field>
+        </record>
+        <record id="musician_role_4" model="church.musician.role">
+            <field name="name">Worship Leader</field>
+        </record>
+        <record id="musician_role_5" model="church.musician.role">
+            <field name="name">Drummer</field>
+        </record>
+        <record id="musician_role_6" model="church.musician.role">
+            <field name="name">Pianis</field>
+        </record>
+        <record id="musician_role_7" model="church.musician.role">
+            <field name="name">Keyboardis</field>
+        </record>
+    </data>
+</odoo>
