@@ -88,6 +88,26 @@ See the [User Guide](USER_GUIDE.md) for detailed usage instructions (in Indonesi
 
 ---
 
+## 📸 Screenshots
+
+> 📥 **How to add:** place your screenshots in the [`screenshots/`](screenshots/) folder (`.png` recommended), then update the links below.
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Church Calendar
+![Church Calendar](screenshots/calendar.png)
+
+### Baptism & Marriage Registration
+| | |
+|---|---|
+| ![Baptism Registration](screenshots/baptism.png) | ![Marriage Registration](screenshots/marriage.png) |
+
+### Public Church Calendar (Website)
+![Public Church Calendar](screenshots/public-calendar.png)
+
+---
+
 ## 👤 Author
 
 **Prihadi** — [prihadi.r@gmail.com](mailto:prihadi.r@gmail.com)
