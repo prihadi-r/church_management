@@ -32,6 +32,11 @@ class ChurchDashboard(models.Model):
     worship_last_month = fields.Integer(string='Worship Last Month', compute='_compute_worship')
     worship_upcoming = fields.Integer(string='Upcoming Worship', compute='_compute_worship')
 
+    # ============ Doa / Pray Requests ============
+    pray_this_month = fields.Integer(string='Pray Requests This Month', compute='_compute_pray')
+    pray_last_month = fields.Integer(string='Pray Requests Last Month', compute='_compute_pray')
+    pray_open = fields.Integer(string='Open Pray Requests', compute='_compute_pray')
+
     def _month_bounds(self):
         """Return (start_last_month, start_this_month) sebagai datetime."""
         now = datetime.now()
@@ -45,6 +50,7 @@ class ChurchDashboard(models.Model):
         self._compute_baptism()
         self._compute_marriage()
         self._compute_worship()
+        self._compute_pray()
 
     def read(self, fields=None, load='_classic_read'):
         """Pastikan statistik selalu dihitung ulang saat form dibuka.
@@ -128,3 +134,18 @@ class ChurchDashboard(models.Model):
             ])
             # Ibadah yang akan datang
             rec.worship_upcoming = Event.search_count([('date_begin', '>=', now)])
+
+    @api.depends()
+    def _compute_pray(self):
+        start_last, start_this = self._month_bounds()
+        for rec in self:
+            Pray = self.env['church.pray.request']
+            rec.pray_this_month = Pray.search_count([
+                ('create_date', '>=', start_this),
+            ])
+            rec.pray_last_month = Pray.search_count([
+                ('create_date', '>=', start_last),
+                ('create_date', '<', start_this),
+            ])
+            # Permohonan yang masih diproses (New / In Progress)
+            rec.pray_open = Pray.search_count([('state', 'in', ('new', 'in_progress'))])

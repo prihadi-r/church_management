@@ -1,6 +1,6 @@
 {
     'name': 'Church Management',
-    'version': '1.0.2',
+    'version': '1.1.0',
     'summary': 'Church membership, events, donations, and sacrament management',
     'author': 'Prihadi <prihadi.r@gmail.com>',
     'description': """
@@ -122,6 +122,11 @@ Church Management
         'views/church_baptism_registration_views.xml',
         'views/church_musician_role_views.xml',
         'views/church_marriage_registration_views.xml',
+        'views/church_pray_request_views.xml',
+        # Sample data loaded AFTER the pray views so the seq_church_pray_request
+        # ir.sequence is defined before records are created (create() calls
+        # ir.sequence.next_by_code).
+        'data/church_pray_request_sample.xml',
         # Dashboard comes AFTER the views that define the actions it links to
         # (action_church_baptism_registration, action_church_marriage_registration,
         # action_church_activity) so the %(...)d button references resolve.
@@ -136,6 +141,7 @@ Church Management
         'views/church_news_menu_views.xml',
         'views/church_news_website_templates.xml',
         'views/church_calendar_website_templates.xml',
+        'views/church_pray_website_templates.xml',
     ],
     'assets': {
         'web.assets_frontend': [

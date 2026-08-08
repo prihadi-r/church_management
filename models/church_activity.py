@@ -17,6 +17,7 @@ class ChurchActivity(models.Model):
         ('baptism', 'Baptism'),
         ('marriage', 'Marriage'),
         ('care_cell', 'Care Cell'),
+        ('pray', 'Pray Request'),
     ], string='Activity Type', required=True)
 
     start = fields.Datetime(string='Start')
@@ -38,6 +39,7 @@ class ChurchActivity(models.Model):
     baptism_id = fields.Many2one('church.baptism.registration', string='Baptism Registration', ondelete='cascade')
     marriage_id = fields.Many2one('church.marriage.registration', string='Marriage Registration', ondelete='cascade')
     care_cell_id = fields.Many2one('church.care.cell', string='Care Cell', ondelete='cascade')
+    pray_request_id = fields.Many2one('church.pray.request', string='Pray Request', ondelete='cascade')
 
     # ===========================================
     # Generate Kalender dari seluruh kegiatan
@@ -118,6 +120,19 @@ class ChurchActivity(models.Model):
                 'color': cell.color or 0,
                 'partner_id': cell.leader_id.id,
                 'care_cell_id': cell.id,
+            })
+
+        # 6. Permohonan Doa (church.pray.request)
+        for pray in self.env['church.pray.request'].search([]):
+            if not pray.create_date:
+                continue
+            Activity.create({
+                'name': f"{pray.name_request} - Doa",
+                'activity_type': 'pray',
+                'start': pray.create_date,
+                'color': 9,
+                'partner_id': pray.requester_id.id,
+                'pray_request_id': pray.id,
             })
 
     # ===========================================
@@ -206,6 +221,27 @@ class ChurchActivity(models.Model):
             'partner_id': marriage.groom_id.id,
             'marriage_id': marriage.id,
             'state': marriage.state,
+        }
+        if activity:
+            activity.write(vals)
+        else:
+            self.create(vals)
+
+    @api.model
+    def _sync_from_pray_request(self, pray):
+        """Buat/perbarui baris kalender untuk satu permohonan doa."""
+        activity = self.search([('pray_request_id', '=', pray.id)], limit=1)
+        if not pray.create_date:
+            if activity:
+                activity.unlink()
+            return
+        vals = {
+            'name': f"{pray.name_request} - Doa",
+            'activity_type': 'pray',
+            'start': pray.create_date,
+            'color': 9,
+            'partner_id': pray.requester_id.id,
+            'pray_request_id': pray.id,
         }
         if activity:
             activity.write(vals)

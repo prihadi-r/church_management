@@ -16,6 +16,7 @@ class ChurchCalendar(http.Controller):
         ('baptism', 'Baptism'),
         ('marriage', 'Marriage'),
         ('care_cell', 'Care Cell'),
+        ('pray', 'Pray Request'),
     ]
 
     @http.route('/church-calendar', type='http', auth='public', website=True)
@@ -39,7 +40,10 @@ class ChurchCalendar(http.Controller):
         activities = Activity.search(domain, order='start asc')
 
         # Only show confirmed activities: hide draft/review/cancelled ones.
+        # Pray requests have their own statuses and are always shown.
         def is_confirmed(act):
+            if act.activity_type == 'pray':
+                return True
             return not act.state or act.state in self.CONFIRMED_STATES
 
         activities = activities.filtered(is_confirmed)

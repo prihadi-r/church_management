@@ -8,7 +8,7 @@
 
 **Apa itu Church Management?**
 - Modul Odoo 18 untuk mengelola kegiatan dan data gereja dalam satu aplikasi.
-- Mengelola **keanggotaan jemaat**, **baptis**, **pernikahan**, **jadwal ibadah**, **pelayanan musik**, dan **kalender kegiatan gereja** secara terpadu.
+- Mengelola **keanggotaan jemaat**, **baptis**, **pernikahan**, **jadwal ibadah**, **pelayanan musik**, **permohonan doa**, dan **kalender kegiatan gereja** secara terpadu.
 
 **Manfaat Utama**
 - Semua data tersimpan di satu database (tidak perlu buku fisik).
@@ -32,6 +32,7 @@ Church Management
     ├── Musician Schedule
     ├── Baptism Registrations
     ├── Marriage Registrations
+    ├── Pray Requests
     └── Church Calendar
 ```
 
@@ -42,13 +43,14 @@ Church Management
 **Fungsi:** Menampilkan ringkasan jumlah kegiatan gereja secara langsung saat aplikasi dibuka.
 
 **Layar yang tersedia:**
-- Empat kartu statistik:
+- Lima kartu statistik:
   - **👥 Jemaat** — total jemaat (terdaftar sebagai anggota).
   - **💧 Baptis** — Baptis bulan ini, bulan lalu, dan jumlah yang masih antrian.
   - **💍 Pernikahan** — Pernikahan bulan ini, bulan lalu, dan yang masih antrian.
   - **⛪ Jadwal Ibadah** — Ibadah bulan ini, bulan lalu, dan yang akan datang.
+  - **🙏 Pray Requests** — Permohonan doa bulan ini, bulan lalu, dan yang masih diproses.
 - Bagian **Jemaat per Tipe Anggota**: rincian jumlah per tipe (Musisi, Pastur, dst.).
-- Tombol pintasan (di bagian atas): *Baptism Registrations*, *Marriage Registrations*, *Church Calendar*.
+- Tombol pintasan (di bagian atas): *Baptism Registrations*, *Marriage Registrations*, *Pray Requests*, *Church Calendar*.
 
 **Cara pakai:**
 1. Buka menu **Church Management → Dashboard**.
@@ -137,10 +139,22 @@ Master Data berisi daftar istilah / kategori yang dipakai di seluruh modul. Semu
 - **Kanban:** kartu berwarna sesuai status.
 - Otomatis tampil di Kalender Kegiatan Gereja.
 
-### 4.5 Church Calendar (Kalender Kegiatan Gereja)
+### 4.5 Pray Requests (Permohonan Doa)
+- **Fungsi:** Mencatat permohonan doa dari jemaat/publik dan memprosesnya melalui sesi-sesi doa.
+- **Layar:** **Kanban** (kartu per status), **Kalender**, **List**, **Pivot** (grid cohort), **Form**, **Search**.
+- **Alur status:** *New* → *In Progress* → *Answered* / *Closed*.
+- **Cara isi (backend):**
+  1. Klik **New**.
+  2. Isi **Request Title** (judul permohonan), **Description**, dan data pemohon (bisa pilih **Requester** dari kontak, atau isi nama/email/telepon langsung).
+  3. Pada tab **Prayer Sessions**, tambahkan sesi doa: **Date & Time**, **Prayers** (pilih kontak yang mendoakan), dan **Notes**.
+  4. **Save**, lalu proses lewat tombol: **Start Praying** → **Mark Answered** → **Close**.
+- **Form publik:** Jemaat/publik bisa mengirim permohonan lewat halaman website **`/church-pray`** (tanpa login). Permohonan masuk otomatis ke daftar Pray Requests.
+- Otomatis tampil di **Church Calendar** dan di **Dashboard** (kartu statistik + pintasan).
+
+### 4.6 Church Calendar (Kalender Kegiatan Gereja)
 - **Fungsi:** Satu kalender terpadu berisi semua kegiatan gereja.
 - **Layar:** **Kalender** (harian/mingguan/bulanan).
-- **Isi otomatis dari:** Ibadah/Event, Jadwal Musisi, Pendaftaran Baptis, dan Pendaftaran Pernikahan.
+- **Isi otomatis dari:** Ibadah/Event, Jadwal Musisi, Pendaftaran Baptis, Pendaftaran Pernikahan, dan Permohonan Doa.
 - **Cara pakai:**
   1. Buka **Operations → Church Calendar**.
   2. Ganti tampilan hari/minggu/bulan.
@@ -148,14 +162,14 @@ Master Data berisi daftar istilah / kategori yang dipakai di seluruh modul. Semu
   4. Klik kegiatan untuk melihat detail.
 - Data di-refresh otomatis setiap hari (ada cron harian); tombol **Refresh** tersedia untuk pembaruan manual.
 
-### 4.6 Kalender Publik di Website (Public Church Calendar)
+### 4.7 Kalender Publik di Website (Public Church Calendar)
 - **Fungsi:** Menampilkan kalender kegiatan gereja di **website publik** — dapat diakses tanpa login.
 - **URL:** `/church-calendar` (mis. `https://www.situs-anda.id/church-calendar`).
-- **Isi:** Semua kegiatan yang **sudah dikonfirmasi** — *Event/Ibadah*, *Baptis*, *Pernikahan*, dan *Care Cell*.
+- **Isi:** Semua kegiatan yang **sudah dikonfirmasi** — *Event/Ibadah*, *Baptis*, *Pernikahan*, *Care Cell*, dan *Permohonan Doa*.
   - Hanya status **Approved** dan **Completed** yang tampil (draft/review/dibatalkan disembunyikan).
   - **Jadwal Musisi tidak ditampilkan** di halaman publik.
 - **Fitur:**
-  1. **Filter berdasarkan jenis** — tab *All*, *Church Event*, *Baptism*, *Marriage*, *Care Cell*.
+  1. **Filter berdasarkan jenis** — tab *All*, *Church Event*, *Baptism*, *Marriage*, *Care Cell*, *Pray Request*.
   2. **Pengelompokan** — *By Month* (per bulan) atau *By Type* (per jenis).
   3. **Legenda warna** dan jumlah total kegiatan.
 - **Cara akses:** Buka menu **Church Calendar** di navigasi website, atau kunjungi langsung `/church-calendar`.
@@ -226,6 +240,8 @@ Draft → Under Review → Approved → Completed
 | Jadwal musisi | Operations → Musician Schedule | New → Musisi + Peran + Waktu → Save |
 | Pendaftaran baptis | Operations → Baptism Registrations | New → Partner + Tanggal + Petugas → Save → Approve |
 | Pendaftaran nikah | Operations → Marriage Registrations | New → Mempelai + Tanggal + Petugas → Save → Approve |
+| Permohonan doa (backend) | Operations → Pray Requests | New → Judul + Pemohon + Sesi Doa → Save |
+| Permohonan doa (publik) | Website → /church-pray | Isi form → Submit |
 | Lihat semua kegiatan | Operations → Church Calendar | (otomatis) |
 | Lihat kalender publik (tanpa login) | Website → /church-calendar | (otomatis) |
 | Ringkasan angka | Dashboard | (otomatis) |
@@ -237,6 +253,7 @@ Draft → Under Review → Approved → Completed
 - **Officiating Minister** hanya bisa memilih kontak dengan tipe anggota **Pastur** — pastikan tipe tersebut sudah diisi pada kontak petugas.
 - **Musician Role** hanya tampil jika tipe anggota kontak = **Musisi**.
 - Semua kegiatan otomatis masuk **Church Calendar** — tidak perlu input ganda.
+- **Permohonan doa** otomatis masuk **Church Calendar**; kirim lewat form publik di **`/church-pray`** tanpa login.
 - Data sample (contoh) sudah disediakan agar mudah berlatih.
 - Pastikan pengguna mendapat akses menu yang sesuai (grup pengguna gereja) dari administrator.
 

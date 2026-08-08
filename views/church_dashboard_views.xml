@@ -21,6 +21,7 @@
                     <header>
                         <button name="%(church_management.action_church_baptism_registration)d" type="action" string="Baptism Registrations" class="btn-secondary"/>
                         <button name="%(church_management.action_church_marriage_registration)d" type="action" string="Marriage Registrations" class="btn-secondary"/>
+                        <button name="%(church_management.action_church_pray_request)d" type="action" string="Pray Requests" class="btn-secondary"/>
                         <button name="%(church_management.action_church_activity)d" type="action" string="Church Calendar" class="btn-secondary"/>
                     </header>
                     <sheet>
@@ -100,6 +101,27 @@
                                 <div class="border rounded p-3">
                                     <h4 class="mb-3">👥 Jemaat per Tipe Anggota</h4>
                                     <field name="member_type_breakdown" widget="html" readonly="1" nolabel="1"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ============ DOA / PRAY REQUESTS ============ -->
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="border rounded p-3 mb-3">
+                                    <h4 class="mb-3">🙏 Pray Requests</h4>
+                                    <div class="o_stat_info">
+                                        <span class="o_stat_value"><field name="pray_this_month"/></span>
+                                        <span class="o_stat_text">Bulan Ini</span>
+                                    </div>
+                                    <div class="o_stat_info">
+                                        <span class="o_stat_value"><field name="pray_last_month"/></span>
+                                        <span class="o_stat_text">Bulan Lalu</span>
+                                    </div>
+                                    <div class="o_stat_info">
+                                        <span class="o_stat_value"><field name="pray_open"/></span>
+                                        <span class="o_stat_text">Sedang Diproses</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -17,6 +17,8 @@ from . import church_member_type
 from . import church_musician_role
 from . import church_sacrament_type
 from . import church_musician_schedule
+from . import church_pray_request
+from . import church_pray_session
 from . import crm_lead_inherit
 from . import event_event_inherit
 from . import res_partner_inherit

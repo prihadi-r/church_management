@@ -55,6 +55,14 @@ access_marriage_registration_read,marriage.registration.read,model_church_marria
 access_marriage_registration_write,marriage.registration.write,model_church_marriage_registration,group_church_write_only,1,1,1,0
 access_marriage_registration_full,marriage.registration.full,model_church_marriage_registration,group_church_full_access,1,1,1,1
 
+access_pray_request_read,pray.request.read,model_church_pray_request,group_church_read_only,1,0,0,0
+access_pray_request_write,pray.request.write,model_church_pray_request,group_church_write_only,1,1,1,0
+access_pray_request_full,pray.request.full,model_church_pray_request,group_church_full_access,1,1,1,1
+
+access_pray_session_read,pray.session.read,model_church_pray_session,group_church_read_only,1,0,0,0
+access_pray_session_write,pray.session.write,model_church_pray_session,group_church_write_only,1,1,1,0
+access_pray_session_full,pray.session.full,model_church_pray_session,group_church_full_access,1,1,1,1
+
 access_church_dashboard_read,dashboard.read,model_church_dashboard,group_church_read_only,1,0,0,0
 access_church_dashboard_write,dashboard.write,model_church_dashboard,group_church_write_only,1,1,1,0
 access_church_dashboard_full,dashboard.full,model_church_dashboard,group_church_full_access,1,1,1,1

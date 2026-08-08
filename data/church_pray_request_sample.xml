@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- ================================================================= -->
+        <!-- Sample data: Prayer Requests + Prayer Sessions                     -->
+        <!-- ================================================================= -->
+
+        <!-- 1. NEW - permohonan baru, belum diproses -->
+        <record id="pray_request_1" model="church.pray.request">
+            <field name="requester_id" ref="res_partner_budi"/>
+            <field name="requester_name">Budi Santoso</field>
+            <field name="requester_email">budi.santoso@example.com</field>
+            <field name="requester_phone">0812-3456-7890</field>
+            <field name="name_request">Kesembuhan untuk Ibu</field>
+            <field name="description">Ibu saya sedang dirawat di rumah sakit karena sakit parah. Mohon didoakan untuk pemulihannya.</field>
+            <field name="state">new</field>
+        </record>
+
+        <!-- 2. IN PROGRESS - sedang didoakan, sudah ada 2 sesi doa -->
+        <record id="pray_request_2" model="church.pray.request">
+            <field name="requester_id" ref="res_partner_sari"/>
+            <field name="requester_name">Sari Wijaya</field>
+            <field name="requester_email">sari.wijaya@example.com</field>
+            <field name="requester_phone">0813-2222-3344</field>
+            <field name="name_request">Ketenangan dalam Pekerjaan</field>
+            <field name="description">Menghadapi tekanan pekerjaan yang besar. Mohon didoakan agar diberikan hikmat dan ketenangan.</field>
+            <field name="state">in_progress</field>
+            <field name="session_ids">
+                <record id="pray_session_2a" model="church.pray.session">
+                    <field name="name">Sesi Doa 1</field>
+                    <field name="datetime">2026-08-06 19:00:00</field>
+                    <field name="prayer_ids" eval="[(6, 0, [ref('res_partner_budi'), ref('res_partner_agus')])]"/>
+                    <field name="note">Didoakan bersama dalam komsel.</field>
+                </record>
+                <record id="pray_session_2b" model="church.pray.session">
+                    <field name="name">Sesi Doa 2</field>
+                    <field name="datetime">2026-08-08 06:30:00</field>
+                    <field name="prayer_ids" eval="[(6, 0, [ref('res_partner_sari'), ref('res_partner_feni')])]"/>
+                    <field name="note">Doa pagi sebelum memulai aktivitas.</field>
+                </record>
+            </field>
+        </record>
+
+        <!-- 3. ANSWERED - sudah dijawab -->
+        <record id="pray_request_3" model="church.pray.request">
+            <field name="requester_id" ref="res_partner_kevin"/>
+            <field name="requester_name">Kevin Pratama</field>
+            <field name="requester_email">kevin.pratama@example.com</field>
+            <field name="requester_phone">0812-9876-5432</field>
+            <field name="name_request">Kelancaran Ujian</field>
+            <field name="description">Berdoa agar diberikan kelancaran dan konsentrasi dalam menghadapi ujian akhir.</field>
+            <field name="state">answered</field>
+            <field name="session_ids">
+                <record id="pray_session_3a" model="church.pray.session">
+                    <field name="name">Doa Sebelum Ujian</field>
+                    <field name="datetime">2026-07-10 20:00:00</field>
+                    <field name="prayer_ids" eval="[(6, 0, [ref('res_partner_1'), ref('res_partner_2')])]"/>
+                    <field name="note">Ujian telah dilalui dengan baik.</field>
+                </record>
+            </field>
+        </record>
+
+        <!-- 4. CLOSED - sudah ditutup -->
+        <record id="pray_request_4" model="church.pray.request">
+            <field name="requester_id" ref="res_partner_maya"/>
+            <field name="requester_name">Maya Anggraini</field>
+            <field name="requester_email">maya.anggraini@example.com</field>
+            <field name="name_request">Syukur atas Berkat Keluarga</field>
+            <field name="description">Ucapan syukur karena keluarga diberikan kesehatan dan rezeki yang cukup. Permohonan ini telah selesai.</field>
+            <field name="state">closed</field>
+            <field name="session_ids">
+                <record id="pray_session_4a" model="church.pray.session">
+                    <field name="name">Doa Syukur</field>
+                    <field name="datetime">2026-06-25 18:30:00</field>
+                    <field name="prayer_ids" eval="[(6, 0, [ref('res_partner_3'), ref('res_partner_4'), ref('res_partner_5')])]"/>
+                    <field name="note">Permohonan ditutup setelah berkat diterima.</field>
+                </record>
+            </field>
+        </record>
+
+        <!-- 5. NEW - dikirim lewat situs publik (tanpa partner terhubung) -->
+        <record id="pray_request_5" model="church.pray.request">
+            <field name="requester_name">Anonim Jemaat</field>
+            <field name="requester_email">anonim@example.com</field>
+            <field name="name_request">Doa untuk Tetangga Sakit</field>
+            <field name="description">Tetangga kami sedang sakit keras. Mohon didoakan untuk kesembuhan dan kekuatan keluarganya.</field>
+            <field name="state">new</field>
+        </record>
+
+        <!-- 6. IN PROGRESS - permohonan dengan banyak sesi -->
+        <record id="pray_request_6" model="church.pray.request">
+            <field name="requester_id" ref="res_partner_agus"/>
+            <field name="requester_name">Agus Setiawan</field>
+            <field name="requester_email">agus.setiawan@example.com</field>
+            <field name="name_request">Pemulihan Hubungan Keluarga</field>
+            <field name="description">Ada keretakan dalam hubungan keluarga kami. Mohon didoakan agar hati kami dipulihkan.</field>
+            <field name="state">in_progress</field>
+            <field name="session_ids">
+                <record id="pray_session_6a" model="church.pray.session">
+                    <field name="name">Doa Bersama Keluarga</field>
+                    <field name="datetime">2026-08-02 19:30:00</field>
+                    <field name="prayer_ids" eval="[(6, 0, [ref('res_partner_agus'), ref('res_partner_lina')])]"/>
+                    <field name="note">Diskusi dan doa bersama di rumah.</field>
+                </record>
+                <record id="pray_session_6b" model="church.pray.session">
+                    <field name="name">Doa Hening</field>
+                    <field name="datetime">2026-08-07 05:30:00</field>
+                    <field name="prayer_ids" eval="[(6, 0, [ref('res_partner_3'), ref('res_partner_5')])]"/>
+                    <field name="note">Doa hening pribadi di kapel.</field>
+                </record>
+            </field>
+        </record>
+
+        <!-- 7. ANSWERED - permohonan dari anggota komsel -->
+        <record id="pray_request_7" model="church.pray.request">
+            <field name="requester_id" ref="res_partner_feni"/>
+            <field name="requester_name">Feni Susanti</field>
+            <field name="requester_email">feni.susanti@example.com</field>
+            <field name="name_request">Bimbingan Keputusan Karir</field>
+            <field name="description">Meminta hikmat dalam mengambil keputusan karir penting bulan depan.</field>
+            <field name="state">answered</field>
+            <field name="session_ids">
+                <record id="pray_session_7a" model="church.pray.session">
+                    <field name="name">Doa Komsel</field>
+                    <field name="datetime">2026-07-28 19:00:00</field>
+                    <field name="prayer_ids" eval="[(6, 0, [ref('res_partner_feni'), ref('res_partner_budi'), ref('res_partner_joko')])]"/>
+                    <field name="note">Jawaban diterima dan keputusan diambil dengan damai.</field>
+                </record>
+            </field>
+        </record>
+
+        <!-- 8. CLOSED - tanpa sesi -->
+        <record id="pray_request_8" model="church.pray.request">
+            <field name="requester_id" ref="res_partner_abigail"/>
+            <field name="requester_name">Abigail Manurung</field>
+            <field name="requester_email">abigail.manurung@example.com</field>
+            <field name="name_request">Doa untuk Anak yang Sakit</field>
+            <field name="description">Anak kami sudah sembuh. Permohonan ini kami tutup dengan penuh syukur.</field>
+            <field name="state">closed</field>
+        </record>
+    </data>
+</odoo>

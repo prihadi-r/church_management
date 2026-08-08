@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="church_pray_page" name="Church Prayer Request Form">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <style>
+                    .pr-hero {
+                        background: linear-gradient(135deg, #6a4f9c 0%, #9b6ac8 100%);
+                        color: #fff;
+                        padding: 3.5rem 0;
+                        text-align: center;
+                    }
+                    .pr-hero h1 { font-weight: 700; font-size: 2.25rem; }
+                    .pr-hero p { opacity: .92; margin-bottom: 0; }
+
+                    .pr-card {
+                        max-width: 720px;
+                        margin: -2.5rem auto 3rem;
+                        background: #fff;
+                        border-radius: 10px;
+                        box-shadow: 0 8px 30px rgba(0,0,0,.12);
+                        padding: 2rem;
+                    }
+                    .pr-field { margin-bottom: 1.25rem; }
+                    .pr-field label { font-weight: 600; color: #2c3e50; margin-bottom: .35rem; }
+                    .pr-field input,
+                    .pr-field textarea {
+                        width: 100%;
+                        border: 1px solid #d5dbe2;
+                        border-radius: 6px;
+                        padding: .6rem .8rem;
+                        font-size: .95rem;
+                    }
+                    .pr-alert {
+                        background: #fdecea;
+                        border: 1px solid #f5c6cb;
+                        color: #842029;
+                        border-radius: 6px;
+                        padding: .8rem 1rem;
+                        margin-bottom: 1.25rem;
+                    }
+                    .pr-alert ul { margin: 0; padding-left: 1.2rem; }
+                    .pr-btn {
+                        display: inline-block;
+                        background: #6a4f9c;
+                        border: none;
+                        color: #fff;
+                        font-weight: 600;
+                        padding: .65rem 1.6rem;
+                        border-radius: 6px;
+                        cursor: pointer;
+                    }
+                    .pr-btn:hover { background: #5a4188; }
+                </style>
+
+                <div class="pr-hero">
+                    <h1>Prayer Request</h1>
+                    <p class="container">Share your prayer request with our community. We will pray for you.</p>
+                </div>
+
+                <div class="container">
+                    <div class="pr-card">
+                        <t t-if="errors">
+                            <div class="pr-alert">
+                                <ul>
+                                    <t t-foreach="errors" t-as="err">
+                                        <li t-out="err"/>
+                                    </t>
+                                </ul>
+                            </div>
+                        </t>
+
+                        <form action="/church-pray" method="post">
+                            <div class="pr-field">
+                                <label>Your Name *</label>
+                                <input type="text" name="requester_name" required="required"
+                                       t-att-value="form and form.get('requester_name') or ''"/>
+                            </div>
+                            <div class="pr-field">
+                                <label>Email</label>
+                                <input type="email" name="requester_email"
+                                       t-att-value="form and form.get('requester_email') or ''"/>
+                            </div>
+                            <div class="pr-field">
+                                <label>Phone</label>
+                                <input type="text" name="requester_phone"
+                                       t-att-value="form and form.get('requester_phone') or ''"/>
+                            </div>
+                            <div class="pr-field">
+                                <label>Prayer Request Title *</label>
+                                <input type="text" name="name_request" required="required"
+                                       t-att-value="form and form.get('name_request') or ''"/>
+                            </div>
+                            <div class="pr-field">
+                                <label>Your Prayer Request</label>
+                                <textarea name="description" rows="5"
+                                          t-esc="form and form.get('description') or ''"/>
+                            </div>
+                            <div class="pr-field">
+                                <button type="submit" class="pr-btn">Submit Prayer Request</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="church_pray_thankyou" name="Church Prayer Request Thank You">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="container" style="max-width:720px; margin:4rem auto; text-align:center;">
+                    <div style="font-size:3rem;">🙏</div>
+                    <h1 class="mb-3">Thank You</h1>
+                    <p class="lead">Your prayer request has been received.
+                        Our prayer team will lift it up in prayer.</p>
+                    <p>
+                        <strong t-if="pray_request" t-out="pray_request.name_request"/>
+                    </p>
+                    <a class="btn btn-primary" href="/church-pray">Submit another request</a>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <record id="menu_website_church_pray" model="website.menu">
+        <field name="name">Prayer Request</field>
+        <field name="url">/church-pray</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" eval="30"/>
+    </record>
+</odoo>

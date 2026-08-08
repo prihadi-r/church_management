@@ -85,6 +85,7 @@
                     .cc-item--baptism { border-left-color: #27ae60; }
                     .cc-item--marriage { border-left-color: #9b59b6; }
                     .cc-item--care_cell { border-left-color: #e67e22; }
+                    .cc-item--pray { border-left-color: #1abc9c; }
 
                     .cc-date {
                         flex: 0 0 88px;
@@ -114,6 +115,7 @@
                     .cc-badge--baptism { background: #27ae60; }
                     .cc-badge--marriage { background: #9b59b6; }
                     .cc-badge--care_cell { background: #e67e22; }
+                    .cc-badge--pray { background: #1abc9c; }
 
                     .cc-legend {
                         display: flex;
@@ -130,12 +132,13 @@
                 <div class="cc-hero">
                     <div class="container">
                         <h1>Church Calendar</h1>
-                        <p>Confirmed church activities — events, baptisms, marriages &amp; care cells</p>
+                        <p>Confirmed church activities — events, baptisms, marriages, care cells &amp; prayer requests</p>
                         <div class="cc-legend">
                             <span class="cc-legend-item"><span class="cc-legend-dot" style="background:#3498db"></span> Event</span>
                             <span class="cc-legend-item"><span class="cc-legend-dot" style="background:#27ae60"></span> Baptism</span>
                             <span class="cc-legend-item"><span class="cc-legend-dot" style="background:#9b59b6"></span> Marriage</span>
                             <span class="cc-legend-item"><span class="cc-legend-dot" style="background:#e67e22"></span> Care Cell</span>
+                            <span class="cc-legend-item"><span class="cc-legend-dot" style="background:#1abc9c"></span> Pray Request</span>
                         </div>
                     </div>
                 </div>
@@ -216,6 +219,7 @@
                 <t t-elif="act.activity_type == 'baptism'">Baptism</t>
                 <t t-elif="act.activity_type == 'marriage'">Marriage</t>
                 <t t-elif="act.activity_type == 'care_cell'">Care Cell</t>
+                <t t-elif="act.activity_type == 'pray'">Pray</t>
                 <t t-else="" t-out="act.activity_type"/>
             </span>
         </div>
