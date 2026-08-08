@@ -86,7 +86,8 @@ Church Management
 
 ## 📖 Documentation
 
-See the [User Guide](USER_GUIDE.md) for detailed usage instructions (in Indonesian).
+- [Installation Guide](INSTALLATION_GUIDE.md) — requirements & step-by-step install.
+- [User Guide](USER_GUIDE.md) — detailed usage instructions (in Indonesian).
 
 ---
 
