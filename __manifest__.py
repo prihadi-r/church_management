@@ -115,6 +115,10 @@ Church Management
         'data/event_event_sample.xml',
         'data/church_musician_role_sample.xml',
         'data/church_marriage_registration_sample.xml',
+        # 56 congregations (Indonesian names) involved in marriage, baptism,
+        # and care-cell events from the current month (Aug 2026) up to two
+        # months ahead (Oct 2026).
+        'data/church_congregation_sample.xml',
         'data/church_news_initial_sources_data.xml',
         'data/church_news_categories_data.xml',
         'data/church_news_cron_data.xml',

@@ -71,9 +71,18 @@ Master Data berisi daftar istilah / kategori yang dipakai di seluruh modul. Semu
 - **Cara isi:** Klik **New** → isi **Name** (contoh: *Simpatisan, Jemaat Tetap, Musisi, Pastur, Pendoa* dst.) → **Save**.
 - **Penting:** Tipe *Musisi* membuat field "Musician Role" muncul di Kontak; tipe *Pastur* membuat kontak bisa dipilih sebagai petugas (Officiating Minister) di Baptis & Pernikahan.
 
-### 3.2 Care Cells (Kelompok Sel)
-- **Fungsi:** Nama kelompok sel / komsel.
-- **Cara isi:** New → isi **Name** → Save.
+### 3.2 Care Cells (Kelompok Sel / Komsel)
+- **Fungsi:** Mengelola kelompok sel (komsel) beserta anggotanya, sesi pertemuan, dan statusnya.
+- **Layar:** **Kanban** (kartu dikelompokkan per status), **Kalender**, **List**, **Form**, **Search**.
+- **Cara isi:**
+  1. Klik **New**.
+  2. Isi **Name** (nama komsel), **Leader** (ketua kelompok), **Status** (*Proposal / Review / Approved / Running / Pending / Cancel*), **Start Date**, dan **End Date**.
+  3. Jumlah **Attendees** (anggota) dan **Sessions** (sesi) terisi otomatis; **Next Session Date** otomatis dihitung dari sesi terdekat.
+- **Tab Attendees (Anggota):** tambahkan kontak anggota dengan **Role** (*Leader / Member / Guest*), **Joined Date**, dan **Notes**.
+- **Tab Sessions (Pertemuan):** catat tiap pertemuan: **Name** (judul), **Date** (tanggal), **Plan** (rencana), dan **Note** (catatan).
+- **Kalender:** komsel tampil pada tampilan kalender sesuai rentang **Start Date → End Date**.
+- **Search:** filter **Active Now**, **Upcoming**, dan per status; dapat dikelompokkan berdasarkan **Status** atau **Leader**.
+- Otomatis tampil di **Kalender Kegiatan Gereja** (Church Calendar) dan di kalender publik website.
 
 ### 3.3 Donation Types (Jenis Persembahan)
 - **Fungsi:** Jenis-jenis persembahan/donasi.
@@ -248,6 +257,9 @@ Draft → Under Review → Approved → Completed
 | Data | Menu | Langkah Singkat |
 |---|---|---|
 | Tipe anggota baru | Master Data → Member Types | New → Name → Save |
+| Kelompok sel (komsel) | Master Data → Care Cells | New → Name + Leader + Status + Tanggal → Save |
+| Anggota komsel | Master Data → Care Cells → tab Attendees | Tambah → Kontak + Peran + Tanggal gabung → Save |
+| Sesi pertemuan komsel | Master Data → Care Cells → tab Sessions | Tambah → Judul + Tanggal + Rencana → Save |
 | Kontak jemaat | Contacts | New → isi data + Member Type / Care Cell |
 | Jadwal ibadah | Ibadah (Event) | New → Name + Tanggal → Save |
 | Petugas ibadah | Operations → Event Rosters | New → Event + Role + Petugas → Save |
@@ -271,7 +283,7 @@ Draft → Under Review → Approved → Completed
 - **Permohonan doa** otomatis masuk **Church Calendar**; kirim lewat form publik di **`/church-pray`** tanpa login.
 - **Berita Kristen** tersedia di **`/christianity-news`** dan ditautkan dari **beranda** serta **menu website**.
 - **Halaman beranda** dan halaman publik memiliki **SEO** yang dapat disesuaikan agar mudah ditemukan di mesin pencari.
-- Data sample (contoh) sudah disediakan agar mudah berlatih.
+- Data sample (contoh) sudah disediakan agar mudah berlatih, termasuk **56 jemaat** dengan nama Indonesia (mis. *Agus Saputra, Pdt. Paulus Situmorang*) yang terlibat dalam **pernikahan, baptis, dan komsel** untuk rentang **Agustus – Oktober 2026** (bulan berjalan hingga 2 bulan ke depan), beserta **6 komsel** (Komsel Imanuel, Bethel, Elim, Getsemani, Kanaan, Siloam) lengkap dengan anggota dan sesi pertemuannya.
 - Pastikan pengguna mendapat akses menu yang sesuai dari administrator melalui
   **Settings → Users → Access Rights** (kategori **Church Management**): grup
   **Read Only**, **Write Only**, atau **Full Access**. Tanpa salah satu grup ini,

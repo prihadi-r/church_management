@@ -1,0 +1,1210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- ================================================================
+             CARE CELLS (komsel baru, nama Indonesia)
+             Defined BEFORE the congregations so each jemaat record can
+             reference its care_cell_id. Cell leaders are assigned via the
+             attendee role="leader" records below.
+             ================================================================ -->
+        <record id="komsel_1" model="church.care.cell">
+            <field name="name">Komsel Imanuel</field>
+            <field name="start_date">2026-01-01</field>
+            <field name="end_date">2026-12-31</field>
+            <field name="status_id" ref="care_cell_status_running"/>
+        </record>
+        <record id="komsel_2" model="church.care.cell">
+            <field name="name">Komsel Bethel</field>
+            <field name="start_date">2026-01-01</field>
+            <field name="end_date">2026-12-31</field>
+            <field name="status_id" ref="care_cell_status_running"/>
+        </record>
+        <record id="komsel_3" model="church.care.cell">
+            <field name="name">Komsel Elim</field>
+            <field name="start_date">2026-01-01</field>
+            <field name="end_date">2026-12-31</field>
+            <field name="status_id" ref="care_cell_status_running"/>
+        </record>
+        <record id="komsel_4" model="church.care.cell">
+            <field name="name">Komsel Getsemani</field>
+            <field name="start_date">2026-01-01</field>
+            <field name="end_date">2026-12-31</field>
+            <field name="status_id" ref="care_cell_status_running"/>
+        </record>
+        <record id="komsel_5" model="church.care.cell">
+            <field name="name">Komsel Kanaan</field>
+            <field name="start_date">2026-01-01</field>
+            <field name="end_date">2026-12-31</field>
+            <field name="status_id" ref="care_cell_status_running"/>
+        </record>
+        <record id="komsel_6" model="church.care.cell">
+            <field name="name">Komsel Siloam</field>
+            <field name="start_date">2026-01-01</field>
+            <field name="end_date">2026-12-31</field>
+            <field name="status_id" ref="care_cell_status_running"/>
+        </record>
+
+        <!-- ================================================================
+             JEMAAT / KONGRESENSI (Congregations)
+             Native Indonesian, realistic names. 56 congregations involved
+             in marriages, baptisms, and care cells between Aug 2026
+             (current month) and Oct 2026 (2 months ahead).
+             ================================================================ -->
+
+        <!-- Care Cell: Alpha (jemaat_1 .. jemaat_5) -->
+        <record id="jemaat_1" model="res.partner">
+            <field name="name">Agus Saputra</field>
+            <field name="email">agus.saputra@example.com</field>
+            <field name="phone">0812-3401-1001</field>
+            <field name="street">Jl. Merdeka No. 101, Jakarta</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="care_cell_1"/>
+        </record>
+        <record id="jemaat_2" model="res.partner">
+            <field name="name">Dewi Lestari</field>
+            <field name="email">dewi.lestari@example.com</field>
+            <field name="phone">0813-3401-1002</field>
+            <field name="street">Jl. Sudirman No. 202, Jakarta</field>
+            <field name="church_member_type_id" ref="member_type_8"/>
+            <field name="care_cell_id" ref="care_cell_1"/>
+        </record>
+        <record id="jemaat_3" model="res.partner">
+            <field name="name">Hendra Gunawan</field>
+            <field name="email">hendra.gunawan@example.com</field>
+            <field name="phone">0815-3401-1003</field>
+            <field name="street">Jl. Diponegoro No. 303, Bandung</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="care_cell_1"/>
+        </record>
+        <record id="jemaat_4" model="res.partner">
+            <field name="name">Sri Rahayu</field>
+            <field name="email">sri.rahayu@example.com</field>
+            <field name="phone">0821-3401-1004</field>
+            <field name="street">Jl. Gatot Subroto No. 404, Bandung</field>
+            <field name="church_member_type_id" ref="member_type_6"/>
+            <field name="care_cell_id" ref="care_cell_1"/>
+        </record>
+        <record id="jemaat_5" model="res.partner">
+            <field name="name">Bambang Wijaya</field>
+            <field name="email">bambang.wijaya@example.com</field>
+            <field name="phone">0857-3401-1005</field>
+            <field name="street">Jl. Ahmad Yani No. 505, Surabaya</field>
+            <field name="church_member_type_id" ref="member_type_12"/>
+            <field name="care_cell_id" ref="care_cell_1"/>
+        </record>
+
+        <!-- Care Cell: Beta (jemaat_6 .. jemaat_10) -->
+        <record id="jemaat_6" model="res.partner">
+            <field name="name">Ratna Sari Dewi</field>
+            <field name="email">ratna.saridewi@example.com</field>
+            <field name="phone">0812-3401-1006</field>
+            <field name="street">Jl. Pahlawan No. 606, Surabaya</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="care_cell_2"/>
+        </record>
+        <record id="jemaat_7" model="res.partner">
+            <field name="name">Eko Prasetyo</field>
+            <field name="email">eko.prasetyo@example.com</field>
+            <field name="phone">0813-3401-1007</field>
+            <field name="street">Jl. Jend. Sudirman No. 707, Semarang</field>
+            <field name="church_member_type_id" ref="member_type_8"/>
+            <field name="care_cell_id" ref="care_cell_2"/>
+        </record>
+        <record id="jemaat_8" model="res.partner">
+            <field name="name">Yuni Astuti</field>
+            <field name="email">yuni.astuti@example.com</field>
+            <field name="phone">0815-3401-1008</field>
+            <field name="street">Jl. Imam Bonjol No. 808, Semarang</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="care_cell_2"/>
+        </record>
+        <record id="jemaat_9" model="res.partner">
+            <field name="name">Fajar Nugroho</field>
+            <field name="email">fajar.nugroho@example.com</field>
+            <field name="phone">0821-3401-1009</field>
+            <field name="street">Jl. Veteran No. 909, Yogyakarta</field>
+            <field name="church_member_type_id" ref="member_type_3"/>
+            <field name="care_cell_id" ref="care_cell_2"/>
+        </record>
+        <record id="jemaat_10" model="res.partner">
+            <field name="name">Lilis Suryani</field>
+            <field name="email">lilis.suryani@example.com</field>
+            <field name="phone">0857-3401-1010</field>
+            <field name="street">Jl. Malioboro No. 110, Yogyakarta</field>
+            <field name="church_member_type_id" ref="member_type_6"/>
+            <field name="care_cell_id" ref="care_cell_2"/>
+        </record>
+
+        <!-- Care Cell: Gamma (jemaat_11 .. jemaat_15) -->
+        <record id="jemaat_11" model="res.partner">
+            <field name="name">Rizky Ramadhan</field>
+            <field name="email">rizky.ramadhan@example.com</field>
+            <field name="phone">0812-3401-1011</field>
+            <field name="street">Jl. Gajah Mada No. 211, Medan</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="care_cell_3"/>
+        </record>
+        <record id="jemaat_12" model="res.partner">
+            <field name="name">Siti Aminah</field>
+            <field name="email">siti.aminah@example.com</field>
+            <field name="phone">0813-3401-1012</field>
+            <field name="street">Jl. Iskandar Muda No. 312, Medan</field>
+            <field name="church_member_type_id" ref="member_type_8"/>
+            <field name="care_cell_id" ref="care_cell_3"/>
+        </record>
+        <record id="jemaat_13" model="res.partner">
+            <field name="name">Adi Purnomo</field>
+            <field name="email">adi.purnomo@example.com</field>
+            <field name="phone">0815-3401-1013</field>
+            <field name="street">Jl. Malioboro No. 413, Yogyakarta</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="care_cell_3"/>
+        </record>
+        <record id="jemaat_14" model="res.partner">
+            <field name="name">Nurul Hidayah</field>
+            <field name="email">nurul.hidayah@example.com</field>
+            <field name="phone">0821-3401-1014</field>
+            <field name="street">Jl. Kusuma Bangsa No. 514, Surabaya</field>
+            <field name="church_member_type_id" ref="member_type_6"/>
+            <field name="care_cell_id" ref="care_cell_3"/>
+        </record>
+        <record id="jemaat_15" model="res.partner">
+            <field name="name">Bayu Aji Santoso</field>
+            <field name="email">bayu.ajisantoso@example.com</field>
+            <field name="phone">0857-3401-1015</field>
+            <field name="street">Jl. Pemuda No. 615, Semarang</field>
+            <field name="church_member_type_id" ref="member_type_11"/>
+            <field name="care_cell_id" ref="care_cell_3"/>
+        </record>
+
+        <!-- Care Cell: Delta (jemaat_16 .. jemaat_20) -->
+        <record id="jemaat_16" model="res.partner">
+            <field name="name">Indah Permata Sari</field>
+            <field name="email">indah.permata@example.com</field>
+            <field name="phone">0812-3401-1016</field>
+            <field name="street">Jl. Dipatiukur No. 716, Bandung</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="care_cell_4"/>
+        </record>
+        <record id="jemaat_17" model="res.partner">
+            <field name="name">Toni Setiawan</field>
+            <field name="email">toni.setiawan@example.com</field>
+            <field name="phone">0813-3401-1017</field>
+            <field name="street">Jl. Asia Afrika No. 817, Bandung</field>
+            <field name="church_member_type_id" ref="member_type_8"/>
+            <field name="care_cell_id" ref="care_cell_4"/>
+        </record>
+        <record id="jemaat_18" model="res.partner">
+            <field name="name">Fitri Handayani</field>
+            <field name="email">fitri.handayani@example.com</field>
+            <field name="phone">0815-3401-1018</field>
+            <field name="street">Jl. Jend. Ahmad Yani No. 918, Medan</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="care_cell_4"/>
+        </record>
+        <record id="jemaat_19" model="res.partner">
+            <field name="name">Yusuf Maulana</field>
+            <field name="email">yusuf.maulana@example.com</field>
+            <field name="phone">0821-3401-1019</field>
+            <field name="street">Jl. Soekarno Hatta No. 120, Malang</field>
+            <field name="church_member_type_id" ref="member_type_3"/>
+            <field name="care_cell_id" ref="care_cell_4"/>
+        </record>
+        <record id="jemaat_20" model="res.partner">
+            <field name="name">Rina Marlina</field>
+            <field name="email">rina.marlina@example.com</field>
+            <field name="phone">0857-3401-1020</field>
+            <field name="street">Jl. Ijen No. 221, Malang</field>
+            <field name="church_member_type_id" ref="member_type_12"/>
+            <field name="care_cell_id" ref="care_cell_4"/>
+        </record>
+
+        <!-- Care Cell: Epsilon (jemaat_21 .. jemaat_25) -->
+        <record id="jemaat_21" model="res.partner">
+            <field name="name">Deny Kurnia</field>
+            <field name="email">deny.kurnia@example.com</field>
+            <field name="phone">0812-3401-1021</field>
+            <field name="street">Jl. Tunjungan No. 322, Surabaya</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="care_cell_5"/>
+        </record>
+        <record id="jemaat_22" model="res.partner">
+            <field name="name">Ayu Wulandari</field>
+            <field name="email">ayu.wulandari@example.com</field>
+            <field name="phone">0813-3401-1022</field>
+            <field name="street">Jl. Kertajaya No. 423, Surabaya</field>
+            <field name="church_member_type_id" ref="member_type_8"/>
+            <field name="care_cell_id" ref="care_cell_5"/>
+        </record>
+        <record id="jemaat_23" model="res.partner">
+            <field name="name">Galih Pratama</field>
+            <field name="email">galih.pratama@example.com</field>
+            <field name="phone">0815-3401-1023</field>
+            <field name="street">Jl. Cendrawasih No. 524, Semarang</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="care_cell_5"/>
+        </record>
+        <record id="jemaat_24" model="res.partner">
+            <field name="name">Tuti Kusuma</field>
+            <field name="email">tuti.kusuma@example.com</field>
+            <field name="phone">0821-3401-1024</field>
+            <field name="street">Jl. Pandanaran No. 625, Semarang</field>
+            <field name="church_member_type_id" ref="member_type_6"/>
+            <field name="care_cell_id" ref="care_cell_5"/>
+        </record>
+        <record id="jemaat_25" model="res.partner">
+            <field name="name">Bagus Firmansyah</field>
+            <field name="email">bagus.firmansyah@example.com</field>
+            <field name="phone">0857-3401-1025</field>
+            <field name="street">Jl. Urip Sumoharjo No. 726, Surabaya</field>
+            <field name="church_member_type_id" ref="member_type_11"/>
+            <field name="care_cell_id" ref="care_cell_5"/>
+        </record>
+
+        <!-- Komsel Imanuel (jemaat_26 .. jemaat_30) -->
+        <record id="jemaat_26" model="res.partner">
+            <field name="name">Mila Rahmawati</field>
+            <field name="email">mila.rahmawati@example.com</field>
+            <field name="phone">0812-3401-1026</field>
+            <field name="street">Jl. Pattimura No. 827, Ambon</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="komsel_1"/>
+        </record>
+        <record id="jemaat_27" model="res.partner">
+            <field name="name">Sigit Pambudi</field>
+            <field name="email">sigit.pambudi@example.com</field>
+            <field name="phone">0813-3401-1027</field>
+            <field name="street">Jl. Slamet Riyadi No. 928, Solo</field>
+            <field name="church_member_type_id" ref="member_type_8"/>
+            <field name="care_cell_id" ref="komsel_1"/>
+        </record>
+        <record id="jemaat_28" model="res.partner">
+            <field name="name">Diah Ayu Lestari</field>
+            <field name="email">diah.ayulestari@example.com</field>
+            <field name="phone">0815-3401-1028</field>
+            <field name="street">Jl. Adisucipto No. 130, Solo</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="komsel_1"/>
+        </record>
+        <record id="jemaat_29" model="res.partner">
+            <field name="name">Anton Susilo</field>
+            <field name="email">anton.susilo@example.com</field>
+            <field name="phone">0821-3401-1029</field>
+            <field name="street">Jl. Sudirman No. 231, Palembang</field>
+            <field name="church_member_type_id" ref="member_type_12"/>
+            <field name="care_cell_id" ref="komsel_1"/>
+        </record>
+        <record id="jemaat_30" model="res.partner">
+            <field name="name">Mega Puspita</field>
+            <field name="email">mega.puspita@example.com</field>
+            <field name="phone">0857-3401-1030</field>
+            <field name="street">Jl. Demang Lebar Daun No. 332, Palembang</field>
+            <field name="church_member_type_id" ref="member_type_6"/>
+            <field name="care_cell_id" ref="komsel_1"/>
+        </record>
+
+        <!-- Komsel Bethel (jemaat_31 .. jemaat_35) -->
+        <record id="jemaat_31" model="res.partner">
+            <field name="name">Wahyu Hidayat</field>
+            <field name="email">wahyu.hidayat@example.com</field>
+            <field name="phone">0812-3401-1031</field>
+            <field name="street">Jl. Veteran No. 133, Makassar</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="komsel_2"/>
+        </record>
+        <record id="jemaat_32" model="res.partner">
+            <field name="name">Sari Kusumaningrum</field>
+            <field name="email">sari.kusumaningrum@example.com</field>
+            <field name="phone">0813-3401-1032</field>
+            <field name="street">Jl. Andi Pangeran Pettarani No. 234, Makassar</field>
+            <field name="church_member_type_id" ref="member_type_8"/>
+            <field name="care_cell_id" ref="komsel_2"/>
+        </record>
+        <record id="jemaat_33" model="res.partner">
+            <field name="name">Doni Hermawan</field>
+            <field name="email">doni.hermawan@example.com</field>
+            <field name="phone">0815-3401-1033</field>
+            <field name="street">Jl. Ahmad Yani No. 335, Pontianak</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="komsel_2"/>
+        </record>
+        <record id="jemaat_34" model="res.partner">
+            <field name="name">Rani Maharani</field>
+            <field name="email">rani.maharani@example.com</field>
+            <field name="phone">0821-3401-1034</field>
+            <field name="street">Jl. Tanjungpura No. 436, Pontianak</field>
+            <field name="church_member_type_id" ref="member_type_3"/>
+            <field name="care_cell_id" ref="komsel_2"/>
+        </record>
+        <record id="jemaat_35" model="res.partner">
+            <field name="name">Joko Santosa</field>
+            <field name="email">joko.santosa@example.com</field>
+            <field name="phone">0857-3401-1035</field>
+            <field name="street">Jl. Sudirman No. 537, Banjarmasin</field>
+            <field name="church_member_type_id" ref="member_type_11"/>
+            <field name="care_cell_id" ref="komsel_2"/>
+        </record>
+
+        <!-- Komsel Elim (jemaat_36 .. jemaat_40) -->
+        <record id="jemaat_36" model="res.partner">
+            <field name="name">Melati Putri</field>
+            <field name="email">melati.putri@example.com</field>
+            <field name="phone">0812-3401-1036</field>
+            <field name="street">Jl. Ahmad Yani No. 138, Balikpapan</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="komsel_3"/>
+        </record>
+        <record id="jemaat_37" model="res.partner">
+            <field name="name">Andri Wibowo</field>
+            <field name="email">andri.wibowo@example.com</field>
+            <field name="phone">0813-3401-1037</field>
+            <field name="street">Jl. MT Haryono No. 239, Balikpapan</field>
+            <field name="church_member_type_id" ref="member_type_8"/>
+            <field name="care_cell_id" ref="komsel_3"/>
+        </record>
+        <record id="jemaat_38" model="res.partner">
+            <field name="name">Sinta Dewi</field>
+            <field name="email">sinta.dewi@example.com</field>
+            <field name="phone">0815-3401-1038</field>
+            <field name="street">Jl. Jend. Sudirman No. 340, Samarinda</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="komsel_3"/>
+        </record>
+        <record id="jemaat_39" model="res.partner">
+            <field name="name">Rahmat Hidayatullah</field>
+            <field name="email">rahmat.hidayatullah@example.com</field>
+            <field name="phone">0821-3401-1039</field>
+            <field name="street">Jl. P. Antasari No. 441, Banjarmasin</field>
+            <field name="church_member_type_id" ref="member_type_6"/>
+            <field name="care_cell_id" ref="komsel_3"/>
+        </record>
+        <record id="jemaat_40" model="res.partner">
+            <field name="name">Pdt. Paulus Situmorang</field>
+            <field name="email">paulus.situmorang@example.com</field>
+            <field name="phone">0811-3401-1040</field>
+            <field name="street">Jl. Sisingamangaraja No. 142, Medan</field>
+            <field name="church_member_type_id" ref="member_type_14"/>
+            <field name="care_cell_id" ref="komsel_3"/>
+        </record>
+
+        <!-- Komsel Getsemani (jemaat_41 .. jemaat_45) -->
+        <record id="jemaat_41" model="res.partner">
+            <field name="name">Yohana Sihombing</field>
+            <field name="email">yohana.sihombing@example.com</field>
+            <field name="phone">0812-3401-1041</field>
+            <field name="street">Jl. Sisingamangaraja No. 143, Medan</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="komsel_4"/>
+        </record>
+        <record id="jemaat_42" model="res.partner">
+            <field name="name">Binsar Nainggolan</field>
+            <field name="email">binsar.nainggolan@example.com</field>
+            <field name="phone">0813-3401-1042</field>
+            <field name="street">Jl. Imam Bonjol No. 244, Medan</field>
+            <field name="church_member_type_id" ref="member_type_8"/>
+            <field name="care_cell_id" ref="komsel_4"/>
+        </record>
+        <record id="jemaat_43" model="res.partner">
+            <field name="name">Maria Hutapea</field>
+            <field name="email">maria.hutapea@example.com</field>
+            <field name="phone">0815-3401-1043</field>
+            <field name="street">Jl. Gajah Mada No. 345, Medan</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="komsel_4"/>
+        </record>
+        <record id="jemaat_44" model="res.partner">
+            <field name="name">Pdt. Markus Nababan</field>
+            <field name="email">markus.nababan@example.com</field>
+            <field name="phone">0811-3401-1044</field>
+            <field name="street">Jl. Dr. Mansyur No. 146, Medan</field>
+            <field name="church_member_type_id" ref="member_type_14"/>
+            <field name="care_cell_id" ref="komsel_4"/>
+        </record>
+        <record id="jemaat_45" model="res.partner">
+            <field name="name">Togar Simanjuntak</field>
+            <field name="email">togar.simanjuntak@example.com</field>
+            <field name="phone">0821-3401-1045</field>
+            <field name="street">Jl. K.H. Wahid Hasyim No. 447, Medan</field>
+            <field name="church_member_type_id" ref="member_type_12"/>
+            <field name="care_cell_id" ref="komsel_4"/>
+        </record>
+
+        <!-- Komsel Kanaan (jemaat_46 .. jemaat_50) -->
+        <record id="jemaat_46" model="res.partner">
+            <field name="name">Lisbeth Panjaitan</field>
+            <field name="email">lisbeth.panjaitan@example.com</field>
+            <field name="phone">0812-3401-1046</field>
+            <field name="street">Jl. Perintis Kemerdekaan No. 148, Pekanbaru</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="komsel_5"/>
+        </record>
+        <record id="jemaat_47" model="res.partner">
+            <field name="name">Jefri Manullang</field>
+            <field name="email">jefri.manullang@example.com</field>
+            <field name="phone">0813-3401-1047</field>
+            <field name="street">Jl. Sudirman No. 249, Pekanbaru</field>
+            <field name="church_member_type_id" ref="member_type_8"/>
+            <field name="care_cell_id" ref="komsel_5"/>
+        </record>
+        <record id="jemaat_48" model="res.partner">
+            <field name="name">Pdt. Petrus Siregar</field>
+            <field name="email">petrus.siregar@example.com</field>
+            <field name="phone">0811-3401-1048</field>
+            <field name="street">Jl. Ahmad Dahlan No. 350, Padang</field>
+            <field name="church_member_type_id" ref="member_type_14"/>
+            <field name="care_cell_id" ref="komsel_5"/>
+        </record>
+        <record id="jemaat_49" model="res.partner">
+            <field name="name">Rosalina Sinaga</field>
+            <field name="email">rosalina.sinaga@example.com</field>
+            <field name="phone">0821-3401-1049</field>
+            <field name="street">Jl. Veteran No. 451, Padang</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="komsel_5"/>
+        </record>
+        <record id="jemaat_50" model="res.partner">
+            <field name="name">Frits Manurung</field>
+            <field name="email">frits.manurung@example.com</field>
+            <field name="phone">0857-3401-1050</field>
+            <field name="street">Jl. Merpati No. 552, Padang</field>
+            <field name="church_member_type_id" ref="member_type_11"/>
+            <field name="care_cell_id" ref="komsel_5"/>
+        </record>
+
+        <!-- Komsel Siloam (jemaat_51 .. jemaat_56) -->
+        <record id="jemaat_51" model="res.partner">
+            <field name="name">Christina Tambunan</field>
+            <field name="email">christina.tambunan@example.com</field>
+            <field name="phone">0812-3401-1051</field>
+            <field name="street">Jl. Danau Toba No. 253, Bandung</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="komsel_6"/>
+        </record>
+        <record id="jemaat_52" model="res.partner">
+            <field name="name">Robby Siahaan</field>
+            <field name="email">robby.siahaan@example.com</field>
+            <field name="phone">0813-3401-1052</field>
+            <field name="street">Jl. R.E. Martadinata No. 354, Bandung</field>
+            <field name="church_member_type_id" ref="member_type_8"/>
+            <field name="care_cell_id" ref="komsel_6"/>
+        </record>
+        <record id="jemaat_53" model="res.partner">
+            <field name="name">Natalia Ginting</field>
+            <field name="email">natalia.ginting@example.com</field>
+            <field name="phone">0815-3401-1053</field>
+            <field name="street">Jl. Jend. Sudirman No. 455, Bandung</field>
+            <field name="church_member_type_id" ref="member_type_2"/>
+            <field name="care_cell_id" ref="komsel_6"/>
+        </record>
+        <record id="jemaat_54" model="res.partner">
+            <field name="name">Samuel Pasaribu</field>
+            <field name="email">samuel.pasaribu@example.com</field>
+            <field name="phone">0821-3401-1054</field>
+            <field name="street">Jl. Buah Batu No. 556, Bandung</field>
+            <field name="church_member_type_id" ref="member_type_6"/>
+            <field name="care_cell_id" ref="komsel_6"/>
+        </record>
+        <record id="jemaat_55" model="res.partner">
+            <field name="name">Grace Sitorus</field>
+            <field name="email">grace.sitorus@example.com</field>
+            <field name="phone">0857-3401-1055</field>
+            <field name="street">Jl. Dago No. 657, Bandung</field>
+            <field name="church_member_type_id" ref="member_type_12"/>
+            <field name="care_cell_id" ref="komsel_6"/>
+        </record>
+        <record id="jemaat_56" model="res.partner">
+            <field name="name">Yohanes Sirait</field>
+            <field name="email">yohanes.sirait@example.com</field>
+            <field name="phone">0815-3401-1056</field>
+            <field name="street">Jl. Cihampelas No. 758, Bandung</field>
+            <field name="church_member_type_id" ref="member_type_3"/>
+            <field name="care_cell_id" ref="komsel_6"/>
+        </record>
+
+        <!-- ================================================================
+             CARE CELL SESSIONS (Agustus - Oktober 2026)
+             ================================================================ -->
+        <record id="session_cc1_aug" model="church.care.cell.session">
+            <field name="care_cell_id" ref="care_cell_1"/>
+            <field name="name">Pemahaman Alkitab - Kasih</field>
+            <field name="date">2026-08-12</field>
+            <field name="plan">Pembahasan 1 Korintus 13 tentang kasih.</field>
+        </record>
+        <record id="session_cc1_sep" model="church.care.cell.session">
+            <field name="care_cell_id" ref="care_cell_1"/>
+            <field name="name">Sharing Keluarga</field>
+            <field name="date">2026-09-16</field>
+            <field name="plan">Berbagi kesaksian dan saling mendoakan.</field>
+        </record>
+        <record id="session_cc1_oct" model="church.care.cell.session">
+            <field name="care_cell_id" ref="care_cell_1"/>
+            <field name="name">Doa Syafaat</field>
+            <field name="date">2026-10-14</field>
+            <field name="plan">Doa bagi jemaat yang sedang sakit.</field>
+        </record>
+
+        <record id="session_cc2_aug" model="church.care.cell.session">
+            <field name="care_cell_id" ref="care_cell_2"/>
+            <field name="name">Pemahaman Mazmur</field>
+            <field name="date">2026-08-13</field>
+        </record>
+        <record id="session_cc2_sep" model="church.care.cell.session">
+            <field name="care_cell_id" ref="care_cell_2"/>
+            <field name="name">Doa Bersama</field>
+            <field name="date">2026-09-17</field>
+        </record>
+        <record id="session_cc2_oct" model="church.care.cell.session">
+            <field name="care_cell_id" ref="care_cell_2"/>
+            <field name="name">Pemahaman Injil Yohanes</field>
+            <field name="date">2026-10-15</field>
+        </record>
+
+        <record id="session_cc3_aug" model="church.care.cell.session">
+            <field name="care_cell_id" ref="care_cell_3"/>
+            <field name="name">Pemahaman Roma 12</field>
+            <field name="date">2026-08-14</field>
+        </record>
+        <record id="session_cc3_sep" model="church.care.cell.session">
+            <field name="care_cell_id" ref="care_cell_3"/>
+            <field name="name">Sharing Pelayanan</field>
+            <field name="date">2026-09-18</field>
+        </record>
+        <record id="session_cc3_oct" model="church.care.cell.session">
+            <field name="care_cell_id" ref="care_cell_3"/>
+            <field name="name">Doa Pagi</field>
+            <field name="date">2026-10-16</field>
+        </record>
+
+        <record id="session_cc4_aug" model="church.care.cell.session">
+            <field name="care_cell_id" ref="care_cell_4"/>
+            <field name="name">Pemahaman Efesus</field>
+            <field name="date">2026-08-15</field>
+        </record>
+        <record id="session_cc4_sep" model="church.care.cell.session">
+            <field name="care_cell_id" ref="care_cell_4"/>
+            <field name="name">Sharing Kehidupan</field>
+            <field name="date">2026-09-19</field>
+        </record>
+        <record id="session_cc4_oct" model="church.care.cell.session">
+            <field name="care_cell_id" ref="care_cell_4"/>
+            <field name="name">Pemahaman Amsal</field>
+            <field name="date">2026-10-17</field>
+        </record>
+
+        <record id="session_cc5_aug" model="church.care.cell.session">
+            <field name="care_cell_id" ref="care_cell_5"/>
+            <field name="name">Doa Bersama</field>
+            <field name="date">2026-08-16</field>
+        </record>
+        <record id="session_cc5_sep" model="church.care.cell.session">
+            <field name="care_cell_id" ref="care_cell_5"/>
+            <field name="name">Pemahaman Kolose</field>
+            <field name="date">2026-09-20</field>
+        </record>
+        <record id="session_cc5_oct" model="church.care.cell.session">
+            <field name="care_cell_id" ref="care_cell_5"/>
+            <field name="name">Sharing Pelayanan</field>
+            <field name="date">2026-10-18</field>
+        </record>
+
+        <record id="session_k1_aug" model="church.care.cell.session">
+            <field name="care_cell_id" ref="komsel_1"/>
+            <field name="name">Pemahaman Yosua 1</field>
+            <field name="date">2026-08-19</field>
+        </record>
+        <record id="session_k1_sep" model="church.care.cell.session">
+            <field name="care_cell_id" ref="komsel_1"/>
+            <field name="name">Doa Bersama</field>
+            <field name="date">2026-09-23</field>
+        </record>
+        <record id="session_k1_oct" model="church.care.cell.session">
+            <field name="care_cell_id" ref="komsel_1"/>
+            <field name="name">Sharing Iman</field>
+            <field name="date">2026-10-21</field>
+        </record>
+
+        <record id="session_k2_aug" model="church.care.cell.session">
+            <field name="care_cell_id" ref="komsel_2"/>
+            <field name="name">Pemahaman Filipi</field>
+            <field name="date">2026-08-20</field>
+        </record>
+        <record id="session_k2_sep" model="church.care.cell.session">
+            <field name="care_cell_id" ref="komsel_2"/>
+            <field name="name">Doa Syafaat</field>
+            <field name="date">2026-09-24</field>
+        </record>
+        <record id="session_k2_oct" model="church.care.cell.session">
+            <field name="care_cell_id" ref="komsel_2"/>
+            <field name="name">Pemahaman Mazmur</field>
+            <field name="date">2026-10-22</field>
+        </record>
+
+        <record id="session_k3_aug" model="church.care.cell.session">
+            <field name="care_cell_id" ref="komsel_3"/>
+            <field name="name">Pemahaman 1 Petrus</field>
+            <field name="date">2026-08-21</field>
+        </record>
+        <record id="session_k3_sep" model="church.care.cell.session">
+            <field name="care_cell_id" ref="komsel_3"/>
+            <field name="name">Sharing Keluarga</field>
+            <field name="date">2026-09-25</field>
+        </record>
+        <record id="session_k3_oct" model="church.care.cell.session">
+            <field name="care_cell_id" ref="komsel_3"/>
+            <field name="name">Doa Pagi</field>
+            <field name="date">2026-10-23</field>
+        </record>
+
+        <record id="session_k4_aug" model="church.care.cell.session">
+            <field name="care_cell_id" ref="komsel_4"/>
+            <field name="name">Pemahaman Hakim-hakim</field>
+            <field name="date">2026-08-22</field>
+        </record>
+        <record id="session_k4_sep" model="church.care.cell.session">
+            <field name="care_cell_id" ref="komsel_4"/>
+            <field name="name">Doa Bersama</field>
+            <field name="date">2026-09-26</field>
+        </record>
+        <record id="session_k4_oct" model="church.care.cell.session">
+            <field name="care_cell_id" ref="komsel_4"/>
+            <field name="name">Sharing Pelayanan</field>
+            <field name="date">2026-10-24</field>
+        </record>
+
+        <record id="session_k5_aug" model="church.care.cell.session">
+            <field name="care_cell_id" ref="komsel_5"/>
+            <field name="name">Pemahaman Kejadian</field>
+            <field name="date">2026-08-23</field>
+        </record>
+        <record id="session_k5_sep" model="church.care.cell.session">
+            <field name="care_cell_id" ref="komsel_5"/>
+            <field name="name">Doa Syafaat</field>
+            <field name="date">2026-09-27</field>
+        </record>
+        <record id="session_k5_oct" model="church.care.cell.session">
+            <field name="care_cell_id" ref="komsel_5"/>
+            <field name="name">Pemahaman Kisah Para Rasul</field>
+            <field name="date">2026-10-25</field>
+        </record>
+
+        <record id="session_k6_aug" model="church.care.cell.session">
+            <field name="care_cell_id" ref="komsel_6"/>
+            <field name="name">Doa Bersama</field>
+            <field name="date">2026-08-24</field>
+        </record>
+        <record id="session_k6_sep" model="church.care.cell.session">
+            <field name="care_cell_id" ref="komsel_6"/>
+            <field name="name">Pemahaman Galatia</field>
+            <field name="date">2026-09-28</field>
+        </record>
+        <record id="session_k6_oct" model="church.care.cell.session">
+            <field name="care_cell_id" ref="komsel_6"/>
+            <field name="name">Sharing Iman</field>
+            <field name="date">2026-10-26</field>
+        </record>
+
+        <!-- ================================================================
+             CARE CELL ATTENDEES (anggota komsel)
+             ================================================================ -->
+        <record id="attendee_1" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_1"/>
+            <field name="partner_id" ref="jemaat_1"/>
+            <field name="role">leader</field>
+            <field name="joined_date">2026-01-10</field>
+        </record>
+        <record id="attendee_2" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_1"/>
+            <field name="partner_id" ref="jemaat_2"/>
+            <field name="joined_date">2026-01-10</field>
+        </record>
+        <record id="attendee_3" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_1"/>
+            <field name="partner_id" ref="jemaat_3"/>
+            <field name="joined_date">2026-02-14</field>
+        </record>
+        <record id="attendee_4" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_1"/>
+            <field name="partner_id" ref="jemaat_4"/>
+            <field name="joined_date">2026-02-14</field>
+        </record>
+        <record id="attendee_5" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_1"/>
+            <field name="partner_id" ref="jemaat_5"/>
+            <field name="joined_date">2026-03-20</field>
+        </record>
+
+        <record id="attendee_6" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_2"/>
+            <field name="partner_id" ref="jemaat_6"/>
+            <field name="role">leader</field>
+            <field name="joined_date">2026-01-12</field>
+        </record>
+        <record id="attendee_7" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_2"/>
+            <field name="partner_id" ref="jemaat_7"/>
+            <field name="joined_date">2026-01-12</field>
+        </record>
+        <record id="attendee_8" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_2"/>
+            <field name="partner_id" ref="jemaat_8"/>
+            <field name="joined_date">2026-02-18</field>
+        </record>
+        <record id="attendee_9" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_2"/>
+            <field name="partner_id" ref="jemaat_9"/>
+            <field name="joined_date">2026-02-18</field>
+        </record>
+        <record id="attendee_10" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_2"/>
+            <field name="partner_id" ref="jemaat_10"/>
+            <field name="joined_date">2026-03-25</field>
+        </record>
+
+        <record id="attendee_11" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_3"/>
+            <field name="partner_id" ref="jemaat_11"/>
+            <field name="role">leader</field>
+            <field name="joined_date">2026-01-15</field>
+        </record>
+        <record id="attendee_12" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_3"/>
+            <field name="partner_id" ref="jemaat_12"/>
+            <field name="joined_date">2026-01-15</field>
+        </record>
+        <record id="attendee_13" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_3"/>
+            <field name="partner_id" ref="jemaat_13"/>
+            <field name="joined_date">2026-02-22</field>
+        </record>
+        <record id="attendee_14" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_3"/>
+            <field name="partner_id" ref="jemaat_14"/>
+            <field name="joined_date">2026-02-22</field>
+        </record>
+        <record id="attendee_15" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_3"/>
+            <field name="partner_id" ref="jemaat_15"/>
+            <field name="joined_date">2026-03-28</field>
+        </record>
+
+        <record id="attendee_16" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_4"/>
+            <field name="partner_id" ref="jemaat_16"/>
+            <field name="role">leader</field>
+            <field name="joined_date">2026-01-18</field>
+        </record>
+        <record id="attendee_17" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_4"/>
+            <field name="partner_id" ref="jemaat_17"/>
+            <field name="joined_date">2026-01-18</field>
+        </record>
+        <record id="attendee_18" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_4"/>
+            <field name="partner_id" ref="jemaat_18"/>
+            <field name="joined_date">2026-02-25</field>
+        </record>
+        <record id="attendee_19" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_4"/>
+            <field name="partner_id" ref="jemaat_19"/>
+            <field name="joined_date">2026-02-25</field>
+        </record>
+        <record id="attendee_20" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_4"/>
+            <field name="partner_id" ref="jemaat_20"/>
+            <field name="joined_date">2026-03-30</field>
+        </record>
+
+        <record id="attendee_21" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_5"/>
+            <field name="partner_id" ref="jemaat_21"/>
+            <field name="role">leader</field>
+            <field name="joined_date">2026-01-20</field>
+        </record>
+        <record id="attendee_22" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_5"/>
+            <field name="partner_id" ref="jemaat_22"/>
+            <field name="joined_date">2026-01-20</field>
+        </record>
+        <record id="attendee_23" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_5"/>
+            <field name="partner_id" ref="jemaat_23"/>
+            <field name="joined_date">2026-02-27</field>
+        </record>
+        <record id="attendee_24" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_5"/>
+            <field name="partner_id" ref="jemaat_24"/>
+            <field name="joined_date">2026-02-27</field>
+        </record>
+        <record id="attendee_25" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="care_cell_5"/>
+            <field name="partner_id" ref="jemaat_25"/>
+            <field name="joined_date">2026-03-30</field>
+        </record>
+
+        <record id="attendee_26" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_1"/>
+            <field name="partner_id" ref="jemaat_26"/>
+            <field name="role">leader</field>
+            <field name="joined_date">2026-04-02</field>
+        </record>
+        <record id="attendee_27" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_1"/>
+            <field name="partner_id" ref="jemaat_27"/>
+            <field name="joined_date">2026-04-02</field>
+        </record>
+        <record id="attendee_28" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_1"/>
+            <field name="partner_id" ref="jemaat_28"/>
+            <field name="joined_date">2026-04-09</field>
+        </record>
+        <record id="attendee_29" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_1"/>
+            <field name="partner_id" ref="jemaat_29"/>
+            <field name="joined_date">2026-04-09</field>
+        </record>
+        <record id="attendee_30" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_1"/>
+            <field name="partner_id" ref="jemaat_30"/>
+            <field name="joined_date">2026-04-16</field>
+        </record>
+
+        <record id="attendee_31" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_2"/>
+            <field name="partner_id" ref="jemaat_31"/>
+            <field name="role">leader</field>
+            <field name="joined_date">2026-04-05</field>
+        </record>
+        <record id="attendee_32" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_2"/>
+            <field name="partner_id" ref="jemaat_32"/>
+            <field name="joined_date">2026-04-05</field>
+        </record>
+        <record id="attendee_33" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_2"/>
+            <field name="partner_id" ref="jemaat_33"/>
+            <field name="joined_date">2026-04-12</field>
+        </record>
+        <record id="attendee_34" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_2"/>
+            <field name="partner_id" ref="jemaat_34"/>
+            <field name="joined_date">2026-04-12</field>
+        </record>
+        <record id="attendee_35" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_2"/>
+            <field name="partner_id" ref="jemaat_35"/>
+            <field name="joined_date">2026-04-19</field>
+        </record>
+
+        <record id="attendee_36" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_3"/>
+            <field name="partner_id" ref="jemaat_36"/>
+            <field name="role">leader</field>
+            <field name="joined_date">2026-04-07</field>
+        </record>
+        <record id="attendee_37" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_3"/>
+            <field name="partner_id" ref="jemaat_37"/>
+            <field name="joined_date">2026-04-07</field>
+        </record>
+        <record id="attendee_38" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_3"/>
+            <field name="partner_id" ref="jemaat_38"/>
+            <field name="joined_date">2026-04-14</field>
+        </record>
+        <record id="attendee_39" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_3"/>
+            <field name="partner_id" ref="jemaat_39"/>
+            <field name="joined_date">2026-04-14</field>
+        </record>
+        <record id="attendee_40" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_3"/>
+            <field name="partner_id" ref="jemaat_40"/>
+            <field name="role">guest</field>
+            <field name="joined_date">2026-04-21</field>
+        </record>
+
+        <record id="attendee_41" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_4"/>
+            <field name="partner_id" ref="jemaat_41"/>
+            <field name="role">leader</field>
+            <field name="joined_date">2026-04-09</field>
+        </record>
+        <record id="attendee_42" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_4"/>
+            <field name="partner_id" ref="jemaat_42"/>
+            <field name="joined_date">2026-04-09</field>
+        </record>
+        <record id="attendee_43" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_4"/>
+            <field name="partner_id" ref="jemaat_43"/>
+            <field name="joined_date">2026-04-16</field>
+        </record>
+        <record id="attendee_44" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_4"/>
+            <field name="partner_id" ref="jemaat_44"/>
+            <field name="role">guest</field>
+            <field name="joined_date">2026-04-16</field>
+        </record>
+        <record id="attendee_45" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_4"/>
+            <field name="partner_id" ref="jemaat_45"/>
+            <field name="joined_date">2026-04-23</field>
+        </record>
+
+        <record id="attendee_46" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_5"/>
+            <field name="partner_id" ref="jemaat_46"/>
+            <field name="role">leader</field>
+            <field name="joined_date">2026-04-11</field>
+        </record>
+        <record id="attendee_47" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_5"/>
+            <field name="partner_id" ref="jemaat_47"/>
+            <field name="joined_date">2026-04-11</field>
+        </record>
+        <record id="attendee_48" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_5"/>
+            <field name="partner_id" ref="jemaat_48"/>
+            <field name="role">guest</field>
+            <field name="joined_date">2026-04-18</field>
+        </record>
+        <record id="attendee_49" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_5"/>
+            <field name="partner_id" ref="jemaat_49"/>
+            <field name="joined_date">2026-04-18</field>
+        </record>
+        <record id="attendee_50" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_5"/>
+            <field name="partner_id" ref="jemaat_50"/>
+            <field name="joined_date">2026-04-25</field>
+        </record>
+
+        <record id="attendee_51" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_6"/>
+            <field name="partner_id" ref="jemaat_51"/>
+            <field name="role">leader</field>
+            <field name="joined_date">2026-04-13</field>
+        </record>
+        <record id="attendee_52" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_6"/>
+            <field name="partner_id" ref="jemaat_52"/>
+            <field name="joined_date">2026-04-13</field>
+        </record>
+        <record id="attendee_53" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_6"/>
+            <field name="partner_id" ref="jemaat_53"/>
+            <field name="joined_date">2026-04-20</field>
+        </record>
+        <record id="attendee_54" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_6"/>
+            <field name="partner_id" ref="jemaat_54"/>
+            <field name="joined_date">2026-04-20</field>
+        </record>
+        <record id="attendee_55" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_6"/>
+            <field name="partner_id" ref="jemaat_55"/>
+            <field name="joined_date">2026-04-27</field>
+        </record>
+        <record id="attendee_56" model="church.care.cell.attendee">
+            <field name="care_cell_id" ref="komsel_6"/>
+            <field name="partner_id" ref="jemaat_56"/>
+            <field name="joined_date">2026-04-27</field>
+        </record>
+
+        <!-- ================================================================
+             BAPTISM REGISTRATIONS (Agustus - Oktober 2026)
+             ================================================================ -->
+        <record id="baptism_j1" model="church.baptism.registration">
+            <field name="partner_id" ref="jemaat_1"/>
+            <field name="birth_date">1992-05-14</field>
+            <field name="baptism_datetime">2026-08-16 08:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="pastor_id" ref="jemaat_40"/>
+            <field name="state">approved</field>
+            <field name="notes">Baptis dewasa dalam ibadah Minggu pagi.</field>
+        </record>
+        <record id="baptism_j6" model="church.baptism.registration">
+            <field name="partner_id" ref="jemaat_6"/>
+            <field name="birth_date">1994-09-02</field>
+            <field name="baptism_datetime">2026-08-30 09:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="pastor_id" ref="jemaat_44"/>
+            <field name="state">done</field>
+        </record>
+        <record id="baptism_j11" model="church.baptism.registration">
+            <field name="partner_id" ref="jemaat_11"/>
+            <field name="birth_date">2013-03-17</field>
+            <field name="father_id" ref="jemaat_3"/>
+            <field name="mother_id" ref="jemaat_4"/>
+            <field name="baptism_datetime">2026-09-13 10:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="pastor_id" ref="jemaat_48"/>
+            <field name="state">approved</field>
+            <field name="notes">Baptis anak, disaksikan kedua orang tua.</field>
+        </record>
+        <record id="baptism_j16" model="church.baptism.registration">
+            <field name="partner_id" ref="jemaat_16"/>
+            <field name="birth_date">1990-11-23</field>
+            <field name="baptism_datetime">2026-09-27 08:30:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="pastor_id" ref="jemaat_40"/>
+            <field name="state">approved</field>
+        </record>
+        <record id="baptism_j21" model="church.baptism.registration">
+            <field name="partner_id" ref="jemaat_21"/>
+            <field name="birth_date">1996-07-08</field>
+            <field name="baptism_datetime">2026-10-11 09:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="pastor_id" ref="jemaat_44"/>
+            <field name="state">approved</field>
+        </record>
+        <record id="baptism_j26" model="church.baptism.registration">
+            <field name="partner_id" ref="jemaat_26"/>
+            <field name="birth_date">2015-10-05</field>
+            <field name="father_id" ref="jemaat_8"/>
+            <field name="mother_id" ref="jemaat_9"/>
+            <field name="baptism_datetime">2026-10-25 10:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="pastor_id" ref="jemaat_48"/>
+            <field name="state">approved</field>
+        </record>
+        <record id="baptism_j31" model="church.baptism.registration">
+            <field name="partner_id" ref="jemaat_31"/>
+            <field name="birth_date">1989-01-30</field>
+            <field name="baptism_datetime">2026-08-23 08:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="pastor_id" ref="jemaat_40"/>
+            <field name="state">done</field>
+        </record>
+        <record id="baptism_j36" model="church.baptism.registration">
+            <field name="partner_id" ref="jemaat_36"/>
+            <field name="birth_date">1991-12-19</field>
+            <field name="baptism_datetime">2026-09-20 09:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="pastor_id" ref="jemaat_44"/>
+            <field name="state">approved</field>
+        </record>
+        <record id="baptism_j41" model="church.baptism.registration">
+            <field name="partner_id" ref="jemaat_41"/>
+            <field name="birth_date">2016-06-11</field>
+            <field name="father_id" ref="jemaat_13"/>
+            <field name="mother_id" ref="jemaat_14"/>
+            <field name="baptism_datetime">2026-10-04 10:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="pastor_id" ref="jemaat_48"/>
+            <field name="state">review</field>
+            <field name="notes">Baptis anak, menunggu konfirmasi orang tua.</field>
+        </record>
+        <record id="baptism_j46" model="church.baptism.registration">
+            <field name="partner_id" ref="jemaat_46"/>
+            <field name="birth_date">1993-04-27</field>
+            <field name="baptism_datetime">2026-10-18 08:30:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="pastor_id" ref="jemaat_40"/>
+            <field name="state">approved</field>
+        </record>
+        <record id="baptism_j51" model="church.baptism.registration">
+            <field name="partner_id" ref="jemaat_51"/>
+            <field name="birth_date">1995-02-14</field>
+            <field name="baptism_datetime">2026-09-06 09:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="pastor_id" ref="jemaat_44"/>
+            <field name="state">approved</field>
+        </record>
+        <record id="baptism_j56" model="church.baptism.registration">
+            <field name="partner_id" ref="jemaat_56"/>
+            <field name="birth_date">2017-08-29</field>
+            <field name="father_id" ref="jemaat_18"/>
+            <field name="mother_id" ref="jemaat_19"/>
+            <field name="baptism_datetime">2026-10-31 10:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_2"/>
+            <field name="pastor_id" ref="jemaat_48"/>
+            <field name="state">draft</field>
+        </record>
+
+        <!-- ================================================================
+             MARRIAGE REGISTRATIONS (Agustus - Oktober 2026)
+             ================================================================ -->
+        <record id="marriage_j2" model="church.marriage.registration">
+            <field name="groom_id" ref="jemaat_2"/>
+            <field name="bride_id" ref="jemaat_3"/>
+            <field name="marriage_datetime">2026-08-22 10:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_1"/>
+            <field name="pastor_id" ref="jemaat_40"/>
+            <field name="state">approved</field>
+            <field name="notes">Pernikahan diberkati di hadapan keluarga kedua pihak.</field>
+        </record>
+        <record id="marriage_j7" model="church.marriage.registration">
+            <field name="groom_id" ref="jemaat_7"/>
+            <field name="bride_id" ref="jemaat_8"/>
+            <field name="marriage_datetime">2026-08-29 09:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_1"/>
+            <field name="pastor_id" ref="jemaat_44"/>
+            <field name="state">approved</field>
+        </record>
+        <record id="marriage_j12" model="church.marriage.registration">
+            <field name="groom_id" ref="jemaat_12"/>
+            <field name="bride_id" ref="jemaat_13"/>
+            <field name="marriage_datetime">2026-09-05 10:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_1"/>
+            <field name="pastor_id" ref="jemaat_48"/>
+            <field name="state">approved</field>
+        </record>
+        <record id="marriage_j17" model="church.marriage.registration">
+            <field name="groom_id" ref="jemaat_17"/>
+            <field name="bride_id" ref="jemaat_18"/>
+            <field name="marriage_datetime">2026-09-19 09:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_1"/>
+            <field name="pastor_id" ref="jemaat_40"/>
+            <field name="state">approved</field>
+        </record>
+        <record id="marriage_j22" model="church.marriage.registration">
+            <field name="groom_id" ref="jemaat_22"/>
+            <field name="bride_id" ref="jemaat_23"/>
+            <field name="marriage_datetime">2026-10-03 10:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_1"/>
+            <field name="pastor_id" ref="jemaat_44"/>
+            <field name="state">approved</field>
+        </record>
+        <record id="marriage_j27" model="church.marriage.registration">
+            <field name="groom_id" ref="jemaat_27"/>
+            <field name="bride_id" ref="jemaat_28"/>
+            <field name="marriage_datetime">2026-10-10 09:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_1"/>
+            <field name="pastor_id" ref="jemaat_48"/>
+            <field name="state">approved</field>
+        </record>
+        <record id="marriage_j32" model="church.marriage.registration">
+            <field name="groom_id" ref="jemaat_32"/>
+            <field name="bride_id" ref="jemaat_33"/>
+            <field name="marriage_datetime">2026-10-17 10:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_1"/>
+            <field name="pastor_id" ref="jemaat_40"/>
+            <field name="state">review</field>
+        </record>
+        <record id="marriage_j37" model="church.marriage.registration">
+            <field name="groom_id" ref="jemaat_37"/>
+            <field name="bride_id" ref="jemaat_38"/>
+            <field name="marriage_datetime">2026-10-24 09:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_1"/>
+            <field name="pastor_id" ref="jemaat_44"/>
+            <field name="state">review</field>
+        </record>
+        <record id="marriage_j42" model="church.marriage.registration">
+            <field name="groom_id" ref="jemaat_42"/>
+            <field name="bride_id" ref="jemaat_43"/>
+            <field name="marriage_datetime">2026-09-12 10:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_1"/>
+            <field name="pastor_id" ref="jemaat_48"/>
+            <field name="state">done</field>
+        </record>
+        <record id="marriage_j47" model="church.marriage.registration">
+            <field name="groom_id" ref="jemaat_47"/>
+            <field name="bride_id" ref="jemaat_49"/>
+            <field name="marriage_datetime">2026-10-31 09:00:00</field>
+            <field name="sacrament_type_id" ref="sacrament_type_1"/>
+            <field name="pastor_id" ref="jemaat_40"/>
+            <field name="state">draft</field>
+        </record>
+    </data>
+</odoo>
