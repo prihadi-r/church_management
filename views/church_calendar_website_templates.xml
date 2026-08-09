@@ -5,7 +5,7 @@
             <div id="wrap">
                 <style>
                     .cc-hero {
-                        background: linear-gradient(135deg, #2c3e50 0%, #4a6b8a 100%);
+                        background: linear-gradient(135deg, #1a1a1a 0%, #9a7b4f 100%);
                         color: #fff;
                         padding: 3.5rem 0;
                         text-align: center;
@@ -28,39 +28,39 @@
                         display: inline-block;
                         padding: .45rem 1rem;
                         border-radius: 999px;
-                        border: 1px solid #d5dbe2;
+                        border: 1px solid #e0e0e0;
                         background: #fff;
-                        color: #2c3e50;
+                        color: #1a1a1a;
                         font-size: .85rem;
                         font-weight: 600;
                         text-decoration: none;
                         transition: all .15s ease;
                     }
-                    .cc-tab:hover { border-color: #4a6b8a; color: #4a6b8a; }
-                    .cc-tab.active { background: #4a6b8a; border-color: #4a6b8a; color: #fff; }
+                    .cc-tab:hover { border-color: #9a7b4f; color: #9a7b4f; }
+                    .cc-tab.active { background: #9a7b4f; border-color: #9a7b4f; color: #fff; }
 
                     .cc-group-switch { display: flex; gap: .4rem; }
                     .cc-gbtn {
                         padding: .45rem 1rem;
                         border-radius: 6px;
-                        border: 1px solid #d5dbe2;
+                        border: 1px solid #e0e0e0;
                         background: #fff;
-                        color: #2c3e50;
+                        color: #1a1a1a;
                         font-size: .85rem;
                         font-weight: 600;
                         text-decoration: none;
                         transition: all .15s ease;
                     }
-                    .cc-gbtn:hover { border-color: #4a6b8a; color: #4a6b8a; }
-                    .cc-gbtn.active { background: #2c3e50; border-color: #2c3e50; color: #fff; }
+                    .cc-gbtn:hover { border-color: #9a7b4f; color: #9a7b4f; }
+                    .cc-gbtn.active { background: #1a1a1a; border-color: #1a1a1a; color: #fff; }
 
-                    .cc-count { color: #7f8c8d; font-size: .9rem; margin-top: .75rem; }
+                    .cc-count { color: #9ca3af; font-size: .9rem; margin-top: .75rem; }
 
                     .cc-month { margin-top: 2.25rem; }
                     .cc-month-title {
                         font-size: 1.35rem;
                         font-weight: 700;
-                        color: #2c3e50;
+                        color: #1a1a1a;
                         border-bottom: 2px solid #e8e8e8;
                         padding-bottom: .5rem;
                         margin-bottom: 1.25rem;
@@ -92,13 +92,13 @@
                         text-align: center;
                         margin-right: 1rem;
                     }
-                    .cc-date .day { font-size: 1.7rem; font-weight: 700; line-height: 1; color: #2c3e50; }
-                    .cc-date .mon { font-size: .8rem; text-transform: uppercase; color: #7f8c8d; }
-                    .cc-date .time { font-size: .8rem; color: #95a5a6; }
+                    .cc-date .day { font-size: 1.7rem; font-weight: 700; line-height: 1; color: #1a1a1a; }
+                    .cc-date .mon { font-size: .8rem; text-transform: uppercase; color: #9ca3af; }
+                    .cc-date .time { font-size: .8rem; color: #b3bcc6; }
 
                     .cc-body { flex: 1; min-width: 0; }
-                    .cc-title { font-weight: 600; color: #2c3e50; margin: 0; }
-                    .cc-partner { color: #7f8c8d; font-size: .9rem; }
+                    .cc-title { font-weight: 600; color: #1a1a1a; margin: 0; }
+                    .cc-partner { color: #6b7280; font-size: .9rem; }
 
                     .cc-badge {
                         flex: 0 0 auto;
@@ -124,9 +124,9 @@
                         justify-content: center;
                         margin-top: 1.5rem;
                     }
-                    .cc-legend-item { display: inline-flex; align-items: center; gap: .4rem; font-size: .8rem; color: #7f8c8d; }
+                    .cc-legend-item { display: inline-flex; align-items: center; gap: .4rem; font-size: .8rem; color: #6b7280; }
                     .cc-legend-dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
-                    .cc-empty { text-align: center; color: #95a5a6; padding: 3.5rem 0; }
+                    .cc-empty { text-align: center; color: #9ca3af; padding: 3.5rem 0; }
                 </style>
 
                 <div class="cc-hero">

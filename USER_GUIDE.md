@@ -1,4 +1,4 @@
-# ⛪ Church Management — Panduan Penggunaan (User Guide)
+# ⛪ Darash — Panduan Penggunaan (User Guide)
 
 > Modul manajemen gereja pada Odoo 18. Dokumen ini menjelaskan fungsi setiap menu, layar yang tersedia, dan cara pengisian data. Disusun untuk bahan presentasi di gamma.app.
 

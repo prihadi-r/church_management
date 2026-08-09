@@ -1,10 +1,12 @@
 {
-    'name': 'Church Management',
-    'version': '1.1.1',
+    'name': 'Darash - Church Management',
+    'version': '2.0.0',
     'summary': 'Church membership, events, donations, and sacrament management',
     'author': 'Prihadi <prihadi.r@gmail.com>',
     'description': """
-# ⛪ Church Management
+# ⛪ Darash - Church Management
+
+> **Your church, beautifully managed.**
 
 A comprehensive **Odoo 18** module for managing church membership, events,
 donations, sacraments, and news in a single application — no more physical

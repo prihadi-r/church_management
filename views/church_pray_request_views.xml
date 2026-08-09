@@ -55,10 +55,10 @@
                                 <div class="o_kanban_record_bottom">
                                     <div>
                                         <div t-if="record.requester_name.raw_value">
-                                            <i class="fa fa-user"/> <field name="requester_name"/>
+                                            <i class="fa fa-user" title="Requester" aria-label="Requester"/> <field name="requester_name"/>
                                         </div>
                                         <div>
-                                            <i class="fa fa-calendar"/> <field name="create_date"/>
+                                            <i class="fa fa-calendar" title="Created on" aria-label="Created on"/> <field name="create_date"/>
                                         </div>
                                     </div>
                                 </div>

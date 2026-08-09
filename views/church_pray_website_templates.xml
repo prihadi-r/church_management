@@ -5,7 +5,7 @@
             <div id="wrap">
                 <style>
                     .pr-hero {
-                        background: linear-gradient(135deg, #6a4f9c 0%, #9b6ac8 100%);
+                        background: linear-gradient(135deg, #1a1a1a 0%, #9a7b4f 100%);
                         color: #fff;
                         padding: 3.5rem 0;
                         text-align: center;
@@ -22,7 +22,7 @@
                         padding: 2rem;
                     }
                     .pr-field { margin-bottom: 1.25rem; }
-                    .pr-field label { font-weight: 600; color: #2c3e50; margin-bottom: .35rem; }
+                    .pr-field label { font-weight: 600; color: #1a1a1a; margin-bottom: .35rem; }
                     .pr-field input,
                     .pr-field textarea {
                         width: 100%;
@@ -42,7 +42,7 @@
                     .pr-alert ul { margin: 0; padding-left: 1.2rem; }
                     .pr-btn {
                         display: inline-block;
-                        background: #6a4f9c;
+                        background: #1a1a1a;
                         border: none;
                         color: #fff;
                         font-weight: 600;
@@ -50,7 +50,7 @@
                         border-radius: 6px;
                         cursor: pointer;
                     }
-                    .pr-btn:hover { background: #5a4188; }
+                    .pr-btn:hover { background: #9a7b4f; }
                 </style>
 
                 <div class="pr-hero">

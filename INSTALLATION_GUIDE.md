@@ -1,4 +1,4 @@
-# ⛪ Church Management — Installation Guide
+# ⛪ Darash — Church Management Installation Guide
 
 Panduan lengkap untuk menginstal dan mengkonfigurasi modul **Church Management**
 pada Odoo 18. Dokumen ini menjelaskan semua **persyaratan** (requirements),
