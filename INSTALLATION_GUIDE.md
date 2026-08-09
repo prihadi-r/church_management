@@ -172,8 +172,13 @@ Access Rights** (kategori **Church Management**).
 
 ### 6.2 Website Publik
 - Pastikan modul **website** aktif.
-- Menu website **Church Calendar** dan **Prayer Request** otomatis dibuat.
-- Untuk akses tanpa login, kunjungi `/church-calendar` dan `/church-pray`.
+- Menu website **Church Calendar**, **Prayer Request**, dan **Christianity News** otomatis dibuat.
+- Untuk akses tanpa login, kunjungi:
+  - `/church-calendar` — kalender kegiatan publik.
+  - `/church-pray` — formulir permohonan doa.
+  - `/christianity-news` — halaman berita Kristen.
+- Halaman beranda memiliki **SEO** (title, meta description, keywords).
+- Desain beranda disediakan oleh tema pendamping opsional **`church_theme`** (lihat **Bagian 11**).
 
 ### 6.3 Data Sampel
 Modul menyediakan **data sampel** (member types, kontak, baptis, pernikahan,
@@ -197,6 +202,15 @@ Setiap perubahan pada model/field membutuhkan **restart** + **upgrade**:
 > restart *registry*; oleh karena itu selalu restart layanan **sebelum** upgrade
 > setelah menambah/mengubah model.
 
+> 🐳 **Deployment Docker Compose:** upgrade modul dari dalam container (ganti
+> `<db>` dengan nama database):
+>
+> ```bash
+> docker compose stop web \
+>   && docker compose run --rm -T web odoo -d <db> -c /etc/odoo/odoo.conf -u church_management --stop-after-init \
+>   && docker compose start web
+> ```
+
 ---
 
 ## 8. Pemecahan Masalah (Troubleshooting)
@@ -212,6 +226,9 @@ Setiap perubahan pada model/field membutuhkan **restart** + **upgrade**:
 | `ParseError: External ID not found ... menu_church_operations` | Kopi modul lama dengan urutan menu yang salah (bug < 1.1.1). | Ganti seluruh folder modul dengan versi **1.1.1+**, lalu upgrade. |
 | `"res.config.settings"."vat_check_vies" field is undefined` (klien) | Sisa modul `base_vat` dari migrasi Odoo 17 → 18; view settings lama masih merujuk field yang sudah dihapus. | Nonaktifkan view sisa: `UPDATE ir_ui_view SET active = false WHERE id = <id_view>;` (cari via `arch_db::text LIKE '%vat_check_vies%'`). |
 | Perubahan kode tidak berefek | Layanan masih memuat registry lama. | `Restart-Service odoo-server-18.0` lalu upgrade. |
+| `lxml XMLSyntaxError: Entity 'mdash' not defined` saat install | View XML memakai entitas HTML (`&mdash;`, `&ndash;`) yang tidak valid di XML (server Linux/lxml ketat). | Ganti dengan karakter Unicode literal (`—`, `–`). Hanya `&amp; &lt; &gt; &quot; &apos;` yang valid. |
+| `AttributeError: module ... has no attribute 'post_init_hook'` | `__init__.py` tidak mengimpor hook. | Tambahkan `from . import hooks` **dan** `from .hooks import post_init_hook` di `__init__.py`. |
+| `ValidationError: Start tag expected, '<' not found` saat hook menulis arch | Menulis `arch_db` menyisakan satu bahasa (mis. `en_US`) kosong, atau via ORM memicu validasi. | Selalu sertakan `en_US`, dan tulis `arch_db` via raw SQL (`UPDATE ir_ui_view SET arch_db = ...::jsonb`). |
 
 ---
 
@@ -230,6 +247,18 @@ Setiap perubahan pada model/field membutuhkan **restart** + **upgrade**:
 
 ---
 
-## 10. Lisensi
+## 11. Tema Pendamping `church_theme`
+
+Halaman beranda website (hero, fitur, kalender, CTA) didesain oleh **`church_theme`** —
+sebuah tema website Odoo 18 terpisah yang bergantung hanya pada `website`.
+
+- **Opsional** tetapi disarankan jika ingin beranda ber-tema.
+- Salin folder `church_theme` ke direktori addons, lalu **instal** seperti modul lain.
+- Jika tidak diinstal, modul tetap berfungsi penuh (backend, `/church-calendar`,
+  `/church-pray`, `/christianity-news`) namun beranda memakai tema default Odoo.
+
+---
+
+## 12. Lisensi
 
 Modul dirilis di bawah lisensi **LGPL-3** — bebas digunakan dan dimodifikasi.

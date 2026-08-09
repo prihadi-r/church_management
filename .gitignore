@@ -17,3 +17,6 @@ __pycache__/
 # Odoo / local runtime
 *.sqlite3
 .odoo/
+
+# Local virtual environment
+.venv/

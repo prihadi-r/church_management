@@ -174,6 +174,20 @@ Master Data berisi daftar istilah / kategori yang dipakai di seluruh modul. Semu
   3. **Legenda warna** dan jumlah total kegiatan.
 - **Cara akses:** Buka menu **Church Calendar** di navigasi website, atau kunjungi langsung `/church-calendar`.
 
+### 4.8 Berita Kristen di Website (Christianity News)
+- **Fungsi:** Menampilkan berita / artikel Kristen dari berbagai sumber terpercaya di **website publik**, dapat diakses tanpa login.
+- **URL:** `/christianity-news` (mis. `https://www.situs-anda.id/christianity-news`).
+- **Menu navigasi:** item **"Christianity News"** muncul di menu utama website.
+- **Halaman beranda:** terdapat bagian **"Christianity News"** (dengan tombol **Read Christianity News**) yang menautkan ke halaman ini.
+- **Isi:** Artikel dikelompokkan per kategori (*World, Church & Faith, Theology & Opinion, Culture & Society*, dst.), bersumber dari umpan RSS yang dikelola di backend (**Christianity News → Sources / Articles / Categories**).
+- **Fitur:**
+  1. Tab filter kategori.
+  2. Kartu artikel (judul, sumber, tanggal, ringkasan, tag) dengan tautan **"Read article"** ke sumber asli.
+
+### 4.9 Halaman Beranda Website & SEO
+- **Beranda (`/`):** menampilkan bagian hero, *What We Offer* (fitur modul), *Church Calendar*, dan *Come As You Are*.
+- **SEO:** halaman utama memiliki **SEO title**, **meta description**, dan **meta keywords** (mis. "church management", "free church software", "modern church", "digital church") yang dapat disesuaikan.
+
 ---
 
 ## 5. Kontak / Jemaat (Contacts)
@@ -244,6 +258,7 @@ Draft → Under Review → Approved → Completed
 | Permohonan doa (publik) | Website → /church-pray | Isi form → Submit |
 | Lihat semua kegiatan | Operations → Church Calendar | (otomatis) |
 | Lihat kalender publik (tanpa login) | Website → /church-calendar | (otomatis) |
+| Baca berita Kristen (publik) | Website → /christianity-news | (otomatis) |
 | Ringkasan angka | Dashboard | (otomatis) |
 
 ---
@@ -254,6 +269,8 @@ Draft → Under Review → Approved → Completed
 - **Musician Role** hanya tampil jika tipe anggota kontak = **Musisi**.
 - Semua kegiatan otomatis masuk **Church Calendar** — tidak perlu input ganda.
 - **Permohonan doa** otomatis masuk **Church Calendar**; kirim lewat form publik di **`/church-pray`** tanpa login.
+- **Berita Kristen** tersedia di **`/christianity-news`** dan ditautkan dari **beranda** serta **menu website**.
+- **Halaman beranda** dan halaman publik memiliki **SEO** yang dapat disesuaikan agar mudah ditemukan di mesin pencari.
 - Data sample (contoh) sudah disediakan agar mudah berlatih.
 - Pastikan pengguna mendapat akses menu yang sesuai dari administrator melalui
   **Settings → Users → Access Rights** (kategori **Church Management**): grup

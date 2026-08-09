@@ -39,7 +39,15 @@ A comprehensive **Odoo 18** module for managing church membership, events, donat
 - **Public Church Calendar** — a public website page (`/church-calendar`) that shows **confirmed** activities (events, baptisms, marriages, care cells, prayer requests) with **type filters** and **month/type grouping**. Musician schedules and unconfirmed entries are excluded.
 
 ### 📰 News & Website
-- **News articles, categories, and sources** with RSS/feed ingestion (`feedparser`), published to the website.
+- **News articles, categories, and sources** with RSS/feed ingestion (`feedparser`).
+- **Public Christianity News page** (`/christianity-news`) — category filters and article cards, linked from the homepage and the main website menu.
+
+### 🌐 Public Website
+- **Themed homepage** — hero, *What We Offer* feature cards, church calendar preview, and call-to-action sections.
+- **Public Church Calendar** (`/church-calendar`) — confirmed activities with type filters & month/type grouping.
+- **Prayer Request form** (`/church-pray`) — public submission without login.
+- **Christianity News** (`/christianity-news`) — public news aggregator page.
+- **SEO** — homepage title, meta description & meta keywords (e.g. "church management", "modern church", "digital church").
 
 ### 🔌 Integrations
 - Extends **Contacts** (`res.partner`), **CRM Leads** (`crm.lead`), **Events** (`event.event`), and **Accounting Payments** (`account.payment`).
@@ -53,6 +61,8 @@ A comprehensive **Odoo 18** module for managing church membership, events, donat
 | **Odoo** | 18.0+ |
 | **Python** | `feedparser` |
 | **Odoo apps** | `base`, `crm`, `event`, `account`, `website` |
+
+> 🎨 **Optional companion:** [`church_theme`](#) — a separate website theme that provides the public homepage design (hero, feature cards, CTA). Install it if you want the themed homepage; without it the module still works fully but uses Odoo's default website theme.
 
 ---
 
@@ -114,6 +124,7 @@ Church Management
 
 | Version | Date | Changes |
 |---------|------|---------|
+| **1.2.0** | 2026-08-09 | **Website polish** — themed homepage content, **Christianity News** section & main-menu link, **SEO** metadata for the homepage, and documented the optional companion `church_theme`. |
 | **1.1.1** | 2026-08-08 | **Fixes & docs** — fixed menu load-order bug causing `ParseError` (`External ID not found: menu_church_operations`) on fresh installs by centralizing all menus in `church_parent_menu.xml`; hardened install/troubleshooting docs (requires `website`, security-group setup, Odoo 17→18 `vat_check_vies` cleanup). |
 | **1.1.0** | 2026-08-08 | **Pray Requests** — new feature: public submission form (`/church-pray`), CRUD under **Operations → Pray Requests**, prayer sessions (date, time, prayers, notes), **Kanban / Calendar / List / Pivot / Form** views, **Dashboard** stat card + shortcut, automatic **Church Calendar** sync, and sample data. Also: cohort-style **Pivot** view replaces the grid view (unsupported in Odoo 18). |
 | **1.0.2** | — | **Public Church Calendar** (`/church-calendar`) — type filters, month/type grouping, only confirmed activities shown. |

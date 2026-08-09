@@ -10,5 +10,7 @@ Recommended files (as referenced in the README):
 - `baptism.png` — Baptism Registration
 - `marriage.png` — Marriage Registration
 - `public-calendar.png` — the public Church Calendar page on the website
+- `news.png` — the public Christianity News page on the website
+- `homepage.png` — the public themed homepage
 
 Use `.png` for best results on GitHub.

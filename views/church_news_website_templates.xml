@@ -85,4 +85,11 @@
             </article>
         </div>
     </template>
+
+    <record id="menu_website_christianity_news" model="website.menu">
+        <field name="name">Christianity News</field>
+        <field name="url">/christianity-news</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" eval="25"/>
+    </record>
 </odoo>
