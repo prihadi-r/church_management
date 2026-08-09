@@ -247,15 +247,23 @@ Setiap perubahan pada model/field membutuhkan **restart** + **upgrade**:
 
 ---
 
-## 11. Tema Pendamping `church_theme`
+## 11. Tema Pendamping `church_theme` & Repositori
 
 Halaman beranda website (hero, fitur, kalender, CTA) didesain oleh **`church_theme`** —
 sebuah tema website Odoo 18 terpisah yang bergantung hanya pada `website`.
 
-- **Opsional** tetapi disarankan jika ingin beranda ber-tema.
-- Salin folder `church_theme` ke direktori addons, lalu **instal** seperti modul lain.
-- Jika tidak diinstal, modul tetap berfungsi penuh (backend, `/church-calendar`,
-  `/church-pray`, `/christianity-news`) namun beranda memakai tema default Odoo.
+**Kedua modul tersedia sebagai repo GitHub terpisah:**
+
+| Modul | Repositori |
+|-------|------------|
+| **`church_management`** | `https://github.com/prihadi-r/church_management` |
+| **`church_theme`** | `https://github.com/prihadi-r/church_theme` |
+
+- **`church_theme` bersifat opsional** tetapi disarankan jika ingin beranda ber-tema.
+- Salin folder masing-masing modul ke direktori addons, lalu **instal** seperti modul lain.
+- Jika `church_theme` tidak diinstal, modul `church_management` tetap berfungsi penuh
+  (backend, `/church-calendar`, `/church-pray`, `/christianity-news`) namun beranda
+  memakai tema default Odoo.
 
 ---
 
