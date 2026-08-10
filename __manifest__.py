@@ -1,7 +1,7 @@
 {
     'name': 'Darash - Church Management',
     'version': '2.0.0',
-    'summary': 'Church membership, events, donations, and sacrament management',
+    'summary': 'Open-source Church Management System (ChMS): membership, tithing & donations, worship event scheduling, baptism & marriage registration, ministry and news for Odoo 18.',
     'author': 'Prihadi <prihadi.r@gmail.com>',
     'description': """
 # ⛪ Darash - Church Management
