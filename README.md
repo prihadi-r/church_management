@@ -13,6 +13,7 @@ A comprehensive **Odoo 18** module for managing church membership, events, donat
 ![XML](https://img.shields.io/badge/Views-XML-8A2BE2?style=for-the-badge)
 ![OWL](https://img.shields.io/badge/UI-OWL%20JS-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![feedparser](https://img.shields.io/badge/RSS-feedparser-FF6600?style=for-the-badge)
+![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![GitHub Copilot](https://img.shields.io/badge/Built%20with-GitHub%20Copilot-000000?style=for-the-badge&logo=githubcopilot&logoColor=white)
 ![License](https://img.shields.io/badge/License-LGPL--3-blue?style=for-the-badge)
 
@@ -89,6 +90,62 @@ odoo -i website,church_management -d <your_db> --stop-after-init
 ```
 
 After installing, assign one of the **Church Management** groups (**Read Only** / **Write Only** / **Full Access**) to users under **Settings → Users → Access Rights**, or the menu will not appear.
+
+---
+
+## 🐳 Docker Quick Start
+
+Run the whole stack (**Odoo 18 + PostgreSQL**) with **Docker Compose** — no local Odoo / Python / PostgreSQL install needed.
+
+### Prerequisites
+- [Docker](https://docs.docker.com/get-docker/) with **Docker Compose v2** (bundled with Docker Desktop).
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/prihadi-r/church_management.git
+cd church_management
+```
+
+> Default database credentials are `odoo` / `odoo` (defined in both `odoo.conf` and `docker-compose.yml`). If you change them, change them **together** — and use a strong password in production.
+
+### 2. Build & start
+```bash
+docker compose up -d --build
+```
+
+- **Odoo web UI:** http://localhost:8069
+- Data is stored in the named volumes `odoo-web-data` and `odoo-db-data` (persisted across restarts).
+
+### 3. Create the database & install the module
+1. Open http://localhost:8069 and create a database (Master Password: `admin` by default — change it in production).
+2. Log in, then go to **Apps → Update Apps List**.
+3. Search for **Church Management** and click **Install**.
+   > The `website`, `crm`, `event`, and `account` apps install automatically as dependencies.
+
+> 💡 **Automated install (CLI):** instead of the web UI, run
+> ```bash
+> docker compose exec web odoo -i website,church_management -d <your_db> --stop-after-init
+> ```
+
+After installing, assign one of the **Church Management** groups (**Read Only** / **Write Only** / **Full Access**) to users under **Settings → Users → Access Rights**, or the menu will not appear.
+
+### Common commands
+| Task | Command |
+|------|---------|
+| View logs | `docker compose logs -f web` |
+| Stop services | `docker compose down` |
+| Stop & wipe all data | `docker compose down -v` |
+| Rebuild the image | `docker compose up -d --build` |
+| Restart Odoo | `docker compose restart web` |
+| Run a shell inside Odoo | `docker compose exec web odoo shell -d <your_db> --no-http` |
+
+### Customising
+- **Ports:** change `"8069:8069"` in `docker-compose.yml` (left side = host port).
+- **Database credentials:** edit `odoo.conf` **and** the `db` service environment in `docker-compose.yml` together.
+- **Module code:** the repo root is bind-mounted into `/mnt/extra-addons/church_management`, so code edits are picked up without rebuilding. Restart `web` (`docker compose restart web`) after model/field changes.
+- **Configuration:** `odoo.conf` is mounted to `/etc/odoo/odoo.conf` inside the container.
+
+> 🎨 **Optional companion:** the public themed homepage comes from the separate [`church_theme`](#) module — place it in `/mnt/extra-addons` (e.g. alongside this repo) if you want the designed homepage.
 
 ---
 

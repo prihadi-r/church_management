@@ -1,0 +1,51 @@
+# =============================================================================
+#  Darash — Church Management (Odoo 18) — Docker Compose
+#
+#  Services:
+#    - web : Odoo 18 with the church_management module (built from ./Dockerfile)
+#    - db  : PostgreSQL 16 database
+#
+#  Quick start:
+#      docker compose up -d --build
+#      open http://localhost:8069
+#
+#  NOTE: default DB credentials are `odoo` / `odoo` (defined both in
+#  `odoo.conf` and in the `db` service below). If you change them, change them
+#  in BOTH places. For production, override the PostgreSQL password.
+# =============================================================================
+
+services:
+  web:
+    build: .
+    image: church_management:18.0
+    container_name: church_management_web
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8069:8069" # host:container — change the left side to use a custom port
+    volumes:
+      - odoo-web-data:/var/lib/odoo                # filestore / sessions persistence
+      - ./:/mnt/extra-addons/church_management     # live module code (no rebuild needed)
+      - ./odoo.conf:/etc/odoo/odoo.conf            # explicit Odoo configuration
+    restart: unless-stopped
+
+  db:
+    image: postgres:16
+    container_name: church_management_db
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data      # database persistence
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  odoo-web-data:
+  odoo-db-data:
