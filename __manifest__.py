@@ -1,6 +1,6 @@
 {
     'name': 'Darash - Church Management',
-    'version': '2.0.0',
+    'version': '2.1.0',
     'summary': 'Open-source Church Management System (ChMS): membership, tithing & donations, worship event scheduling, baptism & marriage registration, ministry and news for Odoo 18.',
     'author': 'Prihadi <prihadi.r@gmail.com>',
     'description': """
@@ -94,7 +94,7 @@ Church Management
 **LGPL-3** — free to use, modify, and distribute.
 """,
     'category': 'Services/Church',
-    'depends': ['base', 'crm', 'event', 'account', 'website'],
+    'depends': ['base', 'board', 'crm', 'event', 'account', 'website'],
 
     'external_dependencies': {
         'python': ['feedparser'],
@@ -104,6 +104,10 @@ Church Management
     'data': [
         'security/church_security.xml',
         'security/ir.model.access.csv',
+        'data/church_sunday_school_data.xml',
+        # Sample data: 5 classes x 20 students. Loaded right after the master
+        # data it references (levels, statuses, teacher roles, student sequence).
+        'data/church_sunday_school_sample.xml',
         'data/church_care_cell_status_sample.xml',
         'data/church_care_cell_type_sample.xml',   
         'data/church_member_type_sample.xml',
@@ -133,14 +137,17 @@ Church Management
         # ir.sequence is defined before records are created (create() calls
         # ir.sequence.next_by_code).
         'data/church_pray_request_sample.xml',
-        # Dashboard comes AFTER the views that define the actions it links to
-        # (action_church_baptism_registration, action_church_marriage_registration,
-        # action_church_activity) so the %(...)d button references resolve.
-        'views/church_dashboard_views.xml',
+        # Dashboard is a board (Odoo "Dashboards" app) built from graph
+        # dashlets. Its arch references only the actions declared in the same
+        # file, so it does not depend on the load order of the other views.
+        'views/church_dashboard_board_views.xml',
         'views/musician_schedule_view.xml',
         'views/church_inherited_views.xml',
         'views/crm_sacrament_kanban.xml',
         'views/church_parent_menu.xml',
+        'views/church_sunday_school_master_views.xml',
+        'views/church_sunday_school_views.xml',
+        'views/church_sunday_school_menu.xml',
         'views/church_news_source_views.xml',
         'views/church_news_article_views.xml',
         'views/church_news_category_views.xml',

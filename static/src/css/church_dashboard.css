@@ -1,0 +1,6 @@
+/* Dashboard dashlets: Odoo's board app forces a 1200px min-width on every
+   dashlet renderer, which makes each graph scroll horizontally inside its
+   box. Let the graph fill the box instead. */
+.o_dashboard .o-dashboard-action .o_view_controller .o_content > .o_renderer {
+    min-width: 0;
+}

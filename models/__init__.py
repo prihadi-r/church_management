@@ -4,7 +4,6 @@ from . import church_news_article
 from . import church_news_category
 from . import church_news_source
 from . import church_baptism_registration
-from . import church_dashboard
 from . import church_care_cell
 from . import church_care_cell_attendee
 from . import church_care_cell_session
@@ -19,6 +18,19 @@ from . import church_sacrament_type
 from . import church_musician_schedule
 from . import church_pray_request
 from . import church_pray_session
+# Sunday School (master data dulu, lalu transaksi)
+from . import church_sunday_school_attendance_status
+from . import church_sunday_school_session_status
+from . import church_sunday_school_student_status
+from . import church_sunday_school_class_status
+from . import church_sunday_school_class_level
+from . import church_sunday_school_teacher_role
+from . import church_sunday_school_class
+from . import church_sunday_school_teacher
+from . import church_sunday_school_class_teacher
+from . import church_sunday_school_student
+from . import church_sunday_school_attendance
+from . import church_sunday_school_session
 from . import crm_lead_inherit
 from . import event_event_inherit
 from . import res_partner_inherit

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- ================================================================
+             CHURCH MANAGEMENT DASHBOARD (Odoo "Dashboards" app / board)
+
+             Every dashlet is a graph inside a box, so the landing page is
+             read at a glance instead of as a wall of numbers.
+
+             The graph views and their actions are declared HERE (rather than
+             reusing the module's list/kanban actions) so this file only
+             depends on the models existing, not on the load order of the
+             other view files.
+             ================================================================ -->
+
+        <!-- ========================================== -->
+        <!-- GRAPH VIEWS                                -->
+        <!-- ========================================== -->
+        <record id="view_church_partner_dashboard_graph" model="ir.ui.view">
+            <field name="name">res.partner.dashboard.graph</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <graph string="Jemaat" type="bar">
+                    <field name="church_member_type_id"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_church_baptism_dashboard_graph" model="ir.ui.view">
+            <field name="name">church.baptism.registration.dashboard.graph</field>
+            <field name="model">church.baptism.registration</field>
+            <field name="arch" type="xml">
+                <graph string="Baptis" type="bar">
+                    <field name="baptism_datetime" interval="month"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_church_marriage_dashboard_graph" model="ir.ui.view">
+            <field name="name">church.marriage.registration.dashboard.graph</field>
+            <field name="model">church.marriage.registration</field>
+            <field name="arch" type="xml">
+                <graph string="Pernikahan" type="bar">
+                    <field name="marriage_datetime" interval="month"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_church_pray_dashboard_graph" model="ir.ui.view">
+            <field name="name">church.pray.request.dashboard.graph</field>
+            <field name="model">church.pray.request</field>
+            <field name="arch" type="xml">
+                <graph string="Doa" type="pie">
+                    <field name="state"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_student_dashboard_graph" model="ir.ui.view">
+            <field name="name">church.sunday.school.student.dashboard.graph</field>
+            <field name="model">church.sunday.school.student</field>
+            <field name="arch" type="xml">
+                <graph string="Murid" type="bar">
+                    <field name="class_id"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_session_dashboard_graph" model="ir.ui.view">
+            <field name="name">church.sunday.school.session.dashboard.graph</field>
+            <field name="model">church.sunday.school.session</field>
+            <field name="arch" type="xml">
+                <graph string="Sesi" type="bar">
+                    <field name="class_id"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_attendance_dashboard_graph" model="ir.ui.view">
+            <field name="name">church.sunday.school.attendance.dashboard.graph</field>
+            <field name="model">church.sunday.school.attendance</field>
+            <field name="arch" type="xml">
+                <graph string="Kehadiran" type="pie">
+                    <field name="status_id"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_church_care_cell_dashboard_graph" model="ir.ui.view">
+            <field name="name">church.care.cell.dashboard.graph</field>
+            <field name="model">church.care.cell</field>
+            <field name="arch" type="xml">
+                <graph string="Care Cell" type="pie">
+                    <field name="status_id"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- DASHLET ACTIONS (graph only, no list)      -->
+        <!-- ========================================== -->
+        <record id="action_church_dashboard_member" model="ir.actions.act_window">
+            <field name="name">Jemaat</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">graph</field>
+            <field name="domain">[('church_member_type_id', '!=', False)]</field>
+        </record>
+
+        <record id="action_church_dashboard_baptism" model="ir.actions.act_window">
+            <field name="name">Baptis</field>
+            <field name="res_model">church.baptism.registration</field>
+            <field name="view_mode">graph</field>
+        </record>
+
+        <record id="action_church_dashboard_marriage" model="ir.actions.act_window">
+            <field name="name">Pernikahan</field>
+            <field name="res_model">church.marriage.registration</field>
+            <field name="view_mode">graph</field>
+        </record>
+
+        <record id="action_church_dashboard_pray" model="ir.actions.act_window">
+            <field name="name">Doa</field>
+            <field name="res_model">church.pray.request</field>
+            <field name="view_mode">graph</field>
+        </record>
+
+        <record id="action_church_dashboard_sunday_student" model="ir.actions.act_window">
+            <field name="name">Murid Sekolah Minggu</field>
+            <field name="res_model">church.sunday.school.student</field>
+            <field name="view_mode">graph</field>
+        </record>
+
+        <record id="action_church_dashboard_sunday_session" model="ir.actions.act_window">
+            <field name="name">Sesi Sekolah Minggu</field>
+            <field name="res_model">church.sunday.school.session</field>
+            <field name="view_mode">graph</field>
+        </record>
+
+        <record id="action_church_dashboard_sunday_attendance" model="ir.actions.act_window">
+            <field name="name">Kehadiran Sekolah Minggu</field>
+            <field name="res_model">church.sunday.school.attendance</field>
+            <field name="view_mode">graph</field>
+        </record>
+
+        <record id="action_church_dashboard_care_cell" model="ir.actions.act_window">
+            <field name="name">Care Cell</field>
+            <field name="res_model">church.care.cell</field>
+            <field name="view_mode">graph</field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- BOARD                                      -->
+        <!-- ========================================== -->
+        <record id="view_church_dashboard_board" model="ir.ui.view">
+            <field name="name">church.dashboard.board</field>
+            <field name="model">board.board</field>
+            <field name="arch" type="xml">
+                <form string="Church Management">
+                    <board style="1-1">
+                        <column>
+                            <!-- The board JS takes domain/context from this
+                                 node (not from the action record), so the
+                                 "no member type" bar is filtered out here. -->
+                            <action name="%(action_church_dashboard_member)d" string="Jemaat" view_mode="graph"
+                                    domain="[('church_member_type_id', '!=', False)]"/>
+                            <action name="%(action_church_dashboard_baptism)d" string="Baptis" view_mode="graph"/>
+                            <action name="%(action_church_dashboard_marriage)d" string="Pernikahan" view_mode="graph"/>
+                            <action name="%(action_church_dashboard_pray)d" string="Doa" view_mode="graph"/>
+                        </column>
+                        <column>
+                            <action name="%(action_church_dashboard_sunday_student)d" string="Murid" view_mode="graph"/>
+                            <action name="%(action_church_dashboard_sunday_session)d" string="Sesi" view_mode="graph"/>
+                            <action name="%(action_church_dashboard_sunday_attendance)d" string="Kehadiran" view_mode="graph"/>
+                            <action name="%(action_church_dashboard_care_cell)d" string="Care Cell" view_mode="graph"/>
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+
+        <!-- Landing action of the Church Management app -->
+        <record id="action_church_dashboard" model="ir.actions.act_window">
+            <field name="name">Church Management</field>
+            <field name="res_model">board.board</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_church_dashboard_board"/>
+            <field name="context">{'disable_toolbar': True}</field>
+            <field name="usage">menu</field>
+        </record>
+
+        <!-- Dashboard stylesheet, declared as an ir.asset record (instead of
+             the manifest "assets" key) so the backend bundle picks it up
+             without requiring a server restart. -->
+        <record id="asset_church_dashboard_css" model="ir.asset">
+            <field name="name">Church Dashboard</field>
+            <field name="bundle">web.assets_backend</field>
+            <field name="path">church_management/static/src/css/church_dashboard.css</field>
+            <field name="directive">append</field>
+            <field name="sequence">100</field>
+        </record>
+    </data>
+</odoo>

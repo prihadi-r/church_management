@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- ========================================== -->
+        <!-- SUNDAY SCHOOL : CLASSES                    -->
+        <!-- ========================================== -->
+        <record id="action_church_sunday_school_class" model="ir.actions.act_window">
+            <field name="name">Sunday School Classes</field>
+            <field name="res_model">church.sunday.school.class</field>
+            <field name="view_mode">kanban,list,form</field>
+        </record>
+
+        <record id="view_church_sunday_school_class_kanban" model="ir.ui.view">
+            <field name="name">church.sunday.school.class.kanban</field>
+            <field name="model">church.sunday.school.class</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="status_id" group_create="true" group_edit="true" group_delete="true">
+                    <field name="status_id"/>
+                    <field name="color"/>
+                    <field name="level_id"/>
+                    <field name="teacher_id"/>
+                    <field name="student_count"/>
+                    <field name="session_count"/>
+                    <templates>
+                        <t t-name="card">
+                            <div class="oe_kanban_global_click" t-att-class="kanban_color(record.color.raw_value)">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </div>
+                                    <div class="o_kanban_record_options">
+                                        <field name="status_id" widget="badge"/>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div>
+                                        <field name="level_id"/>
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-user" title="Teacher"/> <field name="teacher_id"/>
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-users" title="Students"/> <field name="student_count"/>
+                                        <i class="fa fa-calendar-o" title="Sessions"/> <field name="session_count"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_class_list" model="ir.ui.view">
+            <field name="name">church.sunday.school.class.list</field>
+            <field name="model">church.sunday.school.class</field>
+            <field name="arch" type="xml">
+                <list string="Sunday School Classes">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="level_id"/>
+                    <field name="teacher_id"/>
+                    <field name="status_id" widget="badge"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="student_count"/>
+                    <field name="next_session_datetime"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_class_form" model="ir.ui.view">
+            <field name="name">church.sunday.school.class.form</field>
+            <field name="model">church.sunday.school.class</field>
+            <field name="arch" type="xml">
+                <form string="Sunday School Class">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Class Name"/>
+                            <h1>
+                                <field name="name" placeholder="e.g. Primary 1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="level_id"/>
+                                <field name="status_id"/>
+                                <field name="teacher_id"/>
+                                <field name="room"/>
+                                <field name="meeting_time" widget="float_time"/>
+                            </group>
+                            <group>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                                <field name="capacity"/>
+                                <field name="student_count" readonly="1"/>
+                                <field name="teacher_count" readonly="1"/>
+                                <field name="next_session_datetime" readonly="1"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Students" name="students">
+                                <field name="student_ids" context="{'default_class_id': id}">
+                                    <list editable="bottom">
+                                        <field name="code" readonly="1"/>
+                                        <field name="partner_id"/>
+                                        <field name="status_id"/>
+                                        <field name="enrollment_date"/>
+                                        <field name="age"/>
+                                        <field name="attendance_rate"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Teachers" name="teachers">
+                                <field name="teacher_ids" context="{'default_class_id': id}">
+                                    <list editable="bottom">
+                                        <field name="teacher_id"/>
+                                        <field name="role_id"/>
+                                        <field name="since_date"/>
+                                        <field name="notes"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Sessions" name="sessions">
+                                <field name="session_ids" context="{'default_class_id': id}">
+                                    <list editable="bottom">
+                                        <field name="name"/>
+                                        <field name="start_datetime"/>
+                                        <field name="end_datetime"/>
+                                        <field name="teacher_id"/>
+                                        <field name="status_id" widget="badge"/>
+                                        <field name="attendance_count"/>
+                                        <field name="present_count"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Notes" name="notes">
+                                <field name="notes" placeholder="Class notes..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_class_search" model="ir.ui.view">
+            <field name="name">church.sunday.school.class.search</field>
+            <field name="model">church.sunday.school.class</field>
+            <field name="arch" type="xml">
+                <search string="Sunday School Class">
+                    <field name="name"/>
+                    <field name="level_id"/>
+                    <field name="teacher_id"/>
+                    <field name="status_id"/>
+                    <filter name="filter_status_planned" string="Planned"
+                            domain="[('status_id.code', '=', 'planned')]"/>
+                    <filter name="filter_status_running" string="Running"
+                            domain="[('status_id.code', '=', 'running')]"/>
+                    <filter name="filter_status_completed" string="Completed"
+                            domain="[('status_id.code', '=', 'completed')]"/>
+                    <filter name="filter_status_cancel" string="Cancelled"
+                            domain="[('status_id.code', '=', 'cancel')]"/>
+                    <separator/>
+                    <filter name="filter_inactive" string="Archived"
+                            domain="[('active', '=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_level" string="Level"
+                                context="{'group_by': 'level_id'}"/>
+                        <filter name="group_by_status" string="Status"
+                                context="{'group_by': 'status_id'}"/>
+                        <filter name="group_by_teacher" string="Head Teacher"
+                                context="{'group_by': 'teacher_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- SUNDAY SCHOOL : STUDENTS                   -->
+        <!-- ========================================== -->
+        <record id="action_church_sunday_school_student" model="ir.actions.act_window">
+            <field name="name">Sunday School Students</field>
+            <field name="res_model">church.sunday.school.student</field>
+            <field name="view_mode">kanban,list,form</field>
+        </record>
+
+        <record id="view_church_sunday_school_student_kanban" model="ir.ui.view">
+            <field name="name">church.sunday.school.student.kanban</field>
+            <field name="model">church.sunday.school.student</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="class_id" group_create="false" group_edit="false" group_delete="false">
+                    <field name="color"/>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="class_id"/>
+                    <field name="status_id"/>
+                    <field name="age"/>
+                    <field name="attendance_rate"/>
+                    <templates>
+                        <t t-name="card">
+                            <div class="oe_kanban_global_click" t-att-class="kanban_color(record.color.raw_value)">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </div>
+                                    <div class="o_kanban_record_options">
+                                        <field name="status_id" widget="badge"/>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div>
+                                        <i class="fa fa-graduation-cap" title="Class"/> <field name="class_id"/>
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-birthday-cake" title="Age"/> <field name="age"/>
+                                        <i class="fa fa-check-circle" title="Attendance Rate"/> <field name="attendance_rate"/>%
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_student_list" model="ir.ui.view">
+            <field name="name">church.sunday.school.student.list</field>
+            <field name="model">church.sunday.school.student</field>
+            <field name="arch" type="xml">
+                <list string="Sunday School Students">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="class_id"/>
+                    <field name="status_id" widget="badge"/>
+                    <field name="age"/>
+                    <field name="guardian_id"/>
+                    <field name="enrollment_date"/>
+                    <field name="attendance_rate" optional="show"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_student_form" model="ir.ui.view">
+            <field name="name">church.sunday.school.student.form</field>
+            <field name="model">church.sunday.school.student</field>
+            <field name="arch" type="xml">
+                <form string="Sunday School Student">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Student Name"/>
+                            <h1>
+                                <field name="name" placeholder="Student name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="code" readonly="1"/>
+                                <field name="partner_id"/>
+                                <field name="birth_date"/>
+                                <field name="age"/>
+                                <field name="class_id"/>
+                                <field name="status_id"/>
+                            </group>
+                            <group>
+                                <field name="enrollment_date"/>
+                                <field name="guardian_id"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                        <group string="Contact Details">
+                            <group>
+                                <field name="phone" widget="phone"/>
+                                <field name="email" widget="email"/>
+                                <field name="street"/>
+                            </group>
+                            <group>
+                                <field name="city"/>
+                                <field name="zip"/>
+                                <field name="country_id"/>
+                            </group>
+                        </group>
+                        <group string="Attendance Summary">
+                            <group>
+                                <field name="session_count" readonly="1"/>
+                                <field name="present_count" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="absent_count" readonly="1"/>
+                                <field name="attendance_rate" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Attendance" name="attendance">
+                                <field name="attendance_ids" readonly="1">
+                                    <list>
+                                        <field name="session_id"/>
+                                        <field name="class_id"/>
+                                        <field name="status_id" widget="badge"/>
+                                        <field name="present" optional="hide"/>
+                                        <field name="note"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Notes" name="notes">
+                                <field name="notes" placeholder="Student notes..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_student_search" model="ir.ui.view">
+            <field name="name">church.sunday.school.student.search</field>
+            <field name="model">church.sunday.school.student</field>
+            <field name="arch" type="xml">
+                <search string="Sunday School Student">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="class_id"/>
+                    <field name="status_id"/>
+                    <field name="guardian_id"/>
+                    <filter name="filter_status_active" string="Active"
+                            domain="[('status_id.code', '=', 'active')]"/>
+                    <filter name="filter_status_graduated" string="Graduated"
+                            domain="[('status_id.code', '=', 'graduated')]"/>
+                    <filter name="filter_status_withdrawn" string="Withdrawn"
+                            domain="[('status_id.code', '=', 'withdrawn')]"/>
+                    <separator/>
+                    <filter name="filter_inactive" string="Archived"
+                            domain="[('active', '=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_class" string="Class"
+                                context="{'group_by': 'class_id'}"/>
+                        <filter name="group_by_status" string="Status"
+                                context="{'group_by': 'status_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- SUNDAY SCHOOL : TEACHERS                   -->
+        <!-- ========================================== -->
+        <record id="action_church_sunday_school_teacher" model="ir.actions.act_window">
+            <field name="name">Sunday School Teachers</field>
+            <field name="res_model">church.sunday.school.teacher</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="view_church_sunday_school_teacher_list" model="ir.ui.view">
+            <field name="name">church.sunday.school.teacher.list</field>
+            <field name="model">church.sunday.school.teacher</field>
+            <field name="arch" type="xml">
+                <list string="Sunday School Teachers">
+                    <field name="name"/>
+                    <field name="phone" optional="show"/>
+                    <field name="email" optional="show"/>
+                    <field name="since_date"/>
+                    <field name="class_count"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_teacher_form" model="ir.ui.view">
+            <field name="name">church.sunday.school.teacher.form</field>
+            <field name="model">church.sunday.school.teacher</field>
+            <field name="arch" type="xml">
+                <form string="Sunday School Teacher">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Teacher Name"/>
+                            <h1>
+                                <field name="name" placeholder="Teacher name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="since_date"/>
+                                <field name="class_count" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                        <group string="Contact Details">
+                            <group>
+                                <field name="phone" widget="phone"/>
+                                <field name="email" widget="email"/>
+                                <field name="street"/>
+                            </group>
+                            <group>
+                                <field name="city"/>
+                                <field name="zip"/>
+                                <field name="country_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Class Assignments" name="assignments">
+                                <field name="assignment_ids" readonly="1">
+                                    <list>
+                                        <field name="class_id"/>
+                                        <field name="role_id"/>
+                                        <field name="since_date"/>
+                                        <field name="notes"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Notes" name="notes">
+                                <field name="notes" placeholder="Teacher notes..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_teacher_search" model="ir.ui.view">
+            <field name="name">church.sunday.school.teacher.search</field>
+            <field name="model">church.sunday.school.teacher</field>
+            <field name="arch" type="xml">
+                <search string="Sunday School Teacher">
+                    <field name="name"/>
+                    <field name="phone"/>
+                    <field name="email"/>
+                    <filter name="filter_inactive" string="Archived"
+                            domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- SUNDAY SCHOOL : SESSIONS                   -->
+        <!-- ========================================== -->
+        <record id="action_church_sunday_school_session" model="ir.actions.act_window">
+            <field name="name">Sunday School Sessions</field>
+            <field name="res_model">church.sunday.school.session</field>
+            <field name="view_mode">calendar,list,form</field>
+        </record>
+
+        <record id="view_church_sunday_school_session_calendar" model="ir.ui.view">
+            <field name="name">church.sunday.school.session.calendar</field>
+            <field name="model">church.sunday.school.session</field>
+            <field name="arch" type="xml">
+                <calendar string="Sunday School Sessions"
+                          date_start="start_datetime"
+                          date_stop="calendar_stop"
+                          color="color"
+                          quick_create="false">
+                    <field name="name"/>
+                    <field name="class_id"/>
+                    <field name="teacher_id"/>
+                    <field name="status_id" widget="badge"/>
+                    <field name="calendar_stop" invisible="1"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_session_list" model="ir.ui.view">
+            <field name="name">church.sunday.school.session.list</field>
+            <field name="model">church.sunday.school.session</field>
+            <field name="arch" type="xml">
+                <list string="Sunday School Sessions">
+                    <field name="name"/>
+                    <field name="class_id"/>
+                    <field name="start_datetime"/>
+                    <field name="end_datetime" optional="show"/>
+                    <field name="teacher_id"/>
+                    <field name="status_id" widget="badge"/>
+                    <field name="attendance_count"/>
+                    <field name="present_count"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_session_form" model="ir.ui.view">
+            <field name="name">church.sunday.school.session.form</field>
+            <field name="model">church.sunday.school.session</field>
+            <field name="arch" type="xml">
+                <form string="Sunday School Session">
+                    <header>
+                        <button name="action_mark_in_progress" type="object"
+                                string="Mark In Progress" class="btn-primary"
+                                invisible="status_id.code != 'planned'"/>
+                        <button name="action_mark_done" type="object"
+                                string="Mark Done" class="btn-primary"
+                                invisible="status_id.code in ('done', 'cancel')"/>
+                        <button name="action_cancel" type="object"
+                                string="Cancel"
+                                invisible="status_id.code == 'cancel'"/>
+                        <button name="action_reset_to_planned" type="object"
+                                string="Reset to Planned"
+                                invisible="status_id.code == 'planned'"/>
+                        <button name="action_generate_attendance" type="object"
+                                string="Generate Attendance" class="btn-secondary"/>
+                        <field name="status_id" widget="badge"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Topic"/>
+                            <h1>
+                                <field name="name" placeholder="e.g. The Good Shepherd"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="class_id"/>
+                                <field name="teacher_id"/>
+                                <field name="start_datetime"/>
+                                <field name="end_datetime"/>
+                            </group>
+                            <group>
+                                <field name="attendance_count" readonly="1"/>
+                                <field name="present_count" readonly="1"/>
+                                <field name="absent_count" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Attendance" name="attendance">
+                                <field name="attendance_ids">
+                                    <list editable="bottom">
+                                        <field name="student_id"/>
+                                        <field name="status_id"/>
+                                        <field name="present" optional="hide"/>
+                                        <field name="note"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Lesson" name="lesson">
+                                <field name="lesson_summary" placeholder="Lesson summary..."/>
+                                <field name="notes" placeholder="Session notes..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_session_search" model="ir.ui.view">
+            <field name="name">church.sunday.school.session.search</field>
+            <field name="model">church.sunday.school.session</field>
+            <field name="arch" type="xml">
+                <search string="Sunday School Session">
+                    <field name="name"/>
+                    <field name="class_id"/>
+                    <field name="teacher_id"/>
+                    <field name="status_id"/>
+                    <field name="start_datetime"/>
+                    <filter name="filter_status_planned" string="Planned"
+                            domain="[('status_id.code', '=', 'planned')]"/>
+                    <filter name="filter_status_in_progress" string="In Progress"
+                            domain="[('status_id.code', '=', 'in_progress')]"/>
+                    <filter name="filter_status_done" string="Done"
+                            domain="[('status_id.code', '=', 'done')]"/>
+                    <filter name="filter_status_cancel" string="Cancelled"
+                            domain="[('status_id.code', '=', 'cancel')]"/>
+                    <separator/>
+                    <filter name="filter_upcoming" string="Upcoming"
+                            domain="[('start_datetime', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_class" string="Class"
+                                context="{'group_by': 'class_id'}"/>
+                        <filter name="group_by_status" string="Status"
+                                context="{'group_by': 'status_id'}"/>
+                        <filter name="group_by_teacher" string="Teacher"
+                                context="{'group_by': 'teacher_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- SUNDAY SCHOOL : ATTENDANCE                 -->
+        <!-- ========================================== -->
+        <record id="action_church_sunday_school_attendance" model="ir.actions.act_window">
+            <field name="name">Sunday School Attendance</field>
+            <field name="res_model">church.sunday.school.attendance</field>
+            <field name="view_mode">list,pivot,form</field>
+        </record>
+
+        <record id="view_church_sunday_school_attendance_list" model="ir.ui.view">
+            <field name="name">church.sunday.school.attendance.list</field>
+            <field name="model">church.sunday.school.attendance</field>
+            <field name="arch" type="xml">
+                <list string="Sunday School Attendance" editable="bottom">
+                    <field name="session_id"/>
+                    <field name="class_id"/>
+                    <field name="student_id"/>
+                    <field name="status_id" widget="badge"/>
+                    <field name="present" optional="hide"/>
+                    <field name="note"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_attendance_pivot" model="ir.ui.view">
+            <field name="name">church.sunday.school.attendance.pivot</field>
+            <field name="model">church.sunday.school.attendance</field>
+            <field name="arch" type="xml">
+                <pivot string="Attendance Analysis">
+                    <field name="class_id" type="row"/>
+                    <field name="student_id" type="row"/>
+                    <field name="status_id" type="col"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_attendance_form" model="ir.ui.view">
+            <field name="name">church.sunday.school.attendance.form</field>
+            <field name="model">church.sunday.school.attendance</field>
+            <field name="arch" type="xml">
+                <form string="Sunday School Attendance">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="session_id"/>
+                                <field name="class_id"/>
+                                <field name="student_id"/>
+                            </group>
+                            <group>
+                                <field name="status_id"/>
+                                <field name="present"/>
+                            </group>
+                        </group>
+                        <field name="note" placeholder="Attendance note..."/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_attendance_search" model="ir.ui.view">
+            <field name="name">church.sunday.school.attendance.search</field>
+            <field name="model">church.sunday.school.attendance</field>
+            <field name="arch" type="xml">
+                <search string="Sunday School Attendance">
+                    <field name="session_id"/>
+                    <field name="class_id"/>
+                    <field name="student_id"/>
+                    <field name="status_id"/>
+                    <filter name="filter_present" string="Present"
+                            domain="[('present', '=', True)]"/>
+                    <filter name="filter_absent" string="Not Present"
+                            domain="[('present', '=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_class" string="Class"
+                                context="{'group_by': 'class_id'}"/>
+                        <filter name="group_by_session" string="Session"
+                                context="{'group_by': 'session_id'}"/>
+                        <filter name="group_by_status" string="Status"
+                                context="{'group_by': 'status_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

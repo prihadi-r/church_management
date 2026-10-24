@@ -1,0 +1,2542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- ================================================================
+             SUNDAY SCHOOL SAMPLE DATA
+
+             5 classes (one per class level), each with 20 students.
+             Every student and teacher delegates to res.partner via
+             _inherits, so each one needs a res.partner record first.
+             Teachers/students use real names.
+
+             Loaded AFTER church_sunday_school_data.xml because it
+             references the class levels, statuses, teacher roles and the
+             church.sunday.school.student ir.sequence defined there.
+             ================================================================ -->
+
+        <!-- ========================================== -->
+        <!-- TEACHERS (res.partner + church.sunday.school.teacher) -->
+        <!-- ========================================== -->
+        <record id="ss_teacher_partner_maria_simanjuntak" model="res.partner">
+            <field name="name">Maria Simanjuntak</field>
+            <field name="email">maria.simanjuntak@example.com</field>
+            <field name="phone">0812-7011-4001</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_teacher_partner_yohanes_sitorus" model="res.partner">
+            <field name="name">Yohanes Sitorus</field>
+            <field name="email">yohanes.sitorus@example.com</field>
+            <field name="phone">0812-7011-4002</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_teacher_partner_ruth_hutapea" model="res.partner">
+            <field name="name">Ruth Hutapea</field>
+            <field name="email">ruth.hutapea@example.com</field>
+            <field name="phone">0812-7011-4003</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_teacher_partner_andreas_nainggolan" model="res.partner">
+            <field name="name">Andreas Nainggolan</field>
+            <field name="email">andreas.nainggolan@example.com</field>
+            <field name="phone">0812-7011-4004</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_teacher_partner_debora_simatupang" model="res.partner">
+            <field name="name">Debora Simatupang</field>
+            <field name="email">debora.simatupang@example.com</field>
+            <field name="phone">0812-7011-4005</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_teacher_partner_paulus_manurung" model="res.partner">
+            <field name="name">Paulus Manurung</field>
+            <field name="email">paulus.manurung@example.com</field>
+            <field name="phone">0812-7011-4006</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_teacher_partner_elisabeth_panjaitan" model="res.partner">
+            <field name="name">Elisabeth Panjaitan</field>
+            <field name="email">elisabeth.panjaitan@example.com</field>
+            <field name="phone">0812-7011-4007</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_teacher_partner_fransiskus_sihombing" model="res.partner">
+            <field name="name">Fransiskus Sihombing</field>
+            <field name="email">fransiskus.sihombing@example.com</field>
+            <field name="phone">0812-7011-4008</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_teacher_partner_yohana_siregar" model="res.partner">
+            <field name="name">Yohana Siregar</field>
+            <field name="email">yohana.siregar@example.com</field>
+            <field name="phone">0812-7011-4009</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_teacher_partner_samuel_tambunan" model="res.partner">
+            <field name="name">Samuel Tambunan</field>
+            <field name="email">samuel.tambunan@example.com</field>
+            <field name="phone">0812-7011-4010</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_teacher_partner_christina_lumbantobing" model="res.partner">
+            <field name="name">Christina Lumbantobing</field>
+            <field name="email">christina.lumbantobing@example.com</field>
+            <field name="phone">0812-7011-4011</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_teacher_partner_petrus_marpaung" model="res.partner">
+            <field name="name">Petrus Marpaung</field>
+            <field name="email">petrus.marpaung@example.com</field>
+            <field name="phone">0812-7011-4012</field>
+            <field name="city">Jakarta</field>
+        </record>
+
+        <record id="ss_teacher_maria_simanjuntak" model="church.sunday.school.teacher">
+            <field name="partner_id" ref="ss_teacher_partner_maria_simanjuntak"/>
+            <field name="since_date">2016-01-10</field>
+            <field name="notes">Supervisor Sekolah Minggu, koordinator kurikulum.</field>
+        </record>
+        <record id="ss_teacher_yohanes_sitorus" model="church.sunday.school.teacher">
+            <field name="partner_id" ref="ss_teacher_partner_yohanes_sitorus"/>
+            <field name="since_date">2018-03-04</field>
+            <field name="notes">Guru kepala kelas Toddler.</field>
+        </record>
+        <record id="ss_teacher_ruth_hutapea" model="church.sunday.school.teacher">
+            <field name="partner_id" ref="ss_teacher_partner_ruth_hutapea"/>
+            <field name="since_date">2021-07-11</field>
+            <field name="notes">Asisten kelas Toddler.</field>
+        </record>
+        <record id="ss_teacher_andreas_nainggolan" model="church.sunday.school.teacher">
+            <field name="partner_id" ref="ss_teacher_partner_andreas_nainggolan"/>
+            <field name="since_date">2017-02-05</field>
+            <field name="notes">Guru kepala kelas Kindergarten.</field>
+        </record>
+        <record id="ss_teacher_debora_simatupang" model="church.sunday.school.teacher">
+            <field name="partner_id" ref="ss_teacher_partner_debora_simatupang"/>
+            <field name="since_date">2020-09-13</field>
+            <field name="notes">Asisten kelas Kindergarten.</field>
+        </record>
+        <record id="ss_teacher_paulus_manurung" model="church.sunday.school.teacher">
+            <field name="partner_id" ref="ss_teacher_partner_paulus_manurung"/>
+            <field name="since_date">2015-05-17</field>
+            <field name="notes">Guru kepala kelas Primary.</field>
+        </record>
+        <record id="ss_teacher_elisabeth_panjaitan" model="church.sunday.school.teacher">
+            <field name="partner_id" ref="ss_teacher_partner_elisabeth_panjaitan"/>
+            <field name="since_date">2019-01-20</field>
+            <field name="notes">Asisten kelas Primary.</field>
+        </record>
+        <record id="ss_teacher_fransiskus_sihombing" model="church.sunday.school.teacher">
+            <field name="partner_id" ref="ss_teacher_partner_fransiskus_sihombing"/>
+            <field name="since_date">2016-08-14</field>
+            <field name="notes">Guru kepala kelas Teen.</field>
+        </record>
+        <record id="ss_teacher_yohana_siregar" model="church.sunday.school.teacher">
+            <field name="partner_id" ref="ss_teacher_partner_yohana_siregar"/>
+            <field name="since_date">2022-02-06</field>
+            <field name="notes">Asisten kelas Teen.</field>
+        </record>
+        <record id="ss_teacher_samuel_tambunan" model="church.sunday.school.teacher">
+            <field name="partner_id" ref="ss_teacher_partner_samuel_tambunan"/>
+            <field name="since_date">2014-11-02</field>
+            <field name="notes">Guru kepala kelas Youth.</field>
+        </record>
+        <record id="ss_teacher_christina_lumbantobing" model="church.sunday.school.teacher">
+            <field name="partner_id" ref="ss_teacher_partner_christina_lumbantobing"/>
+            <field name="since_date">2021-03-21</field>
+            <field name="notes">Asisten kelas Youth.</field>
+        </record>
+        <record id="ss_teacher_petrus_marpaung" model="church.sunday.school.teacher">
+            <field name="partner_id" ref="ss_teacher_partner_petrus_marpaung"/>
+            <field name="since_date">2023-06-18</field>
+            <field name="notes">Guru pengganti lintas kelas.</field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- CLASSES                                    -->
+        <!-- ========================================== -->
+        <record id="ss_class_toddler" model="church.sunday.school.class">
+            <field name="name">Toddler</field>
+            <field name="code">SS-TOD</field>
+            <field name="level_id" ref="sunday_school_level_toddler"/>
+            <field name="status_id" ref="sunday_school_class_status_running"/>
+            <field name="teacher_id" ref="ss_teacher_yohanes_sitorus"/>
+            <field name="room">Ruang Anak 1</field>
+            <field name="meeting_time">7.5</field>
+            <field name="start_date">2026-07-05</field>
+            <field name="capacity">25</field>
+        </record>
+        <record id="ss_class_kindergarten" model="church.sunday.school.class">
+            <field name="name">Kindergarten</field>
+            <field name="code">SS-KID</field>
+            <field name="level_id" ref="sunday_school_level_kindergarten"/>
+            <field name="status_id" ref="sunday_school_class_status_running"/>
+            <field name="teacher_id" ref="ss_teacher_andreas_nainggolan"/>
+            <field name="room">Ruang Anak 2</field>
+            <field name="meeting_time">7.5</field>
+            <field name="start_date">2026-07-05</field>
+            <field name="capacity">30</field>
+        </record>
+        <record id="ss_class_primary" model="church.sunday.school.class">
+            <field name="name">Primary</field>
+            <field name="code">SS-PRI</field>
+            <field name="level_id" ref="sunday_school_level_primary"/>
+            <field name="status_id" ref="sunday_school_class_status_running"/>
+            <field name="teacher_id" ref="ss_teacher_paulus_manurung"/>
+            <field name="room">Ruang Tengah</field>
+            <field name="meeting_time">7.5</field>
+            <field name="start_date">2026-07-05</field>
+            <field name="capacity">35</field>
+        </record>
+        <record id="ss_class_teen" model="church.sunday.school.class">
+            <field name="name">Teen</field>
+            <field name="code">SS-TEN</field>
+            <field name="level_id" ref="sunday_school_level_teen"/>
+            <field name="status_id" ref="sunday_school_class_status_running"/>
+            <field name="teacher_id" ref="ss_teacher_fransiskus_sihombing"/>
+            <field name="room">Ruang Pemuda</field>
+            <field name="meeting_time">9.5</field>
+            <field name="start_date">2026-07-05</field>
+            <field name="capacity">30</field>
+        </record>
+        <record id="ss_class_youth" model="church.sunday.school.class">
+            <field name="name">Youth</field>
+            <field name="code">SS-YTH</field>
+            <field name="level_id" ref="sunday_school_level_youth"/>
+            <field name="status_id" ref="sunday_school_class_status_running"/>
+            <field name="teacher_id" ref="ss_teacher_samuel_tambunan"/>
+            <field name="room">Aula Serbaguna</field>
+            <field name="meeting_time">9.5</field>
+            <field name="start_date">2026-07-05</field>
+            <field name="capacity">40</field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- CLASS-TEACHER ASSIGNMENTS                   -->
+        <!-- ========================================== -->
+        <record id="ss_assignment_toddler_yohanes_sitorus" model="church.sunday.school.class.teacher">
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="teacher_id" ref="ss_teacher_yohanes_sitorus"/>
+            <field name="role_id" ref="sunday_school_teacher_role_head"/>
+            <field name="since_date">2026-07-05</field>
+        </record>
+        <record id="ss_assignment_toddler_ruth_hutapea" model="church.sunday.school.class.teacher">
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="teacher_id" ref="ss_teacher_ruth_hutapea"/>
+            <field name="role_id" ref="sunday_school_teacher_role_assistant"/>
+            <field name="since_date">2026-07-05</field>
+        </record>
+        <record id="ss_assignment_kindergarten_andreas_nainggolan" model="church.sunday.school.class.teacher">
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="teacher_id" ref="ss_teacher_andreas_nainggolan"/>
+            <field name="role_id" ref="sunday_school_teacher_role_head"/>
+            <field name="since_date">2026-07-05</field>
+        </record>
+        <record id="ss_assignment_kindergarten_debora_simatupang" model="church.sunday.school.class.teacher">
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="teacher_id" ref="ss_teacher_debora_simatupang"/>
+            <field name="role_id" ref="sunday_school_teacher_role_assistant"/>
+            <field name="since_date">2026-07-05</field>
+        </record>
+        <record id="ss_assignment_primary_paulus_manurung" model="church.sunday.school.class.teacher">
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="teacher_id" ref="ss_teacher_paulus_manurung"/>
+            <field name="role_id" ref="sunday_school_teacher_role_head"/>
+            <field name="since_date">2026-07-05</field>
+        </record>
+        <record id="ss_assignment_primary_elisabeth_panjaitan" model="church.sunday.school.class.teacher">
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="teacher_id" ref="ss_teacher_elisabeth_panjaitan"/>
+            <field name="role_id" ref="sunday_school_teacher_role_assistant"/>
+            <field name="since_date">2026-07-05</field>
+        </record>
+        <record id="ss_assignment_teen_fransiskus_sihombing" model="church.sunday.school.class.teacher">
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="teacher_id" ref="ss_teacher_fransiskus_sihombing"/>
+            <field name="role_id" ref="sunday_school_teacher_role_head"/>
+            <field name="since_date">2026-07-05</field>
+        </record>
+        <record id="ss_assignment_teen_yohana_siregar" model="church.sunday.school.class.teacher">
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="teacher_id" ref="ss_teacher_yohana_siregar"/>
+            <field name="role_id" ref="sunday_school_teacher_role_assistant"/>
+            <field name="since_date">2026-07-05</field>
+        </record>
+        <record id="ss_assignment_youth_samuel_tambunan" model="church.sunday.school.class.teacher">
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="teacher_id" ref="ss_teacher_samuel_tambunan"/>
+            <field name="role_id" ref="sunday_school_teacher_role_head"/>
+            <field name="since_date">2026-07-05</field>
+        </record>
+        <record id="ss_assignment_youth_christina_lumbantobing" model="church.sunday.school.class.teacher">
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="teacher_id" ref="ss_teacher_christina_lumbantobing"/>
+            <field name="role_id" ref="sunday_school_teacher_role_assistant"/>
+            <field name="since_date">2026-07-05</field>
+        </record>
+        <record id="ss_assignment_supervisor" model="church.sunday.school.class.teacher">
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="teacher_id" ref="ss_teacher_maria_simanjuntak"/>
+            <field name="role_id" ref="sunday_school_teacher_role_supervisor"/>
+            <field name="since_date">2016-01-10</field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- TODDLER STUDENTS (20)                    -->
+        <!-- ========================================== -->
+        <record id="ss_student_partner_toddler_01" model="res.partner">
+            <field name="name">Keisha Anindya Putri</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_toddler_02" model="res.partner">
+            <field name="name">Rafael Arya Nugroho</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_toddler_03" model="res.partner">
+            <field name="name">Alena Grace Wijaya</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_toddler_04" model="res.partner">
+            <field name="name">Kenzo Albert Santoso</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_toddler_05" model="res.partner">
+            <field name="name">Shania Putri Halim</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_toddler_06" model="res.partner">
+            <field name="name">Jeremy Evan Kusuma</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_toddler_07" model="res.partner">
+            <field name="name">Aletta Sofie Rumapea</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_toddler_08" model="res.partner">
+            <field name="name">Nathan Hosea Pangaribuan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_toddler_09" model="res.partner">
+            <field name="name">Chika Amara Wibowo</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_toddler_10" model="res.partner">
+            <field name="name">Darren Louis Hartono</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_toddler_11" model="res.partner">
+            <field name="name">Mischa Eleanor Siahaan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_toddler_12" model="res.partner">
+            <field name="name">Alden Matthew Gunawan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_toddler_13" model="res.partner">
+            <field name="name">Quinn Alyssa Setiawan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_toddler_14" model="res.partner">
+            <field name="name">Hugo Benedict Purnomo</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_toddler_15" model="res.partner">
+            <field name="name">Starla Marie Tambunan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_toddler_16" model="res.partner">
+            <field name="name">Ethan Josiah Simbolon</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_toddler_17" model="res.partner">
+            <field name="name">Nadine Claire Sitorus</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_toddler_18" model="res.partner">
+            <field name="name">Lucas Emmanuel Hutasoit</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_toddler_19" model="res.partner">
+            <field name="name">Ariella Rose Nainggolan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_toddler_20" model="res.partner">
+            <field name="name">Zayn Alexander Manurung</field>
+            <field name="city">Jakarta</field>
+        </record>
+
+        <record id="ss_student_toddler_01" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_toddler_01"/>
+            <field name="birth_date">2022-03-14</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_toddler_02" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_toddler_02"/>
+            <field name="birth_date">2022-07-02</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_toddler_03" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_toddler_03"/>
+            <field name="birth_date">2023-01-19</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_toddler_04" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_toddler_04"/>
+            <field name="birth_date">2022-11-08</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_toddler_05" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_toddler_05"/>
+            <field name="birth_date">2023-04-27</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_toddler_06" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_toddler_06"/>
+            <field name="birth_date">2022-05-30</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_toddler_07" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_toddler_07"/>
+            <field name="birth_date">2023-02-11</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_toddler_08" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_toddler_08"/>
+            <field name="birth_date">2022-09-23</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_toddler_09" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_toddler_09"/>
+            <field name="birth_date">2023-06-05</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_toddler_10" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_toddler_10"/>
+            <field name="birth_date">2022-12-17</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_toddler_11" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_toddler_11"/>
+            <field name="birth_date">2023-03-08</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_toddler_12" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_toddler_12"/>
+            <field name="birth_date">2022-08-21</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_toddler_13" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_toddler_13"/>
+            <field name="birth_date">2023-05-16</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_toddler_14" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_toddler_14"/>
+            <field name="birth_date">2022-10-04</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_toddler_15" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_toddler_15"/>
+            <field name="birth_date">2023-07-29</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_toddler_16" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_toddler_16"/>
+            <field name="birth_date">2022-04-12</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_toddler_17" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_toddler_17"/>
+            <field name="birth_date">2023-08-02</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_toddler_18" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_toddler_18"/>
+            <field name="birth_date">2022-06-25</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_toddler_19" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_toddler_19"/>
+            <field name="birth_date">2023-09-13</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_toddler_20" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_toddler_20"/>
+            <field name="birth_date">2022-02-07</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- KINDERGARTEN STUDENTS (20)                    -->
+        <!-- ========================================== -->
+        <record id="ss_student_partner_kindergarten_01" model="res.partner">
+            <field name="name">Aditya Pratama Wijaya</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_kindergarten_02" model="res.partner">
+            <field name="name">Bella Christina Sihombing</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_kindergarten_03" model="res.partner">
+            <field name="name">Calvin Hosea Simatupang</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_kindergarten_04" model="res.partner">
+            <field name="name">Davina Grace Panjaitan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_kindergarten_05" model="res.partner">
+            <field name="name">Elvira Ruth Hutapea</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_kindergarten_06" model="res.partner">
+            <field name="name">Ferdinand Yosua Siregar</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_kindergarten_07" model="res.partner">
+            <field name="name">Gracia Melati Lumbantobing</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_kindergarten_08" model="res.partner">
+            <field name="name">Hosea Immanuel Marpaung</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_kindergarten_09" model="res.partner">
+            <field name="name">Isabel Aurelya Siahaan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_kindergarten_10" model="res.partner">
+            <field name="name">Joshua Nathanael Tambunan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_kindergarten_11" model="res.partner">
+            <field name="name">Kinar Ayu Wulandari</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_kindergarten_12" model="res.partner">
+            <field name="name">Levi Christian Situmorang</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_kindergarten_13" model="res.partner">
+            <field name="name">Michelle Audrey Halim</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_kindergarten_14" model="res.partner">
+            <field name="name">Nicholas Arya Gunawan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_kindergarten_15" model="res.partner">
+            <field name="name">Olivia Grace Santoso</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_kindergarten_16" model="res.partner">
+            <field name="name">Patrick Juan Kusuma</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_kindergarten_17" model="res.partner">
+            <field name="name">Rachel Amanda Sihotang</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_kindergarten_18" model="res.partner">
+            <field name="name">Samuel Rafael Hutagalung</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_kindergarten_19" model="res.partner">
+            <field name="name">Tiffany Joy Wibowo</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_kindergarten_20" model="res.partner">
+            <field name="name">Wilson Theo Nainggolan</field>
+            <field name="city">Jakarta</field>
+        </record>
+
+        <record id="ss_student_kindergarten_01" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_kindergarten_01"/>
+            <field name="birth_date">2020-01-22</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_kindergarten_02" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_kindergarten_02"/>
+            <field name="birth_date">2021-04-09</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_kindergarten_03" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_kindergarten_03"/>
+            <field name="birth_date">2020-08-15</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_kindergarten_04" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_kindergarten_04"/>
+            <field name="birth_date">2021-02-27</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_kindergarten_05" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_kindergarten_05"/>
+            <field name="birth_date">2020-11-03</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_kindergarten_06" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_kindergarten_06"/>
+            <field name="birth_date">2021-06-18</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_kindergarten_07" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_kindergarten_07"/>
+            <field name="birth_date">2020-03-31</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_kindergarten_08" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_kindergarten_08"/>
+            <field name="birth_date">2021-09-06</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_kindergarten_09" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_kindergarten_09"/>
+            <field name="birth_date">2020-07-12</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_kindergarten_10" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_kindergarten_10"/>
+            <field name="birth_date">2021-01-25</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_kindergarten_11" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_kindergarten_11"/>
+            <field name="birth_date">2020-05-08</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_kindergarten_12" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_kindergarten_12"/>
+            <field name="birth_date">2021-03-14</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_kindergarten_13" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_kindergarten_13"/>
+            <field name="birth_date">2020-09-19</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_kindergarten_14" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_kindergarten_14"/>
+            <field name="birth_date">2021-07-23</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_kindergarten_15" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_kindergarten_15"/>
+            <field name="birth_date">2020-12-02</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_kindergarten_16" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_kindergarten_16"/>
+            <field name="birth_date">2021-08-11</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_kindergarten_17" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_kindergarten_17"/>
+            <field name="birth_date">2020-04-26</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_kindergarten_18" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_kindergarten_18"/>
+            <field name="birth_date">2021-05-05</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_kindergarten_19" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_kindergarten_19"/>
+            <field name="birth_date">2020-10-16</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_kindergarten_20" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_kindergarten_20"/>
+            <field name="birth_date">2021-11-21</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- PRIMARY STUDENTS (20)                    -->
+        <!-- ========================================== -->
+        <record id="ss_student_partner_primary_01" model="res.partner">
+            <field name="name">Angelina Putri Siregar</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_primary_02" model="res.partner">
+            <field name="name">Bryan Christopher Simanjuntak</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_primary_03" model="res.partner">
+            <field name="name">Cynthia Grace Hutapea</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_primary_04" model="res.partner">
+            <field name="name">Daniel Arya Sitorus</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_primary_05" model="res.partner">
+            <field name="name">Evelyn Ruth Manurung</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_primary_06" model="res.partner">
+            <field name="name">Fabian Joshua Situmorang</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_primary_07" model="res.partner">
+            <field name="name">Grace Natalia Panjaitan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_primary_08" model="res.partner">
+            <field name="name">Hansen Wijaya Kusuma</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_primary_09" model="res.partner">
+            <field name="name">Irene Melati Sihombing</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_primary_10" model="res.partner">
+            <field name="name">Jonathan Hosea Tambunan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_primary_11" model="res.partner">
+            <field name="name">Kevin Alexander Halim</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_primary_12" model="res.partner">
+            <field name="name">Larissa Ayu Purnomo</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_primary_13" model="res.partner">
+            <field name="name">Matthew Ryan Gunawan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_primary_14" model="res.partner">
+            <field name="name">Natalia Christy Siahaan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_primary_15" model="res.partner">
+            <field name="name">Owen Daniel Santoso</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_primary_16" model="res.partner">
+            <field name="name">Priscilla Joy Marpaung</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_primary_17" model="res.partner">
+            <field name="name">Rizky Aditya Pratama</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_primary_18" model="res.partner">
+            <field name="name">Sarah Grace Lumbantobing</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_primary_19" model="res.partner">
+            <field name="name">Timothy Evan Hutagalung</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_primary_20" model="res.partner">
+            <field name="name">Vanessa Clarissa Setiawan</field>
+            <field name="city">Jakarta</field>
+        </record>
+
+        <record id="ss_student_primary_01" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_primary_01"/>
+            <field name="birth_date">2014-02-18</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_primary_02" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_primary_02"/>
+            <field name="birth_date">2015-06-04</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_primary_03" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_primary_03"/>
+            <field name="birth_date">2016-09-27</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_primary_04" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_primary_04"/>
+            <field name="birth_date">2017-01-13</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_primary_05" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_primary_05"/>
+            <field name="birth_date">2014-07-30</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_primary_06" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_primary_06"/>
+            <field name="birth_date">2018-03-08</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_primary_07" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_primary_07"/>
+            <field name="birth_date">2015-11-15</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_primary_08" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_primary_08"/>
+            <field name="birth_date">2016-05-22</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_primary_09" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_primary_09"/>
+            <field name="birth_date">2019-02-06</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_primary_10" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_primary_10"/>
+            <field name="birth_date">2017-08-19</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_primary_11" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_primary_11"/>
+            <field name="birth_date">2014-10-11</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_primary_12" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_primary_12"/>
+            <field name="birth_date">2018-06-28</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_primary_13" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_primary_13"/>
+            <field name="birth_date">2015-03-25</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_primary_14" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_primary_14"/>
+            <field name="birth_date">2019-04-17</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_primary_15" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_primary_15"/>
+            <field name="birth_date">2016-12-09</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_primary_16" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_primary_16"/>
+            <field name="birth_date">2017-05-31</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_primary_17" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_primary_17"/>
+            <field name="birth_date">2014-09-14</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_primary_18" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_primary_18"/>
+            <field name="birth_date">2018-11-07</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_primary_19" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_primary_19"/>
+            <field name="birth_date">2015-07-21</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_primary_20" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_primary_20"/>
+            <field name="birth_date">2019-08-23</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- TEEN STUDENTS (20)                    -->
+        <!-- ========================================== -->
+        <record id="ss_student_partner_teen_01" model="res.partner">
+            <field name="name">Aaron Nathaniel Sihotang</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_teen_02" model="res.partner">
+            <field name="name">Bianca Grace Simatupang</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_teen_03" model="res.partner">
+            <field name="name">Caleb Hosea Siregar</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_teen_04" model="res.partner">
+            <field name="name">Deborah Ruth Hutapea</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_teen_05" model="res.partner">
+            <field name="name">Elia Samuel Panjaitan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_teen_06" model="res.partner">
+            <field name="name">Faith Angelica Manurung</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_teen_07" model="res.partner">
+            <field name="name">Gideon Arya Sitorus</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_teen_08" model="res.partner">
+            <field name="name">Hannah Joy Tambunan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_teen_09" model="res.partner">
+            <field name="name">Ivan Christopher Sihombing</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_teen_10" model="res.partner">
+            <field name="name">Jessica Amelia Wijaya</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_teen_11" model="res.partner">
+            <field name="name">Kristian Hosea Situmorang</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_teen_12" model="res.partner">
+            <field name="name">Laura Christina Halim</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_teen_13" model="res.partner">
+            <field name="name">Michael Ryan Gunawan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_teen_14" model="res.partner">
+            <field name="name">Naomi Grace Marpaung</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_teen_15" model="res.partner">
+            <field name="name">Obed Immanuel Nainggolan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_teen_16" model="res.partner">
+            <field name="name">Priska Natalia Siahaan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_teen_17" model="res.partner">
+            <field name="name">Raka Dwi Purnomo</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_teen_18" model="res.partner">
+            <field name="name">Sonia Grace Lumbantobing</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_teen_19" model="res.partner">
+            <field name="name">Tobias Evan Hutagalung</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_teen_20" model="res.partner">
+            <field name="name">Vania Christy Santoso</field>
+            <field name="city">Jakarta</field>
+        </record>
+
+        <record id="ss_student_teen_01" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_teen_01"/>
+            <field name="birth_date">2011-01-09</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_teen_02" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_teen_02"/>
+            <field name="birth_date">2012-05-14</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_teen_03" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_teen_03"/>
+            <field name="birth_date">2013-08-26</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_teen_04" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_teen_04"/>
+            <field name="birth_date">2011-03-30</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_teen_05" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_teen_05"/>
+            <field name="birth_date">2012-10-07</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_teen_06" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_teen_06"/>
+            <field name="birth_date">2013-02-19</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_teen_07" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_teen_07"/>
+            <field name="birth_date">2011-06-12</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_teen_08" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_teen_08"/>
+            <field name="birth_date">2012-12-04</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_teen_09" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_teen_09"/>
+            <field name="birth_date">2013-04-22</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_teen_10" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_teen_10"/>
+            <field name="birth_date">2011-09-16</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_teen_11" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_teen_11"/>
+            <field name="birth_date">2012-07-28</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_teen_12" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_teen_12"/>
+            <field name="birth_date">2013-11-11</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_teen_13" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_teen_13"/>
+            <field name="birth_date">2011-04-03</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_teen_14" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_teen_14"/>
+            <field name="birth_date">2012-02-25</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_teen_15" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_teen_15"/>
+            <field name="birth_date">2013-06-17</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_teen_16" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_teen_16"/>
+            <field name="birth_date">2011-11-29</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_teen_17" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_teen_17"/>
+            <field name="birth_date">2012-08-13</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_teen_18" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_teen_18"/>
+            <field name="birth_date">2013-01-05</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_teen_19" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_teen_19"/>
+            <field name="birth_date">2011-07-24</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_teen_20" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_teen_20"/>
+            <field name="birth_date">2012-04-10</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- YOUTH STUDENTS (20)                    -->
+        <!-- ========================================== -->
+        <record id="ss_student_partner_youth_01" model="res.partner">
+            <field name="name">Andreas Hosea Simanjuntak</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_youth_02" model="res.partner">
+            <field name="name">Bernadeth Grace Sihombing</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_youth_03" model="res.partner">
+            <field name="name">Christian Arya Siregar</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_youth_04" model="res.partner">
+            <field name="name">Dian Ruth Hutapea</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_youth_05" model="res.partner">
+            <field name="name">Efraim Samuel Tambunan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_youth_06" model="res.partner">
+            <field name="name">Felicia Grace Manurung</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_youth_07" model="res.partner">
+            <field name="name">Gabriel Hosea Sitorus</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_youth_08" model="res.partner">
+            <field name="name">Helena Joy Panjaitan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_youth_09" model="res.partner">
+            <field name="name">Immanuel Ryan Sihotang</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_youth_10" model="res.partner">
+            <field name="name">Joanna Melati Wijaya</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_youth_11" model="res.partner">
+            <field name="name">Krisna Aditya Kusuma</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_youth_12" model="res.partner">
+            <field name="name">Lidya Christina Halim</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_youth_13" model="res.partner">
+            <field name="name">Marcelino Juan Gunawan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_youth_14" model="res.partner">
+            <field name="name">Natalia Grace Santoso</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_youth_15" model="res.partner">
+            <field name="name">Oscar Daniel Setiawan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_youth_16" model="res.partner">
+            <field name="name">Patricia Joy Marpaung</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_youth_17" model="res.partner">
+            <field name="name">Rio Fernando Nainggolan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_youth_18" model="res.partner">
+            <field name="name">Sarah Christy Siahaan</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_youth_19" model="res.partner">
+            <field name="name">Teofilus Evan Situmorang</field>
+            <field name="city">Jakarta</field>
+        </record>
+        <record id="ss_student_partner_youth_20" model="res.partner">
+            <field name="name">Viona Grace Hutagalung</field>
+            <field name="city">Jakarta</field>
+        </record>
+
+        <record id="ss_student_youth_01" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_youth_01"/>
+            <field name="birth_date">2008-02-11</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_youth_02" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_youth_02"/>
+            <field name="birth_date">2009-06-23</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_youth_03" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_youth_03"/>
+            <field name="birth_date">2010-09-05</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_youth_04" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_youth_04"/>
+            <field name="birth_date">2008-05-19</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_youth_05" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_youth_05"/>
+            <field name="birth_date">2009-11-02</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_youth_06" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_youth_06"/>
+            <field name="birth_date">2010-03-16</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_youth_07" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_youth_07"/>
+            <field name="birth_date">2008-08-27</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_youth_08" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_youth_08"/>
+            <field name="birth_date">2009-01-14</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_youth_09" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_youth_09"/>
+            <field name="birth_date">2010-07-08</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_youth_10" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_youth_10"/>
+            <field name="birth_date">2008-11-21</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_youth_11" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_youth_11"/>
+            <field name="birth_date">2009-04-06</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_youth_12" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_youth_12"/>
+            <field name="birth_date">2010-12-18</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_youth_13" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_youth_13"/>
+            <field name="birth_date">2008-06-30</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_youth_14" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_youth_14"/>
+            <field name="birth_date">2009-09-12</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_youth_15" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_youth_15"/>
+            <field name="birth_date">2010-02-24</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_youth_16" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_youth_16"/>
+            <field name="birth_date">2008-12-09</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_youth_17" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_youth_17"/>
+            <field name="birth_date">2009-07-15</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_youth_18" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_youth_18"/>
+            <field name="birth_date">2010-05-28</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_youth_19" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_youth_19"/>
+            <field name="birth_date">2008-04-17</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+        <record id="ss_student_youth_20" model="church.sunday.school.student">
+            <field name="partner_id" ref="ss_student_partner_youth_20"/>
+            <field name="birth_date">2009-10-30</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="status_id" ref="sunday_school_student_status_active"/>
+            <field name="enrollment_date">2026-07-05</field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- SESSIONS & ATTENDANCE                      -->
+        <!-- ========================================== -->
+        <record id="ss_session_toddler_1" model="church.sunday.school.session">
+            <field name="name">Tuhan Menciptakan Langit dan Bumi</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="teacher_id" ref="ss_teacher_yohanes_sitorus"/>
+            <field name="start_datetime">2026-10-11 07:30:00</field>
+            <field name="end_datetime">2026-10-11 09:00:00</field>
+            <field name="status_id" ref="sunday_school_session_status_done"/>
+        </record>
+        <record id="ss_session_toddler_2" model="church.sunday.school.session">
+            <field name="name">Nuh dan Bahtera Besar</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="teacher_id" ref="ss_teacher_yohanes_sitorus"/>
+            <field name="start_datetime">2026-10-18 07:30:00</field>
+            <field name="end_datetime">2026-10-18 09:00:00</field>
+            <field name="status_id" ref="sunday_school_session_status_done"/>
+        </record>
+        <record id="ss_session_toddler_3" model="church.sunday.school.session">
+            <field name="name">Doa Bapa Kami</field>
+            <field name="class_id" ref="ss_class_toddler"/>
+            <field name="teacher_id" ref="ss_teacher_yohanes_sitorus"/>
+            <field name="start_datetime">2026-10-25 07:30:00</field>
+            <field name="end_datetime">2026-10-25 09:00:00</field>
+            <field name="status_id" ref="sunday_school_session_status_planned"/>
+        </record>
+
+        <record id="ss_att_toddler_s1_01" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_1"/>
+            <field name="student_id" ref="ss_student_toddler_01"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_toddler_s1_02" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_1"/>
+            <field name="student_id" ref="ss_student_toddler_02"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_toddler_s1_03" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_1"/>
+            <field name="student_id" ref="ss_student_toddler_03"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_toddler_s1_04" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_1"/>
+            <field name="student_id" ref="ss_student_toddler_04"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_toddler_s1_05" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_1"/>
+            <field name="student_id" ref="ss_student_toddler_05"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_toddler_s1_06" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_1"/>
+            <field name="student_id" ref="ss_student_toddler_06"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_toddler_s1_07" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_1"/>
+            <field name="student_id" ref="ss_student_toddler_07"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_toddler_s1_08" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_1"/>
+            <field name="student_id" ref="ss_student_toddler_08"/>
+            <field name="status_id" ref="sunday_school_attendance_status_absent"/>
+        </record>
+        <record id="ss_att_toddler_s1_09" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_1"/>
+            <field name="student_id" ref="ss_student_toddler_09"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_toddler_s1_10" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_1"/>
+            <field name="student_id" ref="ss_student_toddler_10"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_toddler_s1_11" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_1"/>
+            <field name="student_id" ref="ss_student_toddler_11"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_toddler_s1_12" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_1"/>
+            <field name="student_id" ref="ss_student_toddler_12"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_toddler_s1_13" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_1"/>
+            <field name="student_id" ref="ss_student_toddler_13"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_toddler_s1_14" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_1"/>
+            <field name="student_id" ref="ss_student_toddler_14"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_toddler_s1_15" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_1"/>
+            <field name="student_id" ref="ss_student_toddler_15"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_toddler_s1_16" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_1"/>
+            <field name="student_id" ref="ss_student_toddler_16"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_toddler_s1_17" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_1"/>
+            <field name="student_id" ref="ss_student_toddler_17"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_toddler_s1_18" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_1"/>
+            <field name="student_id" ref="ss_student_toddler_18"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_toddler_s1_19" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_1"/>
+            <field name="student_id" ref="ss_student_toddler_19"/>
+            <field name="status_id" ref="sunday_school_attendance_status_absent"/>
+        </record>
+        <record id="ss_att_toddler_s1_20" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_1"/>
+            <field name="student_id" ref="ss_student_toddler_20"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_toddler_s2_01" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_2"/>
+            <field name="student_id" ref="ss_student_toddler_01"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_toddler_s2_02" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_2"/>
+            <field name="student_id" ref="ss_student_toddler_02"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_toddler_s2_03" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_2"/>
+            <field name="student_id" ref="ss_student_toddler_03"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_toddler_s2_04" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_2"/>
+            <field name="student_id" ref="ss_student_toddler_04"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_toddler_s2_05" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_2"/>
+            <field name="student_id" ref="ss_student_toddler_05"/>
+            <field name="status_id" ref="sunday_school_attendance_status_absent"/>
+        </record>
+        <record id="ss_att_toddler_s2_06" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_2"/>
+            <field name="student_id" ref="ss_student_toddler_06"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_toddler_s2_07" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_2"/>
+            <field name="student_id" ref="ss_student_toddler_07"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_toddler_s2_08" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_2"/>
+            <field name="student_id" ref="ss_student_toddler_08"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_toddler_s2_09" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_2"/>
+            <field name="student_id" ref="ss_student_toddler_09"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_toddler_s2_10" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_2"/>
+            <field name="student_id" ref="ss_student_toddler_10"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_toddler_s2_11" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_2"/>
+            <field name="student_id" ref="ss_student_toddler_11"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_toddler_s2_12" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_2"/>
+            <field name="student_id" ref="ss_student_toddler_12"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_toddler_s2_13" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_2"/>
+            <field name="student_id" ref="ss_student_toddler_13"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_toddler_s2_14" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_2"/>
+            <field name="student_id" ref="ss_student_toddler_14"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_toddler_s2_15" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_2"/>
+            <field name="student_id" ref="ss_student_toddler_15"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_toddler_s2_16" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_2"/>
+            <field name="student_id" ref="ss_student_toddler_16"/>
+            <field name="status_id" ref="sunday_school_attendance_status_absent"/>
+        </record>
+        <record id="ss_att_toddler_s2_17" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_2"/>
+            <field name="student_id" ref="ss_student_toddler_17"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_toddler_s2_18" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_2"/>
+            <field name="student_id" ref="ss_student_toddler_18"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_toddler_s2_19" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_2"/>
+            <field name="student_id" ref="ss_student_toddler_19"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_toddler_s2_20" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_toddler_2"/>
+            <field name="student_id" ref="ss_student_toddler_20"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+
+        <record id="ss_session_kindergarten_1" model="church.sunday.school.session">
+            <field name="name">Adam dan Hawa di Taman Eden</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="teacher_id" ref="ss_teacher_andreas_nainggolan"/>
+            <field name="start_datetime">2026-10-11 07:30:00</field>
+            <field name="end_datetime">2026-10-11 09:00:00</field>
+            <field name="status_id" ref="sunday_school_session_status_done"/>
+        </record>
+        <record id="ss_session_kindergarten_2" model="church.sunday.school.session">
+            <field name="name">Daud dan Goliat</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="teacher_id" ref="ss_teacher_andreas_nainggolan"/>
+            <field name="start_datetime">2026-10-18 07:30:00</field>
+            <field name="end_datetime">2026-10-18 09:00:00</field>
+            <field name="status_id" ref="sunday_school_session_status_done"/>
+        </record>
+        <record id="ss_session_kindergarten_3" model="church.sunday.school.session">
+            <field name="name">Yesus Sahabat Anak</field>
+            <field name="class_id" ref="ss_class_kindergarten"/>
+            <field name="teacher_id" ref="ss_teacher_andreas_nainggolan"/>
+            <field name="start_datetime">2026-10-25 07:30:00</field>
+            <field name="end_datetime">2026-10-25 09:00:00</field>
+            <field name="status_id" ref="sunday_school_session_status_planned"/>
+        </record>
+
+        <record id="ss_att_kindergarten_s1_01" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_1"/>
+            <field name="student_id" ref="ss_student_kindergarten_01"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_kindergarten_s1_02" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_1"/>
+            <field name="student_id" ref="ss_student_kindergarten_02"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_kindergarten_s1_03" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_1"/>
+            <field name="student_id" ref="ss_student_kindergarten_03"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_kindergarten_s1_04" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_1"/>
+            <field name="student_id" ref="ss_student_kindergarten_04"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_kindergarten_s1_05" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_1"/>
+            <field name="student_id" ref="ss_student_kindergarten_05"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_kindergarten_s1_06" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_1"/>
+            <field name="student_id" ref="ss_student_kindergarten_06"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_kindergarten_s1_07" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_1"/>
+            <field name="student_id" ref="ss_student_kindergarten_07"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_kindergarten_s1_08" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_1"/>
+            <field name="student_id" ref="ss_student_kindergarten_08"/>
+            <field name="status_id" ref="sunday_school_attendance_status_absent"/>
+        </record>
+        <record id="ss_att_kindergarten_s1_09" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_1"/>
+            <field name="student_id" ref="ss_student_kindergarten_09"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_kindergarten_s1_10" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_1"/>
+            <field name="student_id" ref="ss_student_kindergarten_10"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_kindergarten_s1_11" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_1"/>
+            <field name="student_id" ref="ss_student_kindergarten_11"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_kindergarten_s1_12" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_1"/>
+            <field name="student_id" ref="ss_student_kindergarten_12"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_kindergarten_s1_13" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_1"/>
+            <field name="student_id" ref="ss_student_kindergarten_13"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_kindergarten_s1_14" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_1"/>
+            <field name="student_id" ref="ss_student_kindergarten_14"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_kindergarten_s1_15" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_1"/>
+            <field name="student_id" ref="ss_student_kindergarten_15"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_kindergarten_s1_16" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_1"/>
+            <field name="student_id" ref="ss_student_kindergarten_16"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_kindergarten_s1_17" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_1"/>
+            <field name="student_id" ref="ss_student_kindergarten_17"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_kindergarten_s1_18" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_1"/>
+            <field name="student_id" ref="ss_student_kindergarten_18"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_kindergarten_s1_19" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_1"/>
+            <field name="student_id" ref="ss_student_kindergarten_19"/>
+            <field name="status_id" ref="sunday_school_attendance_status_absent"/>
+        </record>
+        <record id="ss_att_kindergarten_s1_20" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_1"/>
+            <field name="student_id" ref="ss_student_kindergarten_20"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_kindergarten_s2_01" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_2"/>
+            <field name="student_id" ref="ss_student_kindergarten_01"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_kindergarten_s2_02" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_2"/>
+            <field name="student_id" ref="ss_student_kindergarten_02"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_kindergarten_s2_03" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_2"/>
+            <field name="student_id" ref="ss_student_kindergarten_03"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_kindergarten_s2_04" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_2"/>
+            <field name="student_id" ref="ss_student_kindergarten_04"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_kindergarten_s2_05" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_2"/>
+            <field name="student_id" ref="ss_student_kindergarten_05"/>
+            <field name="status_id" ref="sunday_school_attendance_status_absent"/>
+        </record>
+        <record id="ss_att_kindergarten_s2_06" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_2"/>
+            <field name="student_id" ref="ss_student_kindergarten_06"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_kindergarten_s2_07" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_2"/>
+            <field name="student_id" ref="ss_student_kindergarten_07"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_kindergarten_s2_08" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_2"/>
+            <field name="student_id" ref="ss_student_kindergarten_08"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_kindergarten_s2_09" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_2"/>
+            <field name="student_id" ref="ss_student_kindergarten_09"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_kindergarten_s2_10" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_2"/>
+            <field name="student_id" ref="ss_student_kindergarten_10"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_kindergarten_s2_11" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_2"/>
+            <field name="student_id" ref="ss_student_kindergarten_11"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_kindergarten_s2_12" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_2"/>
+            <field name="student_id" ref="ss_student_kindergarten_12"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_kindergarten_s2_13" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_2"/>
+            <field name="student_id" ref="ss_student_kindergarten_13"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_kindergarten_s2_14" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_2"/>
+            <field name="student_id" ref="ss_student_kindergarten_14"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_kindergarten_s2_15" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_2"/>
+            <field name="student_id" ref="ss_student_kindergarten_15"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_kindergarten_s2_16" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_2"/>
+            <field name="student_id" ref="ss_student_kindergarten_16"/>
+            <field name="status_id" ref="sunday_school_attendance_status_absent"/>
+        </record>
+        <record id="ss_att_kindergarten_s2_17" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_2"/>
+            <field name="student_id" ref="ss_student_kindergarten_17"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_kindergarten_s2_18" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_2"/>
+            <field name="student_id" ref="ss_student_kindergarten_18"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_kindergarten_s2_19" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_2"/>
+            <field name="student_id" ref="ss_student_kindergarten_19"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_kindergarten_s2_20" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_kindergarten_2"/>
+            <field name="student_id" ref="ss_student_kindergarten_20"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+
+        <record id="ss_session_primary_1" model="church.sunday.school.session">
+            <field name="name">Yusuf di Mesir</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="teacher_id" ref="ss_teacher_paulus_manurung"/>
+            <field name="start_datetime">2026-10-11 07:30:00</field>
+            <field name="end_datetime">2026-10-11 09:00:00</field>
+            <field name="status_id" ref="sunday_school_session_status_done"/>
+        </record>
+        <record id="ss_session_primary_2" model="church.sunday.school.session">
+            <field name="name">Musa Membelah Laut Merah</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="teacher_id" ref="ss_teacher_paulus_manurung"/>
+            <field name="start_datetime">2026-10-18 07:30:00</field>
+            <field name="end_datetime">2026-10-18 09:00:00</field>
+            <field name="status_id" ref="sunday_school_session_status_done"/>
+        </record>
+        <record id="ss_session_primary_3" model="church.sunday.school.session">
+            <field name="name">Perumpamaan Anak yang Hilang</field>
+            <field name="class_id" ref="ss_class_primary"/>
+            <field name="teacher_id" ref="ss_teacher_paulus_manurung"/>
+            <field name="start_datetime">2026-10-25 07:30:00</field>
+            <field name="end_datetime">2026-10-25 09:00:00</field>
+            <field name="status_id" ref="sunday_school_session_status_planned"/>
+        </record>
+
+        <record id="ss_att_primary_s1_01" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_1"/>
+            <field name="student_id" ref="ss_student_primary_01"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_primary_s1_02" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_1"/>
+            <field name="student_id" ref="ss_student_primary_02"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_primary_s1_03" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_1"/>
+            <field name="student_id" ref="ss_student_primary_03"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_primary_s1_04" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_1"/>
+            <field name="student_id" ref="ss_student_primary_04"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_primary_s1_05" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_1"/>
+            <field name="student_id" ref="ss_student_primary_05"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_primary_s1_06" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_1"/>
+            <field name="student_id" ref="ss_student_primary_06"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_primary_s1_07" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_1"/>
+            <field name="student_id" ref="ss_student_primary_07"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_primary_s1_08" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_1"/>
+            <field name="student_id" ref="ss_student_primary_08"/>
+            <field name="status_id" ref="sunday_school_attendance_status_absent"/>
+        </record>
+        <record id="ss_att_primary_s1_09" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_1"/>
+            <field name="student_id" ref="ss_student_primary_09"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_primary_s1_10" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_1"/>
+            <field name="student_id" ref="ss_student_primary_10"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_primary_s1_11" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_1"/>
+            <field name="student_id" ref="ss_student_primary_11"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_primary_s1_12" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_1"/>
+            <field name="student_id" ref="ss_student_primary_12"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_primary_s1_13" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_1"/>
+            <field name="student_id" ref="ss_student_primary_13"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_primary_s1_14" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_1"/>
+            <field name="student_id" ref="ss_student_primary_14"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_primary_s1_15" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_1"/>
+            <field name="student_id" ref="ss_student_primary_15"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_primary_s1_16" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_1"/>
+            <field name="student_id" ref="ss_student_primary_16"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_primary_s1_17" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_1"/>
+            <field name="student_id" ref="ss_student_primary_17"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_primary_s1_18" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_1"/>
+            <field name="student_id" ref="ss_student_primary_18"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_primary_s1_19" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_1"/>
+            <field name="student_id" ref="ss_student_primary_19"/>
+            <field name="status_id" ref="sunday_school_attendance_status_absent"/>
+        </record>
+        <record id="ss_att_primary_s1_20" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_1"/>
+            <field name="student_id" ref="ss_student_primary_20"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_primary_s2_01" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_2"/>
+            <field name="student_id" ref="ss_student_primary_01"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_primary_s2_02" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_2"/>
+            <field name="student_id" ref="ss_student_primary_02"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_primary_s2_03" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_2"/>
+            <field name="student_id" ref="ss_student_primary_03"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_primary_s2_04" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_2"/>
+            <field name="student_id" ref="ss_student_primary_04"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_primary_s2_05" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_2"/>
+            <field name="student_id" ref="ss_student_primary_05"/>
+            <field name="status_id" ref="sunday_school_attendance_status_absent"/>
+        </record>
+        <record id="ss_att_primary_s2_06" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_2"/>
+            <field name="student_id" ref="ss_student_primary_06"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_primary_s2_07" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_2"/>
+            <field name="student_id" ref="ss_student_primary_07"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_primary_s2_08" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_2"/>
+            <field name="student_id" ref="ss_student_primary_08"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_primary_s2_09" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_2"/>
+            <field name="student_id" ref="ss_student_primary_09"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_primary_s2_10" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_2"/>
+            <field name="student_id" ref="ss_student_primary_10"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_primary_s2_11" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_2"/>
+            <field name="student_id" ref="ss_student_primary_11"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_primary_s2_12" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_2"/>
+            <field name="student_id" ref="ss_student_primary_12"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_primary_s2_13" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_2"/>
+            <field name="student_id" ref="ss_student_primary_13"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_primary_s2_14" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_2"/>
+            <field name="student_id" ref="ss_student_primary_14"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_primary_s2_15" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_2"/>
+            <field name="student_id" ref="ss_student_primary_15"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_primary_s2_16" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_2"/>
+            <field name="student_id" ref="ss_student_primary_16"/>
+            <field name="status_id" ref="sunday_school_attendance_status_absent"/>
+        </record>
+        <record id="ss_att_primary_s2_17" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_2"/>
+            <field name="student_id" ref="ss_student_primary_17"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_primary_s2_18" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_2"/>
+            <field name="student_id" ref="ss_student_primary_18"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_primary_s2_19" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_2"/>
+            <field name="student_id" ref="ss_student_primary_19"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_primary_s2_20" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_primary_2"/>
+            <field name="student_id" ref="ss_student_primary_20"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+
+        <record id="ss_session_teen_1" model="church.sunday.school.session">
+            <field name="name">Daniel di Gua Singa</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="teacher_id" ref="ss_teacher_fransiskus_sihombing"/>
+            <field name="start_datetime">2026-10-11 09:30:00</field>
+            <field name="end_datetime">2026-10-11 11:00:00</field>
+            <field name="status_id" ref="sunday_school_session_status_done"/>
+        </record>
+        <record id="ss_session_teen_2" model="church.sunday.school.session">
+            <field name="name">Kasih Allah dalam Roma 8</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="teacher_id" ref="ss_teacher_fransiskus_sihombing"/>
+            <field name="start_datetime">2026-10-18 09:30:00</field>
+            <field name="end_datetime">2026-10-18 11:00:00</field>
+            <field name="status_id" ref="sunday_school_session_status_done"/>
+        </record>
+        <record id="ss_session_teen_3" model="church.sunday.school.session">
+            <field name="name">Hidup Baru dalam Kristus</field>
+            <field name="class_id" ref="ss_class_teen"/>
+            <field name="teacher_id" ref="ss_teacher_fransiskus_sihombing"/>
+            <field name="start_datetime">2026-10-25 09:30:00</field>
+            <field name="end_datetime">2026-10-25 11:00:00</field>
+            <field name="status_id" ref="sunday_school_session_status_planned"/>
+        </record>
+
+        <record id="ss_att_teen_s1_01" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_1"/>
+            <field name="student_id" ref="ss_student_teen_01"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_teen_s1_02" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_1"/>
+            <field name="student_id" ref="ss_student_teen_02"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_teen_s1_03" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_1"/>
+            <field name="student_id" ref="ss_student_teen_03"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_teen_s1_04" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_1"/>
+            <field name="student_id" ref="ss_student_teen_04"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_teen_s1_05" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_1"/>
+            <field name="student_id" ref="ss_student_teen_05"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_teen_s1_06" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_1"/>
+            <field name="student_id" ref="ss_student_teen_06"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_teen_s1_07" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_1"/>
+            <field name="student_id" ref="ss_student_teen_07"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_teen_s1_08" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_1"/>
+            <field name="student_id" ref="ss_student_teen_08"/>
+            <field name="status_id" ref="sunday_school_attendance_status_absent"/>
+        </record>
+        <record id="ss_att_teen_s1_09" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_1"/>
+            <field name="student_id" ref="ss_student_teen_09"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_teen_s1_10" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_1"/>
+            <field name="student_id" ref="ss_student_teen_10"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_teen_s1_11" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_1"/>
+            <field name="student_id" ref="ss_student_teen_11"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_teen_s1_12" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_1"/>
+            <field name="student_id" ref="ss_student_teen_12"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_teen_s1_13" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_1"/>
+            <field name="student_id" ref="ss_student_teen_13"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_teen_s1_14" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_1"/>
+            <field name="student_id" ref="ss_student_teen_14"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_teen_s1_15" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_1"/>
+            <field name="student_id" ref="ss_student_teen_15"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_teen_s1_16" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_1"/>
+            <field name="student_id" ref="ss_student_teen_16"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_teen_s1_17" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_1"/>
+            <field name="student_id" ref="ss_student_teen_17"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_teen_s1_18" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_1"/>
+            <field name="student_id" ref="ss_student_teen_18"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_teen_s1_19" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_1"/>
+            <field name="student_id" ref="ss_student_teen_19"/>
+            <field name="status_id" ref="sunday_school_attendance_status_absent"/>
+        </record>
+        <record id="ss_att_teen_s1_20" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_1"/>
+            <field name="student_id" ref="ss_student_teen_20"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_teen_s2_01" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_2"/>
+            <field name="student_id" ref="ss_student_teen_01"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_teen_s2_02" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_2"/>
+            <field name="student_id" ref="ss_student_teen_02"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_teen_s2_03" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_2"/>
+            <field name="student_id" ref="ss_student_teen_03"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_teen_s2_04" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_2"/>
+            <field name="student_id" ref="ss_student_teen_04"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_teen_s2_05" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_2"/>
+            <field name="student_id" ref="ss_student_teen_05"/>
+            <field name="status_id" ref="sunday_school_attendance_status_absent"/>
+        </record>
+        <record id="ss_att_teen_s2_06" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_2"/>
+            <field name="student_id" ref="ss_student_teen_06"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_teen_s2_07" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_2"/>
+            <field name="student_id" ref="ss_student_teen_07"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_teen_s2_08" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_2"/>
+            <field name="student_id" ref="ss_student_teen_08"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_teen_s2_09" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_2"/>
+            <field name="student_id" ref="ss_student_teen_09"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_teen_s2_10" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_2"/>
+            <field name="student_id" ref="ss_student_teen_10"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_teen_s2_11" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_2"/>
+            <field name="student_id" ref="ss_student_teen_11"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_teen_s2_12" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_2"/>
+            <field name="student_id" ref="ss_student_teen_12"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_teen_s2_13" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_2"/>
+            <field name="student_id" ref="ss_student_teen_13"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_teen_s2_14" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_2"/>
+            <field name="student_id" ref="ss_student_teen_14"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_teen_s2_15" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_2"/>
+            <field name="student_id" ref="ss_student_teen_15"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_teen_s2_16" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_2"/>
+            <field name="student_id" ref="ss_student_teen_16"/>
+            <field name="status_id" ref="sunday_school_attendance_status_absent"/>
+        </record>
+        <record id="ss_att_teen_s2_17" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_2"/>
+            <field name="student_id" ref="ss_student_teen_17"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_teen_s2_18" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_2"/>
+            <field name="student_id" ref="ss_student_teen_18"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_teen_s2_19" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_2"/>
+            <field name="student_id" ref="ss_student_teen_19"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_teen_s2_20" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_teen_2"/>
+            <field name="student_id" ref="ss_student_teen_20"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+
+        <record id="ss_session_youth_1" model="church.sunday.school.session">
+            <field name="name">Panggilan Yusuf</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="teacher_id" ref="ss_teacher_samuel_tambunan"/>
+            <field name="start_datetime">2026-10-11 09:30:00</field>
+            <field name="end_datetime">2026-10-11 11:00:00</field>
+            <field name="status_id" ref="sunday_school_session_status_done"/>
+        </record>
+        <record id="ss_session_youth_2" model="church.sunday.school.session">
+            <field name="name">Berjalan dengan Roh Kudus</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="teacher_id" ref="ss_teacher_samuel_tambunan"/>
+            <field name="start_datetime">2026-10-18 09:30:00</field>
+            <field name="end_datetime">2026-10-18 11:00:00</field>
+            <field name="status_id" ref="sunday_school_session_status_done"/>
+        </record>
+        <record id="ss_session_youth_3" model="church.sunday.school.session">
+            <field name="name">Menjadi Garam dan Terang Dunia</field>
+            <field name="class_id" ref="ss_class_youth"/>
+            <field name="teacher_id" ref="ss_teacher_samuel_tambunan"/>
+            <field name="start_datetime">2026-10-25 09:30:00</field>
+            <field name="end_datetime">2026-10-25 11:00:00</field>
+            <field name="status_id" ref="sunday_school_session_status_planned"/>
+        </record>
+
+        <record id="ss_att_youth_s1_01" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_1"/>
+            <field name="student_id" ref="ss_student_youth_01"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_youth_s1_02" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_1"/>
+            <field name="student_id" ref="ss_student_youth_02"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_youth_s1_03" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_1"/>
+            <field name="student_id" ref="ss_student_youth_03"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_youth_s1_04" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_1"/>
+            <field name="student_id" ref="ss_student_youth_04"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_youth_s1_05" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_1"/>
+            <field name="student_id" ref="ss_student_youth_05"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_youth_s1_06" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_1"/>
+            <field name="student_id" ref="ss_student_youth_06"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_youth_s1_07" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_1"/>
+            <field name="student_id" ref="ss_student_youth_07"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_youth_s1_08" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_1"/>
+            <field name="student_id" ref="ss_student_youth_08"/>
+            <field name="status_id" ref="sunday_school_attendance_status_absent"/>
+        </record>
+        <record id="ss_att_youth_s1_09" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_1"/>
+            <field name="student_id" ref="ss_student_youth_09"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_youth_s1_10" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_1"/>
+            <field name="student_id" ref="ss_student_youth_10"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_youth_s1_11" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_1"/>
+            <field name="student_id" ref="ss_student_youth_11"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_youth_s1_12" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_1"/>
+            <field name="student_id" ref="ss_student_youth_12"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_youth_s1_13" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_1"/>
+            <field name="student_id" ref="ss_student_youth_13"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_youth_s1_14" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_1"/>
+            <field name="student_id" ref="ss_student_youth_14"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_youth_s1_15" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_1"/>
+            <field name="student_id" ref="ss_student_youth_15"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_youth_s1_16" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_1"/>
+            <field name="student_id" ref="ss_student_youth_16"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_youth_s1_17" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_1"/>
+            <field name="student_id" ref="ss_student_youth_17"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_youth_s1_18" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_1"/>
+            <field name="student_id" ref="ss_student_youth_18"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_youth_s1_19" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_1"/>
+            <field name="student_id" ref="ss_student_youth_19"/>
+            <field name="status_id" ref="sunday_school_attendance_status_absent"/>
+        </record>
+        <record id="ss_att_youth_s1_20" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_1"/>
+            <field name="student_id" ref="ss_student_youth_20"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_youth_s2_01" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_2"/>
+            <field name="student_id" ref="ss_student_youth_01"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_youth_s2_02" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_2"/>
+            <field name="student_id" ref="ss_student_youth_02"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_youth_s2_03" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_2"/>
+            <field name="student_id" ref="ss_student_youth_03"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_youth_s2_04" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_2"/>
+            <field name="student_id" ref="ss_student_youth_04"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_youth_s2_05" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_2"/>
+            <field name="student_id" ref="ss_student_youth_05"/>
+            <field name="status_id" ref="sunday_school_attendance_status_absent"/>
+        </record>
+        <record id="ss_att_youth_s2_06" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_2"/>
+            <field name="student_id" ref="ss_student_youth_06"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_youth_s2_07" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_2"/>
+            <field name="student_id" ref="ss_student_youth_07"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_youth_s2_08" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_2"/>
+            <field name="student_id" ref="ss_student_youth_08"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_youth_s2_09" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_2"/>
+            <field name="student_id" ref="ss_student_youth_09"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_youth_s2_10" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_2"/>
+            <field name="student_id" ref="ss_student_youth_10"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_youth_s2_11" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_2"/>
+            <field name="student_id" ref="ss_student_youth_11"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_youth_s2_12" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_2"/>
+            <field name="student_id" ref="ss_student_youth_12"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_youth_s2_13" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_2"/>
+            <field name="student_id" ref="ss_student_youth_13"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_youth_s2_14" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_2"/>
+            <field name="student_id" ref="ss_student_youth_14"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_youth_s2_15" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_2"/>
+            <field name="student_id" ref="ss_student_youth_15"/>
+            <field name="status_id" ref="sunday_school_attendance_status_sick"/>
+        </record>
+        <record id="ss_att_youth_s2_16" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_2"/>
+            <field name="student_id" ref="ss_student_youth_16"/>
+            <field name="status_id" ref="sunday_school_attendance_status_absent"/>
+        </record>
+        <record id="ss_att_youth_s2_17" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_2"/>
+            <field name="student_id" ref="ss_student_youth_17"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+        <record id="ss_att_youth_s2_18" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_2"/>
+            <field name="student_id" ref="ss_student_youth_18"/>
+            <field name="status_id" ref="sunday_school_attendance_status_late"/>
+        </record>
+        <record id="ss_att_youth_s2_19" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_2"/>
+            <field name="student_id" ref="ss_student_youth_19"/>
+            <field name="status_id" ref="sunday_school_attendance_status_permission"/>
+        </record>
+        <record id="ss_att_youth_s2_20" model="church.sunday.school.attendance">
+            <field name="session_id" ref="ss_session_youth_2"/>
+            <field name="student_id" ref="ss_student_youth_20"/>
+            <field name="status_id" ref="sunday_school_attendance_status_present"/>
+        </record>
+
+    </data>
+</odoo>

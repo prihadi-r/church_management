@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- ========================================== -->
+        <!-- SUNDAY SCHOOL : MENUS                      -->
+        <!-- ========================================== -->
+        <menuitem id="menu_church_sunday_school"
+                  name="Sunday School"
+                  parent="menu_church_root"
+                  sequence="15"/>
+
+        <menuitem id="menu_church_sunday_school_class"
+                  name="Classes"
+                  parent="menu_church_sunday_school"
+                  action="action_church_sunday_school_class"
+                  sequence="10"/>
+
+        <menuitem id="menu_church_sunday_school_teacher"
+                  name="Teachers"
+                  parent="menu_church_sunday_school"
+                  action="action_church_sunday_school_teacher"
+                  sequence="15"/>
+
+        <menuitem id="menu_church_sunday_school_student"
+                  name="Students"
+                  parent="menu_church_sunday_school"
+                  action="action_church_sunday_school_student"
+                  sequence="20"/>
+
+        <menuitem id="menu_church_sunday_school_session"
+                  name="Sessions"
+                  parent="menu_church_sunday_school"
+                  action="action_church_sunday_school_session"
+                  sequence="30"/>
+
+        <menuitem id="menu_church_sunday_school_attendance"
+                  name="Attendance"
+                  parent="menu_church_sunday_school"
+                  action="action_church_sunday_school_attendance"
+                  sequence="40"/>
+
+        <menuitem id="menu_church_sunday_school_config"
+                  name="Configuration"
+                  parent="menu_church_sunday_school"
+                  sequence="90"/>
+
+        <menuitem id="menu_church_sunday_school_level"
+                  name="Class Levels"
+                  parent="menu_church_sunday_school_config"
+                  action="action_church_sunday_school_level"
+                  sequence="10"/>
+
+        <menuitem id="menu_church_sunday_school_teacher_role"
+                  name="Teacher Roles"
+                  parent="menu_church_sunday_school_config"
+                  action="action_church_sunday_school_teacher_role"
+                  sequence="20"/>
+
+        <menuitem id="menu_church_sunday_school_class_status"
+                  name="Class Statuses"
+                  parent="menu_church_sunday_school_config"
+                  action="action_church_sunday_school_class_status"
+                  sequence="30"/>
+
+        <menuitem id="menu_church_sunday_school_student_status"
+                  name="Student Statuses"
+                  parent="menu_church_sunday_school_config"
+                  action="action_church_sunday_school_student_status"
+                  sequence="40"/>
+
+        <menuitem id="menu_church_sunday_school_attendance_status"
+                  name="Attendance Statuses"
+                  parent="menu_church_sunday_school_config"
+                  action="action_church_sunday_school_attendance_status"
+                  sequence="50"/>
+
+        <menuitem id="menu_church_sunday_school_session_status"
+                  name="Session Statuses"
+                  parent="menu_church_sunday_school_config"
+                  action="action_church_sunday_school_session_status"
+                  sequence="60"/>
+    </data>
+</odoo>

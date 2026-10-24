@@ -2,7 +2,7 @@
 
 > **Your church, beautifully managed.**
 
-**Darash** is a free, open-source **Church Management System (ChMS)** built on the **Odoo 18** framework. It helps congregations manage **membership & family records**, **worship event scheduling**, **baptism & marriage registrations**, **tithing & donations**, **ministry / volunteer coordination**, **prayer requests**, and **church news** — all in a single application. No more physical books or scattered spreadsheets.
+**Darash** is a free, open-source **Church Management System (ChMS)** built on the **Odoo 18** framework. It helps congregations manage **membership & family records**, **worship event scheduling**, **baptism & marriage registrations**, **tithing & donations**, **ministry / volunteer coordination**, **Sunday school classes, students & attendance**, **prayer requests**, and **church news** — all in a single application. No more physical books or scattered spreadsheets.
 
 Whether you lead a small congregation or a growing ministry, Darash centralizes your church operations into one clean, modern dashboard so your team can focus on what matters most: people.
 
@@ -24,7 +24,7 @@ Whether you lead a small congregation or a growing ministry, Darash centralizes 
 
 - ✅ **100% free & open source** — no licensing fees, no vendor lock-in (LGPL-3).
 - ✅ **Runs on the proven Odoo ERP platform** — extend it with 40,000+ Odoo apps.
-- ✅ **Church-specific workflows** — baptism/marriage registration, care cells (small groups), musician scheduling, event rosters.
+- ✅ **Church-specific workflows** — baptism/marriage registration, care cells (small groups), Sunday school classes with attendance, musician scheduling, event rosters.
 - ✅ **Public website out of the box** — themed homepage, public church calendar, prayer request form, and news aggregator.
 - ✅ **Self-hosted** — keep your church data private with Docker or your own server.
 
@@ -57,10 +57,15 @@ Whether you lead a small congregation or a growing ministry, Darash centralizes 
 
 ## ✨ Features
 
-### 🏠 Church Dashboard
-- Live statistic cards: **congregants**, **baptisms**, **marriages**, and **worship schedule** (this month / last month / pending).
-- **Congregants per member type** breakdown.
-- Quick-access shortcuts to Baptism Registrations, Marriage Registrations, and Church Calendar.
+### 🏠 Church Dashboard (interactive graphs)
+- Built on Odoo's **Dashboards** app (`board`): the landing page is a grid of **graph boxes**, not text cards.
+- Eight dashlets — congregants per member type, baptisms per month, marriages per month,
+  prayer requests by status, Sunday School students & sessions per class, Sunday School
+  attendance by status, and care cells by status.
+- Every box is a live graph: switch it to **bar / line / pie**, change the measure it computes,
+  or filter it using the controls inside the box.
+- Personal per user: pick the column layout (**Change Layout**), fold or hide boxes, and add your
+  own dashlets from any list, kanban, graph or pivot view.
 
 ### 🧑‍🤝‍🧑 Membership & Master Data
 - **Member Types** (Simpatisan, Jemaat Tetap, Musisi, Pastur, ...).
@@ -77,6 +82,23 @@ Whether you lead a small congregation or a growing ministry, Darash centralizes 
 - **Church Calendar** — one unified calendar aggregating events, musician schedules, baptisms, marriages, and prayer requests (daily auto-refresh cron).
 - **Public Church Calendar** — a public website page (`/church-calendar`) that shows **confirmed** activities (events, baptisms, marriages, care cells, prayer requests) with **type filters** and **month/type grouping**. Musician schedules and unconfirmed entries are excluded.
 
+### 📖 Sunday School (Sekolah Minggu)
+- **Classes** — one per class level (Toddler, Kindergarten, Primary, Teen, Youth) with room,
+  weekly meeting time, capacity, head teacher, status and computed student/teacher/session counts.
+- **Teachers** — delegate to `res.partner` (`_inherits`), so name, phone and email come straight
+  from Contacts; roles (**Supervisor**, **Head Teacher**, **Assistant**, **Substitute**) are
+  assigned per class.
+- **Students** — also delegate to `res.partner`, with an auto-generated code (`SS/2026/0001`),
+  birth date & computed age, class, status, guardian and a computed attendance rate.
+- **Sessions** — dated class meetings (topic, teacher, start/end, status) that are also pushed
+  to the Church Calendar.
+- **Attendance** — one line per student per session (**Present / Late / Permission / Sick /
+  Absent**) feeding per-student and per-class attendance rates.
+- **Configuration** — class levels, teacher roles, and the class / student / session /
+  attendance statuses.
+- Ships with **sample data**: 5 classes × 20 students, 12 teachers, 15 sessions and
+  200 attendance lines, so the graphs and dashboards are populated out of the box.
+
 ### 📰 News & Website
 - **News articles, categories, and sources** with RSS/feed ingestion (`feedparser`).
 - **Public Christianity News page** (`/christianity-news`) — category filters and article cards, linked from the homepage and the main website menu.
@@ -90,6 +112,9 @@ Whether you lead a small congregation or a growing ministry, Darash centralizes 
 
 ### 🔌 Integrations
 - Extends **Contacts** (`res.partner`), **CRM Leads** (`crm.lead`), **Events** (`event.event`), and **Accounting Payments** (`account.payment`).
+- Sunday School **students** and **teachers** inherit `res.partner` through Odoo's delegation
+  inheritance (`_inherits`), so they reuse the contact's name, phone, email and address instead
+  of duplicating them.
 
 ---
 
@@ -99,7 +124,7 @@ Whether you lead a small congregation or a growing ministry, Darash centralizes 
 |-------------|-----------------|
 | **Odoo** | 18.0+ |
 | **Python** | `feedparser` |
-| **Odoo apps** | `base`, `crm`, `event`, `account`, `website` |
+| **Odoo apps** | `base`, `board`, `crm`, `event`, `account`, `website` |
 
 > 🎨 **Optional companion:** [`church_theme`](#) — a separate website theme that provides the public homepage design (hero, feature cards, CTA). Install it if you want the themed homepage; without it the module still works fully but uses Odoo's default website theme.
 
@@ -107,7 +132,7 @@ Whether you lead a small congregation or a growing ministry, Darash centralizes 
 
 ## 🚀 Installation
 
-> ⚠️ **Requires the `website` module** (plus `base`, `crm`, `event`, `account`). If `website` is not installed, Odoo reports `Unmet dependencies: website` and the module stays stuck in `to install`. Install the missing apps first.
+> ⚠️ **Requires the `website` module** (plus `base`, `board`, `crm`, `event`, `account`). If `website` is not installed, Odoo reports `Unmet dependencies: website` and the module stays stuck in `to install`. Install the missing apps first.
 
 1. Copy this folder into your Odoo addons directory.
 2. Install the Python dependency:
@@ -189,7 +214,7 @@ After installing, assign one of the **Church Management** groups (**Read Only** 
 
 ```
 Church Management
-├── Dashboard
+├── Dashboard                       (graph board — Odoo Dashboards app)
 ├── Master Data
 │   ├── Member Types
 │   ├── Care Cells
@@ -197,6 +222,19 @@ Church Management
 │   ├── Sacrament Types
 │   ├── Event Roles
 │   └── Musician Roles
+├── Sunday School
+│   ├── Classes
+│   ├── Teachers
+│   ├── Students
+│   ├── Sessions
+│   ├── Attendance
+│   └── Configuration
+│       ├── Class Levels
+│       ├── Teacher Roles
+│       ├── Class Statuses
+│       ├── Student Statuses
+│       ├── Attendance Statuses
+│       └── Session Statuses
 └── Operations
     ├── Event Rosters
     ├── Musician Schedule
@@ -233,6 +271,7 @@ Contributions, bug reports, and feature requests are welcome! Please read our [C
 
 | Version | Date | Changes |
 |---------|------|---------|
+| **2.1.0** | 2026-10-24 | **Sunday School & graph dashboard** — new **Sunday School** app (classes, teachers, students, sessions, attendance + configuration masters; students & teachers inherit `res.partner`), sample data (5 classes × 20 students, 12 teachers, 15 sessions, 200 attendance lines), and the dashboard rebuilt on Odoo's **Dashboards** (`board`) app as eight interactive bar/pie graph dashlets instead of text cards. |
 | **2.0.0** | 2026-08-09 | **Darash major release** — branded as **Darash**, themed public homepage, Christianity News page & nav link, homepage SEO, unified color theme across all public pages, and deployment tooling (`scripts/`). |
 | **1.2.0** | 2026-08-09 | **Website polish** — themed homepage content, **Christianity News** section & main-menu link, **SEO** metadata for the homepage, and documented the optional companion `church_theme`. |
 | **1.1.1** | 2026-08-08 | **Fixes & docs** — fixed menu load-order bug causing `ParseError` (`External ID not found: menu_church_operations`) on fresh installs by centralizing all menus in `church_parent_menu.xml`; hardened install/troubleshooting docs (requires `website`, security-group setup, Odoo 17→18 `vat_check_vies` cleanup). |

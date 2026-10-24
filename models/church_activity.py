@@ -18,6 +18,7 @@ class ChurchActivity(models.Model):
         ('marriage', 'Marriage'),
         ('care_cell', 'Care Cell'),
         ('pray', 'Pray Request'),
+        ('sunday_school', 'Sunday School'),
     ], string='Activity Type', required=True)
 
     start = fields.Datetime(string='Start')
@@ -40,6 +41,9 @@ class ChurchActivity(models.Model):
     marriage_id = fields.Many2one('church.marriage.registration', string='Marriage Registration', ondelete='cascade')
     care_cell_id = fields.Many2one('church.care.cell', string='Care Cell', ondelete='cascade')
     pray_request_id = fields.Many2one('church.pray.request', string='Pray Request', ondelete='cascade')
+    sunday_school_session_id = fields.Many2one(
+        'church.sunday.school.session', string='Sunday School Session',
+        ondelete='cascade')
 
     # ===========================================
     # Generate Kalender dari seluruh kegiatan
@@ -133,6 +137,20 @@ class ChurchActivity(models.Model):
                 'color': 9,
                 'partner_id': pray.requester_id.id,
                 'pray_request_id': pray.id,
+            })
+
+        # 7. Sesi Sekolah Minggu (church.sunday.school.session)
+        for session in self.env['church.sunday.school.session'].search([]):
+            if not session.start_datetime:
+                continue
+            Activity.create({
+                'name': session.name,
+                'activity_type': 'sunday_school',
+                'start': session.start_datetime,
+                'stop': session.calendar_stop,
+                'color': session.color or 0,
+                'partner_id': session.teacher_id.partner_id.id,
+                'sunday_school_session_id': session.id,
             })
 
     # ===========================================
@@ -269,6 +287,29 @@ class ChurchActivity(models.Model):
             'color': cell.color or 0,
             'partner_id': cell.leader_id.id,
             'care_cell_id': cell.id,
+        }
+        if activity:
+            activity.write(vals)
+        else:
+            self.create(vals)
+
+    @api.model
+    def _sync_from_sunday_school_session(self, session):
+        """Buat/perbarui baris kalender untuk satu sesi sekolah minggu."""
+        activity = self.search(
+            [('sunday_school_session_id', '=', session.id)], limit=1)
+        if not session.start_datetime:
+            if activity:
+                activity.unlink()
+            return
+        vals = {
+            'name': session.name,
+            'activity_type': 'sunday_school',
+            'start': session.start_datetime,
+            'stop': session.calendar_stop,
+            'color': session.color or 0,
+            'partner_id': session.teacher_id.partner_id.id,
+            'sunday_school_session_id': session.id,
         }
         if activity:
             activity.write(vals)

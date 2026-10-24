@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- ========================================== -->
+        <!-- SUNDAY SCHOOL : MASTER DATA                -->
+        <!-- ========================================== -->
+
+        <!-- CLASS LEVEL -->
+        <record id="action_church_sunday_school_level" model="ir.actions.act_window">
+            <field name="name">Class Levels</field>
+            <field name="res_model">church.sunday.school.class.level</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="view_church_sunday_school_level_list" model="ir.ui.view">
+            <field name="name">church.sunday.school.class.level.list</field>
+            <field name="model">church.sunday.school.class.level</field>
+            <field name="arch" type="xml">
+                <list string="Class Levels" editable="bottom">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="color" widget="color_picker"/>
+                    <field name="description" optional="hide"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_level_form" model="ir.ui.view">
+            <field name="name">church.sunday.school.class.level.form</field>
+            <field name="model">church.sunday.school.class.level</field>
+            <field name="arch" type="xml">
+                <form string="Class Level">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="sequence"/>
+                            </group>
+                            <group>
+                                <field name="color" widget="color_picker"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                        <field name="description"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_level_search" model="ir.ui.view">
+            <field name="name">church.sunday.school.class.level.search</field>
+            <field name="model">church.sunday.school.class.level</field>
+            <field name="arch" type="xml">
+                <search string="Class Level">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <filter name="filter_inactive" string="Archived"
+                            domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- TEACHER ROLE -->
+        <record id="action_church_sunday_school_teacher_role" model="ir.actions.act_window">
+            <field name="name">Teacher Roles</field>
+            <field name="res_model">church.sunday.school.teacher.role</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="view_church_sunday_school_teacher_role_list" model="ir.ui.view">
+            <field name="name">church.sunday.school.teacher.role.list</field>
+            <field name="model">church.sunday.school.teacher.role</field>
+            <field name="arch" type="xml">
+                <list string="Teacher Roles" editable="bottom">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="color" widget="color_picker"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_teacher_role_form" model="ir.ui.view">
+            <field name="name">church.sunday.school.teacher.role.form</field>
+            <field name="model">church.sunday.school.teacher.role</field>
+            <field name="arch" type="xml">
+                <form string="Teacher Role">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="sequence"/>
+                            </group>
+                            <group>
+                                <field name="color" widget="color_picker"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_teacher_role_search" model="ir.ui.view">
+            <field name="name">church.sunday.school.teacher.role.search</field>
+            <field name="model">church.sunday.school.teacher.role</field>
+            <field name="arch" type="xml">
+                <search string="Teacher Role">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <filter name="filter_inactive" string="Archived"
+                            domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- CLASS STATUS -->
+        <record id="action_church_sunday_school_class_status" model="ir.actions.act_window">
+            <field name="name">Class Statuses</field>
+            <field name="res_model">church.sunday.school.class.status</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="view_church_sunday_school_class_status_list" model="ir.ui.view">
+            <field name="name">church.sunday.school.class.status.list</field>
+            <field name="model">church.sunday.school.class.status</field>
+            <field name="arch" type="xml">
+                <list string="Class Statuses" editable="bottom">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="color" widget="color_picker"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_class_status_form" model="ir.ui.view">
+            <field name="name">church.sunday.school.class.status.form</field>
+            <field name="model">church.sunday.school.class.status</field>
+            <field name="arch" type="xml">
+                <form string="Class Status">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="sequence"/>
+                            </group>
+                            <group>
+                                <field name="color" widget="color_picker"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_class_status_search" model="ir.ui.view">
+            <field name="name">church.sunday.school.class.status.search</field>
+            <field name="model">church.sunday.school.class.status</field>
+            <field name="arch" type="xml">
+                <search string="Class Status">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <filter name="filter_inactive" string="Archived"
+                            domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- STUDENT STATUS -->
+        <record id="action_church_sunday_school_student_status" model="ir.actions.act_window">
+            <field name="name">Student Statuses</field>
+            <field name="res_model">church.sunday.school.student.status</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="view_church_sunday_school_student_status_list" model="ir.ui.view">
+            <field name="name">church.sunday.school.student.status.list</field>
+            <field name="model">church.sunday.school.student.status</field>
+            <field name="arch" type="xml">
+                <list string="Student Statuses" editable="bottom">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="color" widget="color_picker"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_student_status_form" model="ir.ui.view">
+            <field name="name">church.sunday.school.student.status.form</field>
+            <field name="model">church.sunday.school.student.status</field>
+            <field name="arch" type="xml">
+                <form string="Student Status">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="sequence"/>
+                            </group>
+                            <group>
+                                <field name="color" widget="color_picker"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_student_status_search" model="ir.ui.view">
+            <field name="name">church.sunday.school.student.status.search</field>
+            <field name="model">church.sunday.school.student.status</field>
+            <field name="arch" type="xml">
+                <search string="Student Status">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <filter name="filter_inactive" string="Archived"
+                            domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- ATTENDANCE STATUS -->
+        <record id="action_church_sunday_school_attendance_status" model="ir.actions.act_window">
+            <field name="name">Attendance Statuses</field>
+            <field name="res_model">church.sunday.school.attendance.status</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="view_church_sunday_school_attendance_status_list" model="ir.ui.view">
+            <field name="name">church.sunday.school.attendance.status.list</field>
+            <field name="model">church.sunday.school.attendance.status</field>
+            <field name="arch" type="xml">
+                <list string="Attendance Statuses" editable="bottom">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="is_present" widget="boolean_toggle"/>
+                    <field name="color" widget="color_picker"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_attendance_status_form" model="ir.ui.view">
+            <field name="name">church.sunday.school.attendance.status.form</field>
+            <field name="model">church.sunday.school.attendance.status</field>
+            <field name="arch" type="xml">
+                <form string="Attendance Status">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="sequence"/>
+                            </group>
+                            <group>
+                                <field name="is_present"/>
+                                <field name="color" widget="color_picker"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_attendance_status_search" model="ir.ui.view">
+            <field name="name">church.sunday.school.attendance.status.search</field>
+            <field name="model">church.sunday.school.attendance.status</field>
+            <field name="arch" type="xml">
+                <search string="Attendance Status">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <filter name="filter_inactive" string="Archived"
+                            domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- SESSION STATUS -->
+        <record id="action_church_sunday_school_session_status" model="ir.actions.act_window">
+            <field name="name">Session Statuses</field>
+            <field name="res_model">church.sunday.school.session.status</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="view_church_sunday_school_session_status_list" model="ir.ui.view">
+            <field name="name">church.sunday.school.session.status.list</field>
+            <field name="model">church.sunday.school.session.status</field>
+            <field name="arch" type="xml">
+                <list string="Session Statuses" editable="bottom">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="color" widget="color_picker"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_session_status_form" model="ir.ui.view">
+            <field name="name">church.sunday.school.session.status.form</field>
+            <field name="model">church.sunday.school.session.status</field>
+            <field name="arch" type="xml">
+                <form string="Session Status">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="sequence"/>
+                            </group>
+                            <group>
+                                <field name="color" widget="color_picker"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_sunday_school_session_status_search" model="ir.ui.view">
+            <field name="name">church.sunday.school.session.status.search</field>
+            <field name="model">church.sunday.school.session.status</field>
+            <field name="arch" type="xml">
+                <search string="Session Status">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <filter name="filter_inactive" string="Archived"
+                            domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

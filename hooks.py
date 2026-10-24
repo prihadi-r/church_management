@@ -51,7 +51,3 @@ def post_init_hook(env):
         # agar nilai tersimpan pada record yang SUDAH ADA langsung benar.
         partners._compute_is_pastor()
         env['church.marriage.registration'].search([])._compute_is_pastor()
-
-    # 4) Pastikan ada record dashboard tunggal (landing page Church Management)
-    if not env['church.dashboard'].search([], limit=1):
-        env['church.dashboard'].create({'name': 'Church Management Dashboard'})
