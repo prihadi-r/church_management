@@ -5,6 +5,18 @@ Task breakdown lives in [task.md](task.md).
 
 ---
 
+## 2026-10-25 — License change
+
+- Replaced **LGPL-3** with a **custom license**: free to use and free to distribute
+  (verbatim copies); **any modification requires the prior written approval of the
+  owner**. See [LICENSE](LICENSE).
+- `__manifest__.py`: `license` → `Other proprietary` (Odoo has no custom key), summary and
+  description updated.
+- Docs updated: `README.md` (hero text, badge, "Why Darash" bullet, license section),
+  `CONTRIBUTING.md` (contributions need owner approval), `INSTALLATION_GUIDE.md` (§12).
+
+---
+
 ## 2026-10-25 — v2.2.0: Mission app
 
 ### Done

@@ -1,6 +1,6 @@
 # 🤝 Contributing to Darash — Church Management
 
-Thank you for your interest in contributing to this open-source **Church Management System (ChMS)**! 🎉
+Thank you for your interest in contributing to this **Church Management System (ChMS)**! 🎉
 
 Contributions of all kinds are welcome: code, bug reports, feature requests, documentation, translations, and design.
 
@@ -132,7 +132,7 @@ Common prefixes: `feat:`, `fix:`, `docs:`, `refactor:`, `style:`, `test:`, `chor
 
 ## 📄 License
 
-By contributing, you agree that your contributions will be licensed under the same [LGPL-3 License](LICENSE) as this project.
+This project uses a [custom license](LICENSE): it is free to use and to distribute, but **every change must be approved by the owner**. By opening a pull request or sending a patch you agree that your contribution may be merged under that license, and that no change is considered accepted until the owner has approved it in writing.
 
 ---
 

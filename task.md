@@ -52,3 +52,11 @@ Church Management, using **master-data models instead of selection fields** and
 - ⬜ Optional: auto-create `church.mission.participant` from `event.registration`.
 - ⬜ Optional: currency conversion for support totals in multi-currency setups.
 - ⬜ Optional: portal access so missionaries can see their own support progress.
+
+---
+
+## Completed outside the milestone
+
+- ✅ 2026-10-25 — License changed from **LGPL-3** to a **custom license**: free to use and
+  free to distribute (verbatim copies); **any modification requires the owner's prior written
+  approval**. Details in [LICENSE](LICENSE) and [progress.md](progress.md).

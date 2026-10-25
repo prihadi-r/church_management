@@ -269,4 +269,4 @@ sebuah tema website Odoo 18 terpisah yang bergantung hanya pada `website`.
 
 ## 12. Lisensi
 
-Modul dirilis di bawah lisensi **LGPL-3** — bebas digunakan dan dimodifikasi.
+Modul dirilis dengan **lisensi khusus** — **bebas digunakan** dan **bebas didistribusikan** (apa adanya/tanpa modifikasi). **Setiap perubahan (modifikasi) memerlukan persetujuan tertulis dari pemilik** (Prihadi — prihadi.r@gmail.com). Ketentuan lengkap ada di berkas `LICENSE`.

@@ -1,7 +1,7 @@
 {
     'name': 'Darash - Church Management',
     'version': '2.2.0',
-    'summary': 'Open-source Church Management System (ChMS): membership, tithing & donations, worship event scheduling, baptism & marriage registration, missions & missionaries, ministry and news for Odoo 18.',
+    'summary': 'Free Church Management System (ChMS): membership, tithing & donations, worship event scheduling, baptism & marriage registration, missions & missionaries, ministry and news for Odoo 18.',
     'author': 'Prihadi <prihadi.r@gmail.com>',
     'description': """
 # ⛪ Darash - Church Management
@@ -116,7 +116,9 @@ Church Management
 
 ## 📄 License
 
-**LGPL-3** — free to use, modify, and distribute.
+**Custom license** — free to use and free to distribute (unmodified copies).
+**Any modification requires the prior written approval of the owner.**
+See the `LICENSE` file for the full terms.
 """,
     'category': 'Services/Church',
     'depends': ['base', 'board', 'crm', 'event', 'account', 'website'],
@@ -200,5 +202,5 @@ Church Management
     },
     'application': True,
     'installable': True,
-    'license': 'LGPL-3',
+    'license': 'Other proprietary',
 }

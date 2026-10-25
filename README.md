@@ -1,13 +1,14 @@
-# ⛪ Darash — Open Source Church Management System (ChMS)
+# ⛪ Darash — Church Management System (ChMS)
 
 > **Your church, beautifully managed.**
 
-**Darash** is a free, open-source **Church Management System (ChMS)** built on the **Odoo 18** framework. It helps congregations manage **membership & family records**, **worship event scheduling**, **baptism & marriage registrations**, **tithing & donations**, **ministry / volunteer coordination**, **Sunday school classes, students & attendance**, **prayer requests**, and **church news** — all in a single application. No more physical books or scattered spreadsheets.
+**Darash** is a free **Church Management System (ChMS)** built on the **Odoo 18** framework. It helps congregations manage **membership & family records**, **worship event scheduling**, **baptism & marriage registrations**, **tithing & donations**, **ministry / volunteer coordination**, **Sunday school classes, students & attendance**, **prayer requests**, and **church news** — all in a single application. No more physical books or scattered spreadsheets.
 
 Whether you lead a small congregation or a growing ministry, Darash centralizes your church operations into one clean, modern dashboard so your team can focus on what matters most: people.
 
 > Built with the assistance of **GitHub Copilot as a vibe coding assistant**.
-> This module is **free to use, modify, and distribute** under the **LGPL-3** license.
+> This module is **free to use and free to distribute** (unmodified copies).
+> **Any modification requires the prior written approval of the owner** — see [LICENSE](LICENSE).
 
 ![Odoo](https://img.shields.io/badge/Odoo-18.0-714B67?style=for-the-badge&logo=odoo&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.10--3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)
@@ -17,12 +18,12 @@ Whether you lead a small congregation or a growing ministry, Darash centralizes 
 ![feedparser](https://img.shields.io/badge/RSS-feedparser-FF6600?style=for-the-badge)
 ![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![GitHub Copilot](https://img.shields.io/badge/Built%20with-GitHub%20Copilot-000000?style=for-the-badge&logo=githubcopilot&logoColor=white)
-![License](https://img.shields.io/badge/License-LGPL--3-blue?style=for-the-badge)
+![License](https://img.shields.io/badge/License-Custom%20%C2%B7%20Changes%20need%20approval-orange?style=for-the-badge)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=for-the-badge)
 
 ## 📌 Why Darash?
 
-- ✅ **100% free & open source** — no licensing fees, no vendor lock-in (LGPL-3).
+- ✅ **Free to use & distribute** — no licensing fees, no vendor lock-in. Modifications require the owner's approval.
 - ✅ **Runs on the proven Odoo ERP platform** — extend it with 40,000+ Odoo apps.
 - ✅ **Church-specific workflows** — baptism/marriage registration, care cells (small groups), Sunday school classes with attendance, musician scheduling, event rosters.
 - ✅ **Public website out of the box** — themed homepage, public church calendar, prayer request form, and news aggregator.
@@ -296,7 +297,7 @@ Contributions, bug reports, and feature requests are welcome! Please read our [C
 - ✨ Want a feature? [Submit a feature request](https://github.com/prihadi-r/church_management/issues/new/choose).
 - 🚀 Ready to help? Fork the repo and open a pull request.
 
-> **Star ⭐ this repository** if you find it useful — it helps others discover this open-source church software.
+> **Star ⭐ this repository** if you find it useful — it helps others discover this church management software.
 
 ---
 
@@ -322,4 +323,12 @@ Contributions, bug reports, and feature requests are welcome! Please read our [C
 
 ## 📄 License
 
-**LGPL-3** — free to use, modify, and distribute.
+**Custom license** — **free to use** and **free to distribute** (verbatim, unmodified copies).
+
+> ⚠️ **Any modification requires the prior written approval of the owner**
+> (Prihadi — [prihadi.r@gmail.com](mailto:prihadi.r@gmail.com)). Modified versions may
+> not be published or distributed without that approval and must be clearly marked as
+> modified.
+
+See the full terms in [LICENSE](LICENSE). For approval requests, bug reports or
+suggestions, contact the owner by e-mail.
