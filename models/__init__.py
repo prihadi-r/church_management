@@ -18,6 +18,17 @@ from . import church_sacrament_type
 from . import church_musician_schedule
 from . import church_pray_request
 from . import church_pray_session
+# Mission (master data dulu, lalu transaksi)
+from . import church_mission_field
+from . import church_mission_type
+from . import church_mission_status
+from . import church_mission_role
+from . import church_missionary_status
+from . import church_mission_agency
+from . import church_missionary
+from . import church_mission_trip
+from . import church_mission_participant
+from . import church_mission_support
 # Sunday School (master data dulu, lalu transaksi)
 from . import church_sunday_school_attendance_status
 from . import church_sunday_school_session_status

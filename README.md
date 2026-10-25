@@ -99,6 +99,21 @@ Whether you lead a small congregation or a growing ministry, Darash centralizes 
 - Ships with **sample data**: 5 classes × 20 students, 12 teachers, 15 sessions and
   200 attendance lines, so the graphs and dashboards are populated out of the box.
 
+### 🚀 Missions
+- **Mission Trips** — a trip **is an Event** (`event.event` via `_inherits`): name, dates, venue,
+  registrations and calendar sync come from the Events app, plus mission type, field, sending
+  agency, leader, budget and computed support/funding progress. Auto code `MT/2026/0001`.
+- **Missionaries** — delegate to `res.partner` (`_inherits`) with mission field, sending agency,
+  status, supervisor, support target and computed support progress. Auto code `MSN/2026/0001`.
+- **Participants** — trip team members with a **Role** and confirmation flag; unique per trip.
+- **Mission Support** — donor contributions per missionary/trip, reusing `church.donation.type`
+  and optionally linked to `account.payment`; auto code `MSP/2026/0001`.
+- **Mission Dashboard** — its own board with graphs: trips by status/type/field, missionaries by
+  status, participants by role, and support per month/missionary/donation type.
+- **Configuration** — mission fields, types, statuses, roles, missionary statuses and agencies
+  (all master data, **no hard-coded selection fields**).
+- Ships with **sample data**: 2 agencies, 5 missionaries, 5 trips, 9 participants, 8 support lines.
+
 ### 📰 News & Website
 - **News articles, categories, and sources** with RSS/feed ingestion (`feedparser`).
 - **Public Christianity News page** (`/christianity-news`) — category filters and article cards, linked from the homepage and the main website menu.
@@ -115,6 +130,9 @@ Whether you lead a small congregation or a growing ministry, Darash centralizes 
 - Sunday School **students** and **teachers** inherit `res.partner` through Odoo's delegation
   inheritance (`_inherits`), so they reuse the contact's name, phone, email and address instead
   of duplicating them.
+- **Mission** reuses the same delegation patterns: missionaries, participants and mission agencies
+  inherit `res.partner`, while **mission trips inherit `event.event`** (so they are real Events and
+  appear automatically in the Church Calendar).
 
 ---
 
@@ -235,6 +253,19 @@ Church Management
 │       ├── Student Statuses
 │       ├── Attendance Statuses
 │       └── Session Statuses
+├── Mission                         (missions & missionaries)
+│   ├── Dashboard                   (graph board)
+│   ├── Mission Trips
+│   ├── Missionaries
+│   ├── Participants
+│   ├── Mission Support
+│   └── Configuration
+│       ├── Mission Fields
+│       ├── Mission Types
+│       ├── Mission Statuses
+│       ├── Mission Roles
+│       ├── Missionary Statuses
+│       └── Mission Agencies
 └── Operations
     ├── Event Rosters
     ├── Musician Schedule
@@ -250,6 +281,8 @@ Church Management
 
 - [Installation Guide](INSTALLATION_GUIDE.md) — requirements & step-by-step install.
 - [User Guide](USER_GUIDE.md) — detailed usage instructions (in Indonesian).
+- [Task Board](task.md) — scope, acceptance criteria and backlog of the current milestone.
+- [Progress Log](progress.md) — completed work, verification evidence and open items.
 
 ## 🖥️ Live Demo
 
@@ -271,6 +304,7 @@ Contributions, bug reports, and feature requests are welcome! Please read our [C
 
 | Version | Date | Changes |
 |---------|------|---------|
+| **2.2.0** | 2026-10-25 | **Mission** — new **Mission** app: mission trips (inherit `event.event`), missionaries / participants / agencies (inherit `res.partner`), mission support (reuses donation types and `account.payment`), master data for fields/types/statuses/roles/missionary statuses (no selection fields), a dedicated **Mission Dashboard** board, and sample data. |
 | **2.1.0** | 2026-10-24 | **Sunday School & graph dashboard** — new **Sunday School** app (classes, teachers, students, sessions, attendance + configuration masters; students & teachers inherit `res.partner`), sample data (5 classes × 20 students, 12 teachers, 15 sessions, 200 attendance lines), and the dashboard rebuilt on Odoo's **Dashboards** (`board`) app as eight interactive bar/pie graph dashlets instead of text cards. |
 | **2.0.0** | 2026-08-09 | **Darash major release** — branded as **Darash**, themed public homepage, Christianity News page & nav link, homepage SEO, unified color theme across all public pages, and deployment tooling (`scripts/`). |
 | **1.2.0** | 2026-08-09 | **Website polish** — themed homepage content, **Christianity News** section & main-menu link, **SEO** metadata for the homepage, and documented the optional companion `church_theme`. |

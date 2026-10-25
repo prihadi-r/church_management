@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- ================================================================
+             MISSION SAMPLE DATA
+
+             Agencies, missionaries, trips, participants and support lines.
+             Agencies, missionaries and participants delegate to res.partner
+             via _inherits, and trips delegate to event.event, so every
+             record below is also a real Contact / Event.
+
+             Loaded AFTER church_mission_data.xml (master data + sequences)
+             and AFTER res_partner_sample.xml (participants and donors
+             reference the sample congregation contacts).
+             ================================================================ -->
+
+        <!-- ========================================== -->
+        <!-- AGENCIES (res.partner + church.mission.agency) -->
+        <!-- ========================================== -->
+        <record id="mission_agency_global_partnership" model="church.mission.agency">
+            <field name="name">Global Mission Partnership</field>
+            <field name="is_company" eval="True"/>
+            <field name="code">GMP</field>
+            <field name="email">info@globalmissionpartnership.example.com</field>
+            <field name="phone">021-5566-1001</field>
+            <field name="city">Jakarta</field>
+            <field name="field_ids" eval="[(6, 0, [ref('mission_field_sumatra'), ref('mission_field_papua'), ref('mission_field_southeast_asia')])]"/>
+            <field name="notes">Sending agency for cross-cultural missionaries.</field>
+        </record>
+
+        <record id="mission_agency_misi_nusantara" model="church.mission.agency">
+            <field name="name">Yayasan Misi Nusantara</field>
+            <field name="is_company" eval="True"/>
+            <field name="code">YMN</field>
+            <field name="email">kontak@misinusantara.example.com</field>
+            <field name="phone">021-5566-1002</field>
+            <field name="city">Jakarta</field>
+            <field name="field_ids" eval="[(6, 0, [ref('mission_field_kalimantan'), ref('mission_field_nusa_tenggara'), ref('mission_field_papua')])]"/>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- MISSIONARIES (res.partner + church.mission.missionary) -->
+        <!-- ========================================== -->
+        <record id="missionary_petrus_halim" model="church.mission.missionary">
+            <field name="name">Petrus Halim</field>
+            <field name="email">petrus.halim@example.com</field>
+            <field name="phone">0812-7100-2001</field>
+            <field name="function">Field Missionary</field>
+            <field name="field_id" ref="mission_field_sumatra"/>
+            <field name="agency_id" ref="mission_agency_global_partnership"/>
+            <field name="status_id" ref="missionary_status_on_field"/>
+            <field name="start_date">2023-01-15</field>
+            <field name="support_target">24000000</field>
+        </record>
+
+        <record id="missionary_ruth_nababan" model="church.mission.missionary">
+            <field name="name">Ruth Nababan</field>
+            <field name="email">ruth.nababan@example.com</field>
+            <field name="phone">0812-7100-2002</field>
+            <field name="function">Field Missionary</field>
+            <field name="field_id" ref="mission_field_papua"/>
+            <field name="agency_id" ref="mission_agency_misi_nusantara"/>
+            <field name="status_id" ref="missionary_status_on_field"/>
+            <field name="start_date">2022-06-01</field>
+            <field name="support_target">18000000</field>
+        </record>
+
+        <record id="missionary_yulianus_wenda" model="church.mission.missionary">
+            <field name="name">Yulianus Wenda</field>
+            <field name="email">yulianus.wenda@example.com</field>
+            <field name="phone">0812-7100-2003</field>
+            <field name="function">Missionary Candidate</field>
+            <field name="field_id" ref="mission_field_papua"/>
+            <field name="agency_id" ref="mission_agency_misi_nusantara"/>
+            <field name="status_id" ref="missionary_status_preparing"/>
+            <field name="start_date">2026-01-05</field>
+            <field name="support_target">12000000</field>
+        </record>
+
+        <record id="missionary_sari_wulandari" model="church.mission.missionary">
+            <field name="name">Sari Wulandari</field>
+            <field name="email">sari.wulandari@example.com</field>
+            <field name="phone">0812-7100-2004</field>
+            <field name="function">Field Missionary</field>
+            <field name="field_id" ref="mission_field_southeast_asia"/>
+            <field name="agency_id" ref="mission_agency_global_partnership"/>
+            <field name="status_id" ref="missionary_status_furlough"/>
+            <field name="start_date">2021-03-01</field>
+            <field name="support_target">30000000</field>
+        </record>
+
+        <record id="missionary_daniel_sihombing" model="church.mission.missionary">
+            <field name="name">Daniel Sihombing</field>
+            <field name="email">daniel.sihombing@example.com</field>
+            <field name="phone">0812-7100-2005</field>
+            <field name="function">Missionary Candidate</field>
+            <field name="field_id" ref="mission_field_nusa_tenggara"/>
+            <field name="agency_id" ref="mission_agency_global_partnership"/>
+            <field name="status_id" ref="missionary_status_candidate"/>
+            <field name="support_target">10000000</field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- MISSION TRIPS (event.event + church.mission.trip) -->
+        <!-- ========================================== -->
+        <record id="mission_trip_nias_medical" model="church.mission.trip">
+            <field name="name">Medical Outreach — Nias</field>
+            <field name="date_begin">2026-07-10 01:00:00</field>
+            <field name="date_end">2026-07-17 08:00:00</field>
+            <field name="type_id" ref="mission_type_medical"/>
+            <field name="field_id" ref="mission_field_sumatra"/>
+            <field name="agency_id" ref="mission_agency_global_partnership"/>
+            <field name="status_id" ref="mission_status_completed"/>
+            <field name="leader_id" ref="missionary_petrus_halim"/>
+            <field name="budget">12000000</field>
+            <field name="description">&lt;p&gt;Free medical check-up and medicine distribution for five villages in Nias.&lt;/p&gt;</field>
+        </record>
+
+        <record id="mission_trip_kutai_church_planting" model="church.mission.trip">
+            <field name="name">Church Planting — Kutai Barat</field>
+            <field name="date_begin">2026-09-05 01:00:00</field>
+            <field name="date_end">2026-09-12 08:00:00</field>
+            <field name="type_id" ref="mission_type_church_planting"/>
+            <field name="field_id" ref="mission_field_kalimantan"/>
+            <field name="agency_id" ref="mission_agency_misi_nusantara"/>
+            <field name="status_id" ref="mission_status_completed"/>
+            <field name="leader_id" ref="missionary_yulianus_wenda"/>
+            <field name="budget">9000000</field>
+            <field name="description">&lt;p&gt;Survey and initial gathering for a new congregation in Kutai Barat.&lt;/p&gt;</field>
+        </record>
+
+        <record id="mission_trip_cianjur_relief" model="church.mission.trip">
+            <field name="name">Disaster Relief — Cianjur</field>
+            <field name="date_begin">2026-10-20 01:00:00</field>
+            <field name="date_end">2026-10-28 08:00:00</field>
+            <field name="type_id" ref="mission_type_disaster_relief"/>
+            <field name="field_id" ref="mission_field_jabodetabek"/>
+            <field name="agency_id" ref="mission_agency_misi_nusantara"/>
+            <field name="status_id" ref="mission_status_ongoing"/>
+            <field name="leader_id" ref="missionary_sari_wulandari"/>
+            <field name="budget">15000000</field>
+            <field name="description">&lt;p&gt;Logistics, shelter kits, and trauma healing for earthquake survivors.&lt;/p&gt;</field>
+        </record>
+
+        <record id="mission_trip_kupang_evangelism" model="church.mission.trip">
+            <field name="name">Youth Evangelism — Kupang</field>
+            <field name="date_begin">2026-11-02 01:00:00</field>
+            <field name="date_end">2026-11-08 08:00:00</field>
+            <field name="type_id" ref="mission_type_evangelism"/>
+            <field name="field_id" ref="mission_field_nusa_tenggara"/>
+            <field name="agency_id" ref="mission_agency_misi_nusantara"/>
+            <field name="status_id" ref="mission_status_planned"/>
+            <field name="leader_id" ref="missionary_ruth_nababan"/>
+            <field name="budget">7000000</field>
+            <field name="description">&lt;p&gt;Open-air youth rallies and small group follow-up in Kupang.&lt;/p&gt;</field>
+        </record>
+
+        <record id="mission_trip_sumba_literacy" model="church.mission.trip">
+            <field name="name">Literacy Mission — Sumba</field>
+            <field name="date_begin">2026-12-01 01:00:00</field>
+            <field name="date_end">2026-12-10 08:00:00</field>
+            <field name="type_id" ref="mission_type_education"/>
+            <field name="field_id" ref="mission_field_nusa_tenggara"/>
+            <field name="agency_id" ref="mission_agency_global_partnership"/>
+            <field name="status_id" ref="mission_status_planned"/>
+            <field name="leader_id" ref="missionary_daniel_sihombing"/>
+            <field name="budget">6500000</field>
+            <field name="description">&lt;p&gt;Teacher training and reading camps for elementary school children.&lt;/p&gt;</field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- PARTICIPANTS (res.partner + church.mission.participant) -->
+        <!-- ========================================== -->
+        <record id="mission_participant_nias_john" model="church.mission.participant">
+            <field name="partner_id" ref="res_partner_1"/>
+            <field name="trip_id" ref="mission_trip_nias_medical"/>
+            <field name="role_id" ref="mission_role_medical"/>
+            <field name="registration_date">2026-06-01</field>
+            <field name="confirmed" eval="True"/>
+        </record>
+        <record id="mission_participant_nias_jane" model="church.mission.participant">
+            <field name="partner_id" ref="res_partner_2"/>
+            <field name="trip_id" ref="mission_trip_nias_medical"/>
+            <field name="role_id" ref="mission_role_member"/>
+            <field name="registration_date">2026-06-02</field>
+            <field name="confirmed" eval="True"/>
+        </record>
+        <record id="mission_participant_nias_budi" model="church.mission.participant">
+            <field name="partner_id" ref="res_partner_budi"/>
+            <field name="trip_id" ref="mission_trip_nias_medical"/>
+            <field name="role_id" ref="mission_role_logistics"/>
+            <field name="registration_date">2026-06-03</field>
+            <field name="confirmed" eval="True"/>
+        </record>
+
+        <record id="mission_participant_kutai_john" model="church.mission.participant">
+            <field name="partner_id" ref="res_partner_1"/>
+            <field name="trip_id" ref="mission_trip_kutai_church_planting"/>
+            <field name="role_id" ref="mission_role_leader"/>
+            <field name="registration_date">2026-08-01</field>
+            <field name="confirmed" eval="True"/>
+        </record>
+        <record id="mission_participant_kutai_charlie" model="church.mission.participant">
+            <field name="partner_id" ref="res_partner_5"/>
+            <field name="trip_id" ref="mission_trip_kutai_church_planting"/>
+            <field name="role_id" ref="mission_role_member"/>
+            <field name="registration_date">2026-08-04</field>
+            <field name="confirmed" eval="True"/>
+        </record>
+
+        <record id="mission_participant_cianjur_jane" model="church.mission.participant">
+            <field name="partner_id" ref="res_partner_2"/>
+            <field name="trip_id" ref="mission_trip_cianjur_relief"/>
+            <field name="role_id" ref="mission_role_medical"/>
+            <field name="registration_date">2026-10-05</field>
+            <field name="confirmed" eval="True"/>
+        </record>
+        <record id="mission_participant_cianjur_budi" model="church.mission.participant">
+            <field name="partner_id" ref="res_partner_budi"/>
+            <field name="trip_id" ref="mission_trip_cianjur_relief"/>
+            <field name="role_id" ref="mission_role_logistics"/>
+            <field name="registration_date">2026-10-06</field>
+        </record>
+
+        <record id="mission_participant_kupang_charlie" model="church.mission.participant">
+            <field name="partner_id" ref="res_partner_5"/>
+            <field name="trip_id" ref="mission_trip_kupang_evangelism"/>
+            <field name="role_id" ref="mission_role_leader"/>
+            <field name="registration_date">2026-10-12</field>
+        </record>
+
+        <record id="mission_participant_sumba_john" model="church.mission.participant">
+            <field name="partner_id" ref="res_partner_1"/>
+            <field name="trip_id" ref="mission_trip_sumba_literacy"/>
+            <field name="role_id" ref="mission_role_teacher"/>
+            <field name="registration_date">2026-10-18</field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- SUPPORT (donations to missionaries / trips) -->
+        <!-- ========================================== -->
+        <record id="mission_support_petrus_1" model="church.mission.support">
+            <field name="partner_id" ref="res_partner_1"/>
+            <field name="date">2026-07-05</field>
+            <field name="amount">1500000</field>
+            <field name="donation_type_id" ref="donation_type_2"/>
+            <field name="missionary_id" ref="missionary_petrus_halim"/>
+            <field name="trip_id" ref="mission_trip_nias_medical"/>
+        </record>
+        <record id="mission_support_petrus_2" model="church.mission.support">
+            <field name="partner_id" ref="res_partner_2"/>
+            <field name="date">2026-08-11</field>
+            <field name="amount">2000000</field>
+            <field name="donation_type_id" ref="donation_type_1"/>
+            <field name="missionary_id" ref="missionary_petrus_halim"/>
+        </record>
+        <record id="mission_support_ruth_1" model="church.mission.support">
+            <field name="partner_id" ref="res_partner_5"/>
+            <field name="date">2026-09-07</field>
+            <field name="amount">2500000</field>
+            <field name="donation_type_id" ref="donation_type_7"/>
+            <field name="missionary_id" ref="missionary_ruth_nababan"/>
+        </record>
+        <record id="mission_support_yulianus_1" model="church.mission.support">
+            <field name="partner_id" ref="res_partner_3"/>
+            <field name="date">2026-09-21</field>
+            <field name="amount">1750000</field>
+            <field name="donation_type_id" ref="donation_type_7"/>
+            <field name="missionary_id" ref="missionary_yulianus_wenda"/>
+            <field name="trip_id" ref="mission_trip_kutai_church_planting"/>
+        </record>
+        <record id="mission_support_sari_1" model="church.mission.support">
+            <field name="partner_id" ref="res_partner_5"/>
+            <field name="date">2026-10-09</field>
+            <field name="amount">3000000</field>
+            <field name="donation_type_id" ref="donation_type_1"/>
+            <field name="missionary_id" ref="missionary_sari_wulandari"/>
+        </record>
+        <record id="mission_support_cianjur_1" model="church.mission.support">
+            <field name="partner_id" ref="res_partner_budi"/>
+            <field name="date">2026-10-21</field>
+            <field name="amount">4000000</field>
+            <field name="donation_type_id" ref="donation_type_7"/>
+            <field name="trip_id" ref="mission_trip_cianjur_relief"/>
+        </record>
+        <record id="mission_support_cianjur_2" model="church.mission.support">
+            <field name="partner_id" ref="res_partner_2"/>
+            <field name="date">2026-10-23</field>
+            <field name="amount">1250000</field>
+            <field name="donation_type_id" ref="donation_type_10"/>
+            <field name="trip_id" ref="mission_trip_cianjur_relief"/>
+        </record>
+        <record id="mission_support_kupang_1" model="church.mission.support">
+            <field name="partner_id" ref="res_partner_1"/>
+            <field name="date">2026-10-24</field>
+            <field name="amount">900000</field>
+            <field name="donation_type_id" ref="donation_type_1"/>
+            <field name="trip_id" ref="mission_trip_kupang_evangelism"/>
+        </record>
+    </data>
+</odoo>

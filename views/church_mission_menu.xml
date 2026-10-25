@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- ========================================== -->
+        <!-- MISSION : MENUS                            -->
+        <!-- ========================================== -->
+        <menuitem id="menu_church_mission"
+                  name="Mission"
+                  parent="menu_church_root"
+                  sequence="18"/>
+
+        <menuitem id="menu_church_mission_dashboard"
+                  name="Dashboard"
+                  parent="menu_church_mission"
+                  action="action_church_mission_dashboard"
+                  sequence="5"/>
+
+        <menuitem id="menu_church_mission_trip"
+                  name="Mission Trips"
+                  parent="menu_church_mission"
+                  action="action_church_mission_trip"
+                  sequence="10"/>
+
+        <menuitem id="menu_church_missionary"
+                  name="Missionaries"
+                  parent="menu_church_mission"
+                  action="action_church_missionary"
+                  sequence="20"/>
+
+        <menuitem id="menu_church_mission_participant"
+                  name="Participants"
+                  parent="menu_church_mission"
+                  action="action_church_mission_participant"
+                  sequence="30"/>
+
+        <menuitem id="menu_church_mission_support"
+                  name="Mission Support"
+                  parent="menu_church_mission"
+                  action="action_church_mission_support"
+                  sequence="40"/>
+
+        <menuitem id="menu_church_mission_config"
+                  name="Configuration"
+                  parent="menu_church_mission"
+                  sequence="90"/>
+
+        <menuitem id="menu_church_mission_field"
+                  name="Mission Fields"
+                  parent="menu_church_mission_config"
+                  action="action_church_mission_field"
+                  sequence="10"/>
+
+        <menuitem id="menu_church_mission_type"
+                  name="Mission Types"
+                  parent="menu_church_mission_config"
+                  action="action_church_mission_type"
+                  sequence="20"/>
+
+        <menuitem id="menu_church_mission_status"
+                  name="Mission Statuses"
+                  parent="menu_church_mission_config"
+                  action="action_church_mission_status"
+                  sequence="30"/>
+
+        <menuitem id="menu_church_mission_role"
+                  name="Mission Roles"
+                  parent="menu_church_mission_config"
+                  action="action_church_mission_role"
+                  sequence="40"/>
+
+        <menuitem id="menu_church_missionary_status"
+                  name="Missionary Statuses"
+                  parent="menu_church_mission_config"
+                  action="action_church_missionary_status"
+                  sequence="50"/>
+
+        <menuitem id="menu_church_mission_agency"
+                  name="Mission Agencies"
+                  parent="menu_church_mission_config"
+                  action="action_church_mission_agency"
+                  sequence="60"/>
+    </data>
+</odoo>

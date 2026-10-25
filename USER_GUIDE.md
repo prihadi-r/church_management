@@ -8,7 +8,7 @@
 
 **Apa itu Church Management?**
 - Modul Odoo 18 untuk mengelola kegiatan dan data gereja dalam satu aplikasi.
-- Mengelola **keanggotaan jemaat**, **baptis**, **pernikahan**, **jadwal ibadah**, **pelayanan musik**, **sekolah minggu (Sunday School)**, **permohonan doa**, dan **kalender kegiatan gereja** secara terpadu.
+- Mengelola **keanggotaan jemaat**, **baptis**, **pernikahan**, **jadwal ibadah**, **pelayanan musik**, **sekolah minggu (Sunday School)**, **misi (Mission)**, **permohonan doa**, dan **kalender kegiatan gereja** secara terpadu.
 
 **Manfaat Utama**
 - Semua data tersimpan di satu database (tidak perlu buku fisik).
@@ -16,6 +16,7 @@
 - **Dashboard** dibuat dengan **Odoo Dashboards** (`board`): halaman utama berisi kotak-kotak **grafik** (bar & pie) yang ringkas, bukan tabel angka panjang.
 - Alur kerja (workflow) dengan status: antrian → disetujui → selesai.
 - Modul **Sekolah Minggu** lengkap: kelas, guru, murid, sesi pertemuan, dan kehadiran.
+- Modul **Misi** lengkap: perjalanan misi, misionaris, peserta, dukungan dana, dan dashboard grafiknya sendiri.
 
 **Struktur Menu**
 ```
@@ -41,6 +42,19 @@ Church Management
 │       ├── Student Statuses
 │       ├── Attendance Statuses
 │       └── Session Statuses
+├── Mission
+│   ├── Dashboard (papan grafik misi)
+│   ├── Mission Trips
+│   ├── Missionaries
+│   ├── Participants
+│   ├── Mission Support
+│   └── Configuration
+│       ├── Mission Fields
+│       ├── Mission Types
+│       ├── Mission Statuses
+│       ├── Mission Roles
+│       ├── Missionary Statuses
+│       └── Mission Agencies
 └── Operations
     ├── Event Rosters
     ├── Musician Schedule
@@ -290,7 +304,94 @@ Menu **Church Management → Sunday School** mengelola kelas, guru, murid, sesi 
 
 ---
 
-## 6. Kontak / Jemaat (Contacts)
+## 6. Mission (Misi)
+
+Menu **Church Management → Mission** mengelola **perjalanan misi**, **misionaris**, **peserta**, dan **dukungan dana (mission support)**.
+
+> ℹ️ **Semua orang adalah Kontak, semua perjalanan adalah Event.** Misionaris, peserta, dan lembaga pengirim memakai *delegation inheritance* (`_inherits`) ke `res.partner`; perjalanan misi (`church.mission.trip`) mewarisi `event.event`. Jadi data otomatis muncul di aplikasi **Contacts** dan **Events**, serta di **Church Calendar**.
+>
+> ℹ️ **Tidak ada selection field.** Semua status, jenis misi, wilayah, dan peran peserta adalah **master data** yang bisa ditambah sendiri lewat menu **Configuration**.
+
+### 6.1 Dashboard (Mission)
+- **Fungsi:** ringkasan grafik khusus misi (papan dashlet Odoo `board`).
+- **Delapan kotak grafik:**
+
+| Kotak | Isi | Jenis grafik |
+|---|---|---|
+| **Missions by Status** | Perjalanan misi per status (Planned, Ongoing, Completed, Cancelled) | Pie |
+| **Missions by Type** | Perjalanan misi per jenis (Evangelism, Medical, Education, ...) | Bar |
+| **Missions by Field** | Perjalanan misi per wilayah misi | Bar |
+| **Missionaries** | Misionaris per status (Candidate, Preparing, On the Field, Furlough, Completed) | Pie |
+| **Participants** | Peserta per peran (Team Leader, Medical, Logistics, ...) | Pie |
+| **Support per Month** | Total dukungan dana per bulan | Bar |
+| **Support per Missionary** | Total dukungan dana per misionaris | Bar |
+| **Support by Donation Type** | Dukungan dana per jenis donasi | Pie |
+
+- **Cara pakai:** sama seperti Dashboard utama — tombol **Measures** untuk mengganti ukuran, **Change Layout** untuk susunan kolom, dan ikon **×** untuk menyembunyikan kotak (per pengguna).
+
+### 6.2 Mission Trips (Perjalanan Misi)
+- **Fungsi:** Data perjalanan misi (outreach, medis, penanaman gereja, dsb.).
+- **Layar:** **Kanban** (dikelompokkan per status), **List**, **Calendar**, **Form**, **Search**.
+- **Cara isi:**
+  1. Klik **New**.
+  2. Isi **Mission Trip** (nama) serta **Start Date** dan **End Date** (wajib — ini tanggal Event).
+  3. Pilih **Mission Type**, **Mission Field**, **Sending Agency**, dan **Trip Leader**.
+  4. Pilih **Venue** dan isi **Budget**.
+  5. **Save** — **Trip Code** dibuat otomatis (`MT/2026/0001`).
+- **Status** diubah dari status bar: **Planned → Ongoing → Completed** (atau **Cancelled**).
+- **Support Received** dan **Funding Progress (%)** dihitung otomatis dari tab **Support**.
+- **Tab Participants** — anggota tim + peran dan konfirmasi.
+- **Tab Support** — donasi untuk perjalanan ini (dengan tombol **Total**).
+- **Tab Description / Notes** — tujuan kegiatan dan catatan internal.
+- Karena merupakan Event, perjalanan misi otomatis tampil di **Events** dan **Church Calendar**.
+
+### 6.3 Missionaries (Misionaris)
+- **Fungsi:** Data misionaris beserta wilayah, lembaga pengirim, status, dan target dukungan.
+- **Layar:** **Kanban** (per status), **List**, **Form**.
+- **Cara isi:**
+  1. Klik **New** → pilih **Contact** (atau buat kontak baru).
+  2. Pilih **Mission Field**, **Sending Agency**, **Status**, dan **Supervisor**.
+  3. Isi **Ministry Start / End**, **Support Target**.
+  4. Lengkapi **Contact Details** (jabatan, telepon, e-mail, alamat) → **Save**.
+- **Missionary Code** otomatis (`MSN/2026/0001`).
+- **Support Received** dan **Support Progress (%)** dihitung otomatis dari donasi pada tab **Support**.
+- **Tab Led Mission Trips** menampilkan perjalanan yang dipimpin misionaris ini.
+
+### 6.4 Participants (Peserta Misi)
+- **Fungsi:** Anggota tim pada satu perjalanan misi.
+- **Layar:** **List**, **Kanban** (per perjalanan), **Form**.
+- **Cara isi:**
+  1. Klik **New** → pilih **Contact** dan **Mission Trip**.
+  2. Pilih **Role** (Team Leader, Team Member, Medical Personnel, Teacher, Logistics, Intercessor).
+  3. Isi **Registration Date** dan centang **Confirmed** bila sudah pasti ikut.
+  4. **Save**.
+- Satu kontak hanya boleh terdaftar **sekali** pada perjalanan yang sama.
+- Peserta juga bisa ditambahkan langsung dari tab **Participants** pada form perjalanan.
+
+### 6.5 Mission Support (Dukungan Dana)
+- **Fungsi:** Mencatat donasi/support untuk misionaris maupun perjalanan misi.
+- **Layar:** **List**, **Pivot**, **Form**.
+- **Cara isi:**
+  1. Klik **New** → pilih **Donor** (kontak) dan **Date**.
+  2. Isi **Amount** dan pilih **Donation Type** (master yang sama dengan persembahan gereja).
+  3. Pilih **Missionary** dan/atau **Mission Trip** (minimal salah satu).
+  4. (Opsional) pilih **Accounting Payment** bila donasi sudah tercatat di akuntansi.
+  5. **Save** — referensi otomatis (`MSP/2026/0001`).
+- **Pivot** menganalisis total dukungan per misionaris/perjalanan per bulan.
+
+### 6.6 Configuration (Pengaturan Misi)
+- **Mission Fields** — wilayah/medan misi (Jabodetabek, Sumatra, Kalimantan, Nusa Tenggara, Papua, Southeast Asia), bisa bertingkat.
+- **Mission Types** — jenis misi (Evangelism, Church Planting, Medical Mission, Education & Literacy, Disaster Relief, Community Development).
+- **Mission Statuses** — status perjalanan (Planned, Ongoing, Completed, Cancelled) + penanda **Closed Status**.
+- **Mission Roles** — peran peserta (Team Leader, Team Member, Medical Personnel, Teacher, Logistics, Intercessor).
+- **Missionary Statuses** — status misionaris (Candidate, Preparing, On the Field, Furlough, Completed).
+- **Mission Agencies** — lembaga pengirim; setiap agency adalah **perusahaan di Contacts**.
+
+> 💡 **Tip:** Data contoh sudah tersedia: **2 lembaga misi**, **5 misionaris**, **5 perjalanan misi** (Juli–Desember 2026), **9 peserta**, dan **8 baris dukungan dana** — buka **Mission → Mission Trips** atau **Mission → Dashboard** untuk melihatnya.
+
+---
+
+## 7. Kontak / Jemaat (Contacts)
 
 Modul menambah kolom gereja pada layar **Contacts** (Kontak) standar Odoo.
 
@@ -308,7 +409,7 @@ Modul menambah kolom gereja pada layar **Contacts** (Kontak) standar Odoo.
 
 ---
 
-## 7. Ibadah / Event
+## 8. Ibadah / Event
 
 - **Fungsi:** Mencatat jadwal ibadah & kegiatan (Ibadah Minggu, Persekutuan Doa, Retret, dst.).
 - **Layar:** List + Form + **Roster** (jadwal petugas) + **Event Status** (Upcoming/Ongoing/Finished).
@@ -317,14 +418,14 @@ Modul menambah kolom gereja pada layar **Contacts** (Kontak) standar Odoo.
 
 ---
 
-## 8. Leads & Donasi (CRM / Akuntansi)
+## 9. Leads & Donasi (CRM / Akuntansi)
 
 - **CRM Leads:** Lead/calon jemaat dapat memuat data sakramen (tampilan Kanban khusus sakramen tersedia).
 - **Payments (Pembayaran/Donasi):** pembayaran persembahan tercatat; jenis persembahan mengacu pada **Donation Types**.
 
 ---
 
-## 9. Alur Kerja & Status
+## 10. Alur Kerja & Status
 
 Semua pendaftaran (Baptis & Pernikahan) memakai alur kerja yang sama:
 
@@ -343,7 +444,7 @@ Draft → Under Review → Approved → Completed
 
 ---
 
-## 10. Cara Cepat Mengisi Data (Ringkasan)
+## 11. Cara Cepat Mengisi Data (Ringkasan)
 
 | Data | Menu | Langkah Singkat |
 |---|---|---|
@@ -364,6 +465,11 @@ Draft → Under Review → Approved → Completed
 | Murid sekolah minggu | Sunday School → Students | New → Contact + Tanggal Lahir + Kelas → Save |
 | Sesi sekolah minggu | Sunday School → Sessions | New → Kelas + Guru + Topik + Waktu → Save |
 | Kehadiran murid | Sunday School → Sessions → tab Attendance | Add a line → Murid + Status → Save |
+| Perjalanan misi | Mission → Mission Trips | New → Nama + Tanggal + Type + Field + Leader → Save |
+| Misionaris | Mission → Missionaries | New → Contact + Field + Agency + Support Target → Save |
+| Peserta misi | Mission → Participants | New → Contact + Mission Trip + Role → Save |
+| Dukungan misi | Mission → Mission Support | New → Donor + Date + Amount + Missionary/Trip → Save |
+| Ringkasan misi (grafik) | Mission → Dashboard | (otomatis) |
 | Lihat semua kegiatan | Operations → Church Calendar | (otomatis) |
 | Lihat kalender publik (tanpa login) | Website → /church-calendar | (otomatis) |
 | Baca berita Kristen (publik) | Website → /christianity-news | (otomatis) |
@@ -371,7 +477,7 @@ Draft → Under Review → Approved → Completed
 
 ---
 
-## 11. Tips & Hal yang Perlu Diperhatikan
+## 12. Tips & Hal yang Perlu Diperhatikan
 
 - **Officiating Minister** hanya bisa memilih kontak dengan tipe anggota **Pastur** — pastikan tipe tersebut sudah diisi pada kontak petugas.
 - **Musician Role** hanya tampil jika tipe anggota kontak = **Musisi**.
@@ -381,6 +487,9 @@ Draft → Under Review → Approved → Completed
 - **Halaman beranda** dan halaman publik memiliki **SEO** yang dapat disesuaikan agar mudah ditemukan di mesin pencari.
 - **Sekolah minggu:** data **murid** dan **guru** memakai **Contacts** (`res.partner`). Mengubah nama/telepon di kontak langsung terlihat di data murid/guru; menghapus kontak juga menghapus data murid/guru terkait.
 - **Sesi sekolah minggu** otomatis masuk **Church Calendar**, sama seperti ibadah, baptis, dan nikah.
+- **Misi:** misionaris, peserta, dan lembaga pengirim adalah **Contacts** (`res.partner`), sedangkan **perjalanan misi adalah Event** (`event.event`) — mengubah tanggal/venue di Events langsung terlihat di form Mission Trip, dan sebaliknya. Perjalanan misi otomatis muncul di **Church Calendar**.
+- **Misi:** status/jenis/wilayah/peran adalah **master data** (bukan pilihan tetap). Tambah data baru di **Mission → Configuration** agar langsung tersedia di semua form.
+- **Mission Support:** setiap baris dukungan harus terhubung ke **minimal satu** misionaris atau perjalanan misi; nominal harus lebih besar dari nol.
 - **Dashboard bergrafik:** susunan kotak bersifat **per pengguna** (tidak memengaruhi pengguna lain). Gunakan **Change Layout** untuk mengubah jumlah kolom, tombol **Measures** untuk mengganti ukuran/tipe grafik, dan ikon **×** untuk menyembunyikan kotak yang tidak dipakai.
 - Data sample (contoh) sudah disediakan agar mudah berlatih, termasuk **56 jemaat** dengan nama Indonesia (mis. *Agus Saputra, Pdt. Paulus Situmorang*) yang terlibat dalam **pernikahan, baptis, dan komsel** untuk rentang **Agustus – Oktober 2026** (bulan berjalan hingga 2 bulan ke depan), beserta **6 komsel** (Komsel Imanuel, Bethel, Elim, Getsemani, Kanaan, Siloam) lengkap dengan anggota dan sesi pertemuannya, serta **5 kelas sekolah minggu** dengan **20 murid per kelas**, **12 guru**, **sesi**, dan **catatan kehadiran**.
 - Pastikan pengguna mendapat akses menu yang sesuai dari administrator melalui

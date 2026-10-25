@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- ========================================== -->
+        <!-- MISSION : MASTER DATA                      -->
+        <!-- ========================================== -->
+
+        <!-- MISSION FIELD -->
+        <record id="action_church_mission_field" model="ir.actions.act_window">
+            <field name="name">Mission Fields</field>
+            <field name="res_model">church.mission.field</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="view_church_mission_field_list" model="ir.ui.view">
+            <field name="name">church.mission.field.list</field>
+            <field name="model">church.mission.field</field>
+            <field name="arch" type="xml">
+                <list string="Mission Fields" editable="bottom">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="parent_id"/>
+                    <field name="country_id"/>
+                    <field name="color" widget="color_picker"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_mission_field_form" model="ir.ui.view">
+            <field name="name">church.mission.field.form</field>
+            <field name="model">church.mission.field</field>
+            <field name="arch" type="xml">
+                <form string="Mission Field">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="parent_id"/>
+                                <field name="country_id"/>
+                            </group>
+                            <group>
+                                <field name="sequence"/>
+                                <field name="color" widget="color_picker"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                        <group string="Sub Fields">
+                            <field name="child_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="country_id"/>
+                                </list>
+                            </field>
+                        </group>
+                        <group string="Description">
+                            <field name="description" placeholder="Field description..."/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_mission_field_search" model="ir.ui.view">
+            <field name="name">church.mission.field.search</field>
+            <field name="model">church.mission.field</field>
+            <field name="arch" type="xml">
+                <search string="Mission Field">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="country_id"/>
+                    <filter name="filter_inactive" string="Archived"
+                            domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- MISSION TYPE -->
+        <record id="action_church_mission_type" model="ir.actions.act_window">
+            <field name="name">Mission Types</field>
+            <field name="res_model">church.mission.type</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="view_church_mission_type_list" model="ir.ui.view">
+            <field name="name">church.mission.type.list</field>
+            <field name="model">church.mission.type</field>
+            <field name="arch" type="xml">
+                <list string="Mission Types" editable="bottom">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="color" widget="color_picker"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_mission_type_form" model="ir.ui.view">
+            <field name="name">church.mission.type.form</field>
+            <field name="model">church.mission.type</field>
+            <field name="arch" type="xml">
+                <form string="Mission Type">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                            </group>
+                            <group>
+                                <field name="sequence"/>
+                                <field name="color" widget="color_picker"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                        <group string="Description">
+                            <field name="description" placeholder="Type description..."/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_mission_type_search" model="ir.ui.view">
+            <field name="name">church.mission.type.search</field>
+            <field name="model">church.mission.type</field>
+            <field name="arch" type="xml">
+                <search string="Mission Type">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <filter name="filter_inactive" string="Archived"
+                            domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- MISSION STATUS -->
+        <record id="action_church_mission_status" model="ir.actions.act_window">
+            <field name="name">Mission Statuses</field>
+            <field name="res_model">church.mission.status</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="view_church_mission_status_list" model="ir.ui.view">
+            <field name="name">church.mission.status.list</field>
+            <field name="model">church.mission.status</field>
+            <field name="arch" type="xml">
+                <list string="Mission Statuses" editable="bottom">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="color" widget="color_picker"/>
+                    <field name="is_closed"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_mission_status_form" model="ir.ui.view">
+            <field name="name">church.mission.status.form</field>
+            <field name="model">church.mission.status</field>
+            <field name="arch" type="xml">
+                <form string="Mission Status">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="sequence"/>
+                            </group>
+                            <group>
+                                <field name="color" widget="color_picker"/>
+                                <field name="is_closed"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_mission_status_search" model="ir.ui.view">
+            <field name="name">church.mission.status.search</field>
+            <field name="model">church.mission.status</field>
+            <field name="arch" type="xml">
+                <search string="Mission Status">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <filter name="filter_inactive" string="Archived"
+                            domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- MISSION PARTICIPANT ROLE -->
+        <record id="action_church_mission_role" model="ir.actions.act_window">
+            <field name="name">Mission Roles</field>
+            <field name="res_model">church.mission.role</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="view_church_mission_role_list" model="ir.ui.view">
+            <field name="name">church.mission.role.list</field>
+            <field name="model">church.mission.role</field>
+            <field name="arch" type="xml">
+                <list string="Mission Roles" editable="bottom">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="color" widget="color_picker"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_mission_role_form" model="ir.ui.view">
+            <field name="name">church.mission.role.form</field>
+            <field name="model">church.mission.role</field>
+            <field name="arch" type="xml">
+                <form string="Mission Role">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="sequence"/>
+                            </group>
+                            <group>
+                                <field name="color" widget="color_picker"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_mission_role_search" model="ir.ui.view">
+            <field name="name">church.mission.role.search</field>
+            <field name="model">church.mission.role</field>
+            <field name="arch" type="xml">
+                <search string="Mission Role">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <filter name="filter_inactive" string="Archived"
+                            domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- MISSIONARY STATUS -->
+        <record id="action_church_missionary_status" model="ir.actions.act_window">
+            <field name="name">Missionary Statuses</field>
+            <field name="res_model">church.missionary.status</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="view_church_missionary_status_list" model="ir.ui.view">
+            <field name="name">church.missionary.status.list</field>
+            <field name="model">church.missionary.status</field>
+            <field name="arch" type="xml">
+                <list string="Missionary Statuses" editable="bottom">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="color" widget="color_picker"/>
+                    <field name="is_closed"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_missionary_status_form" model="ir.ui.view">
+            <field name="name">church.missionary.status.form</field>
+            <field name="model">church.missionary.status</field>
+            <field name="arch" type="xml">
+                <form string="Missionary Status">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="sequence"/>
+                            </group>
+                            <group>
+                                <field name="color" widget="color_picker"/>
+                                <field name="is_closed"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_missionary_status_search" model="ir.ui.view">
+            <field name="name">church.missionary.status.search</field>
+            <field name="model">church.missionary.status</field>
+            <field name="arch" type="xml">
+                <search string="Missionary Status">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <filter name="filter_inactive" string="Archived"
+                            domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- MISSION AGENCY -->
+        <record id="action_church_mission_agency" model="ir.actions.act_window">
+            <field name="name">Mission Agencies</field>
+            <field name="res_model">church.mission.agency</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="view_church_mission_agency_list" model="ir.ui.view">
+            <field name="name">church.mission.agency.list</field>
+            <field name="model">church.mission.agency</field>
+            <field name="arch" type="xml">
+                <list string="Mission Agencies">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <field name="city"/>
+                    <field name="missionary_count"/>
+                    <field name="trip_count"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_mission_agency_form" model="ir.ui.view">
+            <field name="name">church.mission.agency.form</field>
+            <field name="model">church.mission.agency</field>
+            <field name="arch" type="xml">
+                <form string="Mission Agency">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Agency"/>
+                            <h1>
+                                <field name="name" placeholder="Agency name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="partner_id"/>
+                                <field name="website" widget="url"/>
+                                <field name="field_ids" widget="many2many_tags"/>
+                            </group>
+                            <group>
+                                <field name="email" widget="email"/>
+                                <field name="phone" widget="phone"/>
+                                <field name="street"/>
+                                <field name="city"/>
+                                <field name="country_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Missionaries" name="missionaries">
+                                <field name="missionary_ids" readonly="1">
+                                    <list>
+                                        <field name="name"/>
+                                        <field name="field_id"/>
+                                        <field name="status_id" widget="badge"/>
+                                        <field name="support_progress"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Mission Trips" name="trips">
+                                <field name="trip_ids" readonly="1">
+                                    <list>
+                                        <field name="name"/>
+                                        <field name="date_begin"/>
+                                        <field name="status_id" widget="badge"/>
+                                        <field name="participant_count"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Notes" name="notes">
+                                <field name="notes" placeholder="Agency notes..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_mission_agency_search" model="ir.ui.view">
+            <field name="name">church.mission.agency.search</field>
+            <field name="model">church.mission.agency</field>
+            <field name="arch" type="xml">
+                <search string="Mission Agency">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="field_ids"/>
+                    <field name="email"/>
+                    <filter name="filter_inactive" string="Archived"
+                            domain="[('active', '=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_country" string="Country"
+                                context="{'group_by': 'country_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

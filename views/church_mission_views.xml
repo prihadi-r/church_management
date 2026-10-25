@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- ========================================== -->
+        <!-- MISSION : MISSION TRIPS                    -->
+        <!-- ========================================== -->
+        <record id="action_church_mission_trip" model="ir.actions.act_window">
+            <field name="name">Mission Trips</field>
+            <field name="res_model">church.mission.trip</field>
+            <field name="view_mode">kanban,list,calendar,form</field>
+            <field name="context">{'search_default_group_by_status': 1}</field>
+        </record>
+
+        <record id="view_church_mission_trip_kanban" model="ir.ui.view">
+            <field name="name">church.mission.trip.kanban</field>
+            <field name="model">church.mission.trip</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="status_id" group_create="false"
+                        group_edit="false" group_delete="false">
+                    <field name="status_id"/>
+                    <field name="color_index"/>
+                    <field name="type_id"/>
+                    <field name="field_id"/>
+                    <field name="leader_id"/>
+                    <field name="date_begin"/>
+                    <field name="participant_count"/>
+                    <field name="support_total"/>
+                    <templates>
+                        <t t-name="card">
+                            <div class="oe_kanban_global_click"
+                                 t-att-class="kanban_color(record.color_index.raw_value)">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </div>
+                                    <div class="o_kanban_record_options">
+                                        <field name="status_id" widget="badge"/>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div>
+                                        <i class="fa fa-tag" title="Type"/>
+                                        <field name="type_id"/>
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-globe" title="Field"/>
+                                        <field name="field_id"/>
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-user" title="Leader"/>
+                                        <field name="leader_id"/>
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-calendar" title="Start"/>
+                                        <field name="date_begin" widget="date"/>
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-users" title="Participants"/>
+                                        <field name="participant_count"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_church_mission_trip_list" model="ir.ui.view">
+            <field name="name">church.mission.trip.list</field>
+            <field name="model">church.mission.trip</field>
+            <field name="arch" type="xml">
+                <list string="Mission Trips">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="type_id"/>
+                    <field name="field_id"/>
+                    <field name="leader_id"/>
+                    <field name="date_begin"/>
+                    <field name="date_end" optional="show"/>
+                    <field name="status_id" widget="badge"/>
+                    <field name="participant_count"/>
+                    <field name="budget" optional="show"/>
+                    <field name="support_total" optional="show"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_mission_trip_calendar" model="ir.ui.view">
+            <field name="name">church.mission.trip.calendar</field>
+            <field name="model">church.mission.trip</field>
+            <field name="arch" type="xml">
+                <calendar string="Mission Trips"
+                          date_start="date_begin"
+                          date_stop="date_end"
+                          color="color_index"
+                          quick_create="false">
+                    <field name="name"/>
+                    <field name="type_id"/>
+                    <field name="field_id"/>
+                    <field name="leader_id"/>
+                    <field name="status_id" widget="badge"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="view_church_mission_trip_form" model="ir.ui.view">
+            <field name="name">church.mission.trip.form</field>
+            <field name="model">church.mission.trip</field>
+            <field name="arch" type="xml">
+                <form string="Mission Trip">
+                    <header>
+                        <field name="status_id" widget="statusbar"
+                               options="{'clickable': '1'}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Mission Trip"/>
+                            <h1>
+                                <field name="name" placeholder="e.g. Medical Outreach — Nias"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="code" readonly="1"/>
+                                <field name="type_id"/>
+                                <field name="field_id"/>
+                                <field name="agency_id"/>
+                                <field name="leader_id"/>
+                                <field name="user_id"/>
+                            </group>
+                            <group>
+                                <field name="date_begin"/>
+                                <field name="date_end"/>
+                                <field name="address_id"/>
+                                <field name="currency_id" groups="base.group_multi_currency"/>
+                                <field name="budget"/>
+                                <field name="support_total" readonly="1"/>
+                                <field name="funding_progress" widget="progressbar"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="participant_count" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="confirmed_participant_count" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Participants" name="participants">
+                                <field name="participant_ids"
+                                       context="{'default_trip_id': id}">
+                                    <list editable="bottom">
+                                        <field name="name"/>
+                                        <field name="partner_id"/>
+                                        <field name="role_id"/>
+                                        <field name="registration_date"/>
+                                        <field name="confirmed" widget="boolean_toggle"/>
+                                        <field name="email" optional="hide"/>
+                                        <field name="phone" optional="hide"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Support" name="support">
+                                <field name="support_ids"
+                                       context="{'default_trip_id': id}">
+                                    <list editable="bottom">
+                                        <field name="name" readonly="1"/>
+                                        <field name="partner_id"/>
+                                        <field name="date"/>
+                                        <field name="amount" sum="Total"/>
+                                        <field name="currency_id" column_invisible="1"/>
+                                        <field name="donation_type_id"/>
+                                        <field name="missionary_id"/>
+                                        <field name="payment_id" optional="hide"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Description" name="description">
+                                <field name="description"
+                                       placeholder="Purpose and activities of this mission trip..."/>
+                            </page>
+                            <page string="Notes" name="notes">
+                                <field name="notes" placeholder="Internal notes..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_mission_trip_search" model="ir.ui.view">
+            <field name="name">church.mission.trip.search</field>
+            <field name="model">church.mission.trip</field>
+            <field name="arch" type="xml">
+                <search string="Mission Trip">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="leader_id"/>
+                    <field name="field_id"/>
+                    <field name="type_id"/>
+                    <filter name="filter_planned" string="Planned"
+                            domain="[('status_id.code', '=', 'planned')]"/>
+                    <filter name="filter_ongoing" string="Ongoing"
+                            domain="[('status_id.code', '=', 'ongoing')]"/>
+                    <filter name="filter_completed" string="Completed"
+                            domain="[('status_id.code', '=', 'completed')]"/>
+                    <separator/>
+                    <filter name="filter_upcoming" string="Upcoming"
+                            domain="[('date_begin', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/>
+                    <separator/>
+                    <filter name="filter_inactive" string="Archived"
+                            domain="[('active', '=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_status" string="Status"
+                                context="{'group_by': 'status_id'}"/>
+                        <filter name="group_by_type" string="Mission Type"
+                                context="{'group_by': 'type_id'}"/>
+                        <filter name="group_by_field" string="Mission Field"
+                                context="{'group_by': 'field_id'}"/>
+                        <filter name="group_by_leader" string="Leader"
+                                context="{'group_by': 'leader_id'}"/>
+                        <filter name="group_by_agency" string="Sending Agency"
+                                context="{'group_by': 'agency_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- MISSION : MISSIONARIES                     -->
+        <!-- ========================================== -->
+        <record id="action_church_missionary" model="ir.actions.act_window">
+            <field name="name">Missionaries</field>
+            <field name="res_model">church.mission.missionary</field>
+            <field name="view_mode">kanban,list,form</field>
+        </record>
+
+        <record id="view_church_missionary_kanban" model="ir.ui.view">
+            <field name="name">church.mission.missionary.kanban</field>
+            <field name="model">church.mission.missionary</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="status_id" group_create="false"
+                        group_edit="false" group_delete="false">
+                    <field name="status_id"/>
+                    <field name="color_index"/>
+                    <field name="field_id"/>
+                    <field name="agency_id"/>
+                    <field name="support_progress"/>
+                    <templates>
+                        <t t-name="card">
+                            <div class="oe_kanban_global_click"
+                                 t-att-class="kanban_color(record.color_index.raw_value)">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </div>
+                                    <div class="o_kanban_record_options">
+                                        <field name="status_id" widget="badge"/>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div>
+                                        <i class="fa fa-globe" title="Field"/>
+                                        <field name="field_id"/>
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-building" title="Agency"/>
+                                        <field name="agency_id"/>
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-line-chart" title="Support"/>
+                                        <field name="support_progress" widget="progressbar"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_church_missionary_list" model="ir.ui.view">
+            <field name="name">church.mission.missionary.list</field>
+            <field name="model">church.mission.missionary</field>
+            <field name="arch" type="xml">
+                <list string="Missionaries">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="field_id"/>
+                    <field name="agency_id"/>
+                    <field name="status_id" widget="badge"/>
+                    <field name="start_date"/>
+                    <field name="support_target" optional="show"/>
+                    <field name="support_total" optional="show"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_missionary_form" model="ir.ui.view">
+            <field name="name">church.mission.missionary.form</field>
+            <field name="model">church.mission.missionary</field>
+            <field name="arch" type="xml">
+                <form string="Missionary">
+                    <header>
+                        <field name="status_id" widget="statusbar"
+                               options="{'clickable': '1'}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Missionary"/>
+                            <h1>
+                                <field name="name" placeholder="Missionary name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="code" readonly="1"/>
+                                <field name="partner_id"/>
+                                <field name="field_id"/>
+                                <field name="agency_id"/>
+                                <field name="supervisor_id"/>
+                            </group>
+                            <group>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                                <field name="currency_id" groups="base.group_multi_currency"/>
+                                <field name="support_target"/>
+                                <field name="support_total" readonly="1"/>
+                                <field name="support_progress" widget="progressbar"/>
+                            </group>
+                        </group>
+                        <group string="Contact Details">
+                            <group>
+                                <field name="function"/>
+                                <field name="phone" widget="phone"/>
+                                <field name="email" widget="email"/>
+                            </group>
+                            <group>
+                                <field name="street"/>
+                                <field name="city"/>
+                                <field name="country_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Led Mission Trips" name="trips">
+                                <field name="trip_ids" readonly="1">
+                                    <list>
+                                        <field name="name"/>
+                                        <field name="date_begin"/>
+                                        <field name="field_id"/>
+                                        <field name="status_id" widget="badge"/>
+                                        <field name="participant_count"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Support" name="support">
+                                <field name="support_ids"
+                                       context="{'default_missionary_id': id}">
+                                    <list editable="bottom">
+                                        <field name="name" readonly="1"/>
+                                        <field name="partner_id"/>
+                                        <field name="date"/>
+                                        <field name="amount" sum="Total"/>
+                                        <field name="currency_id" column_invisible="1"/>
+                                        <field name="donation_type_id"/>
+                                        <field name="trip_id"/>
+                                        <field name="payment_id" optional="hide"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Notes" name="notes">
+                                <field name="notes" placeholder="Ministry notes..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_missionary_search" model="ir.ui.view">
+            <field name="name">church.mission.missionary.search</field>
+            <field name="model">church.mission.missionary</field>
+            <field name="arch" type="xml">
+                <search string="Missionary">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="field_id"/>
+                    <field name="agency_id"/>
+                    <filter name="filter_on_field" string="On the Field"
+                            domain="[('status_id.code', '=', 'on_field')]"/>
+                    <filter name="filter_preparing" string="Preparing"
+                            domain="[('status_id.code', '=', 'preparing')]"/>
+                    <filter name="filter_furlough" string="Furlough"
+                            domain="[('status_id.code', '=', 'furlough')]"/>
+                    <separator/>
+                    <filter name="filter_inactive" string="Archived"
+                            domain="[('active', '=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_status" string="Status"
+                                context="{'group_by': 'status_id'}"/>
+                        <filter name="group_by_field" string="Mission Field"
+                                context="{'group_by': 'field_id'}"/>
+                        <filter name="group_by_agency" string="Sending Agency"
+                                context="{'group_by': 'agency_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- MISSION : PARTICIPANTS                     -->
+        <!-- ========================================== -->
+        <record id="action_church_mission_participant" model="ir.actions.act_window">
+            <field name="name">Mission Participants</field>
+            <field name="res_model">church.mission.participant</field>
+            <field name="view_mode">list,kanban,form</field>
+        </record>
+
+        <record id="view_church_mission_participant_list" model="ir.ui.view">
+            <field name="name">church.mission.participant.list</field>
+            <field name="model">church.mission.participant</field>
+            <field name="arch" type="xml">
+                <list string="Mission Participants">
+                    <field name="name"/>
+                    <field name="trip_id"/>
+                    <field name="role_id" widget="badge"/>
+                    <field name="registration_date"/>
+                    <field name="confirmed" widget="boolean_toggle"/>
+                    <field name="email" optional="show"/>
+                    <field name="phone" optional="hide"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_mission_participant_kanban" model="ir.ui.view">
+            <field name="name">church.mission.participant.kanban</field>
+            <field name="model">church.mission.participant</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="trip_id" group_create="false">
+                    <field name="trip_id"/>
+                    <field name="color_index"/>
+                    <field name="role_id"/>
+                    <field name="registration_date"/>
+                    <field name="confirmed"/>
+                    <templates>
+                        <t t-name="card">
+                            <div class="oe_kanban_global_click"
+                                 t-att-class="kanban_color(record.color_index.raw_value)">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </div>
+                                    <div class="o_kanban_record_options">
+                                        <field name="role_id" widget="badge"/>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div>
+                                        <i class="fa fa-calendar" title="Registered"/>
+                                        <field name="registration_date"/>
+                                    </div>
+                                    <div>
+                                        <field name="confirmed"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_church_mission_participant_form" model="ir.ui.view">
+            <field name="name">church.mission.participant.form</field>
+            <field name="model">church.mission.participant</field>
+            <field name="arch" type="xml">
+                <form string="Mission Participant">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Participant"/>
+                            <h1>
+                                <field name="name" placeholder="Participant name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="trip_id"/>
+                                <field name="role_id"/>
+                            </group>
+                            <group>
+                                <field name="registration_date"/>
+                                <field name="confirmed"/>
+                            </group>
+                        </group>
+                        <group string="Contact Details">
+                            <group>
+                                <field name="phone" widget="phone"/>
+                                <field name="email" widget="email"/>
+                            </group>
+                            <group>
+                                <field name="city"/>
+                                <field name="country_id"/>
+                            </group>
+                        </group>
+                        <group string="Notes">
+                            <field name="notes" placeholder="Participant notes..."/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_mission_participant_search" model="ir.ui.view">
+            <field name="name">church.mission.participant.search</field>
+            <field name="model">church.mission.participant</field>
+            <field name="arch" type="xml">
+                <search string="Mission Participant">
+                    <field name="name"/>
+                    <field name="trip_id"/>
+                    <field name="role_id"/>
+                    <filter name="filter_confirmed" string="Confirmed"
+                            domain="[('confirmed', '=', True)]"/>
+                    <filter name="filter_pending" string="Not Confirmed"
+                            domain="[('confirmed', '=', False)]"/>
+                    <separator/>
+                    <filter name="filter_inactive" string="Archived"
+                            domain="[('active', '=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_trip" string="Mission Trip"
+                                context="{'group_by': 'trip_id'}"/>
+                        <filter name="group_by_role" string="Role"
+                                context="{'group_by': 'role_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- MISSION : SUPPORT                          -->
+        <!-- ========================================== -->
+        <record id="action_church_mission_support" model="ir.actions.act_window">
+            <field name="name">Mission Support</field>
+            <field name="res_model">church.mission.support</field>
+            <field name="view_mode">list,pivot,form</field>
+        </record>
+
+        <record id="view_church_mission_support_list" model="ir.ui.view">
+            <field name="name">church.mission.support.list</field>
+            <field name="model">church.mission.support</field>
+            <field name="arch" type="xml">
+                <list string="Mission Support">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="partner_id"/>
+                    <field name="missionary_id"/>
+                    <field name="trip_id"/>
+                    <field name="donation_type_id"/>
+                    <field name="amount" sum="Total"/>
+                    <field name="currency_id" column_invisible="1"/>
+                    <field name="payment_id" optional="hide"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_church_mission_support_pivot" model="ir.ui.view">
+            <field name="name">church.mission.support.pivot</field>
+            <field name="model">church.mission.support</field>
+            <field name="arch" type="xml">
+                <pivot string="Mission Support Analysis">
+                    <field name="missionary_id" type="row"/>
+                    <field name="trip_id" type="row"/>
+                    <field name="date" interval="month" type="col"/>
+                    <field name="amount" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_church_mission_support_form" model="ir.ui.view">
+            <field name="name">church.mission.support.form</field>
+            <field name="model">church.mission.support</field>
+            <field name="arch" type="xml">
+                <form string="Mission Support">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Reference"/>
+                            <h1>
+                                <field name="name" readonly="1" placeholder="Auto-generated"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="date"/>
+                                <field name="amount"/>
+                                <field name="currency_id" groups="base.group_multi_currency"/>
+                                <field name="donation_type_id"/>
+                            </group>
+                            <group>
+                                <field name="missionary_id"/>
+                                <field name="trip_id"/>
+                                <field name="payment_id"/>
+                            </group>
+                        </group>
+                        <group string="Notes">
+                            <field name="notes" placeholder="Notes about this support..."/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_church_mission_support_search" model="ir.ui.view">
+            <field name="name">church.mission.support.search</field>
+            <field name="model">church.mission.support</field>
+            <field name="arch" type="xml">
+                <search string="Mission Support">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="missionary_id"/>
+                    <field name="trip_id"/>
+                    <field name="donation_type_id"/>
+                    <filter name="filter_this_month" string="This Month"
+                            domain="[('date', '&gt;=', (context_today() + relativedelta(day=1)).strftime('%Y-%m-%d'))]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_missionary" string="Missionary"
+                                context="{'group_by': 'missionary_id'}"/>
+                        <filter name="group_by_trip" string="Mission Trip"
+                                context="{'group_by': 'trip_id'}"/>
+                        <filter name="group_by_donation_type" string="Donation Type"
+                                context="{'group_by': 'donation_type_id'}"/>
+                        <filter name="group_by_date" string="Date"
+                                context="{'group_by': 'date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

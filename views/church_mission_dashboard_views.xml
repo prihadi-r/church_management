@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- ========================================== -->
+        <!-- MISSION DASHBOARD (Odoo Dashboards / board) -->
+        <!-- ========================================== -->
+
+        <!-- ========================================== -->
+        <!-- GRAPH VIEWS                                -->
+        <!-- ========================================== -->
+        <record id="view_church_mission_trip_status_graph" model="ir.ui.view">
+            <field name="name">church.mission.trip.status.graph</field>
+            <field name="model">church.mission.trip</field>
+            <field name="arch" type="xml">
+                <graph string="Mission Trips by Status" type="pie">
+                    <field name="status_id"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_church_mission_trip_type_graph" model="ir.ui.view">
+            <field name="name">church.mission.trip.type.graph</field>
+            <field name="model">church.mission.trip</field>
+            <field name="arch" type="xml">
+                <graph string="Mission Trips by Type" type="bar">
+                    <field name="type_id"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_church_mission_trip_field_graph" model="ir.ui.view">
+            <field name="name">church.mission.trip.field.graph</field>
+            <field name="model">church.mission.trip</field>
+            <field name="arch" type="xml">
+                <graph string="Mission Trips by Field" type="bar">
+                    <field name="field_id"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_church_missionary_status_graph" model="ir.ui.view">
+            <field name="name">church.mission.missionary.status.graph</field>
+            <field name="model">church.mission.missionary</field>
+            <field name="arch" type="xml">
+                <graph string="Missionaries by Status" type="pie">
+                    <field name="status_id"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_church_mission_participant_role_graph" model="ir.ui.view">
+            <field name="name">church.mission.participant.role.graph</field>
+            <field name="model">church.mission.participant</field>
+            <field name="arch" type="xml">
+                <graph string="Participants by Role" type="pie">
+                    <field name="role_id"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_church_mission_support_date_graph" model="ir.ui.view">
+            <field name="name">church.mission.support.date.graph</field>
+            <field name="model">church.mission.support</field>
+            <field name="arch" type="xml">
+                <graph string="Mission Support per Month" type="bar">
+                    <field name="date" interval="month"/>
+                    <field name="amount" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_church_mission_support_missionary_graph" model="ir.ui.view">
+            <field name="name">church.mission.support.missionary.graph</field>
+            <field name="model">church.mission.support</field>
+            <field name="arch" type="xml">
+                <graph string="Support per Missionary" type="bar">
+                    <field name="missionary_id"/>
+                    <field name="amount" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_church_mission_support_donation_graph" model="ir.ui.view">
+            <field name="name">church.mission.support.donation.graph</field>
+            <field name="model">church.mission.support</field>
+            <field name="arch" type="xml">
+                <graph string="Support by Donation Type" type="pie">
+                    <field name="donation_type_id"/>
+                    <field name="amount" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- DASHLET ACTIONS (graph only, no list)      -->
+        <!-- ========================================== -->
+        <record id="action_church_mission_dashboard_trip_status" model="ir.actions.act_window">
+            <field name="name">Missions by Status</field>
+            <field name="res_model">church.mission.trip</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_church_mission_trip_status_graph"/>
+        </record>
+
+        <record id="action_church_mission_dashboard_trip_type" model="ir.actions.act_window">
+            <field name="name">Missions by Type</field>
+            <field name="res_model">church.mission.trip</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_church_mission_trip_type_graph"/>
+        </record>
+
+        <record id="action_church_mission_dashboard_trip_field" model="ir.actions.act_window">
+            <field name="name">Missions by Field</field>
+            <field name="res_model">church.mission.trip</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_church_mission_trip_field_graph"/>
+        </record>
+
+        <record id="action_church_mission_dashboard_missionary" model="ir.actions.act_window">
+            <field name="name">Missionaries by Status</field>
+            <field name="res_model">church.mission.missionary</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_church_missionary_status_graph"/>
+        </record>
+
+        <record id="action_church_mission_dashboard_participant" model="ir.actions.act_window">
+            <field name="name">Participants by Role</field>
+            <field name="res_model">church.mission.participant</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_church_mission_participant_role_graph"/>
+        </record>
+
+        <record id="action_church_mission_dashboard_support_date" model="ir.actions.act_window">
+            <field name="name">Support per Month</field>
+            <field name="res_model">church.mission.support</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_church_mission_support_date_graph"/>
+        </record>
+
+        <record id="action_church_mission_dashboard_support_missionary" model="ir.actions.act_window">
+            <field name="name">Support per Missionary</field>
+            <field name="res_model">church.mission.support</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_church_mission_support_missionary_graph"/>
+        </record>
+
+        <record id="action_church_mission_dashboard_support_donation" model="ir.actions.act_window">
+            <field name="name">Support by Donation Type</field>
+            <field name="res_model">church.mission.support</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_church_mission_support_donation_graph"/>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- BOARD                                      -->
+        <!-- ========================================== -->
+        <record id="view_church_mission_dashboard_board" model="ir.ui.view">
+            <field name="name">church.mission.dashboard.board</field>
+            <field name="model">board.board</field>
+            <field name="arch" type="xml">
+                <form string="Mission">
+                    <board style="1-1">
+                        <column>
+                            <action name="%(action_church_mission_dashboard_trip_status)d"
+                                    string="Missions by Status" view_mode="graph"/>
+                            <action name="%(action_church_mission_dashboard_trip_type)d"
+                                    string="Missions by Type" view_mode="graph"/>
+                            <action name="%(action_church_mission_dashboard_trip_field)d"
+                                    string="Missions by Field" view_mode="graph"/>
+                            <action name="%(action_church_mission_dashboard_missionary)d"
+                                    string="Missionaries" view_mode="graph"/>
+                        </column>
+                        <column>
+                            <action name="%(action_church_mission_dashboard_participant)d"
+                                    string="Participants" view_mode="graph"/>
+                            <action name="%(action_church_mission_dashboard_support_date)d"
+                                    string="Support per Month" view_mode="graph"/>
+                            <action name="%(action_church_mission_dashboard_support_missionary)d"
+                                    string="Support per Missionary" view_mode="graph"/>
+                            <action name="%(action_church_mission_dashboard_support_donation)d"
+                                    string="Support by Donation Type" view_mode="graph"/>
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_church_mission_dashboard" model="ir.actions.act_window">
+            <field name="name">Mission</field>
+            <field name="res_model">board.board</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_church_mission_dashboard_board"/>
+            <field name="context">{'disable_toolbar': True}</field>
+            <field name="usage">menu</field>
+        </record>
+    </data>
+</odoo>

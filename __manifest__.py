@@ -1,7 +1,7 @@
 {
     'name': 'Darash - Church Management',
-    'version': '2.1.0',
-    'summary': 'Open-source Church Management System (ChMS): membership, tithing & donations, worship event scheduling, baptism & marriage registration, ministry and news for Odoo 18.',
+    'version': '2.2.0',
+    'summary': 'Open-source Church Management System (ChMS): membership, tithing & donations, worship event scheduling, baptism & marriage registration, missions & missionaries, ministry and news for Odoo 18.',
     'author': 'Prihadi <prihadi.r@gmail.com>',
     'description': """
 # ⛪ Darash - Church Management
@@ -44,6 +44,22 @@ This module is **free to use and modify**.
 - **News articles, categories, and sources** with RSS/feed ingestion
   (`feedparser`), published to the website.
 
+### Missions
+- **Mission Fields, Types, Statuses, Roles, and Missionary Statuses**
+  as master data (no hard-coded selection fields).
+- **Mission Agencies** — sending organizations that delegate to
+  `res.partner`, so they are real Contacts.
+- **Missionaries** — delegate to `res.partner` (identity, phone, email,
+  address) with mission field, agency, status and support target/progress.
+- **Mission Trips** — delegate to `event.event`, so a trip is also an Event
+  (venue, dates, registrations) and shows up in the Church Calendar.
+- **Participants** — trip team members with roles and confirmation.
+- **Mission Support** — donor contributions per missionary/trip, reusing
+  `church.donation.type` and optionally linked to `account.payment`.
+- **Mission Dashboard** — board with graphs for trips by status/type/field,
+  missionaries by status, participants by role, and support per
+  month/missionary/donation type.
+
 ### Integrations
 - Extends **Contacts** (`res.partner`), **CRM Leads** (`crm.lead`),
   **Events** (`event.event`), and **Accounting Payments** (`account.payment`).
@@ -75,6 +91,15 @@ Church Management
 ├── Master Data
 │   ├── Member Types / Care Cells / Donation Types
 │   ├── Sacrament Types / Event Roles / Musician Roles
+├── Sunday School
+│   ├── Classes / Teachers / Students
+│   ├── Sessions / Attendance
+│   └── Configuration
+├── Mission
+│   ├── Dashboard
+│   ├── Mission Trips / Missionaries / Participants
+│   ├── Mission Support
+│   └── Configuration (Fields / Types / Statuses / Roles / Agencies)
 └── Operations
     ├── Event Rosters / Musician Schedule
     ├── Baptism Registrations / Marriage Registrations
@@ -108,12 +133,19 @@ Church Management
         # Sample data: 5 classes x 20 students. Loaded right after the master
         # data it references (levels, statuses, teacher roles, student sequence).
         'data/church_sunday_school_sample.xml',
+        # Mission master data (fields, types, statuses, roles) + sequences.
+        # Must be loaded before any mission transaction record.
+        'data/church_mission_data.xml',
         'data/church_care_cell_status_sample.xml',
         'data/church_care_cell_type_sample.xml',   
         'data/church_member_type_sample.xml',
         'data/church_donation_type_sample.xml',
         'data/church_sacrament_type_sample.xml',
         'data/res_partner_sample.xml',
+        # Mission sample data: agencies, missionaries, trips, participants and
+        # support lines. Loaded after res_partner_sample.xml because the
+        # participants and donors reference the sample congregation contacts.
+        'data/church_mission_sample.xml',
         'data/crm_lead_sample.xml',
         'data/church_baptism_registration_sample.xml',
         'data/event_event_sample.xml',
@@ -148,6 +180,10 @@ Church Management
         'views/church_sunday_school_master_views.xml',
         'views/church_sunday_school_views.xml',
         'views/church_sunday_school_menu.xml',
+        'views/church_mission_master_views.xml',
+        'views/church_mission_views.xml',
+        'views/church_mission_dashboard_views.xml',
+        'views/church_mission_menu.xml',
         'views/church_news_source_views.xml',
         'views/church_news_article_views.xml',
         'views/church_news_category_views.xml',

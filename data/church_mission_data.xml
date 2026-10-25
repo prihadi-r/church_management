@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- ========================================== -->
+        <!-- SEQUENCES                                  -->
+        <!-- ========================================== -->
+        <record id="seq_church_mission_trip" model="ir.sequence">
+            <field name="name">Mission Trip</field>
+            <field name="code">church.mission.trip</field>
+            <field name="prefix">MT/%(year)s/</field>
+            <field name="padding">4</field>
+        </record>
+
+        <record id="seq_church_missionary" model="ir.sequence">
+            <field name="name">Missionary</field>
+            <field name="code">church.mission.missionary</field>
+            <field name="prefix">MSN/%(year)s/</field>
+            <field name="padding">4</field>
+        </record>
+
+        <record id="seq_church_mission_support" model="ir.sequence">
+            <field name="name">Mission Support</field>
+            <field name="code">church.mission.support</field>
+            <field name="prefix">MSP/%(year)s/</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- MASTER: MISSION FIELD                      -->
+        <!-- ========================================== -->
+        <record id="mission_field_jabodetabek" model="church.mission.field">
+            <field name="name">Jabodetabek</field>
+            <field name="code">jabodetabek</field>
+            <field name="sequence">10</field>
+            <field name="color">5</field>
+        </record>
+        <record id="mission_field_sumatra" model="church.mission.field">
+            <field name="name">Sumatra</field>
+            <field name="code">sumatra</field>
+            <field name="sequence">20</field>
+            <field name="color">3</field>
+        </record>
+        <record id="mission_field_kalimantan" model="church.mission.field">
+            <field name="name">Kalimantan</field>
+            <field name="code">kalimantan</field>
+            <field name="sequence">30</field>
+            <field name="color">4</field>
+        </record>
+        <record id="mission_field_nusa_tenggara" model="church.mission.field">
+            <field name="name">Nusa Tenggara</field>
+            <field name="code">nusa_tenggara</field>
+            <field name="sequence">40</field>
+            <field name="color">6</field>
+        </record>
+        <record id="mission_field_papua" model="church.mission.field">
+            <field name="name">Papua</field>
+            <field name="code">papua</field>
+            <field name="sequence">50</field>
+            <field name="color">10</field>
+        </record>
+        <record id="mission_field_southeast_asia" model="church.mission.field">
+            <field name="name">Southeast Asia</field>
+            <field name="code">southeast_asia</field>
+            <field name="sequence">60</field>
+            <field name="color">9</field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- MASTER: MISSION TYPE                       -->
+        <!-- ========================================== -->
+        <record id="mission_type_evangelism" model="church.mission.type">
+            <field name="name">Evangelism</field>
+            <field name="code">evangelism</field>
+            <field name="sequence">10</field>
+            <field name="color">0</field>
+        </record>
+        <record id="mission_type_church_planting" model="church.mission.type">
+            <field name="name">Church Planting</field>
+            <field name="code">church_planting</field>
+            <field name="sequence">20</field>
+            <field name="color">4</field>
+        </record>
+        <record id="mission_type_medical" model="church.mission.type">
+            <field name="name">Medical Mission</field>
+            <field name="code">medical</field>
+            <field name="sequence">30</field>
+            <field name="color">2</field>
+        </record>
+        <record id="mission_type_education" model="church.mission.type">
+            <field name="name">Education &amp; Literacy</field>
+            <field name="code">education</field>
+            <field name="sequence">40</field>
+            <field name="color">6</field>
+        </record>
+        <record id="mission_type_disaster_relief" model="church.mission.type">
+            <field name="name">Disaster Relief</field>
+            <field name="code">disaster_relief</field>
+            <field name="sequence">50</field>
+            <field name="color">1</field>
+        </record>
+        <record id="mission_type_community_development" model="church.mission.type">
+            <field name="name">Community Development</field>
+            <field name="code">community_development</field>
+            <field name="sequence">60</field>
+            <field name="color">5</field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- MASTER: MISSION STATUS                     -->
+        <!-- ========================================== -->
+        <record id="mission_status_planned" model="church.mission.status">
+            <field name="name">Planned</field>
+            <field name="code">planned</field>
+            <field name="sequence">10</field>
+            <field name="color">0</field>
+        </record>
+        <record id="mission_status_ongoing" model="church.mission.status">
+            <field name="name">Ongoing</field>
+            <field name="code">ongoing</field>
+            <field name="sequence">20</field>
+            <field name="color">4</field>
+        </record>
+        <record id="mission_status_completed" model="church.mission.status">
+            <field name="name">Completed</field>
+            <field name="code">completed</field>
+            <field name="sequence">30</field>
+            <field name="color">10</field>
+            <field name="is_closed" eval="True"/>
+        </record>
+        <record id="mission_status_cancelled" model="church.mission.status">
+            <field name="name">Cancelled</field>
+            <field name="code">cancelled</field>
+            <field name="sequence">40</field>
+            <field name="color">1</field>
+            <field name="is_closed" eval="True"/>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- MASTER: MISSION PARTICIPANT ROLE           -->
+        <!-- ========================================== -->
+        <record id="mission_role_leader" model="church.mission.role">
+            <field name="name">Team Leader</field>
+            <field name="code">team_leader</field>
+            <field name="sequence">10</field>
+            <field name="color">4</field>
+        </record>
+        <record id="mission_role_member" model="church.mission.role">
+            <field name="name">Team Member</field>
+            <field name="code">team_member</field>
+            <field name="sequence">20</field>
+            <field name="color">0</field>
+        </record>
+        <record id="mission_role_medical" model="church.mission.role">
+            <field name="name">Medical Personnel</field>
+            <field name="code">medical</field>
+            <field name="sequence">30</field>
+            <field name="color">2</field>
+        </record>
+        <record id="mission_role_teacher" model="church.mission.role">
+            <field name="name">Teacher</field>
+            <field name="code">teacher</field>
+            <field name="sequence">40</field>
+            <field name="color">6</field>
+        </record>
+        <record id="mission_role_logistics" model="church.mission.role">
+            <field name="name">Logistics</field>
+            <field name="code">logistics</field>
+            <field name="sequence">50</field>
+            <field name="color">5</field>
+        </record>
+        <record id="mission_role_intercessor" model="church.mission.role">
+            <field name="name">Intercessor</field>
+            <field name="code">intercessor</field>
+            <field name="sequence">60</field>
+            <field name="color">9</field>
+        </record>
+
+        <!-- ========================================== -->
+        <!-- MASTER: MISSIONARY STATUS                  -->
+        <!-- ========================================== -->
+        <record id="missionary_status_candidate" model="church.missionary.status">
+            <field name="name">Candidate</field>
+            <field name="code">candidate</field>
+            <field name="sequence">10</field>
+            <field name="color">0</field>
+        </record>
+        <record id="missionary_status_preparing" model="church.missionary.status">
+            <field name="name">Preparing</field>
+            <field name="code">preparing</field>
+            <field name="sequence">20</field>
+            <field name="color">3</field>
+        </record>
+        <record id="missionary_status_on_field" model="church.missionary.status">
+            <field name="name">On the Field</field>
+            <field name="code">on_field</field>
+            <field name="sequence">30</field>
+            <field name="color">10</field>
+        </record>
+        <record id="missionary_status_furlough" model="church.missionary.status">
+            <field name="name">Furlough</field>
+            <field name="code">furlough</field>
+            <field name="sequence">40</field>
+            <field name="color">6</field>
+        </record>
+        <record id="missionary_status_completed" model="church.missionary.status">
+            <field name="name">Completed</field>
+            <field name="code">completed</field>
+            <field name="sequence">50</field>
+            <field name="color">1</field>
+            <field name="is_closed" eval="True"/>
+        </record>
+    </data>
+</odoo>
