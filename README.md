@@ -1,4 +1,4 @@
-# ⛪ Darash — Open Source Church Management System (ChMS) for Odoo 18
+# ⛪ Darash — Open Source Church Management System (ChMS)
 
 > **Your church, beautifully managed.**
 
