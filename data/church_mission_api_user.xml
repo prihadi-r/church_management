@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Service account used by the Flutter mobile client.
+             It has no password, so it can only be used through an API key
+             (Preferences > Account Security > New API Key).
+
+             Its church role is left configurable on purpose: assign Read Only,
+             Write Only or Full Access to this user in Settings > Users &
+             Companies > Users, depending on what the app has to do. noupdate
+             keeps the admin's choice on module upgrade. -->
+        <record id="user_mobile_api" model="res.users">
+            <field name="name">Mobile API</field>
+            <field name="login">mobile_api</field>
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_user'), ref('group_church_read_only')])]"/>
+        </record>
+    </data>
+</odoo>

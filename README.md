@@ -135,6 +135,41 @@ Whether you lead a small congregation or a growing ministry, Darash centralizes 
   inherit `res.partner`, while **mission trips inherit `event.event`** (so they are real Events and
   appear automatically in the Church Calendar).
 
+### 📱 Mobile API (Flutter)
+
+A JSON API for the companion Flutter app, served over plain `type='http'` routes.
+
+- **API-key authentication** — every `/api/v1/mobile/...` route is protected by
+  `@require_mobile_api_key` (`controllers/security.py`): it reads `X-Api-Key` (required) and
+  `X-Database` (optional, must match the database the request was routed to), validates the key
+  against `res.users.apikeys`, then switches the request environment to the key owner so the
+  standard Odoo ACLs and record rules apply.
+- **Read-only protection** — members of the **Church Management → Read Only** role get
+  `403 read_only_access` on `POST` / `PUT` / `PATCH` / `DELETE`.
+- **Unified envelope** — `controllers/common.py` provides `success_response()` and
+  `error_response()` plus the `@handle_api_errors` decorator; Odoo exceptions map to
+  `400 validation_error`, `400 user_error`, `403 access_error`, `404 not_found` and
+  `500 internal_error`, while tracebacks stay in the server log.
+
+```json
+{ "success": true, "data": { } }
+
+{ "success": false, "error": { "code": "invalid_api_key",
+                               "message": "The provided API key is invalid or expired." } }
+```
+
+**Service account.** The module creates a dedicated **Mobile API** user (`mobile_api`, external id
+`church_management.user_mobile_api`) without a password, so it can only be reached with an API key.
+Log in as that user, create a key under **Preferences → Account Security → New API Key**, and pick
+its church role in **Settings → Users & Companies → Users** — **Read Only** by default; choose
+Write Only or Full Access for users that must create data. The record is loaded with
+`noupdate="1"`, so your choice survives module upgrades.
+
+**Endpoints.** Legacy helpers live in `controllers/church_api_controller.py`
+(`/api/church/events`, `/api/church/sacrament/register`). The versioned `/api/v1/mobile/...` sets
+for **Mission**, **Sunday School** and the **Church Calendar** are tracked in
+[task.md](task.md).
+
 ---
 
 ## 📋 Requirements
@@ -305,6 +340,7 @@ Contributions, bug reports, and feature requests are welcome! Please read our [C
 
 | Version | Date | Changes |
 |---------|------|---------|
+| **2.3.0** *(in progress)* | 2026-10-26 | **Mobile API foundation** — API-key authentication (`X-Api-Key` / `X-Database`), per-request execution context so Odoo ACLs and record rules apply, read-only role rejected on write methods, unified `success`/`error` JSON envelope with Odoo exception mapping, and a dedicated `mobile_api` service user. Mission, Sunday School and Church Calendar endpoint sets are planned on the [task board](task.md). |
 | **2.2.0** | 2026-10-25 | **Mission** — new **Mission** app: mission trips (inherit `event.event`), missionaries / participants / agencies (inherit `res.partner`), mission support (reuses donation types and `account.payment`), master data for fields/types/statuses/roles/missionary statuses (no selection fields), a dedicated **Mission Dashboard** board, and sample data. |
 | **2.1.0** | 2026-10-24 | **Sunday School & graph dashboard** — new **Sunday School** app (classes, teachers, students, sessions, attendance + configuration masters; students & teachers inherit `res.partner`), sample data (5 classes × 20 students, 12 teachers, 15 sessions, 200 attendance lines), and the dashboard rebuilt on Odoo's **Dashboards** (`board`) app as eight interactive bar/pie graph dashlets instead of text cards. |
 | **2.0.0** | 2026-08-09 | **Darash major release** — branded as **Darash**, themed public homepage, Christianity News page & nav link, homepage SEO, unified color theme across all public pages, and deployment tooling (`scripts/`). |

@@ -131,6 +131,9 @@ See the `LICENSE` file for the full terms.
     'data': [
         'security/church_security.xml',
         'security/ir.model.access.csv',
+        # Dedicated API user for the Flutter mobile client. Loaded right after
+        # the church groups it references.
+        'data/church_mission_api_user.xml',
         'data/church_sunday_school_data.xml',
         # Sample data: 5 classes x 20 students. Loaded right after the master
         # data it references (levels, statuses, teacher roles, student sequence).
