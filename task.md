@@ -46,7 +46,7 @@ Church Management, using **master-data models instead of selection fields** and
 
 ### Backlog / follow-ups
 
-- ⬜ Upgrade the running databases (`demo`) to `18.0.2.2.0` — they are still on `2.0.0`.
+- ✅ Upgrade the running databases (`demo`) to `18.0.2.2.0` — done 2026-10-26 (was `2.0.0`).
 - ⬜ Screenshots for the Mission dashboard under `screenshots/`.
 - ⬜ Optional: public "Missions" page on the website (reuse `event.event` data).
 - ⬜ Optional: auto-create `church.mission.participant` from `event.registration`.
@@ -167,11 +167,11 @@ compose `@require_mobile_api_key` + `@handle_api_errors` and answer through
 
 #### 19. Mobile Dashboard Endpoint (`/api/v1/mobile/mission/dashboard`)
 
-- [ ] **19.1 Consolidated KPI & Chart Data (`GET /metrics`)**
-  - [ ] Aggregate data corresponding to the 8 web mission dashboard dashlets.
-  - [ ] Return KPI card counters (active trips, missionaries in field, total support raised, upcoming departures).
-  - [ ] Return pre-aggregated time-series and categorical data for Flutter chart rendering.
-  - [ ] Deliverable: `controllers/dashboard_controller.py`.
+- [x] **19.1 Consolidated KPI & Chart Data (`GET /metrics`)**
+  - [x] Aggregate data corresponding to the 8 web mission dashboard dashlets.
+  - [x] Return KPI card counters (active trips, missionaries in field, total support raised, upcoming departures).
+  - [x] Return pre-aggregated time-series and categorical data for Flutter chart rendering.
+  - [x] Deliverable: [controllers/dashboard_controller.py](controllers/dashboard_controller.py).
 
 #### 20. Sunday School Endpoints (`/api/v1/mobile/sunday-school`)
 
@@ -222,32 +222,45 @@ compose `@require_mobile_api_key` + `@handle_api_errors` and answer through
 
 #### 21. Church Calendar Endpoints (`/api/v1/mobile/calendar`)
 
-- [ ] **21.1 Calendar Activities (`GET /activities`)**
-  - [ ] Return `church.activity` rows (`event`, `baptism`, `marriage`, `care_cell`, `pray`, `sunday_school`) with `name`, `activity_type`, `start`, `stop`, `state` and `color`.
-  - [ ] Hide unconfirmed activities (`draft`, `review`, `cancel`) the same way the public `church-calendar` page does; pray requests are always shown.
-  - [ ] Filter by `type`, `date_from`, `date_to`, `state`; support `limit` / `offset`.
-  - [ ] Deliverable: `controllers/calendar_controller.py`.
+- [x] **21.1 Calendar Activities (`GET /activities`)**
+  - [x] Return `church.activity` rows (`event`, `baptism`, `marriage`, `care_cell`, `pray`, `sunday_school`) with `name`, `activity_type`, `start`, `stop`, `state` and `color`.
+  - [x] Hide unconfirmed activities (`draft`, `review`, `cancel`) the same way the public `church-calendar` page does; pray requests are always shown.
+  - [x] Filter by `type`, `date_from`, `date_to`, `state`; support `limit` / `offset`.
+  - [x] Deliverable: [controllers/calendar_controller.py](controllers/calendar_controller.py).
 
-- [ ] **21.2 Activity Detail (`GET /activities/<int:activity_id>`)**
-  - [ ] Return the activity plus its source as `source_type` / `source_id` (`event_id`, `baptism_id`, `marriage_id`, `care_cell_id`, `pray_request_id`, `sunday_school_session_id`) so the app can drill down.
-  - [ ] Deliverable: `controllers/calendar_controller.py`.
+- [x] **21.2 Activity Detail (`GET /activities/<int:activity_id>`)**
+  - [x] Return the activity plus its source as `source_type` / `source_id` (`event_id`, `baptism_id`, `marriage_id`, `care_cell_id`, `pray_request_id`, `sunday_school_session_id`) so the app can drill down.
+  - [x] Deliverable: [controllers/calendar_controller.py](controllers/calendar_controller.py).
 
-- [ ] **21.3 Agenda (`GET /agenda`)**
-  - [ ] Group activities per day with a month roll-up for the mobile agenda list.
-  - [ ] Support `group=day` (default) or `group=type` and the same filters as `/activities`.
-  - [ ] Deliverable: `controllers/calendar_controller.py`.
+- [x] **21.3 Agenda (`GET /agenda`)**
+  - [x] Group activities per day with a month roll-up for the mobile agenda list.
+  - [x] Support `group=day` (default) or `group=type` and the same filters as `/activities`.
+  - [x] Deliverable: [controllers/calendar_controller.py](controllers/calendar_controller.py).
 
-- [ ] **21.4 Upcoming (`GET /upcoming`)**
-  - [ ] Return the next activities from now for the home screen, `limit` default 5 and capped at 50.
-  - [ ] Deliverable: `controllers/calendar_controller.py`.
+- [x] **21.4 Upcoming (`GET /upcoming`)**
+  - [x] Return the next activities from now for the home screen, `limit` default 5 and capped at 50.
+  - [x] Deliverable: [controllers/calendar_controller.py](controllers/calendar_controller.py).
 
-- [ ] **21.5 Calendar Metrics (`GET /metrics`)**
-  - [ ] Return activity counts per type and per month for the dashboard charts.
-  - [ ] Deliverable: `controllers/calendar_controller.py`.
+- [x] **21.5 Calendar Metrics (`GET /metrics`)**
+  - [x] Return activity counts per type and per month for the dashboard charts.
+  - [x] Deliverable: [controllers/calendar_controller.py](controllers/calendar_controller.py).
 
 - [ ] **21.6 Optional: iCal Export (`GET /export.ics`)**
   - [ ] Serve the filtered activities as `text/calendar` so the app can hand them to the device calendar.
   - [ ] Deliverable: `controllers/calendar_controller.py`.
+
+### Backlog / follow-ups
+
+- ⬜ **15–18** — Mission master data, trips, missionaries/agencies and support endpoints.
+- ⬜ **20** — Sunday School endpoints (master data, classes, sessions, attendance, dashboard).
+- ⬜ **21.6** — optional iCal export (`GET /export.ics`).
+- ⬜ Write endpoints (`POST /sessions/<id>/attendance`, `POST /pledge`,
+      `POST /register`) need a service user with **Write Only** or **Full Access**; the shipped
+      `mobile_api` user is **Read Only** by default.
+- ⬜ Currency conversion for monetary totals (mission dashboard and support endpoints) —
+      amounts are currently summed in the company currency.
+- ⬜ Revisit the model-wide `event.event` read grant added on 2026-10-26 (needed because
+      mission trips inherit `event.event`); consider restricting it to the fields the app uses.
 
 ---
 

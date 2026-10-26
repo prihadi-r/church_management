@@ -43,6 +43,16 @@ def error_response(status, code, message):
     }, status=status)
 
 
+def paginated_response(items, total, limit, offset, status=200):
+    """Wrap a page of ``items`` together with the pagination metadata."""
+    return success_response({
+        'items': items,
+        'total': total,
+        'limit': limit,
+        'offset': offset,
+    }, status=status)
+
+
 def _user_error_details(exc):
     """Map an Odoo user-facing exception to ``(status, code)``."""
     if isinstance(exc, exceptions.ValidationError):

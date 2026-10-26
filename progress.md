@@ -5,6 +5,102 @@ Task breakdown lives in [task.md](task.md).
 
 ---
 
+## 2026-10-26 — Docs sync for the Mobile API milestone
+
+- `README.md`: added a **Mobile API** row to the architecture table, listed
+  `TASK-FLUTTER-CONTROLLER.md` under documentation, and the `2.3.0 (in progress)` row now
+  names the two live endpoint sets.
+- `USER_GUIDE.md`: new **§13 Mobile API (Aplikasi Flutter)** — service-account/API-key steps,
+  endpoint table, response envelope with error-code table, and what is still planned.
+- `INSTALLATION_GUIDE.md`: new **§6.4 Pengguna API Mobile** (password-less `mobile_api` user,
+  key creation, configurable role), a CLI upgrade recipe, and a refreshed "File Penting" table.
+- `TASK-FLUTTER-CONTROLLER.md`: synced with the board — section 1 (tasks 14.1–14.4) and 6.1
+  (19.1) checked off, `[cite: …]` artefacts and the trailing prompt fragment removed.
+- `task.md`: added a **v2.3.0 Backlog / follow-ups** list (remaining groups 15–18, 20, 21.6;
+  write-access note for the Read Only service user; currency conversion; review of the
+  `event.event` read grant).
+- `CONTRIBUTING.md`: project structure corrected — no `docs/` folder exists, and
+  `controllers/` now also serves the mobile JSON API.
+
+---
+
+## 2026-10-26 — `demo` database upgraded to 18.0.2.2.0
+
+- Backed up first: `C:\Users\Lenovo\odoo_backups\demo_before_upgrade_20261026_133951.dump`
+  (`pg_dump -Fc`).
+- Stopped the `odoo-server-18.0` service, ran
+  `odoo-bin -d demo -u church_management --stop-after-init --max-cron-threads=0`
+  (exit 0, no ERROR/CRITICAL in the log), then restarted the service (`/web/login` → 200).
+- Result: module version `18.0.2.0.0` → `18.0.2.2.0`, 23 new tables
+  (`church_mission_*`, `church_sunday_school_*`), the `mobile_api` service account created
+  without a password, the new `event.event.church_read` ACL row present, and the mission /
+  Sunday School sample data loaded (5 trips, 5 missionaries, 8 support lines, 5 classes,
+  15 sessions, 85 calendar activities).
+- Live smoke test on `http://localhost:8069` with a temporary API key (deleted afterwards):
+  `GET /api/v1/mobile/mission/dashboard/metrics` → 200 (IDR, 3 active trips, 2 missionaries
+  in field, 16,900,000 support, 2 upcoming), `GET /api/v1/mobile/calendar/activities` → 200,
+  `GET /api/v1/mobile/calendar/agenda` → 200 (localised "October 2026"),
+  `GET /api/v1/mobile/calendar/upcoming` → 200, without a key → 401 `missing_api_key`.
+  This also resolves the stale-schema 500 (`church_activity.sunday_school_session_id`).
+
+---
+
+## 2026-10-26 — v2.3.0: Mission dashboard metrics endpoint (task 19.1)
+
+- New `controllers/dashboard_controller.py` serving
+  `GET /api/v1/mobile/mission/dashboard/metrics` with `kpi` (`active_trips`,
+  `missionaries_in_field`, `total_support_raised`, `upcoming_departures`,
+  `next_departure`) and `charts` mirroring the eight web dashlets: `trips_by_status`,
+  `trips_by_type`, `trips_by_field`, `missionaries_by_status`, `participants_by_role`,
+  `support_by_month`, `support_by_missionary`, `support_by_donation_type`.
+- Aggregation uses `_read_group` (no record loading); categorical series are sorted
+  largest-first, the month series oldest-first, and status groups carry `color`/`code`
+  for chart styling. `active_trips` = status `planned`/`ongoing` (an unset status counts
+  as active), `missionaries_in_field` = status `on_field`.
+- **Security fix required by this task:** `security/ir.model.access.csv` had no rule for
+  `event.event`, so church groups could not read mission trips at all — and mission trips
+  *are* events (`_inherits`). Added
+  `access_event_event_church_read,event.event.church_read,model_event_event,group_church_read_only,1,0,0,0`
+  (read-only for the church Read Only group; Write/Full inherit it). This also fixes the
+  same AccessError in the web Mission app for read-only church users.
+- Verified over HTTP against a throwaway database with a **fresh install**, cross-checked
+  against ORM oracles: `active_trips=3` (3), `missionaries_in_field=2` (2),
+  `total_support_raised=16,900,000` (16,900,000), `upcoming_departures=2` (2),
+  `next_departure=2026-11-02 01:00:00`; chart series total 5 trips / 5 missionaries /
+  9 participants / 16.9M support, and the three support breakdowns
+  (month, missionary, donation type) each sum to the same 16.9M KPI. Missing API key → 401.
+  The temporary database/server/key were removed afterwards; `demo` was untouched.
+- Known limitation: monetary totals are summed in the company currency (multi-currency
+  conversion is still in the backlog).
+
+---
+
+## 2026-10-26 — v2.3.0: Church Calendar endpoints (tasks 21.1–21.5)
+
+- New `controllers/calendar_controller.py` serving `/api/v1/mobile/calendar`:
+  `GET /activities` (filters `type`, `state`, `date_from`, `date_to`, `limit`, `offset`),
+  `GET /activities/<id>` (adds `source_type` / `source_model` / `source_id` / `source_name`),
+  `GET /agenda` (`group=day` month/day roll-up or `group=type`), `GET /upcoming`
+  (default 5, capped 50) and `GET /metrics` (counts per type and per month).
+- Unconfirmed activities are hidden exactly like the public `/church-calendar` page
+  (only `approved`/`done`, pray requests always shown). The domain is built with
+  `expression.AND`/`OR` — Odoo 18's `_where_calc` rejects nested domain lists.
+- Agenda labels are formatted with Babel in the API user's language instead of the server
+  locale; datetimes stay naive UTC strings as Odoo stores them.
+- `controllers/common.py`: added `paginated_response()` (`items` / `total` / `limit` / `offset`).
+- Verified end-to-end over HTTP against a throwaway database with a **fresh install**
+  (`churchapitest`, since the `demo` database is still on module `2.0.0` and lacks the
+  `sunday_school_session_id` column): 401 missing key, 403 database mismatch,
+  `activities` / `filter` / `paging` / `agenda` / `upcoming` / `metrics` all 200,
+  `type=nope` / `date_from=31-12-2026` / `limit=abc` / `group=week` / `limit=-3` → 400
+  `validation_error`, unknown id → 404 `not_found`, `state=draft` → 0 rows (confirmation
+  rule), `type=pray` and `type=sunday_school` return rows, agenda labels rendered as
+  "October 2026" / "Saturday, 03 October 2026". The temporary database, server and API key
+  were removed afterwards; the `demo` database was left untouched.
+- Open item: task **21.6** (iCal export) is still planned.
+
+---
+
 ## 2026-10-26 — Task board: Sunday School & Church Calendar mobile endpoints
 
 - [task.md](task.md): added the **20. Sunday School Endpoints**

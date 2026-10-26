@@ -163,3 +163,4 @@ access_mission_participant_full,mission.participant.full,model_church_mission_pa
 access_mission_support_read,mission.support.read,model_church_mission_support,group_church_read_only,1,0,0,0
 access_mission_support_write,mission.support.write,model_church_mission_support,group_church_write_only,1,1,1,0
 access_mission_support_full,mission.support.full,model_church_mission_support,group_church_full_access,1,1,1,1
+access_event_event_church_read,event.event.church_read,model_event_event,group_church_read_only,1,0,0,0

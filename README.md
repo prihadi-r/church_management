@@ -38,6 +38,7 @@ Whether you lead a small congregation or a growing ministry, Darash centralizes 
 | **Database** | PostgreSQL 14 – 16 |
 | **Views / UI** | XML views + OWL JS (Odoo Web Library) |
 | **Web** | Odoo Website (QWeb templates) |
+| **Mobile API** | JSON over Odoo HTTP controllers (`/api/v1/mobile/...`, API-key auth) |
 | **News / RSS** | `feedparser` |
 | **Deployment** | Docker / Docker Compose |
 
@@ -165,10 +166,15 @@ its church role in **Settings → Users & Companies → Users** — **Read Only*
 Write Only or Full Access for users that must create data. The record is loaded with
 `noupdate="1"`, so your choice survives module upgrades.
 
-**Endpoints.** Legacy helpers live in `controllers/church_api_controller.py`
-(`/api/church/events`, `/api/church/sacrament/register`). The versioned `/api/v1/mobile/...` sets
-for **Mission**, **Sunday School** and the **Church Calendar** are tracked in
-[task.md](task.md).
+**Endpoints.** Implemented so far: `/api/v1/mobile/calendar/...` — `GET /activities`
+(filters `type`, `state`, `date_from`, `date_to`, `limit`, `offset`), `GET /activities/<id>`,
+`GET /agenda` (`group=day|type`), `GET /upcoming`, `GET /metrics` — and
+`GET /api/v1/mobile/mission/dashboard/metrics` (mission KPI cards plus the eight dashboard
+chart series). See `controllers/calendar_controller.py` and
+`controllers/dashboard_controller.py`. Legacy helpers live in
+`controllers/church_api_controller.py` (`/api/church/events`,
+`/api/church/sacrament/register`). The remaining **Mission** and **Sunday School**
+endpoint sets are tracked in [task.md](task.md).
 
 ---
 
@@ -318,6 +324,7 @@ Church Management
 - [Installation Guide](INSTALLATION_GUIDE.md) — requirements & step-by-step install.
 - [User Guide](USER_GUIDE.md) — detailed usage instructions (in Indonesian).
 - [Task Board](task.md) — scope, acceptance criteria and backlog of the current milestone.
+- [Mobile API Task Breakdown](TASK-FLUTTER-CONTROLLER.md) — original Flutter controller task list (merged into `task.md`).
 - [Progress Log](progress.md) — completed work, verification evidence and open items.
 
 ## 🖥️ Live Demo
@@ -340,7 +347,7 @@ Contributions, bug reports, and feature requests are welcome! Please read our [C
 
 | Version | Date | Changes |
 |---------|------|---------|
-| **2.3.0** *(in progress)* | 2026-10-26 | **Mobile API foundation** — API-key authentication (`X-Api-Key` / `X-Database`), per-request execution context so Odoo ACLs and record rules apply, read-only role rejected on write methods, unified `success`/`error` JSON envelope with Odoo exception mapping, and a dedicated `mobile_api` service user. Mission, Sunday School and Church Calendar endpoint sets are planned on the [task board](task.md). |
+| **2.3.0** *(in progress)* | 2026-10-26 | **Mobile API foundation** — API-key authentication (`X-Api-Key` / `X-Database`), per-request execution context so Odoo ACLs and record rules apply, read-only role rejected on write methods, unified `success`/`error` JSON envelope with Odoo exception mapping, and a dedicated `mobile_api` service user. Live endpoint sets: **Church Calendar** (`/api/v1/mobile/calendar/...`) and **Mission dashboard** (`/api/v1/mobile/mission/dashboard/metrics`). Mission, Sunday School and iCal endpoint sets are tracked on the [task board](task.md); `event.event` read access added for the church **Read Only** group so mission trips are readable. |
 | **2.2.0** | 2026-10-25 | **Mission** — new **Mission** app: mission trips (inherit `event.event`), missionaries / participants / agencies (inherit `res.partner`), mission support (reuses donation types and `account.payment`), master data for fields/types/statuses/roles/missionary statuses (no selection fields), a dedicated **Mission Dashboard** board, and sample data. |
 | **2.1.0** | 2026-10-24 | **Sunday School & graph dashboard** — new **Sunday School** app (classes, teachers, students, sessions, attendance + configuration masters; students & teachers inherit `res.partner`), sample data (5 classes × 20 students, 12 teachers, 15 sessions, 200 attendance lines), and the dashboard rebuilt on Odoo's **Dashboards** (`board`) app as eight interactive bar/pie graph dashlets instead of text cards. |
 | **2.0.0** | 2026-08-09 | **Darash major release** — branded as **Darash**, themed public homepage, Christianity News page & nav link, homepage SEO, unified color theme across all public pages, and deployment tooling (`scripts/`). |

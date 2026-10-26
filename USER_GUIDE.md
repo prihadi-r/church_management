@@ -17,6 +17,7 @@
 - Alur kerja (workflow) dengan status: antrian → disetujui → selesai.
 - Modul **Sekolah Minggu** lengkap: kelas, guru, murid, sesi pertemuan, dan kehadiran.
 - Modul **Misi** lengkap: perjalanan misi, misionaris, peserta, dukungan dana, dan dashboard grafiknya sendiri.
+- **Mobile API** untuk aplikasi **Flutter**: data **kalender kegiatan** dan **ringkasan dashboard misi** tersedia sebagai JSON dengan autentikasi **kunci API** (lihat **Bagian 13**).
 
 **Struktur Menu**
 ```
@@ -496,6 +497,73 @@ Draft → Under Review → Approved → Completed
   **Settings → Users → Access Rights** (kategori **Church Management**): grup
   **Read Only**, **Write Only**, atau **Full Access**. Tanpa salah satu grup ini,
   menu **Church Management** tidak akan muncul.
+
+---
+
+## 13. Mobile API (Aplikasi Flutter)
+
+Modul menyediakan endpoint **JSON** untuk aplikasi mobile Flutter. Semua endpoint
+menggunakan **kunci API** (bukan login web) dan tunduk pada hak akses grup
+**Church Management** milik pemilik kunci.
+
+### 13.1 Pengguna & Kunci API
+
+| Langkah | Keterangan |
+|---------|------------|
+| 1 | Login sebagai pengguna layanan **Mobile API** (login `mobile_api`). Pengguna ini dibuat otomatis saat instalasi dan **tidak punya password**. |
+| 2 | Buka **Preferences → Account Security → New API Key**, beri nama (mis. *Flutter app*), lalu salin kuncinya. |
+| 3 | Atur hak akses di **Settings → Users → Access Rights** (kategori **Church Management**): **Read Only** (default), **Write Only**, atau **Full Access**. |
+| 4 | Kirim setiap permintaan dengan header `X-Api-Key`; header `X-Database` bersifat opsional (harus sama dengan database yang dituju). |
+
+> ℹ️ Kunci API bersifat rahasia. Jika bocor, hapus di **Account Security** lalu buat kunci
+> baru. Aplikasi mobile tidak boleh menyimpan kunci di kode sumber.
+
+### 13.2 Endpoint yang Sudah Tersedia
+
+**Kalender gereja** — basis `/api/v1/mobile/calendar`:
+
+| Endpoint | Fungsi |
+|----------|--------|
+| `GET /activities` | Daftar kegiatan (event, baptis, nikah, komsel, doa, sekolah minggu). Filter: `type`, `state`, `date_from`, `date_to`, `limit` (default 20, maks 100), `offset`. |
+| `GET /activities/<id>` | Detail satu kegiatan + sumbernya (`source_type`, `source_model`, `source_id`). |
+| `GET /agenda` | Kegiatan dikelompokkan per bulan/hari (`group=day`, default) atau per tipe (`group=type`). |
+| `GET /upcoming` | Kegiatan terdekat dari sekarang (`limit` default 5, maks 50) untuk halaman utama. |
+| `GET /metrics` | Jumlah kegiatan per tipe dan per bulan untuk grafik. |
+
+**Dashboard misi** — `GET /api/v1/mobile/mission/dashboard/metrics`: kartu KPI
+(`active_trips`, `missionaries_in_field`, `total_support_raised`, `upcoming_departures`,
+`next_departure`) dan 8 seri grafik yang sama dengan dashboard web Mission.
+
+> Kegiatan yang **belum disetujui** (`draft`, `review`, `cancelled`) tidak ditampilkan,
+> sama seperti halaman publik `/church-calendar`. Permohonan doa selalu ditampilkan.
+> Tanggal dikirim dalam **UTC** (`YYYY-MM-DD HH:MM:SS`); aplikasi yang mengubahnya ke zona
+> waktu pengguna.
+
+### 13.3 Format Respons & Kode Error
+
+```json
+{ "success": true, "data": { } }
+
+{ "success": false, "error": { "code": "invalid_api_key",
+                               "message": "The provided API key is invalid or expired." } }
+```
+
+| HTTP | `code` | Arti |
+|------|--------|------|
+| 401 | `missing_api_key` | Header `X-Api-Key` tidak dikirim. |
+| 401 | `invalid_api_key` | Kunci salah, kedaluwarsa, atau penggunanya nonaktif. |
+| 403 | `database_mismatch` | `X-Database` tidak cocok dengan database tujuan. |
+| 403 | `read_only_access` | Pengguna **Read Only** mencoba `POST`/`PUT`/`PATCH`/`DELETE`. |
+| 403 | `access_error` | Hak akses Odoo menolak operasi tersebut. |
+| 400 | `validation_error` | Parameter tidak valid (mis. `type` atau tanggal salah format). |
+| 404 | `not_found` | Data yang diminta tidak ada. |
+| 500 | `internal_error` | Kesalahan tak terduga (detail hanya ada di log server). |
+
+### 13.4 Yang Belum Tersedia
+
+Endpoint **Mission** (daftar & detail trip, misionaris, dukungan), **Sunday School**,
+dan ekspor **iCal** masih dalam rencana — lihat [task.md](task.md). Untuk saat ini
+aplikasi mobile memakai dua kelompok endpoint pada **Bagian 13.2**.
 
 ---
 

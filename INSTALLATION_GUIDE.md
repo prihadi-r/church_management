@@ -184,6 +184,30 @@ Access Rights** (kategori **Church Management**).
 Modul menyediakan **data sampel** (member types, kontak, baptis, pernikahan,
 permohonan doa, dll.) yang dimuat saat instalasi untuk memudahkan latihan.
 
+### 6.4 Pengguna API Mobile (`mobile_api`)
+Modul membuat satu pengguna layanan bernama **Mobile API** (login `mobile_api`,
+external ID `church_management.user_mobile_api`) untuk aplikasi **Flutter**.
+
+- Pengguna ini **tidak memiliki password**, sehingga hanya bisa diakses lewat **kunci API**.
+- Login sebagai `mobile_api` → **Preferences → Account Security → New API Key** untuk
+  membuat kunci, lalu kirim kunci tersebut ke aplikasi mobile.
+- Hak akses gerejanya **dapat diubah** di **Settings → Users → Access Rights**
+  (kategori **Church Management**). Default-nya **Read Only**; pilih **Write Only**
+  atau **Full Access** bila aplikasi perlu membuat data. Pilihan ini **tidak
+  ditimpa** saat modul di-upgrade.
+- Permintaan API wajib menyertakan header `X-Api-Key` (opsional `X-Database`):
+
+  ```bash
+  curl -H "X-Api-Key: <kunci>" -H "X-Database: <db>" \
+       http://localhost:8069/api/v1/mobile/calendar/activities
+  ```
+
+- Endpoint yang sudah tersedia: `/api/v1/mobile/calendar/...` dan
+  `/api/v1/mobile/mission/dashboard/metrics`. Daftar lengkap & rencana berikutnya ada di
+  [task.md](task.md).
+- Jika modul baru di-upgrade dan endpoint mengembalikan `500`, pastikan **layanan Odoo
+  sudah di-restart** agar file controller baru dimuat.
+
 ---
 
 ## 7. Memperbarui / Upgrade Modul
@@ -197,6 +221,17 @@ Setiap perubahan pada model/field membutuhkan **restart** + **upgrade**:
    ```
 
 2. **Upgrade modul** di UI: **Apps → Church Management → Upgrade**.
+
+   Alternatif lewat CLI (layanan harus berhenti dulu agar tidak terjadi konflik schema):
+
+   ```powershell
+   Stop-Service odoo-server-18.0
+   & "C:\Program Files\Odoo 18.0.20260806\python\python.exe" `
+       "C:\Program Files\Odoo 18.0.20260806\server\odoo-bin" `
+       -c "C:\Program Files\Odoo 18.0.20260806\server\odoo.conf" `
+       -d <db> -u church_management --stop-after-init
+   Start-Service odoo-server-18.0
+   ```
 
 > ⚠️ Odoo **tidak memuat ulang modul Python yang sudah dimuat** hanya dengan
 > restart *registry*; oleh karena itu selalu restart layanan **sebelum** upgrade
@@ -243,7 +278,9 @@ Setiap perubahan pada model/field membutuhkan **restart** + **upgrade**:
 | `data/*.xml` | Data sampel & data master. |
 | `models/*.py` | Definisi model (logika bisnis). |
 | `views/*.xml` | Antarmuka (menu, action, view). |
-| `controllers/*.py` | Route website publik. |
+| `controllers/*.py` | Route website publik **dan** Mobile API JSON (`/api/v1/mobile/...`): `security.py` (API key), `common.py` (envelope & error handling), `calendar_controller.py`, `dashboard_controller.py`. |
+| `data/church_mission_api_user.xml` | Pengguna layanan **Mobile API** (tanpa password). |
+| `task.md` / `progress.md` | Papan tugas (scope & status) dan log progres + bukti verifikasi. |
 
 ---
 

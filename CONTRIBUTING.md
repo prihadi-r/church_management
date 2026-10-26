@@ -99,14 +99,17 @@ Then open http://localhost:8069, create a database, and install **Church Managem
 church_management/
 ├── __manifest__.py        # Module metadata, dependencies, data/views list
 ├── models/                # Odoo model definitions (Python)
-├── controllers/           # Website controllers & HTTP routes
+├── controllers/           # Website pages + /api/v1/mobile JSON API
+│                          # (security.py, common.py, calendar_controller.py, ...)
 ├── views/                 # XML views, menus, website templates
 ├── data/                  # Sample / seed data (XML)
 ├── security/              # Access rules (CSV + XML)
 ├── static/                # Static assets (CSS, JS, images)
 ├── migrations/            # Version-specific migration scripts
 ├── scripts/               # Deployment / maintenance scripts
-└── docs                  # INSTALLATION_GUIDE.md, USER_GUIDE.md
+├── task.md                # Task board (scope, status, backlog)
+├── progress.md            # Progress log with verification evidence
+└── INSTALLATION_GUIDE.md  # Setup guide (USER_GUIDE.md holds the usage guide)
 ```
 
 ## 🎨 Code Style & Conventions
