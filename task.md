@@ -93,44 +93,44 @@ compose `@require_mobile_api_key` + `@handle_api_errors` and answer through
 
 #### 15. Mission Master Data Endpoints
 
-- [ ] **15.1 Mission Types (`/api/v1/mobile/mission/master/types`)**
-  - [ ] Implement `GET` endpoint returning active mission types (`church.mission.type`).
-  - [ ] Support filter parameters: `active`.
-  - [ ] Deliverable: `controllers/master_controller.py`.
+- [x] **15.1 Mission Types (`/api/v1/mobile/mission/master/types`)**
+  - [x] Implement `GET` endpoint returning active mission types (`church.mission.type`).
+  - [x] Support filter parameters: `active`.
+  - [x] Deliverable: [controllers/master_controller.py](controllers/master_controller.py).
 
-- [ ] **15.2 Mission Fields (`/api/v1/mobile/mission/master/fields`)**
-  - [ ] Implement `GET` endpoint returning geographic fields/regions (`church.mission.field`).
-  - [ ] Support pagination parameters: `limit`, `offset`.
-  - [ ] Deliverable: `controllers/master_controller.py`.
+- [x] **15.2 Mission Fields (`/api/v1/mobile/mission/master/fields`)**
+  - [x] Implement `GET` endpoint returning geographic fields/regions (`church.mission.field`).
+  - [x] Support pagination parameters: `limit`, `offset`.
+  - [x] Deliverable: [controllers/master_controller.py](controllers/master_controller.py).
 
-- [ ] **15.3 Status Records (`/api/v1/mobile/mission/master/statuses`)**
-  - [ ] Implement `GET` endpoint returning trip statuses (`church.mission.status`) and missionary statuses (`church.missionary.status`).
-  - [ ] Deliverable: `controllers/master_controller.py`.
+- [x] **15.3 Status Records (`/api/v1/mobile/mission/master/statuses`)**
+  - [x] Implement `GET` endpoint returning trip statuses (`church.mission.status`) and missionary statuses (`church.missionary.status`).
+  - [x] Deliverable: [controllers/master_controller.py](controllers/master_controller.py).
 
-- [ ] **15.4 Participant Roles (`/api/v1/mobile/mission/master/roles`)**
-  - [ ] Implement `GET` endpoint returning available participant roles (`church.mission.role`).
-  - [ ] Deliverable: `controllers/master_controller.py`.
+- [x] **15.4 Participant Roles (`/api/v1/mobile/mission/master/roles`)**
+  - [x] Implement `GET` endpoint returning available participant roles (`church.mission.role`).
+  - [x] Deliverable: [controllers/master_controller.py](controllers/master_controller.py).
 
 #### 16. Mission Trips Endpoints (`/api/v1/mobile/mission/trips`)
 
-- [ ] **16.1 Mission Trips List (`GET /`)**
-  - [ ] Return paginated trips with status, mission field, date ranges, and funding progress.
-  - [ ] Query domain filtering: by `field_id`, `status_id`, `date_begin`, `date_end`.
-  - [ ] Deliverable: `controllers/trip_controller.py`.
+- [x] **16.1 Mission Trips List (`GET /`)**
+  - [x] Return paginated trips with status, mission field, date ranges, and funding progress.
+  - [x] Query domain filtering: by `field_id`, `status_id`, `date_begin`, `date_end`.
+  - [x] Deliverable: [controllers/trip_controller.py](controllers/trip_controller.py).
 
-- [ ] **16.2 Mission Trip Detail (`GET /<int:trip_id>`)**
-  - [ ] Fetch complete trip payload including inherited `event.event` fields, budget, description, and coordinator details.
-  - [ ] Deliverable: `controllers/trip_controller.py`.
+- [x] **16.2 Mission Trip Detail (`GET /<int:trip_id>`)**
+  - [x] Fetch complete trip payload including inherited `event.event` fields, budget, description, and coordinator details.
+  - [x] Deliverable: [controllers/trip_controller.py](controllers/trip_controller.py).
 
-- [ ] **16.3 Trip Participants List (`GET /<int:trip_id>/participants`)**
-  - [ ] Return confirmed participants (`church.mission_participant`) linked to the trip.
-  - [ ] Include partner details (name, phone, role).
-  - [ ] Deliverable: `controllers/trip_controller.py`.
+- [x] **16.3 Trip Participants List (`GET /<int:trip_id>/participants`)**
+  - [x] Return confirmed participants (`church.mission_participant`) linked to the trip.
+  - [x] Include partner details (name, phone, role).
+  - [x] Deliverable: [controllers/trip_controller.py](controllers/trip_controller.py).
 
-- [ ] **16.4 Trip Participant Registration (`POST /<int:trip_id>/register`)**
-  - [ ] Handle registration payload (`partner_id`, `role_id`, `notes`).
-  - [ ] Validate trip capacity and dates before creating participant record.
-  - [ ] Deliverable: `controllers/trip_controller.py`.
+- [x] **16.4 Trip Participant Registration (`POST /<int:trip_id>/register`)**
+  - [x] Handle registration payload (`partner_id`, `role_id`, `notes`).
+  - [x] Validate trip capacity and dates before creating participant record.
+  - [x] Deliverable: [controllers/trip_controller.py](controllers/trip_controller.py).
 
 #### 17. Missionaries & Agencies Endpoints (`/api/v1/mobile/missionaries`)
 
@@ -251,7 +251,7 @@ compose `@require_mobile_api_key` + `@handle_api_errors` and answer through
 
 ### Backlog / follow-ups
 
-- ⬜ **15–18** — Mission master data, trips, missionaries/agencies and support endpoints.
+- ⬜ **17–18** — Missionaries/agencies and support endpoints.
 - ⬜ **20** — Sunday School endpoints (master data, classes, sessions, attendance, dashboard).
 - ⬜ **21.6** — optional iCal export (`GET /export.ics`).
 - ⬜ Write endpoints (`POST /sessions/<id>/attendance`, `POST /pledge`,

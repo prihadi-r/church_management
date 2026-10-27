@@ -534,6 +534,25 @@ menggunakan **kunci API** (bukan login web) dan tunduk pada hak akses grup
 (`active_trips`, `missionaries_in_field`, `total_support_raised`, `upcoming_departures`,
 `next_departure`) dan 8 seri grafik yang sama dengan dashboard web Mission.
 
+**Master data misi** — basis `/api/v1/mobile/mission/master`. Parameter `active` menerima
+`true` (default, hanya data aktif), `false` (hanya data yang diarsipkan) atau `all` (keduanya):
+
+| Endpoint | Fungsi |
+|----------|--------|
+| `GET /types` | Jenis misi (`church.mission.type`). |
+| `GET /fields` | Medan/wilayah misi (`church.mission.field`) beserta `country` dan `parent`. `limit` (default 50, maks 200), `offset`. |
+| `GET /statuses` | Status perjalanan (`trip_statuses`) dan status misionaris (`missionary_statuses`), masing-masing dengan `is_closed`. |
+| `GET /roles` | Peran peserta tim misi (`church.mission.role`). |
+
+**Perjalanan misi** — basis `/api/v1/mobile/mission/trips`:
+
+| Endpoint | Fungsi |
+|----------|--------|
+| `GET /` | Daftar perjalanan misi (status, medan, tanggal, budget, dana terkumpul & progres). Filter: `field_id`, `status_id`, `date_begin`, `date_end` (perjalanan yang **beririsan** dengan rentang tersebut), `limit` (default 20, maks 100), `offset`. |
+| `GET /<id>` | Detail satu perjalanan: field `event.event` turunan (deskripsi, venue, seats), budget, leader, organizer/penanggung jawab, jumlah peserta dan total dukungan. |
+| `GET /<id>/participants` | Peserta perjalanan beserta nama, telepon, email, peran dan tanggal pendaftaran. Parameter `confirmed`: `true` (default, hanya peserta terkonfirmasi), `false` (menunggu konfirmasi) atau `all`; `limit`/`offset`. |
+| `POST /<id>/register` | Mendaftarkan kontak ke perjalanan. Body JSON: `partner_id` (wajib), `role_id`, `notes`. Ditolak `400 validation_error` bila perjalanan sudah berakhir, penuh (`seats_max`), peserta sudah terdaftar, atau kontak/peran tidak ada. Peserta baru berstatus **belum terkonfirmasi**. |
+
 > Kegiatan yang **belum disetujui** (`draft`, `review`, `cancelled`) tidak ditampilkan,
 > sama seperti halaman publik `/church-calendar`. Permohonan doa selalu ditampilkan.
 > Tanggal dikirim dalam **UTC** (`YYYY-MM-DD HH:MM:SS`); aplikasi yang mengubahnya ke zona
@@ -561,9 +580,9 @@ menggunakan **kunci API** (bukan login web) dan tunduk pada hak akses grup
 
 ### 13.4 Yang Belum Tersedia
 
-Endpoint **Mission** (daftar & detail trip, misionaris, dukungan), **Sunday School**,
-dan ekspor **iCal** masih dalam rencana — lihat [task.md](task.md). Untuk saat ini
-aplikasi mobile memakai dua kelompok endpoint pada **Bagian 13.2**.
+Endpoint **Mission** untuk misionaris/agensi dan dukungan, **Sunday School**, serta ekspor
+**iCal** masih dalam rencana — lihat [task.md](task.md). Daftar dan detail perjalanan misi
+sudah tersedia (lihat **Bagian 13.2**).
 
 ---
 

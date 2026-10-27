@@ -5,6 +5,75 @@ Task breakdown lives in [task.md](task.md).
 
 ---
 
+## 2026-10-27 — v2.3.0: Mission trip endpoints (tasks 16.1–16.4)
+
+- New `controllers/trip_controller.py` serving `/api/v1/mobile/mission/trips`:
+  `GET /` (paginated list), `GET /<id>` (detail), `GET /<id>/participants` and
+  `POST /<id>/register`. Every route composes `@require_mobile_api_key` +
+  `@handle_api_errors`; list/participants answer through `paginated_response()`, the detail and
+  the registration through `success_response()` (registration → `201`).
+- List filters: `field_id`, `status_id`, `date_begin`, `date_end`, `limit` (default 20, capped
+  100), `offset`. The date parameters select trips **overlapping** the window
+  (`date_end >= date_begin` **and** `date_begin <= end-of-day(date_end)`), which is what a
+  mobile agenda needs; a date-only upper bound is expanded to `23:59:59`.
+- Trip payloads expose the inherited `event.event` data — `name`, `date_begin`/`date_end`,
+  `date_tz`, `is_ongoing`/`is_finished`, venue (`address_id` + country), seat configuration,
+  description/note — plus mission fields (type, field, agency, status with `is_closed` and
+  `color`), leader (contact details), `budget`, `currency`, `support_total`,
+  `funding_progress` and participant counts. The detail adds `organizer`, `responsible`
+  (`event.event.user_id`), `event_status`, tags and a participant/support summary.
+- Participants are filtered by a `confirmed` parameter (`true` default → confirmed only,
+  `false` → pending, `all` → both) and serialise name, phone/mobile/email, avatar URL, role
+  and registration date.
+- `POST /register` accepts a JSON body (`partner_id` required, `role_id`, `notes`), or
+  form-encoded parameters. It rejects with `400 validation_error`: unknown contact, unknown or
+  archived role, contact already registered on the trip, a trip that already ended
+  (`date_end` in the past), and a full trip (`seats_limited` with
+  `max(participant_count, seats_taken) >= seats_max`). New participants are created with
+  `confirmed = False` so staff can confirm them in the web app.
+- Verified end-to-end over HTTP against a throwaway database with a **fresh install**
+  (`--without-demo=all`, temporary server on port 8071, temporary API keys for a read-only and a
+  write user, all removed afterwards; `demo` untouched): missing key → 401 `missing_api_key`;
+  list → 200 with 5 trips; `field_id=4` → 2, `status_id=1` → 2, `status_id=2` → 1,
+  November window → 1 (only the trip that overlaps it), `limit=2&offset=2` → rows 3–4,
+  `limit=9999` → capped to 100, `field_id=abc` / `date_begin=31-12-2026` / `limit=0` → 400;
+  detail → 200 with budget 15,000,000, support 5,250,000, progress 35.0 and the event
+  description; unknown id → 404 `not_found`; participants → 1 confirmed, `confirmed=all` → 2,
+  `confirmed=false` → 1, `confirmed=maybe` → 400; read-only key `POST /register` → 403
+  `read_only_access`; write key → 201 (participant created with `confirmed=false`, visible
+  through `confirmed=all`), duplicate → 400, ended trip → 400, unknown contact/role → 400,
+  missing/non-integer `partner_id` → 400, malformed JSON / JSON array → 400; capacity:
+  `seats_max=1` with 1 participant → 400 "full (1 of 1 seats taken)", `seats_max=2` → 201 and
+  the next attempt → 400 "full (2 of 2 seats taken)". No ERROR/CRITICAL in the server log.
+
+---
+
+## 2026-10-27 — v2.3.0: Mission master-data endpoints (tasks 15.1–15.4)
+
+- New `controllers/master_controller.py` serving `/api/v1/mobile/mission/master`:
+  `GET /types`, `GET /fields`, `GET /statuses` (trip + missionary statuses in one payload)
+  and `GET /roles`. Every route composes `@require_mobile_api_key` + `@handle_api_errors`
+  and answers through `success_response()` / `paginated_response()`.
+- The shared `active` query parameter accepts `true` (default: only active records),
+  `false` (only archived records) or `all`; anything else is a `400 validation_error`.
+  Archived rows are read with `with_context(active_test=False)` plus an `active = False`
+  term, so the default Odoo archive filter never hides an explicitly requested archive.
+- `GET /fields` is paginated (`limit` default 50, capped 200, `offset`) and serialises the
+  nested `country` (`id` / `code` / `name`) and `parent` (`id` / `name`) references.
+  Statuses carry `is_closed` so the app can tell finished trips/missionaries apart.
+- Verified end-to-end over HTTP against a throwaway database with a **fresh install**
+  (`--without-demo=all`, temporary server on port 8071 and a temporary API key, all removed
+  afterwards): missing key → 401 `missing_api_key`, `X-Database` mismatch → 403
+  `database_mismatch`; `types` 6, `fields` 6 (paging `limit=2&offset=2` → rows 3–4, `total` 6),
+  `statuses` 4 trip + 5 missionary, `roles` 6 — all 200 and matching the installed master
+  data. Archive handling: after archiving a type, default → 6, `active=false` → 1,
+  `active=all` → 7; `active=maybe` → 400 `validation_error`; `limit=abc` / `limit=0` → 400.
+  A field created with `country_id=ID` and `parent_id=Sumatra` serialised as
+  `{"country": {"id": 100, "code": "ID", "name": "Indonesia"}, "parent": {"id": 2, "name": "Sumatra"}}`.
+  No ERROR/CRITICAL in the server log; the `demo` database was untouched.
+
+---
+
 ## 2026-10-26 — Docs sync for the Mobile API milestone
 
 - `README.md`: added a **Mobile API** row to the architecture table, listed
