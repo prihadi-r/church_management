@@ -5,6 +5,144 @@ Task breakdown lives in [task.md](task.md).
 
 ---
 
+## 2026-10-27 — v2.3.0: Missionary, agency and support endpoints (tasks 17.1–17.4, 18.1–18.3)
+
+- New `controllers/missionary_controller.py` serving `/api/v1/mobile/missionaries`:
+  `GET /` (paginated directory), `GET /<id>` (profile) and `GET /<id>/avatar`. Contact data comes
+  from the delegated `res.partner` (name, phone, mobile, email, image URLs); `active` accepts
+  `true`/`false`/`all` and is evaluated on `partner_id.active` with `active_test=False`, so
+  archived contacts are only returned when explicitly requested. Extra filters: `status_id`,
+  `field_id`, `agency_id`, plus `limit` (default 20, capped 100) and `offset`.
+- The profile adds `contact.address`, the agency with its contact block, `supervisor`, the trips
+  the missionary leads, a support summary (total, count, last date) and avatar URLs for the two
+  supported sizes.
+- `GET /<id>/avatar` streams `res.partner.image_256` (or `size=1920`) as binary with
+  `ETag` (weak, from `write_date` + size), `Last-Modified` and `Cache-Control: private, max-age=86400`.
+  `If-None-Match` and `If-Modified-Since` are evaluated by the controller (weak comparison) and
+  answer `304` with an empty body; the MIME type is sniffed from the image magic bytes. A contact
+  without a photo → `404 not_found`; an unsupported `size` → `400 validation_error`.
+- New `controllers/agency_controller.py` serving `GET /api/v1/mobile/missionaries/agencies`:
+  contact block, address, `mission_fields`, `trip_count` and `missionary_count` counting only
+  **active** missionaries (`partner_id.active`), with `active`/`field_id`/`limit`/`offset` filters.
+- New `controllers/support_controller.py` serving `/api/v1/mobile/mission/support`:
+  - `GET /summary` — `totals` (`pledged`, `collected`, `outstanding`, counts), `targets`
+    (`overall`/`missionaries`/`trips` with `target`, `pledged`, `collected`, `pledge_progress`,
+    `collection_progress`) and `by_donation_type`, all aggregated with `_read_group`/`search_count`.
+  - `POST /pledge` — JSON (or form) body `partner_id`, `amount`, at least one of
+    `missionary_id`/`trip_id`, optional `date` (`YYYY-MM-DD`), `donation_type_id`, `notes`;
+    answers `201` with the created record. Validates the donor, a positive amount, the target
+    (existing and not archived) and the donation type.
+  - `GET /history` — paginated history ordered `date desc, id desc` with filters `partner_id`,
+    `missionary_id`, `trip_id`, `donation_type_id`, `date_from`, `date_to`,
+    `collected=true|false|all`, `limit`, `offset`.
+- **Design note:** `church.mission.support` has no state field, so the API derives the status
+  from the accounting link — a record is `pending` until it has a `payment_id`, then `collected`.
+  No model, view, ACL or data change was needed. Payment details are only serialised when the
+  API user may read `account.payment`; otherwise the payload carries `{"id": …, "restricted": true}`
+  while `collected` stays accurate. Monetary totals are summed without currency conversion, the
+  same known limitation as the web dashboard.
+- Verified end-to-end over HTTP against a throwaway database with a **fresh install**
+  (`--without-demo=all`, temporary server on port 8072, temporary read-only + write API keys,
+  a 1x1 PNG on the first missionary's contact and one `account.payment`-linked support, all
+  removed afterwards; `demo` untouched):
+  - missionaries: list 200 (`total=5`), `status_id=2` → 1, `field_id=4` → 1, `agency_id=2` → 2,
+    `limit=1&offset=1` → id 1, `limit=abc` → 400; detail 200 (`MSN/2026/0001`, target 24,000,000,
+    total 3,500,000, progress 14.58, agency contact, 1 trip, support count 2 / last 2026-08-11);
+    archiving one contact → default 4, `active=false` → 1, `active=all` → 5, agency count 3 → 2.
+  - avatar: 200 `image/png` 70 bytes with `ETag`/`Last-Modified`; `If-None-Match` → 304 (0 bytes);
+    `If-Modified-Since` → 304; stale `If-Modified-Since` → 200; `size=64` → 400;
+    missionary without photo → 404; unknown id → 404; no key → 401; `size=1920` → 200.
+  - agencies: 2 records matching the ORM (GMP 3 active missionaries / 2 trips, YMN 2 / 3),
+    `field_id=3` → 1, paging works, `active=maybe` → 400, no key → 401.
+  - summary: `pledged` 16,900,000, `collected` 1,500,000, `outstanding` 15,400,000, 8/1/7 counts,
+    missionary target 94,000,000 (pledged 10,750,000 → 11.44 %), trip target 49,500,000
+    (pledged 9,400,000 → 18.99 %), overall 143,500,000 (pledged 20,150,000 → 14.04 %,
+    collected 3,000,000 → 2.09 %); `by_donation_type` sums to the same 16.9 M — all equal to the
+    ORM oracle.
+  - history: 8 records, `collected=true` → 1, `false` → 7, `all` → 8, `missionary_id=1` → 2,
+    `trip_id=1` → 1, `partner_id=120` → 2, August window → 1, `limit=3&offset=6` → ids 2,1,
+    `collected=maybe`/`date_from=27-10-2026`/`partner_id=abc` → 400; the collected record carries
+    `status: "collected"` and `payment: {"id": 1, …, "restricted": true}` (no accounting rights),
+    the pending ones `status: "pending"` and `payment: null`.
+  - pledge: read-only key → 403 `read_only_access`; write key → 201 (`MSP/2026/0009`,
+    `status: "pending"`), trip-only pledge → 201 (`MSP/2026/0010`); missing/zero/negative/
+    non-numeric `amount`, missing/unknown `partner_id`, no target, unknown missionary/trip/
+    donation type, bad `date`, malformed JSON and a JSON array → 400 with distinct messages;
+    archived missionary/trip → 400 “not available”; summary then reported 17,151,000 pledged and
+    10/1/9 counts, history `total=10`.
+  - server log during the whole run: no `ERROR` / `CRITICAL` / `WARNING`.
+
+---
+
+## 2026-10-27 — v2.3.0: Mission trip endpoints (tasks 16.1–16.4)
+
+- New `controllers/trip_controller.py` serving `/api/v1/mobile/mission/trips`:
+  `GET /` (paginated list), `GET /<id>` (detail), `GET /<id>/participants` and
+  `POST /<id>/register`. Every route composes `@require_mobile_api_key` +
+  `@handle_api_errors`; list/participants answer through `paginated_response()`, the detail and
+  the registration through `success_response()` (registration → `201`).
+- List filters: `field_id`, `status_id`, `date_begin`, `date_end`, `limit` (default 20, capped
+  100), `offset`. The date parameters select trips **overlapping** the window
+  (`date_end >= date_begin` **and** `date_begin <= end-of-day(date_end)`), which is what a
+  mobile agenda needs; a date-only upper bound is expanded to `23:59:59`.
+- Trip payloads expose the inherited `event.event` data — `name`, `date_begin`/`date_end`,
+  `date_tz`, `is_ongoing`/`is_finished`, venue (`address_id` + country), seat configuration,
+  description/note — plus mission fields (type, field, agency, status with `is_closed` and
+  `color`), leader (contact details), `budget`, `currency`, `support_total`,
+  `funding_progress` and participant counts. The detail adds `organizer`, `responsible`
+  (`event.event.user_id`), `event_status`, tags and a participant/support summary.
+- Participants are filtered by a `confirmed` parameter (`true` default → confirmed only,
+  `false` → pending, `all` → both) and serialise name, phone/mobile/email, avatar URL, role
+  and registration date.
+- `POST /register` accepts a JSON body (`partner_id` required, `role_id`, `notes`), or
+  form-encoded parameters. It rejects with `400 validation_error`: unknown contact, unknown or
+  archived role, contact already registered on the trip, a trip that already ended
+  (`date_end` in the past), and a full trip (`seats_limited` with
+  `max(participant_count, seats_taken) >= seats_max`). New participants are created with
+  `confirmed = False` so staff can confirm them in the web app.
+- Verified end-to-end over HTTP against a throwaway database with a **fresh install**
+  (`--without-demo=all`, temporary server on port 8071, temporary API keys for a read-only and a
+  write user, all removed afterwards; `demo` untouched): missing key → 401 `missing_api_key`;
+  list → 200 with 5 trips; `field_id=4` → 2, `status_id=1` → 2, `status_id=2` → 1,
+  November window → 1 (only the trip that overlaps it), `limit=2&offset=2` → rows 3–4,
+  `limit=9999` → capped to 100, `field_id=abc` / `date_begin=31-12-2026` / `limit=0` → 400;
+  detail → 200 with budget 15,000,000, support 5,250,000, progress 35.0 and the event
+  description; unknown id → 404 `not_found`; participants → 1 confirmed, `confirmed=all` → 2,
+  `confirmed=false` → 1, `confirmed=maybe` → 400; read-only key `POST /register` → 403
+  `read_only_access`; write key → 201 (participant created with `confirmed=false`, visible
+  through `confirmed=all`), duplicate → 400, ended trip → 400, unknown contact/role → 400,
+  missing/non-integer `partner_id` → 400, malformed JSON / JSON array → 400; capacity:
+  `seats_max=1` with 1 participant → 400 "full (1 of 1 seats taken)", `seats_max=2` → 201 and
+  the next attempt → 400 "full (2 of 2 seats taken)". No ERROR/CRITICAL in the server log.
+
+---
+
+## 2026-10-27 — v2.3.0: Mission master-data endpoints (tasks 15.1–15.4)
+
+- New `controllers/master_controller.py` serving `/api/v1/mobile/mission/master`:
+  `GET /types`, `GET /fields`, `GET /statuses` (trip + missionary statuses in one payload)
+  and `GET /roles`. Every route composes `@require_mobile_api_key` + `@handle_api_errors`
+  and answers through `success_response()` / `paginated_response()`.
+- The shared `active` query parameter accepts `true` (default: only active records),
+  `false` (only archived records) or `all`; anything else is a `400 validation_error`.
+  Archived rows are read with `with_context(active_test=False)` plus an `active = False`
+  term, so the default Odoo archive filter never hides an explicitly requested archive.
+- `GET /fields` is paginated (`limit` default 50, capped 200, `offset`) and serialises the
+  nested `country` (`id` / `code` / `name`) and `parent` (`id` / `name`) references.
+  Statuses carry `is_closed` so the app can tell finished trips/missionaries apart.
+- Verified end-to-end over HTTP against a throwaway database with a **fresh install**
+  (`--without-demo=all`, temporary server on port 8071 and a temporary API key, all removed
+  afterwards): missing key → 401 `missing_api_key`, `X-Database` mismatch → 403
+  `database_mismatch`; `types` 6, `fields` 6 (paging `limit=2&offset=2` → rows 3–4, `total` 6),
+  `statuses` 4 trip + 5 missionary, `roles` 6 — all 200 and matching the installed master
+  data. Archive handling: after archiving a type, default → 6, `active=false` → 1,
+  `active=all` → 7; `active=maybe` → 400 `validation_error`; `limit=abc` / `limit=0` → 400.
+  A field created with `country_id=ID` and `parent_id=Sumatra` serialised as
+  `{"country": {"id": 100, "code": "ID", "name": "Indonesia"}, "parent": {"id": 2, "name": "Sumatra"}}`.
+  No ERROR/CRITICAL in the server log; the `demo` database was untouched.
+
+---
+
 ## 2026-10-26 — Docs sync for the Mobile API milestone
 
 - `README.md`: added a **Mobile API** row to the architecture table, listed

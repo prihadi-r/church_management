@@ -534,6 +534,48 @@ menggunakan **kunci API** (bukan login web) dan tunduk pada hak akses grup
 (`active_trips`, `missionaries_in_field`, `total_support_raised`, `upcoming_departures`,
 `next_departure`) dan 8 seri grafik yang sama dengan dashboard web Mission.
 
+**Master data misi** — basis `/api/v1/mobile/mission/master`. Parameter `active` menerima
+`true` (default, hanya data aktif), `false` (hanya data yang diarsipkan) atau `all` (keduanya):
+
+| Endpoint | Fungsi |
+|----------|--------|
+| `GET /types` | Jenis misi (`church.mission.type`). |
+| `GET /fields` | Medan/wilayah misi (`church.mission.field`) beserta `country` dan `parent`. `limit` (default 50, maks 200), `offset`. |
+| `GET /statuses` | Status perjalanan (`trip_statuses`) dan status misionaris (`missionary_statuses`), masing-masing dengan `is_closed`. |
+| `GET /roles` | Peran peserta tim misi (`church.mission.role`). |
+
+**Perjalanan misi** — basis `/api/v1/mobile/mission/trips`:
+
+| Endpoint | Fungsi |
+|----------|--------|
+| `GET /` | Daftar perjalanan misi (status, medan, tanggal, budget, dana terkumpul & progres). Filter: `field_id`, `status_id`, `date_begin`, `date_end` (perjalanan yang **beririsan** dengan rentang tersebut), `limit` (default 20, maks 100), `offset`. |
+| `GET /<id>` | Detail satu perjalanan: field `event.event` turunan (deskripsi, venue, seats), budget, leader, organizer/penanggung jawab, jumlah peserta dan total dukungan. |
+| `GET /<id>/participants` | Peserta perjalanan beserta nama, telepon, email, peran dan tanggal pendaftaran. Parameter `confirmed`: `true` (default, hanya peserta terkonfirmasi), `false` (menunggu konfirmasi) atau `all`; `limit`/`offset`. |
+| `POST /<id>/register` | Mendaftarkan kontak ke perjalanan. Body JSON: `partner_id` (wajib), `role_id`, `notes`. Ditolak `400 validation_error` bila perjalanan sudah berakhir, penuh (`seats_max`), peserta sudah terdaftar, atau kontak/peran tidak ada. Peserta baru berstatus **belum terkonfirmasi**. |
+
+**Misionaris & agensi** — basis `/api/v1/mobile/missionaries`. Parameter `active` menerima
+`true` (default), `false` (hanya kontak yang diarsipkan) atau `all`:
+
+| Endpoint | Fungsi |
+|----------|--------|
+| `GET /` | Daftar misionaris: kontak (`name`, `phone`, `mobile`, `email`, `image_url`, `avatar_url`), `status`, `field`, `agency`, tanggal pelayanan, `support_target`, `support_total` dan `support_progress`. Filter: `status_id`, `field_id`, `agency_id`, `limit` (default 20, maks 100), `offset`. |
+| `GET /<id>` | Profil lengkap: kontak + `address`, detail agensi, `supervisor`, daftar `trips`, ringkasan `support` (total, jumlah, tanggal terakhir) dan URL avatar ukuran `1920`/`256`. |
+| `GET /<id>/avatar?size=256` | Foto misionaris (`image_256`, atau `size=1920`) sebagai biner dengan header `ETag`, `Last-Modified` dan `Cache-Control`. Kirim `If-None-Match`/`If-Modified-Since` untuk mendapat **`304 Not Modified`** tanpa mengunduh ulang. Tanpa foto → `404 not_found`. |
+| `GET /agencies` | Direktori agensi misi: kontak organisasi, `address`, `mission_fields`, `missionary_count` (**hanya misionaris aktif**) dan `trip_count`. Filter: `field_id`, `active`, `limit`, `offset`. |
+
+**Dukungan misi** — basis `/api/v1/mobile/mission/support`:
+
+| Endpoint | Fungsi |
+|----------|--------|
+| `GET /summary` | Metrik pendanaan: `totals` (`pledged`, `collected`, `outstanding`, jumlah janji/terkumpul/tertunda), `targets` (`overall`, `missionaries`, `trips` dengan `target`, `pledged`, `collected`, `pledge_progress`, `collection_progress`), dan `by_donation_type`. |
+| `POST /pledge` | Membuat janji dukungan. Body JSON: `partner_id` (wajib), `amount` (wajib, > 0), minimal salah satu `missionary_id`/`trip_id`, opsional `date` (`YYYY-MM-DD`), `donation_type_id`, `notes`. Ditolak `400 validation_error` untuk nominal tidak valid, donatur/agensi/trip/jenis donasi tidak ada atau sudah diarsipkan. |
+| `GET /history` | Riwayat dukungan (janji & pembayaran), urut tanggal terbaru. Filter: `partner_id` (donatur), `missionary_id`, `trip_id`, `donation_type_id`, `date_from`, `date_to`, `collected` (`true`/`false`/`all`), `limit`, `offset`. |
+
+> ℹ️ `church.mission.support` tidak punya field status: sebuah dukungan berstatus **`pending`**
+> sampai ditautkan ke pembayaran akuntansi (`payment_id`), lalu menjadi **`collected`**.
+> Jika pengguna kunci API tidak punya hak akuntansi, detail pembayaran dikirim sebagai
+> `{"id": … , "restricted": true}` — status terkumpul tetap terlihat.
+
 > Kegiatan yang **belum disetujui** (`draft`, `review`, `cancelled`) tidak ditampilkan,
 > sama seperti halaman publik `/church-calendar`. Permohonan doa selalu ditampilkan.
 > Tanggal dikirim dalam **UTC** (`YYYY-MM-DD HH:MM:SS`); aplikasi yang mengubahnya ke zona
@@ -561,9 +603,9 @@ menggunakan **kunci API** (bukan login web) dan tunduk pada hak akses grup
 
 ### 13.4 Yang Belum Tersedia
 
-Endpoint **Mission** (daftar & detail trip, misionaris, dukungan), **Sunday School**,
-dan ekspor **iCal** masih dalam rencana — lihat [task.md](task.md). Untuk saat ini
-aplikasi mobile memakai dua kelompok endpoint pada **Bagian 13.2**.
+Endpoint **Sunday School** dan ekspor **iCal** masih dalam rencana — lihat
+[task.md](task.md). Seluruh kelompok endpoint **Mission** (master data, perjalanan,
+misionaris & agensi, dukungan, dashboard) sudah tersedia (lihat **Bagian 13.2**).
 
 ---
 
