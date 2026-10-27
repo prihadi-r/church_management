@@ -1,11 +1,11 @@
 # Task Board â€” Odoo Mobile API Controllers (`church_management`)
 
-> **Status (2026-10-26):** this breakdown has been merged into
-> [task.md](task.md) as milestone **v2.3.0** (groups 14â€“21). Section **1** is implemented as
-> tasks **14.1â€“14.4** (`controllers/security.py`, `controllers/common.py`,
-> `data/church_mission_api_user.xml`) and section **6.1** as task **19.1**
-> (`controllers/dashboard_controller.py`). Sections **2â€“5** remain planned (task.md groups
-> 15â€“18). The checkboxes below are kept in sync with the task board.
+> **Status (2026-10-27):** this breakdown has been merged into
+> [task.md](task.md) as milestone **v2.3.0** (groups 14â€“21). Sections **1â€“6** are implemented:
+> security/envelope/service user (tasks 14.1â€“14.4), mission master data (15.1â€“15.4), mission
+> trips (16.1â€“16.4), missionaries & agencies (17.1â€“17.4), mission support (18.1â€“18.3) and the
+> consolidated dashboard metrics (19.1). The checkboxes below are kept in sync with the task
+> board; the Sunday School and iCal endpoint sets live there only.
 
 ---
 
@@ -80,38 +80,38 @@
 
 ## 4. Missionaries & Agencies Endpoints (`/api/v1/mobile/missionaries`)
 
-- [ ] **4.1 Missionaries List (`GET /`)**
-  - [ ] Return active missionaries (`church.missionary`) with contact details from inherited `res.partner`.
-  - [ ] Deliverable: `controllers/missionary_controller.py`.
+- [x] **4.1 Missionaries List (`GET /`)**
+  - [x] Return active missionaries (`church.missionary`) with contact details from inherited `res.partner`.
+  - [x] Deliverable: [controllers/missionary_controller.py](controllers/missionary_controller.py).
 
-- [ ] **4.2 Missionary Profile (`GET /<int:missionary_id>`)**
-  - [ ] Return full missionary record, sending agency details, field assignment, and total support received.
-  - [ ] Deliverable: `controllers/missionary_controller.py`.
+- [x] **4.2 Missionary Profile (`GET /<int:missionary_id>`)**
+  - [x] Return full missionary record, sending agency details, field assignment, and total support received.
+  - [x] Deliverable: [controllers/missionary_controller.py](controllers/missionary_controller.py).
 
-- [ ] **4.3 Missionary Image Route (`GET /<int:missionary_id>/avatar`)**
-  - [ ] Serve cached binary avatar from `res.partner.image_1920` / `image_256` with HTTP 304 support.
-  - [ ] Deliverable: `controllers/missionary_controller.py`.
+- [x] **4.3 Missionary Image Route (`GET /<int:missionary_id>/avatar`)**
+  - [x] Serve cached binary avatar from `res.partner.image_1920` / `image_256` with HTTP 304 support.
+  - [x] Deliverable: [controllers/missionary_controller.py](controllers/missionary_controller.py).
 
-- [ ] **4.4 Mission Agencies Directory (`GET /agencies`)**
-  - [ ] Return registered mission agencies (`church.mission_agency`) along with assigned active missionary counts.
-  - [ ] Deliverable: `controllers/agency_controller.py`.
+- [x] **4.4 Mission Agencies Directory (`GET /agencies`)**
+  - [x] Return registered mission agencies (`church.mission_agency`) along with assigned active missionary counts.
+  - [x] Deliverable: [controllers/agency_controller.py](controllers/agency_controller.py).
 
 ---
 
 ## 5. Mission Support Endpoints (`/api/v1/mobile/mission/support`)
 
-- [ ] **5.1 Support Metrics Summary (`GET /summary`)**
-  - [ ] Compute funding metrics: total pledges, collected amounts, and target attainment percentages.
-  - [ ] Deliverable: `controllers/support_controller.py`.
+- [x] **5.1 Support Metrics Summary (`GET /summary`)**
+  - [x] Compute funding metrics: total pledges, collected amounts, and target attainment percentages.
+  - [x] Deliverable: [controllers/support_controller.py](controllers/support_controller.py).
 
-- [ ] **5.2 Submit Support Entry (`POST /pledge`)**
-  - [ ] Validate payload: ensure positive amount, donor partner ID, and trip or missionary assignment.
-  - [ ] Create record in `church.mission_support` with draft/pending status.
-  - [ ] Deliverable: `controllers/support_controller.py`.
+- [x] **5.2 Submit Support Entry (`POST /pledge`)**
+  - [x] Validate payload: ensure positive amount, donor partner ID, and trip or missionary assignment.
+  - [x] Create record in `church.mission_support` with draft/pending status.
+  - [x] Deliverable: [controllers/support_controller.py](controllers/support_controller.py).
 
-- [ ] **5.3 Support History Log (`GET /history`)**
-  - [ ] Fetch paginated payment and support records filtered by donor partner or target entity.
-  - [ ] Deliverable: `controllers/support_controller.py`.
+- [x] **5.3 Support History Log (`GET /history`)**
+  - [x] Fetch paginated payment and support records filtered by donor partner or target entity.
+  - [x] Deliverable: [controllers/support_controller.py](controllers/support_controller.py).
 
 ---
 
