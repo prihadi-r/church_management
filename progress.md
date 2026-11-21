@@ -5,6 +5,19 @@ Task breakdown lives in [task.md](task.md).
 
 ---
 
+## 2026-11-21 — v2.3.0 released
+
+- `__manifest__.py`: version bumped `2.2.0` → `2.3.0` so the Odoo module reports the
+  release the README already advertised; the version-history row is no longer marked
+  *in progress*.
+- Released from the `alpha-18` head (`e4c59d8`, tasks 15–18) — the branch was 2 commits
+  ahead of `main` and 0 behind, with `alpha-16` at the same commit and `mission` behind.
+  `main` was fast-forwarded to it and the annotated tag `v2.3.0` published.
+- Not in this release: Sunday School and iCal endpoint sets (still tracked in
+  [task.md](task.md)).
+
+---
+
 ## 2026-10-27 — v2.3.0: Missionary, agency and support endpoints (tasks 17.1–17.4, 18.1–18.3)
 
 - New `controllers/missionary_controller.py` serving `/api/v1/mobile/missionaries`:
